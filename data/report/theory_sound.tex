@@ -1,0 +1,243 @@
+\section{Sound}
+
+\cite{Arntzen2014a, Rienstra2017}
+
+\subsection{Wave equation}\label{sec:theory:sound:wave}
+
+Equation for conservation of mass
+\begin{equation}\label{eq:theory:sound:wave:mass}
+ \frac{\partial \rho}{\partial t} + \nabla \cdot \rho \vec{u}
+\end{equation}
+Equation for conservation of momentum
+\begin{equation}\label{eq:theory:sound:wave:momentum}
+ \frac{\partial}{\partial t} \rho \vec{u} + \nabla \cdot \left( \rho \vec{u} \vec{u}  \right) + \nabla \cdot \bold{P} = \vec{F_n} + m \vec{u}
+\end{equation}
+
+% % where $\rho$, $\vec{u}$ and $p$ are the fluid density, velocity and pressure.
+
+$\bold{P} = p \bold{I} - \tau$
+viscous tensor $\tau$
+
+Ignoring viscous effects, we can rewrite equation \ref{eq:theory:sound:wave:momentum} using equation \ref{eq:theory:sound:wave:mass} as
+\begin{equation}
+ \rho \left( \frac{\partial \vec{u}}{\partial t} + \left( \vec{u} \cdot \nabla \right) \vec{u} \right) + \nabla p = \vec{F}
+\end{equation}
+
+Linearization.
+Mass
+\begin{equation}
+ \frac{\partial \rho'}{\partial t} + \vec{u_0} \cdot \nabla \rho' + \rho_0 \nabla \cdot \vec{u'} = 0
+\end{equation}
+Momentum
+\begin{equation}
+ \rho_0 \left( \frac{\partial \vec{u'}}{\partial t} + \left(\vec{u_0} \cdot \nabla \right) \vec{u'}\right) + \nabla p' = 0
+\end{equation}
+
+...
+Classical wave equation
+\begin{equation}\label{eq:theory:sound:wave:classic}
+ \frac{1}{c} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = 0
+\end{equation}
+
+...
+
+Helmholtz equation
+\begin{equation}\label{eq:theory:sound:wave:helmholtz}
+ \nabla^2 \hat{p} + k^2 \hat{p} = 0
+\end{equation}
+\subsection{Green's function}\label{sec:theory:sound:green}
+% Homogeneous
+% \begin{equation}
+%
+% \end{equation}
+Non-homogeneous
+\begin{equation}
+\frac{1}{c^2}\frac{\partial^2 G}{\partial t^2} - \nabla^2 G = \delta \left( \vec{x} - \vec{y} \right) \delta \left(t - \tau \right)
+\end{equation}
+
+Free-field solution
+\begin{equation}
+ G = \frac{1}{4 \pi r} \delta \left( t - \tau - \frac{r}{c} \right)
+\end{equation}
+
+with $r = \left| \vec{x} - \vec{y} \right|$
+
+
+\subsection{Aerodynamic sound sources}\label{sec:theory:sound:aerodynamic}
+Lighthill
+
+
+\subsection{Elementary sources}
+
+The elementary sources 
+
+\missingfigure{Figure of monopole, dipole and quadrupole}
+
+\subsubsection{Monopole}
+
+Volume source
+%
+% \begin{equation}
+%  \frac{d^2 \rho'}{dt^2}
+% \end{equation}
+
+\begin{equation}
+ p' \left(\vec{x},t\right) = \frac{1}{4\pi} \frac{q \left(\vec{y}, t-r/c\right)}{r}
+\end{equation}
+
+\subsubsection{Dipole}
+
+\begin{equation}
+ p' \left(\vec{x}, t\right) =
+\end{equation}
+
+
+\subsubsection{Quadrupole}
+
+Moment
+
+\subsubsection{Multipoles and spherical harmonics}\todo{Unless I would write a piece about Ambisonics I have no need for this so could skip it}
+
+
+\missingfigure{Multipoles and spherical harmonics}
+
+Ambisonics
+
+
+\subsection{Moving source}
+
+\subsubsection{Convective amplification}
+
+\missingfigure{Convective amplification illustration}
+
+\subsubsection{Doppler shift}
+
+\missingfigure{Doppler shift illustration}
+
+
+
+% \chapter{Sound propagation}
+
+
+\subsection{Atmospheric attenuation}\label{sec:theory_sound_atmospheric_attenuation}
+Soundwaves are attenuated due to relaxation processes in the medium.
+A model for atmospheric attenuation is given by Part 1 of ISO 9613-1:1993\cite{ISO9613-1}.
+The attenuation coefficient $\alpha$, in dB/m, is given by
+\begin{align}
+ \alpha &= 8.686 f^2 \Biggl( \left[ 1.84 \times 10^{-11} \left(\frac{p_r}{p_a}\right)^{-1} \left(\frac{T}{T_0}\right)^{1/2} \right] + \left(\frac{T}{T_0}\right)^{-5/2} \nonumber \\ 
+ &\times \Biggl\{ 0.01275 \left[ \exp{\frac{-2239.1}{T}} \right]  \left[f_{r,O} + \frac{f^2}{f_{r,O}} \right]^{-1} \nonumber \\
+ &+ 0.1068 \left[ \exp{\frac{-3352.0}{T}} \right] \left[ f_{r,N} + \frac{f^2}{f_{r,N}} \right]^{-1} \Biggr\} \Biggr) 
+\end{align}
+and is a function of the ambient temperature in kelvin $T$, the reference
+temperature $T_0=293.15$ K, the ambient pressure $p_a$ in kilopascal, the
+reference pressure $p_r=101.325$ kPa and the relaxation frequencies for oxygen 
+$f_{r,O}$ and nitrogen $f_{r,N}$.
+The relaxation frequency of oxygen is given by
+\begin{equation}
+ f_{r,O} = \frac{p_a}{p_r} \left( 24 + 4.04 \cdot 10^4 h \frac{0.02 + h}{0.391 + h}  \right)
+\end{equation}
+and the relaxation frequency of nitrogen by
+\begin{equation}
+ f_{r,N} = \frac{p_a}{p_r} \left( \frac{T}{T_0} \right)^{-1/2} \cdot \left( 9 + 280 h \exp{\left\{ -4.170 \left[ \left(\frac{T}{T_0} \right)^{-1/3} -1 \right] \right\} } \right)
+\end{equation}
+Both depend on the molar concentration of water vapour $h$, given by
+\begin{equation}
+ h = h_r  \frac{p_{sat}}{p_a}
+\end{equation}
+The molar concentration of water vapour is a function of the saturation pressure
+\begin{equation}
+ p_{sat} = 10^C \cdot p_r
+\end{equation}
+where 
+\begin{equation}
+ C = -6.8346 \cdot \left( \frac{T_{01}}{T} \right)^{1.261}  + 4.6151
+\end{equation}
+In this equation $T_{01}$ is the triple-point isotherm temperature of 273.16 K.
+
+The standard furthermore mentions the following expression for the speed of sound
+\begin{equation}
+c = 343.2 \left( \frac{T}{T_0} \right)
+\end{equation}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[]{../figures/generated/sound/attenuation}
+        \caption{Atmospheric attenuation as function of frequency for a standard atmosphere.}
+        \label{fig:theory:sound:attenuation}
+\end{figure}
+
+\subsection{Descriptors}
+
+
+\newpage
+\subsection{Reflections}
+
+\subsubsection{Impedance}
+Several models exist for the prediction of the impedance of a surface.
+Attenborough made a comparison of impedance models\cite{Attenborough2011a}.
+
+
+One such models is the empirical 1-parameter model by Delaney and Bazley which
+only depends on the flow resistivity $\sigma$ aside from the frequency $f$.
+According to this model, the normalised impedance $Z$ is given by
+\begin{equation}\label{eq:theory:sound:impedance:db}
+ Z = 1 + 9.08 \left( \frac{1000f}{\sigma}\right)^{-0.75} - 11.9 j \left( \frac{1000f}{\sigma}\right)^{-0.73}
+\end{equation}
+
+Another example of a model is the 2-parameter model by Attenborough. In this model, the impedance is given by
+\begin{equation}\label{eq:theory:sound:impedance:att}
+ Z = \frac{\left( 1-j\right) \sqrt{\sigma/f}}{\sqrt{\pi \gamma_0 \rho_0}} - \frac{jc\alpha}{8 \pi \gamma_0 f}
+\end{equation}
+and depends on the speed of sound in air $c_0$, the density of air $\rho_0$, $\alpha$, $\gamma_0$ and again the flow resistivity $\sigma$ and frequency $f$.
+
+
+
+\subsubsection{Reflection coefficient}
+
+The plane wave reflection coefficient is given by
+\begin{equation}\label{eq:theory:sound:reflection:plane}
+ R = \frac{Z\cos{\theta}-1}{Z\cos{\theta}+1}
+\end{equation}
+
+The spherical reflection coefficient is given by
+\begin{equation}\label{eq:theory:sound:reflection:spherical}
+ Q = R \left(1 - R \right) F
+\end{equation}
+with 
+\begin{equation}
+ F = 1 - j \sqrt{ \pi} w e^{-w^2} \mathrm{erfc} \left( j w \right) 
+\end{equation}
+and
+\begin{equation}
+ w = \sqrt{-j k r  \left( 1 + \frac{1}{Z} \cos{\theta} - \sqrt{1 - \left( \frac{1}{Z} \right)^2} \sin{\theta} \right) }
+\end{equation}
+
+
+
+
+\missingfigure{SPL relative to free field comparison}
+
+
+
+\subsubsection{Image source method}
+
+\missingfigure{Illustration of ISM}
+
+
+\subsubsection{Ground effect}
+
+A prominent reflection is the reflection with the ground. When the 
+reflecting surface is sufficiently hard the Lloyd's 
+mirror effect can be heard.
+The spectogram in figure \ref{fig:propagation_reflections_mirror_effect} shows the Lloyd's mirror effect as well.
+
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{../figures/ipynb/theory_reflections_mirror_effect/figure1}
+%         \caption{Spectrogram of a white noise source flying at a height of 100 meters over an acoustically hard surface. The spectrogram clearly shows the Lloyd's mirorr effect.}
+%         \label{fig:theory_reflections_mirror_effect}
+% \end{figure}
+
+
+
+

@@ -1,0 +1,448 @@
+\newpage\section{Propagation model}
+
+\subsection{Overview}
+The propagation model takes into account geometrical spreading, Doppler shift,
+atmospheric attenuation and the ground reflection. Furthermore, a model was
+developed to include scintillations, that is, fluctuations in the sound due to atmospheric
+turbulence \cite{Rietdijk2017}. Convective amplification is supported in the
+propagation model but was ignored here.
+
+Figure \ref{fig:propagation_block_diagram} shows a block diagram of the steps
+that are taken. Because of source motion all propagation effects are
+time-variant. The following sections will describe each of these steps in
+detail.
+
+To demonstrate the different propagation effects we simulate a situation and
+will sequentially add propagation effects. \todo{explain situation}. A simple
+emission signal is considered consisting of brown noise and a tone with a
+frequency of \SI{1000}{\hertz}, both modelled as a monopole point source. An
+"aircraft" moves at a height of \SI{200}{\meter} and with a speed of
+\SI{100}{\meter\per\second} straight over the receiver.
+
+Figure \ref{fig:implementation:propagation:emission} shows a spectrogram of the
+emission signal.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../figures/generated/propagation/emission}
+  \caption{Spectrogram of the immission. Because in this case we do not consider sound propagation this in facts corresponds to the emission of the aircraft as function of the orientation.}
+  \label{fig:implementation:propagation:emission}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[auto, node distance=1cm,>=latex']
+\tikzset{
+block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimum width=5em, text width=5em, align=center},
+}
+    % Main nodes
+    \node [block]                       (emission)      {Emission\\Generator};
+    \node [block, right=of emission]    (spreading)     {Spreading\\Gain};
+    \node [block, right=of spreading]   (delay)         {Spreading\\Delay};
+    \node [block, right=of delay]       (attenuation)   {Attenuation\\Filter};
+    \node [block, right=of attenuation] (turbulence)    {Turbulence\\Filter};
+    \node [block, right=of turbulence]  (reflection)    {Reflection\\Filter};
+
+    % Main edges
+    \draw [->]  (emission)      --  (spreading);
+    \draw [->]  (spreading)     --  (delay);
+    \draw [->]  (delay)         --  (attenuation);
+    \draw [->]  (attenuation)   --  (turbulence);
+    \draw [->]  (turbulence)    --  (reflection);
+
+\end{tikzpicture}
+  \caption{Block diagram of the propagation model. These steps are performed for each propagation path and the resulting signals are summed.}
+  \label{fig:propagation_block_diagram}
+\end{figure}
+
+\subsection{Geometrical spreading}\todo{refer to theory}
+Geometrical spreading causes a decrease in amplitude with distance due to divergence and increase
+in propagation delay with distance due to the finite speed of sound. Far field
+is assumed in which case we obtain the sound pressure at the receiver $p_{\mathrm{rcv}}$
+by scaling the magnitude of the sound pressure $p_{\mathrm{src}}$ at some other distance
+from the source $r_{\mathrm{src}}$
+\begin{equation}
+ p_{\mathrm{rcv}} = p_{\mathrm{src}} \frac{r_{\mathrm{src}}}{r_{\mathrm{rcv}}}
+\end{equation}
+
+Figure \ref{fig:implementation:propagation:spreading} shows a spectrogram of the
+immission when geometrical spreading is taken into account.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../figures/generated/propagation/spreading}
+  \caption{Spectrogram of the immission when the amplitude decrease due to geometrical spreading is included.}
+  \label{fig:implementation:propagation:spreading}
+\end{figure}
+
+% \subsubsection{Geometrical spreading - phase}
+The time-dependent propagation delay, which is relevant for the Doppler shift,
+is taken into account by resampling the discretized sound pressure signal with a
+Variable Delay Line. Since the signal is discrete and the delay is generally not
+an integer multiple of the sample time, an interpolation scheme is required.
+
+Different interpolation schemes exist and in this case a linear interpolation
+scheme was chosen due to its simplicity and computational performance \cite{Heutschi2014}.
+As a side-effect, linear interpolation causes low-pass filtering of the signal as
+well as aliasing. These side-effects can be minimized by choosing another
+interpolation scheme, like e.g. Lanczos \cite{Rietdijk2015, Pieren2015}.
+
+% The following describes a method for resampling and linearly interpolating a signal using array processing.
+% The actual implementation used a Variable Delay Line (VDL) because a real-time implementation was desired.
+
+For a given sound travel time $\Delta t(t)$ from source to receiver, the index
+$k_{e}$ of the signal $s[k_e]$ at the source time-axis is given as
+\begin{equation}
+ k_{e} = k_r - \Delta t (t) \cdot f_s
+\end{equation}
+where $f_s$ is the sampling frequency and $k_r$ the sample of the signal at the receiver time-axis. The received signal value $s$ at index $k_e$ is then determined by
+\begin{equation}
+ s[k_e] = \left( 1 - k_e +  \floor{k_e} \right) \cdot s \left[ \floor{k_e} \right] + \left( k_e - \floor{k_e} \right) * s \left[ \floor{k_e} + 1 \right]
+\end{equation}
+where $\floor{k_e}$ corresponds to the floor function of $k_e$.
+The sound travel time was computed with the following expression for the speed of sound $c = 343.2 \sqrt{ \frac{T}{T_0} }$
+where $T$ is the temperature during the event and $T_0 = 293.15$ K the reference temperature.
+
+Figure \ref{fig:implementation:propagation:doppler} shows a spectrogram of the immission when the propagation delay is also considered.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../figures/generated/propagation/doppler}
+  \caption{Spectrogram of the immission when the propagation delay, and thus the Doppler shift, is included as well. The black part in the first couple of seconds is due to the initial propagation delay.}
+  \label{fig:implementation:propagation:doppler}
+\end{figure}
+
+
+\subsection{Atmospheric attenuation}\todo{refer to theory}
+Atmospheric attenuation is accounted for by creating a time-variant filter of length $N_{aa}$
+with a magnitude response based on ISO 9613-1:1993\cite{ISO9613-1}. A single-sided magnitude spectrum is calculated as
+\begin{equation}
+ H_{aa} = 10^{- d \alpha(f) / 20}
+\end{equation}
+where $d$ is the source-receiver distance in \SI{}{meter} and $\alpha(f)$ the
+frequency-dependent attenuation coefficient in \SI{}{\decibel\per\meter}.
+% The air pressure, relative humidity, and temperature were recorded during the event.
+The impulse response of a magnitude-only filter is non-causal and therefore in
+order to create a causal filter a linear-phase filter corresponding to 90
+degrees is added. The spectrum is real and even, and therefore the impulse
+response is real and even as well. After convolving the signal with the designed
+filter the first $N_{aa}/2$ samples were removed to account for the delay caused
+by the linear-phase factor.
+
+Convolution was performed using an overlap-save algorithm. The filter length was
+4096 samples and the hop size 256 samples. Transitioning to the next impulse
+response was done without smoothing.
+
+Figure \ref{fig:implementation:propagation:attenuation} shows a spectrogram of
+the immission when atmospheric attenuation is included. A reference atmosphere
+was considered.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../figures/generated/propagation/attenuation}
+  \caption{Spectrogram of the immission when atmospheric attenuation is included as well.}
+  \label{fig:implementation:propagation:attenuation}
+\end{figure}
+
+% \subsection{Atmospheric turbulence}\todo{This overlaps with next chapter. Remove. Small parts can be reused.}
+% Fluctuations in the atmosphere of wind velocity and temperature affect sound
+% propagation resulting in fluctuations of both the amplitude and the phase.
+% Depending on the situation these fluctuations can be clearly audible and
+% therefore have to be included in order to produce realistic sounding
+% auralisations.
+%
+% A method for including phase fluctuations utilizing the mutual
+% coherence function was presented in \cite{Arntzen2014a, Arntzen2014b, Shin2006}.
+% The phase fluctuations cause decorrelation between the direct and
+% ground-reflected contributions resulting in less-pronounced interference
+% and generally more plausible auralisations.
+%
+% The authors of this paper developed a model that includes both log-amplitude and phase fluctuations due to
+% atmospheric turbulence in auralisations \cite{Rietdijk2014, Rietdijk2014a,
+% Rietdijk2017}. As the aircraft moves through the turbulent atmosphere, the
+% refractive-index fluctuations are sampled by the waves propagating from source
+% to receiver. The model considers a line-of-sight situation and assumes a frozen
+% atmosphere. Other assumptions were a Gaussian applied turbulence spectrum and
+% spherical wavefront \cite{Wilson1999,Daigle1983}. The model takes into account
+% saturation of the log-amplitude fluctuations. Details about the model and how it
+% can be used in auralisations can be found in \cite{Rietdijk2017}.
+%
+% The autocorrelation function of the Gaussian spectrum is given by \cite{Daigle1983}
+% \begin{equation}
+%  C = \frac{\Phi\left(\rho/L\right)}{\rho/L}
+% \end{equation}
+% and determines the shape of the log-amplitude $\chi$ and phase fluctuations $S$
+% spectra. Because of the Wiener-Khinchin theorem we can take the type-1 Discrete
+% Cosine Transform (DCT-1) to obtain the shape of the autospectra.
+%
+% The autocorrelation is a function of $\rho$, the spatial separation between two receivers,
+% perpendicular to the wave propagation direction, and $L$, the correlation
+% length. Instead of two non-moving receivers we consider a moving source
+% % that samples the refractive-index fluctuations,
+% and therefore perform a space-to-time conversion to obtain $C(\tau)$ and $\rho=v_{\bot}\tau$ where
+% $v_{\bot}$ is the speed of the aircraft perpendicular to the wave propagation
+% direction.
+%
+% Gaussian white noise is shaped with this spectrum through a convolution to
+% obtain log-amplitude and phase fluctuations. Time-variance of the speed is taken
+% into account not by updating the filter but instead by resampling the sequence of
+% fluctuations using a Variable Delay Line with a delay based on the time-varying transverse speed.
+%
+% At this point the fluctuations have a variance of 1. The fluctuations are scaled
+% by the square root of the desired variances \cite{Daigle1983}
+% \begin{equation}\label{eq:variances}
+%  \sigma_{\chi}^2 = \sigma_{S}^2 = \frac{\sqrt{\pi}}{2} \sigma_{\mu}^2 k^2 d L
+% \end{equation}
+% which are a function of the variance of the refractive-index fluctuations
+% $\sigma_{\mu}^2$, wavenumber $k$, source-receiver distance $d$ and correlation
+% length $L$. This scaling can be time-variant.
+%
+% The fluctuations are relatively slow, and therefore a filter is constructed to
+% apply the log-amplitude fluctuations as this also allows to take into account the
+% frequency-dependency of the fluctuations as shown in equation
+% \ref{eq:variances}. This filter is obtained by taking the Inverse Discrete
+% Fourier Transform (IDFT) of $\exp(\chi)$. From equation \ref{eq:variances} it
+% also follows that the phase-fluctuations have a linear-phase. Therefore, the
+% phase fluctuations are converted to a propagation delay fluctuation and applied
+% with a Variable Delay Line.
+%
+% The variance of the dynamic refractive-index $\sigma_{\mu}^2$ was \SI{3e-5}{}
+% and the correlation length $L$ \SI{10}{\meter}. The sequences of fluctuations were
+% initially computed at \SI{100}{\hertz}. The autocorrelation filter had a length
+% of 8192 samples. The time-variant filter for the amplitude modulations had 512 samples
+% and hop size was 128 samples. The impulse response transitions were not smoothed.
+%
+% Figure \ref{fig:implementation:propagation:turbulence} shows a spectrogram of the immission when atmospheric attenuation is included.
+%
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[]{../figures/generated/propagation/turbulence}
+%   \caption{Propagation turbulence signal.}
+%   \label{fig:implementation:propagation:turbulence}
+% \end{figure}
+
+\subsection{Ground reflection}\todo{refer to theory. Extend?}
+While the Image Source Method \cite{Mechel2013} was implemented with image
+receivers instead of image sources, we consider here only one additional path,
+a ground reflection, and therefore won't go into details about the
+implementation of the ISM.
+
+The ground reflection is considered as a second propagation path using a mirror receiver.
+% The implementation supports direction-dependent emission signals, but because we had only one emission...
+For the ground reflected path the same emission signal was used as for the direct path, thereby ignoring directivity of the sources.
+Why the directivity of the source is ignored will become clear in the following sections.
+
+A filter was included to take into account the transfer funtion of the ground. For
+the ground reflection the plane wave reflection coefficient was used
+\begin{equation}
+ R = \frac{Z\cos{\theta}-1}{Z\cos{\theta}+1}
+\end{equation}
+with impedance $Z$ calculated using Delany and Bazley's 1-parameter model
+\begin{equation}
+ Z = 1 + 9.08 \left( \frac{1000f}{\sigma}\right)^{-0.75} - 11.9 j \left( \frac{1000f}{\sigma}\right)^{-0.73}
+\end{equation}
+which is a function of frequency and flow resistivity $\sigma$. The scenarios
+considered were landings. Because the area around the airport consists mostly of grass a
+flow resistivity of \SI{2e5}{\pascal\second\per\meter\squared} was chosen. The
+filter length was 4096 samples and the hop size 256 samples.
+
+
+Figure \ref{fig:implementation:propagation:reflection} shows a spectrogram of
+the immission when a ground reflection was added. A hard ground was considered.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../figures/generated/propagation/reflection}
+  \caption{Spectrogram of the immission when a ground reflection is present. The Lloyd's mirror effect is clearly visible.}
+  \label{fig:implementation:propagation:reflection}
+\end{figure}\todo{text}
+
+
+%
+%
+%
+%
+% TODO: OLD PART
+%
+%
+% Figure \ref{fig:propagation_model_propagation_model} represents a block
+% diagram of the steps that are taken. The steps are taken for every
+% source-(mirror)receiver combination.
+%
+%
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[height=0.4\textheight]{../figures/propagation_model}
+%         \caption{Block diagram of propagation model.}
+%         \label{fig:propagation_model_propagation_model}
+% \end{figure}
+%
+%
+%
+% \subsection{Attenuation due to spreading}
+%
+% Geometrical spreading
+% \begin{equation}
+%  p_t = p_0 \frac{r_0}{r_t}
+% \end{equation}
+%
+% \newpage
+% \subsection{Time delay and Doppler shift}
+%
+% The limited speed of sound causes a delay between receiving and emitting a signal.
+% A common method to include this delay in a real-time implementation is to use a variable-delay line.   % Needs reference
+% % This implementation is not real-time, resulting in more available options.
+%
+% % The time delay can be simulated using a variable delay line.
+%
+% Since the signal is discrete and the delay is generally not an integer multiple of the sample time, an interpolation scheme is required.
+%
+% \subsubsection{Linear interpolation}
+% Initially, linear interpolation was used.
+% For a given sound travel time $\Delta t(t)$ from source to receiver, the index
+% $k_{r}^{'}$ is given as
+% \begin{equation}
+%  k_{r}^{'} = k_e + \Delta t (t) \cdot f_s
+% \end{equation}
+% where $f_s$ is the sampling frequency.
+% ......
+%
+% Figure \ref{} shows an example where linear interpolation was used to apply a Doppler shift.
+%
+% \missingfigure{Spectrogram of a Doppler shifted tonal component. The Doppler shift was applied by resampling the signal and using linear interpolation.}
+%
+% The Doppler shifted tonal component is clearly visible, however, strong artefacts are also visible and indeed audible.
+% In practice, these artifacts are often masked by noise components but this however cannot be guaranteed.
+%
+% There are methods to reduce these artefacts. For example, upsampling the signal before resampling decreases the prominence of the artifacts.
+% Another possibility is a different interpolation scheme.
+%
+% \subsubsection{Lanczos interpolation}
+% Theoretically, the optimal reconstruction filter is a sinc filter. In practice
+% only approximations of this filter can be used, and these approximations are
+% generally achieved by windowing and truncating the sinc function. One of these
+% approximations is the Lanczos filter or kernel, which is the sinc function
+% windowed by another sinc function.
+%
+% The Lanczos kernel is given by
+% \begin{equation}
+%  L(z) = \begin{cases}
+%          \textrm{sinc}(z) \textrm{sinc}(z/a), & \textrm{if} -a < z < a \\
+%          0, & \text{otherwise}
+%         \end{cases}
+% \end{equation}
+% where $a$ is the size of the kernel. Consider now a signal with samples $s_i$
+% for integer values of $i$ where sample $s_i$ corresponds to the sample at $t=i/f_s$.
+% The value at retarded time $t'$ is then given by
+% \begin{equation}
+%  S(x) = \sum_{\floor{x} - a + 1}^{\floor{x} + a} s_i L(x-i)
+% \end{equation}
+% where $x$ is the sample at retarded time $t'$
+% \begin{equation}
+%  x = -t' + i
+% \end{equation}
+% The frequency shift depends on the change of propagation delay. Therefore, when source and receiver are relatively close to one another, the method is most sensitive to uncertainties in source position and speed of sound.
+%
+% \missingfigure{Spectrogram of a Doppler shifted tonal component. In this case the Doppler shift was applied by resampling the signal and using Lanczos interpolation. The artefacts are clearly less pronounced as those present in figure \ref{}}
+%
+% \missingfigure{Spectrogram of auralisation}
+%
+% \newpage
+% \subsection{Atmospheric attenuation}
+% The atmospheric attenuation coefficient $\alpha$ in dB/km is calculated according to ISO 9613-1 \cite{ISO9613-1} as presented in \ref{sec:theory_sound_atmospheric_attenuation}.
+%
+% A single-sided spectrum is calculated as
+% % Equation \ref{} is sampled to obtain an attenuation spectrum in dB/m and then multiplied with the current distance to obtain the actual attenuation.
+% \begin{equation}
+%  10.0^{- d \alpha(f) / 20}
+% \end{equation}
+% The spectrum is real and even, and therefore the impulse response is real and even as well. A non-causal zero-phase filter was designed.
+%
+%
+%
+% The attenuation spectrum is converted to an impulse response using the IFFT.
+% Because the attenuation is distance-dependent and the distance changes over time, the impulse response needs to be updated.
+%
+% The attenuation is applied by performing a convolution between the impulse responses and the input signal.
+% The convolution is done by multiplying a matrix consisting of impulse responses with a vector representing the input signal.
+% The impulse responses are stored in a sparse matrix to reduce memory consumption.
+% Nevertheless, because of computational limitations, the impulse response describing atmospheric attenuation are determined for an $N$ amount unique distances.
+%
+% Since atmospheric absorption is frequency-dependent, care should be taken that
+% one corrects for the Doppler shift first. Since a moving medium (due to wind) is not
+% included in the propagation model, the time delay between source and receiver
+% can be calculated directly, and the atmospheric absorption applied thereafter.
+%
+% \missingfigure{Spectrogram of auralisation}
+%
+% %
+% % The attenuation coefficient for
+% % pure tones $\alpha$ is calculated according to ISO 9613-1 \cite{ISO9613-1} in
+% % the frequency domain. This attenuation, corresponding to a (single-sided) power spectrum in decibels, is converted to a double-sided amplitude spectrum
+% % using
+% % \begin{alignat}{2}
+% %  a_{\alpha}[k] &= 10^{+ d \alpha}, && \quad 0 \leq k \leq N/2 \\
+% %  a_{\alpha}[-k] &= a_{\alpha}[k], && \quad 1 \leq k \leq N/2-1
+% % \end{alignat}
+% % where $M$ is the amount of desired filter taps, $k$ the block index of discrete frequency $f_k$ and $d$ the source-receiver distance.
+% % Note also the plus sign; in case of an auralization this sign would be negative but now we're interested in an amplification.
+% % An impulse response is obtained by taking the IFFT of $M$ blocks. The small imaginary parts are discarded by taking the real part.
+% % The filter is then made causal by rotating the impulse response with $M/2$ samples. A rectangular window was used.
+% %
+% % The attenuation is range-dependent and because of the aircraft movement the range varies with time. Within one recording there is a
+% % maximum and minimum range. An $N$ amount of impulse responses are determined for
+% % an $N$ amount of equispaced ranges.
+% %
+% % The attenuation is applied by performing a convolution between the impulse
+% % responses and the input signal. The convolution is done in a rather naive way by multiplying a
+% % Toeplitz matrix consisting of impulse responses with a vector representing the input
+% % signal. The impulse responses are stored as a sparse array to reduce memory
+% % consumption. No further operations were done regarding the impulse response transitions.
+%
+% \newpage
+% \subsection{Atmospheric turbulence}
+%
+% - per octave band
+%
+% \missingfigure{Spectrogram of auralisation}
+%
+% \newpage
+% \subsection{Reflections and shielding}
+%
+% In an urban environment reflections and shielding play a role.
+%
+% Hard surfaces except possibly the ground.
+% Surfaces relatively smooth considering wavelength. Specular reflections are assumed.
+%
+% Considering the large distances compared to the wavelengths the waves can likely
+% be assumed to be plane and a plane-wave reflection coefficient can be used. Then
+% again, the increased computational effort of using a spherical reflection
+% coefficient is negligible.
+%
+% \missingfigure{Spectrogram of auralisation}
+%
+% Using the image source method mirror receivers are determined.
+% Their strength and effectiveness is determined every $N$ samples and the mirror receivers are sorted on strength.
+% The strongest sources are selected.
+%
+% \newpage
+% \subsection{Inverse propagation model}\label{sec:propagation_model_reverse_propagation_model}
+% Based on this propagation model an inverse propagation model was developed.
+% The inverse propagation model is used to calculate back to the source in order to determine emission characteristics.
+%
+% Figure \ref{fig:propagation_model_reverse_propagation_model} shows a block
+% diagram of the steps taken in the reverse propagation model.
+%
+% A likely significant error that is being made is that the ground effect is
+% still included.
+%
+%
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.4\textwidth]{../figures/reverse_propagation_model}
+%         \caption{Block diagram of reverse propagation model. A sound recording
+% is used in conjunction with detailed flight path information. Spherical
+% spreading, atmospheric absorption, and the Doppler shift are undone, resulting
+% in a source signal.}
+%         \label{fig:propagation_model_reverse_propagation_model}
+% \end{figure}

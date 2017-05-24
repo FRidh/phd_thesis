@@ -1,0 +1,461 @@
+\section{Signal processing}
+In the previous chapters we looked at how sound is generated and propagated, and
+we discussed also several aircraft emission models.
+We now would like to synthesise the sound of aircraft. This requires generating
+signals and modifying them. Therefore, we will first discuss certain signal
+processing techniques that are useful or required to develop auralisations.
+
+
+In this chapter we consider all operations to be in time and/or frequency
+domain. Generally, these operations also apply on other domain pairs, like for
+example space and/or wavenumber domain.
+
+
+\newpage
+\subsection{Fourier transform}
+The Fourier transform decomposes a signal into complex exponentials with different frequencies that the signal is made up of.
+
+The (forward) Fourier transform can be defined as
+\begin{equation}
+ X(f) = \int_{-\infty}^{\infty} x(t) e^{-j 2 \pi f t} \mathrm{d} t
+\end{equation}
+where $x(t)$ is a signal in the time-domain, $f$ the frequency of the complex exponential and $j^2=-1$.
+Often the complex exponent $e^{-j 2 \pi f t}$ is written as $e^{-j \omega t}$ where $\omega$ is the angular frequency.
+Typically, $\mathcal{F} \left\{ x(t) \right\}$ is used to denote the Fourier transform of the function $x(t)$.
+
+To go from frequency to time-domain we can use the inverse Fourier transform which is defined as
+\begin{equation}
+ x(t) = \int_{-\infty}^{\infty} X(f) e^{+j 2 \pi f t} \mathrm{d} f
+\end{equation}
+It should be noted that there are in fact multiple conventions for defining the Fourier transform.
+% Note the change of sign in the exponent.
+When working with digital signals we need to have a discretized version of the
+Fourier transform. The Discrete Fourier Transform (DFT) both operates on, and
+returns, finite discrete signals.
+
+The forward DFT can be defined as
+\begin{equation}
+ X_k = \sum_{n=0}^{N-1} x_n \cdot e^{-j 2\pi k n / N}
+\end{equation}
+where $x_n$ is a discrete signal in time-domain, $X_k$ the resulting signal in
+frequency domain, $N$ the amount of complex numbers the input and output signal
+consists of, and $k$ integer frequencies.
+
+and the inverse DFT as
+\begin{equation}
+ x_n = \frac{1}{N} \sum_{k=0}^{N-1} X_k e^{+j 2 \pi k n/N}
+\end{equation}
+The factor $\frac{1}{N}$ is a normalization factor. Similarly as with the
+continuous Fourier transform there are multiple conventions for the DFT, with
+the most notable difference between the chosen normalization factors.
+
+The DFT can be expressed as a matrix and applied through matrix multiplication
+with the signal. The Fast Fourier Transform (FFT) is an algorithm that
+calculates the DFT by decomposing the DFT matrix into a product of sparse
+factors, thereby reducing the amount of computations necessary and obtaining a
+higher performance.
+
+
+\subsubsection{Hermitian symmetry}
+The Fourier transform and DFT operate both on a complex function and return a
+complex function as well where the negative frequencies can be different from
+the positive frequencies. If however the input function is real-valued, then the
+negative frequencies are identical to the positive frequencies, and we say the
+Fourier transform of the function is Hermitian. A Hermitian function is a
+complex function with the property that its complex conjugate is equal to the
+original function with the variable changed in sign
+\begin{equation}
+ f(-x) = \overline{f(x)}
+\end{equation}
+Similarly, when the input function is Hermitian, then its Fourier transform is
+real-valued. This property turns out to be useful, since when computing the DFT
+of a real-valued signal this property will half the amount of computations and
+storage required.
+% that is required to respectively compute and store the result of the
+% DFT.
+
+\subsubsection{Sine and cosine transform}
+
+\todo{I mention the DCT in turbulence paper}
+
+
+\subsection{Transfer functions and filters}
+
+% \section{Filters}
+
+\subsubsection{Delay and gain}
+
+
+
+\subsubsection{Finite and Infinite Impulse Response filters}
+We will now consider two types of filters. In the following expressions $x[n]$ is an input signal to a filter, and $y[n]$ the signal after filtering.
+
+% \subsubsubsection{Infinite Impulse Response filter}
+An Infinite Impulse Response (IIR) filter is a type of filter whose impulse response never exactly reaches zero. Analog electronic filters like fractional-octave bandpass filters in sound level meters are generally IIR filters.
+The output of a digital IIR filter can be obtained through the difference equation
+\begin{equation}
+ y[n] = \frac{1}{a_0} \left( b_0 x[n] + b_1 x[n-1] + \dots b_P x[n-P] - a_1 y[n-1] - a_2 y[n-2] - \dots - a_Q y[n-Q]\right)
+\end{equation}
+where $P$ and $Q$ are respectively the feedforward and feedback filter orders, and $b_i$ and $a_i$ respectively the feedforward and feedback filter coefficients.
+The expression can be written as
+\begin{equation}
+ y[n] = \frac{1}{a_0} \left( \sum_{i=0}^{P} b_i x[n-i] - \sum_{j=1}^Q a_j y[n-j] \right)
+\end{equation}
+The transfer function in $z$-domain is
+\begin{equation}
+ H(z) = \frac{\sum_{i=0}^P b_i z^{-i}}{\sum_{j=0}^Q a_j z^{-j}}
+\end{equation}
+Because an IIR filter has feedback terms, it will have poles which can have a negative effect on the stability of the filter.
+
+% \subsubsubsection{Finite Impulse Response filter}
+A Finite Impulse Response (FIR) filter is a filter whose impulse response is of finite duration before it settles to zero in finite time.
+
+In the case of a causal digital FIR filter the output $y[n]$ is given by
+\begin{equation}
+ y[n] = b_0 x[n] + b_1 x[n-1] + \dots + b_N x[n-N]
+\end{equation}
+which can be written as
+\begin{equation}
+ y[n] = \sum_{n=0}^{N} b_i \cdot x[n-i]
+\end{equation}
+where $N$ the filter order and $b_i$ the value of the $i$th impulse.
+The transfer function in $z$-domain is
+\begin{equation}
+H(z) = \sum_{n=-\infty}^{infty} h[n] z^{-n}
+\end{equation}
+This type of filter does not have any feedback terms, therefore there cannot be any poles and thus this type of filter is inherently stable.
+Furthermore, they can be easily designed to have linear phase, which is an important requirement for auralisations.
+
+\subsubsection{Linear phase and zero phase}
+A filter is said to have linear phase when the phase response of the filter is a 
+linear function of frequency. In case of linear phase, all frequency components 
+are delayed in time by the same amount and consequently there is no phase 
+distortion. This phase distortion, which is basically dispersion, is highly 
+undesired in auralisations. Therefore, linear phase is a must for filters used 
+in auralisations. \todo{Citation}
+
+However, while a filter with linear phase causes no phase distortion, it still 
+does cause a group delay of the signal. The delay in samples is $(L-1)/2$ with 
+$L$ the length of the filter. If the filter length remains constant over time, 
+then the signal will experience a constant delay. This is a known problem with 
+real-time systems; the filters cause a latency in the system and this can effect 
+the experience, especially when it is possible to interact with the simulated 
+environment. \todo{Citation}
+
+A possible method to correct for the group delay is by filtering the signal 
+twice, once forward and once backward. This method, known as zero-phase 
+filtering, is however only possible for offline auralisations because the 
+operation is non-causal. \todo{Citation}
+
+\missingfigure{Show tone, forward only filtered, and zero-phase filtered.}
+
+
+
+
+
+\newpage
+\subsection{Convolution}
+
+\subsubsection{Convolution definition}
+The convolution of the functions $h$ and $x$ is written $h \star x$ and is defined as the integral of the product of the two functions after one of the functions is reversed and shifted.
+\begin{equation}
+ y(t) = (h \star x)(t) = \int_{-\infty}^{\infty} h(\tau)x(t-\tau) \mathrm{d}\tau
+\end{equation}
+% Often $f$ would be an input signal and $g$ an impulse response of a system.
+In practice we work with discrete signals. The discrete convolution of $h$ and $x$ is defined as
+\begin{equation}
+ y [n] = (h \star x )[n] = \sum_{m=-\infty}^{\infty} h[m] x[n-m]
+\end{equation}
+Generally we have also finite sequences in which case the discrete convolution is written as
+\begin{equation}\label{eq:theory_signal_processing_convolution_fir}
+ y [n] = (h \star x )[n] = \sum_{m=0}^{M-1} h[m] x[n-m]
+\end{equation}
+An example of the discrete convolution can be seen in figure \ref{fig:theory_signal_processing_convolution}.
+The discrete convolution operation can also be written as a matrix-vector multiplication
+\begin{equation}\label{eq:theory_signal_processing_convolution_toeplitz}
+ y [n] = T \star x =
+ \begin{bmatrix}
+ h_1 & 0 & \hdots & 0 & 0 \\
+ h_2 & h_1 & \hdots & \vdots & \vdots \\
+ h_3 & h_2 & \hdots & 0 & 0 \\
+ \vdots & h_3 & \hdots & h_1 & 0 \\
+ h_{m-1} & \vdots & \hdots & h_2 & h_1 \\
+ h_m & h_{m-1} & \vdots & \vdots & h_2 \\
+ 0 & h_m & \hdots & h_{m-2} & \vdots \\
+ 0 & 0 & \hdots & h_{m-1} & h_{m-2} \\
+ \vdots & \vdots & \vdots & h_{m} & h_{m-1} \\
+ 0 & 0 & 0 & \hdots & h_{m} \\
+ \end{bmatrix}
+ \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3 \\
+  \vdots \\
+  x_n \\
+ \end{bmatrix}
+\end{equation}
+The matrix $T$ is a Toeplitz matrix with each column a shifted copy of $h$.
+For relatively long signals the matrix will be sparse.
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[]{../figures/generated/signal-processing/convolution}
+        \caption{An example of a convolution. The signal $x$ is convolved with impulse response $h$ producing the output $y$.
+        Both $x$ and $h$ are constant over time. Signal $x$ has length $N$, $h$ length $M$ and the output $y$ has length $N+M-1$. It takes $M-1$ samples before the signal and filter impulse response fully overlap.
+        The length of the fully overlapped part is $N-M+1$ samples.
+%         It can be seen that it takes $M-1$ samples before the filter has fully kicked in.
+        }
+        \label{fig:theory_signal_processing_convolution}
+\end{figure}
+
+% \subsection{Convolution with Fourier transforms}
+The presented algorithms to calculate the convolution are straightforward to implement.
+However, there are better performing algorithms. According to the convolution theorem the Fourier transform of a convolution is the pointwise product of the Fourier transforms of the inputs
+\begin{equation}\label{eq:theory_signal_processing_convolution_fourier}
+ y = h \star x = \mathcal{F}^{-1} \Big\{ \mathcal{F}\left\{ h \right\} \cdot \mathcal{F}\left\{ x \right\} \Big\}
+\end{equation}
+This algorithm generally performs better for larger lengths of $h$ and $x$.
+
+\subsubsection{Overlap-add method}
+If one of the sequences is much longer than the other, then it might be worth splitting up the long sequence into blocks and apply the convolution on each block.
+The overlap-add method is an example of such algorithm. In the overlap-add method the signal $x[n]$ is divided into blocks of size $L$.
+We now define
+\begin{equation}
+ x_k[n] =
+ \begin{cases}
+  x[n+kL], & n = 0,1,\dots L \\
+  0, & \text{otherwise,}
+ \end{cases}
+\end{equation}
+and rewrite $x[n]$ as
+\begin{equation}
+ x[n] = \sum_k x_k[n-kL]
+\end{equation}
+Equation \ref{eq:theory_signal_processing_convolution_fir} can then be written as a sum of short convolutions
+\begin{equation}
+y[n] = h[n] \star \left( \sum_k x_k[n-kL] \right) = \sum_k \left( h[n] \star x_k[n-kL] \right)
+\end{equation}
+As shown in figure \ref{fig:theory_signal_processing_convolution} it takes $M-1$
+samples before the signal and filter fully overlap. We can divide the response
+into three parts; the left part we call the head, the fully overlapped part the
+body and the rightern part the tail. The fully overlapped part is $L-M+1$
+samples long which is shorter than the blocksize $L$. Therefore, we need to keep
+the tail of each convolution and add it to the head of the next convolution.
+
+For longer sequences the overlap-add method is much faster than the naive
+(direct-form) method, and especially when using the overlap-add method in
+combination with Fourier transformations (equation
+\ref{eq:theory_signal_processing_convolution_fourier}) for the short
+convolutions. A disadvantage of overlap-add in a real-time simulation is that, it overlap-add operates on blocks, the simulation will incur a latency.
+
+\subsubsection{Overlap-save or overlap-discard method}
+A method similar to overlap-add is overlap-discard, known also as overlap-save.
+\todo{}
+
+
+\subsubsection{Linear time-variant system}
+So far we considered linear time-invariant systems. In a linear time-variant
+system the impulse response can change over time. Consider again the Toeplitz
+matrix as shown in \ref{eq:theory_signal_processing_convolution_toeplitz}. In
+the time-invariant case each column is a time-shifted copy of the same impulse
+response. In the time-variant case, however, each column can be a entirely
+different impulse response.
+\missingfigure{Show how the matrix-vector product for an LTV is done.}
+
+Using the matrix-vector multiplication is a straightforward method to apply a
+time-variant filter. However, performance is generally bad because of the huge
+amounts of multiplications and additions that have to be performed. Furthermore,
+the method cannot be used in the case of real-time simulations.
+
+If we assume time-invariance during a short amount of time, then we can reuse
+the overlap-add method and perform each of the small convolutions with a
+possibly different impulse response. A requirement is that the filter changes
+sufficiently slow compared to the blocksize and thus the highest possible update
+rate of the impulse response.
+
+
+% For $n$ amount of unique distances an impulse response is calculated. The
+% absorption is then applied using a convolution that can handle a time-variant
+% system.
+% The convolution of two sequences is given by
+% \begin{equation}
+%  y = t \ast u
+% \end{equation}
+% This can be written as a matrix-vector multiplication
+% \begin{equation}
+%  y = T \cdot u
+% \end{equation}
+% where $T$ is a Toeplitz-matrix in which each column represents an impulse
+% response.
+% In the case of a linear time-invariant (LTI) system, each column represents a
+% time-shifted copy of the first column.
+% In the time-variant case (LTV), every column can contain a unique impulse
+% response, both in values as in length.
+
+
+
+
+
+\newpage
+\subsection{Amplitude envelope and instantaneous frequency}
+% An analytic signal $s_a$ is a complex-valued function that has no negative frequency components. The real and imaginary parts of an analytic signal are real-valued functions related to each other by the Hilbert transform.
+In some cases it is possible to directly extract the amplitude envelope $A(t)$
+and instantaneous frequency $\phi(t)$ of a signal. An example of such a case
+would be a signal $s(t)$ consisting of a single sinusoidal. A sinusoidal is an
+analytic signal, and an analytic signal $s_a(t)$ is a complex-valued function
+that has no negative frequency components. Both real and imaginary parts of the
+analytic signal are real-valued functions, and they're related to each other by
+the Hilbert transform.
+
+The amplitude envelope of an analytic signal is given by
+\begin{equation}
+ A(t) = |s_a(t)|
+\end{equation}
+and the wrapped instantaneous phase by
+\begin{equation}
+ \phi(t) = \arg{\left[s_a(t) \right]}
+\end{equation}
+The instantaneous angular frequency can be obtained by differentiating the unwrapped phase with respect to time
+\begin{equation}
+ \omega (t) = \frac{\mathrm{d}\phi}{\mathrm{d}t}
+\end{equation}
+and thus the instantaneous frequency is
+\begin{equation}
+ f (t) = \frac{1}{2\pi} \frac{\mathrm{d}\phi}{\mathrm{d}t}
+\end{equation}
+
+Figure \ref{} shows a spectrogram of a frequency-swept sinusoidal.
+
+\missingfigure{Spectrogram with a sweep + Figure with instantaneous frequency and amplitude envelope. See the scipy.signal.hilbert transform example that I made}
+
+
+\newpage
+\subsection{Resampling and interpolation}
+Generally a single, fixed, sample frequency is used in a chain of signal
+processing operations. However, sometimes it is necessary to resample a signal.
+
+\subsubsection{Resampling}
+Upsampling a signal with an integer factor can be done by inserting zeros
+between the actual samples and low-pass filtering the result to smooth out
+discontinuities, thereby replacing the zeros. Downsampling, also known as
+decimation, is done by first low-pass filtering the signal and then keeping
+every $F$th sample where $F$ is the integer downsampling factor.
+
+If the resampling factor is not an integer, it is necessary to combine
+upsampling and downsampling. When upsampling with a rational fraction it is
+necessary to upsample first, and then downsample. Both operations require
+low-pass filtering, but because of the order of operations it is sufficient to
+low-pass filter only once and with the lower of the two cut-off frequencies.
+
+Similarly, when downsampling with an rational fraction the downsampling with an
+integer factor is done first, followed by upsampling. Again, because of the
+order of operations it is sufficient to low-pass filter only one with the lower
+of the two cut-off frequencies.
+
+\subsubsection{Interpolation}\todo{Rewrite section, more general, less specific to Doppler shift.}
+The low-pass filters used when resampling are basically interpolation filters.
+Interpolation filters can also be used when applying a delay to a system in case
+the delay is not exactly an integer of the sample time, or when the delay
+changes as function of time. The latter is called a Variable Delay Line (VDL). A
+typical example of how a VDL is used in auralisations is to apply the
+propagation delay of sound and in effect the Doppler shift.
+
+
+% Since the signal is discrete and the delay is generally not an integer multiple of the sample time, an interpolation scheme is required.
+
+% \subsubsection{Linear interpolation}
+Initially, linear interpolation was used.
+For a given sound travel time $\Delta t(t)$ from source to receiver, the index
+$k_{r}^{'}$ is given as
+\begin{equation}
+ k_{r}^{'} = k_e + \Delta t (t) \cdot f_s
+\end{equation}
+where $f_s$ is the sampling frequency.
+
+
+\begin{equation}
+ y = y_i + (y_j-y_i) \cdot \frac{x-x_i}{x_j-x_i}
+\end{equation}
+
+
+The Doppler shifted tonal component is clearly visible, however, strong artefacts are also visible and indeed audible.
+In practice, these artifacts are often masked by noise components but this however cannot be guaranteed.
+
+There are methods to reduce these artefacts. For example, upsampling the signal before resampling decreases the prominence of the artifacts.
+Another possibility is a different interpolation scheme.
+
+% \subsubsection{Lanczos interpolation}
+\todo{Not using Lanczos anymore. Keep it in?}
+Theoretically, the optimal reconstruction filter is a sinc filter. In practice
+only approximations of this filter can be used, and these approximations are
+generally achieved by windowing and truncating the sinc function. One of these
+approximations is the Lanczos filter or kernel, which is the sinc function
+windowed by another sinc function.
+
+The Lanczos kernel is given by
+\begin{equation}
+ L(z) = \begin{cases}
+         \textrm{sinc}(z) \textrm{sinc}(z/a), & \textrm{if} -a < z < a \\
+         0, & \text{otherwise}
+        \end{cases}
+\end{equation}
+where $a$ is the size of the kernel. Consider now a signal with samples $s_i$
+for integer values of $i$ where sample $s_i$ corresponds to the sample at $t=i/f_s$.
+The value at retarded time $t'$ is then given by
+\begin{equation}
+ S(x) = \sum_{\floor{x} - a + 1}^{\floor{x} + a} s_i L(x-i)
+\end{equation}
+where $x$ is the sample at retarded time $t'$
+\begin{equation}
+ x = -t' + i
+\end{equation}
+The frequency shift depends on the change of propagation delay. Therefore, when source and receiver are relatively close to one another, the method is most sensitive to uncertainties in source position and speed of sound.
+
+
+\todo{Figure with comparison of linear interp and Lanczos was here. Include it?}
+% Figure \ref{fig:theory_signal_processing_interpolation} shows spectrograms with Doppler-shifted tones for the two explained interpolation algorithms and different values of the kernelsize $a$.
+% The artifacts are clearly less pronounced when using a larger kernelsize. However, a larger kernelsize does come at a cost of performance as shown in \ref{fig:theory_signal_processing_interpolation_benchmarks}.
+%
+%
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=1.0\textwidth]{../figures//ipynb/theory_signal_processing_interpolation/interpolation_comparison_grid}
+%         \caption{A comparison between linear interpolation and Lanczos interpolation with three different kernelsizes. For larger kernelsizes the Lanczos interpolator gives much weaker artifacts.}
+%         \label{fig:theory_signal_processing_interpolation}
+% \end{figure}
+%
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.7\textwidth]{../figures//ipynb/theory_signal_processing_interpolation/benchmarks}
+%         \caption{Computation time as function of signal duration for linear interpolation and Lanczos interpolation with several kernelsizes. The sample frequency was 44100 Hz.}
+%         \label{fig:theory_signal_processing_interpolation_benchmarks}
+% \end{figure}
+
+%
+% \newpage
+% \subsection{Cepstral analysis}
+% A cepstrum is the result of taking the Inverse Fourier transform of the logarithm of the estimated spectrum of a signal.
+% Different types of cepstra exist; the
+%
+% The complex cepstrum is given by
+% \begin{equation}
+%  c[n] = F^{-1} \left\{ \log_{10}{ \left( F {x[n]} \right) } \right\}
+% \end{equation}
+%
+%
+% \missingfigure{Complex cepstrum. Quefrency}
+%
+%
+% % \begin{figure}[H]
+% %          \begin{minipage}{1.0\textwidth}
+% %           \subfloat[]{\includegraphics[width=0.5\textwidth]{../figures//ipynb/theory_signal_processing_interpolation/interpolation_linear.png}}
+% %           \subfloat[]{\includegraphics[width=0.5\textwidth]{../figures//ipynb/theory_signal_processing_interpolation/interpolation_lanczos2.png}}
+% %         \end{minipage}
+% %         \begin{minipage}{1.0\textwidth}
+% %           \subfloat[]{\includegraphics[width=0.5\textwidth]{../figures//ipynb/theory_signal_processing_interpolation/interpolation_lanczos5.png}}
+% %           \subfloat[]{\includegraphics[width=0.5\textwidth]{../figures//ipynb/theory_signal_processing_interpolation/interpolation_lanczos10.png}}
+% %         \end{minipage}
+% %         \centering
+% %         \caption{A comparison between linear interpolation and Lanczos interpolation with three different kernelsizes.}
+% %         \label{fig:theory_signal_processing_interpolation}
+% % \end{figure}

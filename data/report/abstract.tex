@@ -1,0 +1,96 @@
+\newpage\section*{Abstract}
+
+Aircraft noise is a major issue in urban areas and is one of the research topics
+within the FP7 SONORUS project. Current methods for determining the impact of
+aircraft noise on annoyance and sleep disturbance are based on energetic
+quantities disregarding the dynamic character of the sound. To obtain a more
+complete representation of annoyance, listening tests with audible aircraft
+sound promise to determine the impact of the aircraft sound on people more accurately.
+
+A tool was developed to auralise aircraft noise. The propagation model includes,
+aside from the typically considered propagation effects like Doppler shift, a
+computationally efficient model to generate sequences of amplitude and phase
+fluctuations due to atmospheric turbulence. The method, already used in the
+field of wireless communication to predict the performance of wireless
+communication links, could be used in the field of acoustics to create more
+perceptually valid auralizations. Depending on parameters that are used to
+describe the atmospheric turbulence, the amplitude modulations result in clearly
+audible modulations and peaks in a spectrogram. Furthermore, the phase
+modulations cause additional decorrelation.
+
+An inverse propagation model was developed to compute back from a receiver to
+source in time-domain. An automated procedure was developed to extract features
+from the resulting signal. These features were then used to directly synthesise
+the emission as function of time, and this signal was propagated to the original
+receiver resulting in an auralisation that should reproduce the recording
+it is based on.
+
+To determine whether the auralisations indeed resembled the recordings, and thus
+to validate the auralisation tool, a listening test was conducted. Participants
+were asked to rate the similarity of two sounds in a paired comparisons. Two
+aircraft types were considered, and the participants were clearly able to
+discriminate between them, in case of both the recordings and the auralisations.
+However, according to the participants the auralisations did not yet fully match
+the recordings.
+\todo{rewrite}
+
+
+
+
+% OLD
+
+% An increasing amount of people live in urban environments. The amounts of
+% traffic increase as well, a While aircraft have become more quiet over the
+% years, there is also more people than ever flying, and thus the amount of people
+% exposed to aircraft noise increases.
+%
+% Noise has a negative impact on humans, it can cause annoyance, distraction,
+% sleep disturbance, stress. The impact of sound on humans depends on multiple
+% aspects, like the character of the sound as well as expections from those
+% exposed to it. Current aircraft noise assessment methods are based on metrics that consider
+% only the energy of the sound and not the character. To better predict the impact
+% of sound on humans, the audible sound should be considered instead of just a level.
+%
+% Recordings can be used to investigate the human response to aircraft sound,
+% however, with recordings you're limited in the parameters you can very, and thus
+% in how you can control a human response experiment. Auralization is a process to
+% render a soundfield audible. While originally used to predict the sound inside a
+% space, it is now also used to simulate the soundscape of outside spaces.
+% Depending on the auralization method one can adjust parameters affecting
+% sound generation and propagation. \todo{controlled experiment}
+%
+% Auralizations have been made of cars, windturbines and aircraft. Typically the
+% source synthesis is done using Spectral Synthesis Modelling and the sound
+% propagation is based on geometrical acoustics. Spectral Synthesis Modelling
+% allows for a detailed sound synthesis, with the limiting factor typically being
+% the lack of sufficiently detailed input.
+%
+% \todo{emission synthesis}
+%
+% Propagation models typically assume a steady atmosphere as this significantly
+% simplifies the modelling as the resulting system is entirely deterministic. In
+% practice, atmospheric turbulence, which is of a stochastic nature, affects the
+% refractive index of the medium and thus wave propagation.
+% % In practice, spatial and temporal fluctuations of windspeed and temperature, that
+% % are of a stochastic nature, affect the refractive index of the medium and thus
+% % wave propagation. \todo{maybe drop refractive index}
+% The effects of atmospheric turbulence on wave propagation are clearly audible.
+% It is therefore expected that atmospheric turbulence affects the perceived
+% realism of aircraft auralizations and is therefore required to study the impact
+% of aircraft sound on humans.
+%
+% Modelling sound propagation through a turbulent atmosphere is typically
+% computationally expensive. Therefore, a simple and fast model was developed
+% to account for atmospheric turbulence in auralizations. \todo{something about model}
+
+% \todo{listening tests}
+%
+% \todo{conclusions}
+
+
+
+
+Auralizations were created to
+
+
+\textbf{Keywords}: Aircraft noise, Auralization, Outdoor sound propagation, Atmospheric turbulence

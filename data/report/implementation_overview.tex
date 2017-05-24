@@ -1,0 +1,41 @@
+\section{Overview}
+
+In this part the implementation is discussed.
+
+As explained in the introduction, we would like to develop an auralization tool that is physically as correct as possible.
+
+The assumption is made that source and propagation can be 
+described independently of each other. 
+
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[height=0.4\textheight]{../figures/implementation_overview}
+%         \caption{Overview.}
+%         \label{fig:implementation_overview}
+% \end{figure}
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[auto, node distance=1cm,>=latex']
+\tikzset{
+block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimum width=5em, text width=5em, align=center},
+}
+    % Main nodes
+    \node [block]                       (emission)      {Emission};
+    \node [block, right=of emission]    (propagation)     {Propagation};
+    \node [block, right=of propagation]   (immission)         {Immission};
+
+    % Main edges
+    \draw [->]  (emission)      --  (propagation);
+    \draw [->]  (propagation)   --  (immission);
+
+\end{tikzpicture}
+  \caption{Overview.}
+  \label{fig:implementation:overview}
+\end{figure}
+
+
+The auralisation tool was implemented mostly in Python 3.5 \cite{Python} and
+Cython \cite{Behnel2011,Cython}. Extensive use was made of the Numpy\cite{VanderWalt2011,Numpy}, Scipy\cite{Scipy}, Pandas\cite{Mckinney2010},
+and Blaze \cite{Blaze} libraries. A full implementation of the tool can be found at
+\cite{Rietdijk2017d}

@@ -1,0 +1,64 @@
+\chapter{Conclusions and future work}\label{chapter:conclusions}
+
+
+\subsubsection{Auralization paper}\todo{rewrite and merge}
+In order to investigate the impact of aircraft sound on humans a tool was
+developed to auralise aircraft sound. The goal was to develop a tool that can
+create auralisations that sound similar to the target aircraft and is capable of
+creating auralisations of the current fleet of aircraft.
+
+A propagation model based on geometrical acoustics was developed and the
+emission synthesis was based on features extracted from recordings with the use
+of an inverse propagation model and a feature extraction algorithm. A listening
+test was conducted to determine whether the chosen features are sufficient for
+creating auralisations that sound similar to the actual aircraft.
+
+From the listening test it follows that listeners can discriminate between
+sounds of different aircraft types, in case of both recordings and
+auralisations. The similarity ratings between recordings and auralisations are
+similar to the similarity ratings between the two aircraft type, implying the
+auralisations sound like different aircraft than those that were recorded.
+
+Therefore, future work should emphasise on further improving the simulations.
+The authors think that the most important point to improve is the simulation of
+the blade passing frequency and harmonics, and that would require a better
+estimation of their powers and bandwidths. Aside from that, it would seem the
+auralisation tool is capable of delivering plausible auralisations.
+
+\subsubsection{Turbulence paper}\todo{rewrite and merge}
+Fluctuations in the refractive-index field due to variations in temperature and
+wind affects sound propagation and causes audible modulations. A method was
+presented for generating sequences of modulations and applying these to
+monochromatic as well as broadband signals.
+
+A Rytov approximation to first-order refractive-index flucutuations results in a complex
+phase which we can write as a log-amplitude $\chi$ and phase $S$ fluctuation.
+The propagating sound is modelled as a time-varying channel where we consider
+two sequences, one for the log-amplitude fluctuations, and another for the phase
+fluctuations.
+
+The fluctuations are frequency-dependent and therefore a filter was designed to take that into account.
+% A Gaussian applied filter was used to model the atmospheric turbulence because of its simplicity and because it is computationally least demanding.
+A Gaussian turbulence spectrum was considered, but the general method can be
+used with other turbulence spectra as well. The Von Karman spectrum describes
+real turbulence spectra typically better than the Gaussian spectrum, however,
+the Von Karman spectrum is computationally much more demanding.
+% The Gaussian model also allows implementing the phase fluctuation with a Variable Delay Line (VDL).
+
+Examples are shown where the method is applied to a tone and to an aircraft
+auralization. The aircraft auralization spectrogram shows several spikes
+corresponding to amplitude modulations as well as an increase in the amount of
+decorrelation. Furthermore the transverse velocity dependence on the frequency
+content of the modulations is demonstrated.
+
+According to the authors the method results in more realistic sounding
+auralizations, but this has not been validated yet with listening tests. The
+implementation of the model that was used in this paper to generate the figures
+can be found at \cite{Rietdijk2016}.
+
+
+
+\section{Future work}
+
+
+\subsection{Develop better indicators for annoyance and sleep disturbance}

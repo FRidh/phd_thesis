@@ -1,0 +1,125 @@
+\documentclass[a4paper,10pt]{report}
+% \usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage{textcomp}
+% \usepackage{amsart}
+% \usepackage[english]{babel}
+\usepackage[hang,small,bf]{caption}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage[charter]{mathdesign}
+\usepackage{fullpage}                               % Use the full page
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+\usepackage{subfig}
+\usepackage{pdfpages}
+
+\usepackage{xcolor}
+\usepackage{listings}
+
+\usepackage{siunitx}
+\usepackage{todonotes}                              % To do notes and figures
+% \usepackage[numbers,square,sort&compress]{natbib}   % Bibliography
+% Bibliography
+\usepackage[
+  backend=biber,
+  giveninits=true,
+  style=numeric-comp
+]{biblatex}
+\usepackage{nicefrac}                               % Nice fractions
+\usepackage[super]{nth}                             % 1st, 2nd, 3rd, ...
+
+% Turbulence block diagrams
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+
+% Nomenclature
+% \usepackage{nomencl}
+\usepackage{longtable}
+
+% Mathematics
+\usepackage{amsmath}
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\subscript}[1]{\ensuremath{_{\textrm{#1}}}}
+\newcommand{\degree}{\ensuremath{^\circ}}
+% \usepackage{nicefrac}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\setcounter{tocdepth}{2}
+
+\title{Auralisation of aircraft noise in an urban environment}
+\author{
+Frederik Rietdijk \small{frederik.rietdijk@chalmers.se}\\
+}
+
+% \makenomenclature
+
+\bibliography{library.bib}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}	% Hide page number.
+
+\newpage\input{abstract}
+\newpage\input{publications}
+\newpage\input{acknowledgements}
+\newpage
+\tableofcontents
+\input{nomenclature}
+% \printnomenclature
+% \listoftables
+% \listoffigures
+
+\input{introduction}
+\input{theory}
+\input{implementation}
+\input{turbulence}
+
+% \input{implementation_turbulence}
+
+% \input{implementation_reproduction}
+
+\input{listening_test}
+
+
+
+\input{conclusions}
+% \chapter{Future work}
+
+% \input{conclusions}
+
+
+\newpage
+% \bibliographystyle{plain}
+% \bibliography{references}
+\printbibliography
+
+
+
+\appendix
+\newpage
+
+% PAPERS
+
+\chapter{Paper A}
+\includepdf[pages=-]{../papers/scintillations}
+\chapter{Paper B}
+\includepdf[pages=-]{../papers/overview}
+
+% \section{Case 1: Active Noise Control System for an exhaust}
+% \includepdf[pages=-]{../case_study/cement}
+% 
+% \newpage
+% \section{Case 2: Reduction of rail rolling noise}
+% \includepdf[pages=-]{../case_study/silence}
+% 
+% \newpage
+% \section{Case 3: Constrained layer damping treatment to a engine front cover}
+% \includepdf[pages=-]{../case_study/CLD_engine}
+
+
+\end{document}

@@ -1,0 +1,226 @@
+\chapter{Introduction}\label{chapter:introduction}
+
+
+\section{Aircraft noise and human response}
+At the beginning of the 20th century the first practical aircraft were developed
+and since then developments in aviation went fast.
+As aircraft became more common, more flights took place and more airports were
+constructed. An increasing amount of people lives in the vicinity of airports
+and are exposed to aircraft noise.
+
+
+\subsection{The history of aviation}
+
+
+- Wright brothers
+
+- More flights
+
+- Bypass
+
+
+
+
+
+
+Aircraft noise can cause annoyance and sleep disturbance. Currently, annoyance 
+and sleep disturbance are predicted using indicators based on time-averaged sound pressure 
+levels. To obtain a more complete representation of annoyance one should 
+predict the audible aircraft sound and determine the impact of the sound on people.
+
+\subsection{Human response}
+
+Annoyance and sleep disturbance
+
+\subsection{Noise policy}
+
+World Health Organisation
+
+
+Noise control / mitigation
+
+Environmental Noise Policy (END)
+
+Zurich Aircraft Noise Index (ZFI) \cite{Schaffer2012}
+
+
+
+\subsection{Noise prediction}
+
+
+
+\subsubsection{Prediction models}
+
+
+Noise-Power-Distance-tables, or NPD-tables, are the backbone of a wide range of aircraft noise models in use, like the Integrated Noise Model (INM) \cite{Arntzen2011}.
+
+At Empa the noise prediction model FLULA is used, and a new model called sonAIR is in development \cite{sonAIR}. 
+
+
+
+
+
+\section{The urban environment soundscape}
+
+% \begin{quotation}
+% In 450BC Confucius is reputed to have said: "Tell Me and I Will Forget; Show Me and I May Remember; Involve Me and I Will Understand."
+% \end{quotation}
+
+
+
+% The urban environment contains many different kinds of sounds, coming from sources ranging from cars to cats, ... to the music someone is listening to in his or her living room whilst a window is open.
+
+% Soundscape
+
+
+\subsection{Auralisation}% of soundscapes}
+% \begin{quote}
+% Auralisation is the technique of creating audible sound files from numerical data
+% \end{quote} \cite{Vorlander2008}.
+
+% TODO: taken from overview paper
+% Auralisation is a technique to simulate the audible sound of an object or environment.
+Auralisation is a method to render audible virtual sound fields \cite{Kleiner1993}.
+The method has been used to simulate the audible sound inside
+rooms, but also for the sound of
+cars \cite{Forssen2009,Maillard2012,Pieren2015,Hoffmann2016,Hoffmann2016a},
+trains \cite{Pieren2016},
+windturbines \cite{Pieren2014,Heutschi2014},
+fans \cite{Merino2016} and
+aircraft \cite{Arntzen2014a, Rizzi2016a, Rizzi2016}. Auralisation of outdoor sources
+and environments is a key topic of the VASTCON Technical Working Group \cite{Vastcon}.
+
+% Common reasons for generating auralisations is to determine how new and old spaces sound,
+
+Different auralisation methods exist. Often emission synthesis and sound
+propagation are separated. This is not always the case because its not always
+possible, like e.g. when using a wave-based method
+\cite{Hornikx2016,Georgiou2016,Georgiou2016a}.
+
+Common methods for the emission synthesis are spectral modelling synthesis (SMS)
+and granular synthesis. Granular synthesis typically uses grains based on
+measurements and is a computationally fast method for synthesis. Spectral
+modelling synthesis generates a signal through a superposition of two types of
+signal components: tones and noise. Whereas with the granular synthesis method
+each grain typically corresponds directly to specific conditions, e.g. the speed
+of and distance to the source, with spectral modelling synthesis the synthesis
+strategy can be considered separate from the underlying model, and therefore a
+emission synthesis model can be established that relates tonal and spectral
+components to the operational state of the source.
+
+
+
+\subsection{Aircraft noise auralisation}
+
+% TODO: taken from overview paper
+Aircraft auralisation has been used to study future aircraft types
+\cite{Rizzi2013,Rizzi2016,Rizzi2016a} and flight procedures \cite{Sahai2016} but
+also to investigate the perceived unpleasantness of aircraft flyover noise as
+function of certain temporal parameters \cite{Pate2017}.
+
+Aspects to consider when simulating the sound of aircraft are the different
+noise sources on the aircraft, the state of the aircraft and thereby the state
+of these sources, as well as the condition of the environment.
+% \subsection{Aircraft emission}
+The main noise sources of a turbojet aircraft are jet noise, fan and turbine
+noise, combustion noise and airframe noise. In the case of turboprop aircraft
+the main source is the propellor\cite{Zaporozhets2011}. Fan or propellor noise
+is mostly tonal whereas the other sources are broadband noise.
+Which exact sources are most relevant depends on the aircraft type and flight
+procedure as well as the position of the source with respect to the receiver due
+to directivity of the sources \cite{Bertsch2015}.
+
+The aircraft emission prediction tools found in the ANOPP-Source Functional
+Module of ANOPP2 \cite{Lopes2016, Tuttle2017} and INSTANT\cite{Sahai2016b}, which is based
+on ANOPP, use established models for the noise prediction of the individual
+noise sources. The Heidmann model is for example used for fan noise and the
+Stone model for jet noise. The Heidmann model in ANOPP models
+five sources explicitly, of which three correspond to emission of tones and two
+to emission of broadband noise \cite{Arntzen2014a}. The model outputs for each
+of these five sources a spectrum in fractional-octaves.
+For broadband synthesis in the NAF\cite{Aumann2015}, power of the tonal
+components in each band is divided by the amount of tones in that band.
+Nowadays the Heidmann model in ANOPP can output the frequencies and amplitudes
+of forward and aft radiated fan tones. Only Buzz-Saw noise is still output in
+\nicefrac{1}{3}-octaves.
+
+
+%
+% % TODO: clean up the following
+% \todo{cleanup the following}
+% To enhance future aircraft operations, the Dutch National Aerospace Laboratory (NLR) wants to have a more comprehensive picture on aircraft noise annoyance.
+% A cooperation of the NRL with NASA focuses on expanding the annoyance research capabilities \cite{Arntzen2011}. The NLR and NASA use a common setup, the Virtual Community Noise Simulator (VCNS).
+% A helmet with visor is used to present a visual simulation and headphones are used to present binaural flyover noise.
+%
+% At NASA, Rizzi et al. auralised the flyover noise of a hybrid wing body (HWB) aircraft as well as a reference aircraft, similar to a Boeing 777-200ER.
+%
+% % To predict an aircraft trajectory the flight mechanics are modelled, instead
+%
+% At RWTH Aachen University a virtual reality room was developed with... \cite{Schroder2010}
+%
+%
+% Figure \ref{fig:background_aircraft_noise_spectrogram_original} shows a spectrogram of a recorded aircraft passage.
+%
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{../figures/spectrogram_of_measurement}
+%         \caption{Spectrogram of a measured aircraft passage. Doppler shifted tones can clearly be seen.}
+%         \label{fig:background_aircraft_noise_spectrogram_original}
+% \end{figure}
+%
+
+
+\newpage
+\section{Thesis aim}
+
+\subsection{Aim}
+
+The aim of the thesis is to develop a tool to simulate the audible sound of
+aircraft in an urban environment, so that new methodologies can be developed to
+assess annoyance and sleep disturbance due to aircraft noise.
+
+There's a large variation of different aircraft in use nowadays, that could each
+be perceived differently. An additional constraint is therefore that the tool
+should be able to simulate the audible sound of the current fleet of aircraft.
+
+
+\todo{Check!}
+
+The aim of my research is to develop a tool for the auralisation of aircraft noise in 
+an urban environment. This tool can then be used to determine better annoyance 
+and sleep disturbance indicators and can then be used in conjunction with a noise prediction 
+model like sonAIR to give better a better estimate on how many people are affected by aircraft noise and how severe.
+
+The auralisation tool has to support a typical urban situation where shielding 
+and reflections may play an important role and should include correct over-head 
+directional information. The work is therefore divided in three parts:
+
+\begin{itemize}
+ \item Development of an aircraft source synthesiser
+ \item Development of propagation model
+ \item Installation of reproduction system for auralisation.
+ \end{itemize}
+
+% \section{Thesis structure}
+\subsection{Outline}
+The thesis is structured as follows.
+\newline
+\newline
+Chapter \ref{chapter:theory} provides an overview of theory required to understand the concepts that are used throughout the thesis.
+Discussed the basics of sound, signal processing, auralisation, previous work on aircraft auralisation and emission synthesis, and finally atmospheric turbulence.
+\newline
+\newline
+Chapter \ref{chapter:tool} describes the auralisation tool that was developed. The propagation model is explained as well as the algorithm that is used to extract features from recordings and synthesise aircraft sounds based on that.
+\newline
+\newline
+Chapter \ref{chapter:turbulence} gives an extensive overview on a novel algorithm for simulating fluctuations due to atmospheric turbulence and how to apply this algorithm in auralisations.
+\newline
+\newline
+Chapter \ref{chapter:test} aims to answer the question whether the auralisation tool provides sufficiently plausible auralisations
+\newline
+\newline
+Finally, the work is summarised in Chapter \ref{chapter:conclusions} and future work is suggested.
+
+
+
+

@@ -1,0 +1,145 @@
+\section{Atmospheric turbulence}
+
+The theory of turbulence is a statistical theory.
+The wind velocity components and temperature in the turbulent atmosphere are fluctuating functions of both position and time.
+
+Due to these inhomogeneities scattering and decorrelation occur.
+
+
+
+\missingfigure{Refractive-index field}
+
+\missingfigure{Time signal showing fluctuations}
+
+\subsection{Correlation function and refractive-index field}
+
+
+% When listening to aircraft noise, sound level fluctuations caused by atmospheric turbulence are clearly
+% audible. Therefore, to create a realistic auralisation
+% of aircraft noise, atmospheric turbulence needs to be
+% included.
+% 
+% Due to spatial inhomogeneities of the wind veloc-
+% ity and temperature in the atmosphere, acoustic scat-
+% tering occurs, affecting the transfer function between
+% source and receiver. Both these inhomogeneities and
+% the aircraft position are time-dependent, and there-
+% fore the transfer function varies with time resulting
+% in the audible fluctuations.
+% The theory of turbulence is a statistical theory. A
+% statistical theory fits well with the physics of turbu-
+% lence since turbulence is a consequence of instability
+% of fluid flow in relation to very small fluctuations in
+% the fluid [5]. For an auralisation instantaneous values
+% of the sound pressure at the receiver are required.
+% Artnzen[1] included a phase fluctuations filter in
+% their aircraft noise simulator to make the ground ef-
+% fect less pronounced. The filter was based on a Gaus-
+% sian spectrum of turbulence.
+
+
+% \subsection{Correlation function}
+The fields of the wind velocity components and the temperature are random fields.
+A characteristic of a random function or field is it's correlation function. \cite{Tatarskii1971}
+The correlation function of such a random field $f(\mathbf{r})$, as function of distance $\mathbf{r}$ between observation points only, is defined as
+\begin{equation}
+ B(\mathbf{r}_1, \mathbf{r}_2) = \langle f(\mathbf{r}_1  f(\mathbf{r}_2) \rangle
+\end{equation}
+Note that we've assumed a 'frozen turbulence' here. 
+
+In a homogeneous and isotropic random field the correlation function $B(\mathbf{r})$ 
+depends only on $|r|=\mathbf{r}$, i.e., only the distance between the observation points.
+
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[]{../figures/ipynb/theory_atmospheric_turbulence_gaussian_covariance/figure1}
+%         \caption{Correlation for a spherical wave as function of time lag.}
+%         \label{fig:theory_atmospheric_turbulence_correlation}
+% \end{figure}
+
+
+\subsection{Gaussian spectrum}
+In the region of large eddy sizes the turbulence spectrum can be approximated by a Gaussian distribution.
+The spatial correlation function for the fluctuating refractive-index $\mu$ therefore also has a Gaussian form
+\begin{equation}
+ \langle \mu_1 \mu_2 \rangle = \langle \mu^2 \rangle \exp{\left( -x^2 / L^2 \right)}
+\end{equation}
+When the outer length scale of the turbulence $L$ is much smaller than the Fresnel zone, 
+the mean square log-amplitude and phase fluctuations for spherical waves are given by
+\begin{equation}\label{eq:model_daigle}
+ \langle \chi^2 \rangle = \langle S^2 \rangle = \frac{\sqrt{\pi}}{2} \langle \mu^2 \rangle k^2 r L 
+\end{equation}
+where $k$ is the wavenumber and $r$ is the distance of propagation.
+The mean square log-amplitude and phase fluctuations are defined respectively as $\langle \chi^2 \rangle = \langle \left( \ln{\frac{A_{n}}{A_{m}}} \right) ^2 \rangle $
+and $ \langle S^2 \rangle = \langle \left( \phi_n - \phi_m \right)^2  \rangle$. The index $n$ indicates the sample $n$ at time $t$ and index $m$ the average fluctuation.
+For spherical waves the covariances of the fluctuations, $B_{\chi}(\rho)$ and $B_{S}(\rho)$, normalized to their variances, are given by
+\begin{equation}
+ \frac{B_{\chi} (\rho)}{\langle \chi^2 \rangle} = \frac{B_{S} (\rho)}{\langle S^2 \rangle} = \frac{\Phi\left(\rho/L\right)}{\rho/L}
+\end{equation}
+where 
+\begin{align}
+ \phi \left(\rho/L \right) &= \int_0^{\rho/L} \exp{\left(-u^2\right)} \mathrm{d} u 
+ &= \frac{1}{2} \sqrt{\pi} \mathrm{erf}\left( \rho/L \right)
+\end{align}
+with $\mathrm{erf}$ the error function.
+The covariance of the fluctuations $B_{\chi}(\rho)$ and $B_{S}(\rho)$ are thus given by
+\begin{equation}
+ B_{\chi} (\rho) = B_{S}(\rho) = \frac{\sqrt{\pi}}{2}  \langle \mu^2  \rangle k^2 r L 
+\frac{\Phi(\rho/L) }{\rho / L}
+\end{equation}
+according to Daigle's model.
+
+\subsection{Time series of fluctuations}
+% The fluctuations of the random fields cause amplitude and phase fluctuations or modulations.
+For the auralisation, time series of instantaneous fluctuations of log-amplitude and phase are required, $\chi(t)$ and $S(t)$.
+Because the modulations are frequency-dependent, we would like to obtain realisations of $\chi(t, f)$ and $S(t, f)$ which describe the fluctuation of the log-amplitude $\chi$ and phase $S$ at a time $t$ for frequency $f$.
+The frequency $f$ is the frequency of the signal component that should be modulated.
+
+By assuming that $\chi(t,f)$ and $S(t,f)$ are Gaussian random variables, we can produce realisations of $\chi(t,f)$ and $S(t,f)$ by filtering white noise with a chosen filter function.
+The desired filter response is the impulse response $h(\rho)$ of the covariance $B(\rho)$, which is obtained by taking the inverse Fourier transform of the square root of the autospectrum of $B(\rho)$.
+% \begin{equation}
+%  h(\rho) = \sqrt{S_{\rho}}
+% \end{equation}
+
+By taking these steps, two series of fluctuations are obtained, $\chi(t, f)$ and $S(t, f)$. 
+The two time series can be merged into a single complex modulation signal
+\begin{equation}
+ m(t,f) = \exp{\left( \chi\left(t,f\right) + j S\left(t, f\right) \right)}
+\end{equation}
+that can then be applied to the input signal.
+
+\subsection{Saturation of the log-amplitude}
+For longer path lengths and stronger turbulence, the amplitude fluctuations gradually level off.
+Saturation of the amplitude fluctuations can be observed when measuring aircraft noise at distances of over a few kilometers.
+The standard deviation of the fluctuating sound pressure levels is in such cases limited to no approximately 6 dB \cite{Daigle1983,Piercy1974}.
+
+Saturation of the log-amplitude can be included based on an analysis by Wenzel \cite{Wenzel1975}.
+In Wenzel's approach the soundwave is split up in a coherent and incoherent wave. The amplitude of the coherent wave decreases over distance while the incoherent wave obtains the energy from the coherent wave.
+The coherent wave $p$ is written as
+\begin{equation}
+ \langle p \  p^* \rangle = \left( A_m^2 / 4 \pi r^2 \right) \exp{\left( -2 \langle \mu^2 \rangle k^2 r L \right)}
+\end{equation}
+Wenzel defines the distance to saturation $r_s$ as the distance at which the coherent wave is reduced to $e^{-1}$ of its original strength
+\begin{equation}\label{eq:saturation_distance}
+ r_s = \frac{1}{2 \langle \mu^2 \rangle k^2 L}
+\end{equation}
+Saturation of the log-amplitude fluctuations can now be included by multiplying $\chi(t,f)$ with
+\begin{equation}
+ \sqrt{ \frac{ 1}{1 + r/r_s}}
+\end{equation}
+
+
+\subsection{Applying the modulations to the original signal}
+In case the input signal consists of just one frequency $f$ and the modulation 
+signal $m$ is calculated for that specific frequency, then the modulation can simply be 
+applied by multiplying the two in the time-domain.
+However, for the auralisation we have broadband sounds with more than one frequency line to consider. 
+As the fluctuations are frequency-dependent, the modulation 
+signal would have to be calculated for every frequency line.
+
+One of the design criteria of the auralisation tool is to produce at or near 
+real-time auralisations. Since computing the modulation signal for every 
+frequency line is computationally relatively heavy, another solution is sought.
+The variances of the log-amplitude and phase fluctuations increase according to 
+this simple theory linearly with frequency. Therefore, another option would be to scale both 
+$\chi(t,f)$ and $S(t,f)$ accordingly. Care should be taken considering the saturation distance is frequency-dependent.
