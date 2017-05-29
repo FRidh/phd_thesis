@@ -11,11 +11,24 @@ let
 
 in rec {
 
+  # PDF version of the thesis
   thesis = callPackage ./nix/thesis {
-    inherit references media latex;
+    inherit latex thesis-source;
   };
 
-  references = /home/freddy/Data/Media/References/library.bib;
+  # PDF version of thesis announcement
+  thesis-announcement = callPackage ./nix/announcement {
+    inherit latex thesis-source;
+  };
+
+  # Standalone source tree containing everything needed to build the thesis.
+  thesis-source = callPackage ./nix/thesis-source {
+    inherit references media;
+  };
+
+
+
+  references = ./data/library.bib; #/home/freddy/Data/Media/References/library.bib;
 
   # Media: figures and audio
   media = {

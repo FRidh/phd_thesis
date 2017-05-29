@@ -1,4 +1,6 @@
-\documentclass[a4paper,10pt]{report}
+\documentclass[a4paper,12pt,openright]{book}
+\usepackage[a4paper,twoside,inner=2.5cm,outer=2.5cm,bindingoffset=1cm,bottom=3cm]{geometry}
+
 % \usepackage[utf8x]{inputenc}
 \usepackage{graphicx}
 \usepackage{float}
@@ -51,10 +53,10 @@
 
 \setcounter{tocdepth}{2}
 
-\title{Auralisation of aircraft noise in an urban environment}
-\author{
-Frederik Rietdijk \small{frederik.rietdijk@chalmers.se}\\
-}
+\input{common-basic-info}
+
+\title{\thesistitle}
+\author{\thesisauthor}
 
 % \makenomenclature
 
@@ -64,11 +66,15 @@ Frederik Rietdijk \small{frederik.rietdijk@chalmers.se}\\
 \maketitle
 \thispagestyle{empty}	% Hide page number.
 
-\newpage\input{abstract}
+% Abstract
+\newpage\section*{Abstract}\input{abstract}
+% List of publications
 \newpage\input{publications}
+% Acknowledgements
 \newpage\input{acknowledgements}
-\newpage
-\tableofcontents
+% Table of Contents
+\newpage\tableofcontents
+% Nomenclature
 \input{nomenclature}
 % \printnomenclature
 % \listoftables
@@ -98,28 +104,15 @@ Frederik Rietdijk \small{frederik.rietdijk@chalmers.se}\\
 % \bibliography{references}
 \printbibliography
 
-
-
 \appendix
 \newpage
 
 % PAPERS
 
-\chapter{Paper A}
-\includepdf[pages=-]{../papers/scintillations}
-\chapter{Paper B}
-\includepdf[pages=-]{../papers/overview}
-
-% \section{Case 1: Active Noise Control System for an exhaust}
-% \includepdf[pages=-]{../case_study/cement}
-% 
-% \newpage
-% \section{Case 2: Reduction of rail rolling noise}
-% \includepdf[pages=-]{../case_study/silence}
-% 
-% \newpage
-% \section{Case 3: Constrained layer damping treatment to a engine front cover}
-% \includepdf[pages=-]{../case_study/CLD_engine}
+% \chapter{Paper A}
+% \includepdf[pages=-]{../papers/scintillations}
+% \chapter{Paper B}
+% \includepdf[pages=-]{../papers/overview}
 
 
 \end{document}

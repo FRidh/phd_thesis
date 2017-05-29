@@ -9,10 +9,10 @@
 with stdenv.lib;
 
 let
-  filename = "report";
+  filename = "announcement";
   XELATEX="xelatex -halt-on-error";
 in stdenv.mkDerivation {
-  name = "thesis.pdf";
+  name = "thesis-announcement.pdf";
   src = thesis-source;
 
   sourceRoot = "${thesis-source.name}/report";
@@ -20,7 +20,7 @@ in stdenv.mkDerivation {
   buildInputs = [ latex biber ghostscript ];
 
   buildPhase = ''
-    ${XELATEX} ${filename}.tex && biber ${filename}.bcf && biber ${filename}.bcf && ${XELATEX} ${filename}.tex
+    ${XELATEX} ${filename}.tex #&& biber ${filename}.bcf && biber ${filename}.bcf && ${XELATEX} ${filename}.tex
   '';
 
   installPhase = ''
