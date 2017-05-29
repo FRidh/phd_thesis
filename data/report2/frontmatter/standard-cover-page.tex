@@ -1,0 +1,49 @@
+\pagenumbering{alph}
+
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north west, inner sep=0pt]  at (current page.north west)
+     {\includegraphics[width=\paperwidth]{frontmatter/standard-cover-header}};
+
+  % Cover image
+  \ifdefined\thesiscoverimage
+    \node [inner sep=0pt,anchor=north west]  at
+      ($ (current page.north west) + (1.8cm, -7cm) $)
+       {\includegraphics[width=11cm]{\thesiscoverimage}};
+  \fi
+
+  % Title
+  \node [inner sep=0pt,anchor=south west, text width=17cm]  at
+    ($ (current page.north west) + (1.8cm, -22.5cm) $)
+     {
+       \begin{spacing}{2}
+         \textnohyphenation{\Huge \bfseries \textls*[40]{\thesistitle}}
+        \end{spacing}
+     };
+
+  % Name
+  \node [inner sep=0pt,anchor=north west, text width=16cm]  at
+    ($ (current page.north west) + (1.8cm, -23.5cm) $)
+     {\LARGE \textsc{\textls*[80]{\MakeUppercase{\thesisauthor}}}};
+
+  % University
+  \node [inner sep=0pt,anchor=north west, text width=16cm]  at
+    ($ (current page.north west) + (1.8cm, -25.5cm) $)
+     {
+     \begin{spacing}{1.05}
+     \textit{\large{Department of \thesisdepartment}}
+     \par \vspace{0.15cm} \noindent
+     \small \textsc{\textls*[80]{CHALMERS UNIVERSITY OF TECHNOLOGY}}
+     \par \vspace{0.03cm} \noindent
+     \large{Gothenburg, Sweden \thesisyear}
+     \end{spacing}
+   };
+
+\end{tikzpicture}
+
+\cleardoublepage  % advance two pages
+
+\setcounter{page}{1}  % restart page numbering
+
+\pagenumbering{roman}

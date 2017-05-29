@@ -1,0 +1,33 @@
+% Common things used both in the thesis and in the defence announcement
+
+\newcommand\thesistype{PhD} % PhD or Lic
+
+\newcommand\thesistitle{On Formal Methods for Large-Scale Product~Configuration}
+\newcommand\thesissubtitle{} % if empty leave only {}
+\newcommand\thesisauthor{Alexey Voronov}
+
+\newcommand{\thesiscoverimage}{kappa/images/supervisor} % Cover image. Comment away (not leave empty) if not needed
+\newcommand{\thesiscoverdescription}{Cover: Supervisor for interactive product configuration, see Figure~\ref{fig:kappa-sup} on page~\pageref{fig:kappa-sup}.}  % Leave {} if no description of the cover image needed
+
+\newcommand\thesisdepartment{Signals and Systems}
+\newcommand\thesiscity{Göteborg}
+\newcommand\thesismonth{January} % e.g. January, February...
+\newcommand\thesisyear{2013}
+\newcommand\thesisisbn{ISBN 978-91-7385-790-1}  % call library to get this number for PhD, leave empty for Lic
+\newcommand{\thesisissn}{%
+  \ifthenelse{\equal{\thesistype}{PhD}}%
+    {ISSN 0346-718X}% For PhD it is Chalmers PhD ISSN (call library to double-check)
+    {ISSN 1403-266X}% For Lic it is Departmental reports ISSN (ask secretary)
+}
+\newcommand\thesisnumber{3471} % for PhD this is "Ny serie nr" and looks like 3452 (call library to get your number), for Lic it is departmental report number and looks like R001 (ask department secretary)
+
+% Defence information
+\newcommand\defenceday{18} % e.g. 14th
+\newcommand\defencemonth{\thesismonth} % e.g. January, February...
+\newcommand\defenceyear{\thesisyear} % e.g. 2009, 2010...
+\newcommand\defencetime{10:00} % e.g. 10:00, 13:00...
+\newcommand\defenceroom{EA} % e.g. "EA", "HC4"...
+\newcommand\defenceaddress{Hörsalsvägen 11, Göteborg} % from where the \thesislocation can be accessed
+\newcommand\defenceopponent{Dr. rer. nat. Carsten Sinz}
+\newcommand\defenceopponentdepartment{Institute for Theoretical Computer Science}
+\newcommand\defenceopponentuniversity{Karlsruhe Institute of Technology, Germany}

@@ -1,0 +1,325 @@
+\documentclass[12pt,a4paper,twoside,openright,pdftex]{book}
+                              % Reproservice prints on G4, which is about 80% of A4.
+                              % With this scale, 12pt font becomes 9.6pt.
+                              % https://www.chalmers.se/insidan/SV/arbetsredskap/kommunikation/tryck-och-layout/mallar-for-trycksaker/avhandlingens-utformning
+
+\synctex=1                    % instead of "pdflatex -synctex=1 main"
+
+\usepackage{lipsum}           % generating fill-in text for this thesis template
+
+\usepackage{ifthen}           % if-then-else (to choose PhD/Lic titles)
+
+\usepackage[utf8]{inputenc}   % unicode letters in the input tex document
+
+\usepackage[T1]{fontenc}      % unicode letters in the output pdf
+
+\usepackage{amssymb, amsmath} % math symbols
+
+\usepackage{lmodern}          % better font
+
+\usepackage{microtype}        % micro typesetting (on errors use draft to disable)
+
+\usepackage{booktabs}         % better table formatting
+
+\usepackage[pdftex]{graphicx} % images
+
+\usepackage{tikz}             % simply amazing graphics library for LaTeX
+\usetikzlibrary{calc}
+
+\usepackage[%                 %
+  a4paper%
+  ,twoside                    %
+  ,inner=2.5cm                % inner margin
+  ,outer=2.5cm                % outer margin
+  ,bindingoffset=1cm       % additional binding offset on the inner side
+  ,bottom=3cm
+]{geometry}                   % Adjust the margins
+
+\usepackage{fancyhdr}         % fine-tuning of headers
+\pagestyle{fancy}
+
+\usepackage{emptypage}        % no page numbers in headers/footers of blank pages between chapters
+
+\usepackage{setspace}         % for \setstretch in captions
+
+\usepackage[%
+    margin=0.75cm,            % make captions narrower than the main text
+    font={small,stretch=0.80}%%
+  ]{caption}                  % captions
+
+\usepackage{subcaption}       % subcaption -- subfigures (replaces subfig)
+
+\usepackage{url}              % handles URLs correctly (e.g. DOI, software links)
+
+\usepackage[%
+  url=true,%                  % print URLs in references, except for the ones removed below
+  backend=biber,%             % use biber instead of bibtex
+  style=authoryear,%          % cite as: (Author 2008)
+  maxbibnames=10,%            % max names in bibliography
+  maxcitenames=2,%            % max names in citation
+  mincitenames=1,%            % if there are more than maxcitenames, shrink to this
+  backref=true,%              % prints page numbers (wrong with \frontmatter and hypertexnames=false)
+  dashed=false                % do not replace repeated author with a dash in bibliography
+]{biblatex}                   % Modern bibtex replacement (bibliography mgmt)
+
+\usepackage[%
+   pdftex%
+  ,hidelinks%
+  ,linktoc=all%               % part of a ToC entry to be made into a link (section/page/all)
+  ,unicode%
+  ,bookmarksopen=true%
+  ,bookmarksopenlevel=0
+  ,bookmarksnumbered=true
+  %,hypertexnames=false,%     % Correct ToC hyperlinks even with chapter counter reset, but broken biblatex backref.
+                              % Instead of using hypertexnames=false, use \renewcommand on \theHchapter, 
+                              % see http://tex.stackexchange.com/a/6099
+  %,draft                     % draft can be used to avoid some strange links errors
+]{hyperref}                   % links in pdf document
+
+\usepackage{bookmark}         % Create pdf bookmarks in one go
+
+
+% % % Biblatex
+
+\addbibresource{library.bib}  % Bibliography file
+\renewcommand{\cite}{\parencite}
+
+% Remove URLs from common (easy-to-find) entries.
+\AtEveryBibitem{%
+  \ifboolexpr%
+    {%
+      test { \ifentrytype{book} }
+      or
+      test { \ifentrytype{inbook} }
+      or
+      test { \ifentrytype{inproceedings} }
+      or
+      test { \ifentrytype{incollection} }
+      or
+      test { \ifentrytype{article} }
+    }
+    {\clearfield{url}}
+    {}%
+}
+% End Biblatex
+
+
+% % % New environments
+
+% \newenvironment{env-name}[optional-number-of-args]{insert-before}{insert-after}
+
+% \newenvironment{env-name}[optional-number-of-args][default-args]{insert-before}{insert-after}
+
+\newenvironment{abstract}{
+  \begin{center}
+    {\bfseries Abstract\par}  % \bfseries - some bold font, \par - end of paragraph (as empty line)
+  \end{center}
+  \quotation                  % extra indent from left and right
+  \noindent
+}
+{\par\endquotation}
+
+\newenvironment{keywords}%
+{{\bfseries Keywords:}}%
+{\par}%
+% % % End new environments
+
+
+% Begin page content adjustments for putting more text on pages.
+\renewcommand{\topfraction}{.85}       % max fraction of floats at top
+\renewcommand{\bottomfraction}{.7}     % max fraction of floats at bottom
+\renewcommand{\textfraction}{.15}      % minimal text wrt. figs
+\renewcommand{\floatpagefraction}{.66} % fraction for page of floats. floatpagefraction MUST be less than topfraction 
+\renewcommand{\dbltopfraction}{.66}    % fit big float above 2-col. text
+\renewcommand{\dblfloatpagefraction}{.66}
+\setcounter{topnumber}{9}
+\setcounter{bottomnumber}{9}
+\setcounter{totalnumber}{20}
+\setcounter{dbltopnumber}{9}
+\widowpenalty=300                             % widow (at the beginning of page)
+\clubpenalty=300                              % orphans (at the end of page)
+\setlength{\parskip}{0ex plus 0.5ex}  % space between paragraphs
+% End page content adjustments
+
+% % %
+% Begin remove page numbers from the "Part I" pages
+\fancypagestyle{veryempty}{% no headers, no page numbers
+  \fancyhf{} % remove everything
+  \fancyfoot{}
+  \renewcommand{\headrulewidth}{0pt} % remove lines as well
+  \renewcommand{\footrulewidth}{0pt}
+}
+\makeatletter
+\renewcommand\part{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \thispagestyle{veryempty}%
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  \null\vfil
+  \secdef\@part\@spart}
+\makeatother
+% End remove page numbers from the "Part I" pages
+
+
+% % % % %
+
+\input{frontmatter/common-basic-info}     % author, title, etc
+
+\title{\thesistitle}
+\author{\thesisauthor}
+
+\pdfinfo{%
+  /Title (\thesistitle)
+  /Author (\thesisauthor)
+}
+
+% Compression options
+\pdfminorversion=5
+\pdfobjcompresslevel=3  % compression requires \pdfminorversion at least 5
+\pdfcompresslevel=9     % compression requires \pdfminorversion at least 5
+
+
+\begin{document}
+
+\input{frontmatter/standard-cover-page}
+
+\frontmatter                  % roman page numbers
+
+\input{frontmatter/standard-title-page}
+
+\input{frontmatter/standard-copyrights-page}
+
+\input{frontmatter/dedications-page}
+
+% Add abstract to the ToC
+\cleardoublepage              % advance the pages
+\phantomsection               % put pdf anchor
+\addcontentsline{toc}{chapter}{Abstract}  % add toc line with target at the last anchor
+\chapter*{Abstract}
+\vspace*{-1cm}                % More space for abstract text
+\input{frontmatter/abstract}
+
+\cleardoublepage              % advance the pages
+\phantomsection               % put pdf anchor
+\addcontentsline{toc}{chapter}{Acknowledgments}  % add toc line with target at the last anchor
+\chapter*{Acknowledgments}
+\input{frontmatter/acknowledgments}
+
+\cleardoublepage              % advance the pages
+\phantomsection               % put pdf anchor
+\addcontentsline{toc}{chapter}{List of Publications}  % add toc line with target at the last anchor
+\chapter*{List of Publications}
+\input{frontmatter/publications-list}
+
+\cleardoublepage              % advance the pages
+\phantomsection               % put pdf anchor
+\addcontentsline{toc}{chapter}{List of Acronyms}  % add toc line with target at the last anchor
+\chapter*{List of Acronyms}
+\input{frontmatter/acronyms}
+
+% add Contents to PDF bookmarks, but do not add it to the 'printed' Contents
+\cleardoublepage
+\phantomsection
+% \pdfbookmark[level]{text-to-display-in-outline}{unique-pdf-anchor-name}, chapter is level 0
+\pdfbookmark[0]{Contents}{Contents}
+\tableofcontents
+
+\mainmatter                   % normal arabic page numbers
+
+\part{Introductory chapters}
+
+% Headers, footers
+\fancyfoot{}                  % clean all
+\fancyhead[RE]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[RO]{\thepage}
+\fancyhead[LE]{\thepage}
+\fancyhead[LO]{\textit{\nouppercase{\leftmark}}}
+
+  \begin{refsection}
+
+    \include{kappa/body}
+
+    \printbibliography[heading=bibintoc]
+
+  \end{refsection}
+
+\cleardoublepage
+
+% % % Preparations before Part II. In this part one chapter = one paper
+
+\renewcommand{\chaptername}{Paper}
+                              % write 'Paper' instead of 'Chapter' in the title
+
+\setcounter{chapter}{0}       % reset chapter numbers after Part I
+
+% Fix hyperlinks to chapters/papers after chapter counter reset, see
+% http://tex.stackexchange.com/a/6099
+\renewcommand\theHchapter{appendedPaper.\arabic{chapter}}
+
+\renewcommand{\thesection}{\arabic{section}}
+                              % exclude chapter number from section number
+                              % Figures, Tables, etc are still prefixed by chapter number.
+                              % For algorithms numbering see definition of
+                              % \newfloat{algorithm} above.
+
+\newcommand{\paper}[7]
+% #1 Paper Title
+% #2 Short Title for page headers (ToC has the full title)
+% #3 Label for later (or earlier) \ref:s
+% #4 Authors
+% #5 Where published
+% #6 Comment (like "reprinted with a kind permission" and "reformatted for uniformity")
+% #7 File to input
+{
+  \chapter{#1\label{#3}}      % Title as Chapter
+  \chaptermark{#2}            % Short title for the page header
+  \thispagestyle{empty}       % no page numbers
+  {\Large #4}\par             % authors
+  \vspace{1cm}
+  \noindent\emph{\Large #5}\par % where published
+  \vspace{3cm}
+  \noindent\emph{\Large #6}   % Comment
+  \cleardoublepage            % skip back side of the page
+  \thispagestyle{plain}       % no header above paper title
+  \begin{center}
+    {\Large \bfseries Paper~\thechapter. #1}\par % title again
+    \vspace{1pc}
+    #4 \par                   % authors again
+    \vspace{3pc}
+  \end{center}
+  \begin{refsection}          % start of biblatex's refsection for sub-bibliography
+  \input{#7}                  % paper itself, starting from abstract (no title)
+  \printbibliography[heading=subbibintoc] % biblatex bibliography
+  \end{refsection}            % end of biblatex refsection
+}
+
+\newcommand{\reformatted}{The paper was reformatted for uniformity, but otherwise is unchanged.}
+
+\part{Appended papers}        % in this part one chapter = one paper
+
+% Example of using the command \paper defined above: 
+\paper{SAT-solving in practice, with a tutorial example from supervisory control}
+      {SAT-solving in practice, with a SCT example}
+      {pap:supervisory}
+      {Koen~Claessen, Niklas~Een, Mary~Sheeran, Niklas~Sörensson, Alexey~Voronov and Knut~Åkesson}
+      {Journal of Discrete Event Dynamic Systems (2009), 19(4): 495--524.}
+      {Reproduced with kind permission from Springer Science+Business Media. \reformatted}
+      {paper-supervisory/body}
+
+\paper{The same paper, inserted second time for illustration}
+      {SAT-solving in practice, with a SCT example}
+      {pap:another-one}
+      {Koen~Claessen, Niklas~Een, Mary~Sheeran, Niklas~Sörensson, Alexey~Voronov and Knut~Åkesson}
+      {Journal of Discrete Event Dynamic Systems (2009), 19(4): 495--524.}
+      {Reproduced with kind permission from Springer Science+Business Media. \reformatted}
+      {paper-supervisory/body}
+
+\end{document}

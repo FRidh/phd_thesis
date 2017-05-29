@@ -1,0 +1,101 @@
+\documentclass[12pt,a4paper,pdftex]{article}
+
+\usepackage[utf8]{inputenc}   % unicode letters in the input tex document
+\usepackage[T1]{fontenc}      % unicode letters in the output pdf
+\usepackage[pdftex]{graphicx}
+\usepackage{lmodern}          % better font
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{microtype}        % better typesetting
+
+\usepackage[%                 %
+  a4paper%
+  ,inner=2.5cm                % inner margin
+  ,outer=2.5cm                % outer margin
+  ,bottom=3cm
+]{geometry}                   % Adjust the margins
+
+\input{frontmatter/common-basic-info}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\parindent 0 pt
+
+{\centering
+
+  \includegraphics[scale=1.25]{frontmatter/standard-images/Logotyp38mm}
+
+  \vskip 4 pc 
+
+  {\LARGE\thesistitle\par}
+
+  \vskip 1 pc
+
+  {\large\thesissubtitle\par}
+
+  \vskip 2 pc
+
+  {\Large\scshape\thesisauthor\par}
+
+  \vskip 3 pc
+
+  Thesis for the Degree of
+  \ifthenelse{\equal{\thesistype}{PhD}}{Doctor of Philosophy}{Licentiate of Engineering}\\%
+  at Chalmers University of Technology\\
+  to be publicly \ifthenelse{\equal{\thesistype}{PhD}}{defended}{presented} 
+  on \defencemonth\ \defenceday, \defenceyear\\
+  at \defencetime\ in room \defenceroom,\ \defenceaddress
+
+  \vskip 2 pc
+
+  Language: English\\
+  \ifthenelse{\equal{\thesistype}{PhD}}{Faculty opponent}{Discussion leader}: %
+  \defenceopponent\\
+  \defenceopponentdepartment\\
+  \defenceopponentuniversity\\
+
+  \vfill
+  
+  Department of \thesisdepartment \\
+  \vskip 0.1 pc
+  {\scshape  CHALMERS UNIVERSITY OF TECHNOLOGY}\\
+  412 96 Göteborg, Sweden\\
+  Telephone\enskip+46 (0) 31 -- 772 1000\\
+  
+  \vskip 2 pc
+
+  \includegraphics[scale=1]{frontmatter/standard-images/Bildmarke30mm}\par
+}
+
+\clearpage
+
+
+\thesistitle
+
+\thesissubtitle
+
+\vskip 0.2 pc
+
+{\scshape\thesisauthor}
+\vskip 0.2 pc
+
+Department of \thesisdepartment
+
+Chalmers University of Technology
+
+\vskip 2 pc
+
+{\large\scshape Abstract}
+\vspace{1 pc}
+
+\parindent 1 em
+\setlength{\parskip}{0.5ex plus 0.5ex}  % space between paragraphs
+
+\noindent
+\input{frontmatter/abstract}
+
+\vfill
+
+\end{document}

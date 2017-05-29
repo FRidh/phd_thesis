@@ -1,0 +1,57 @@
+\vspace*{50 pt}
+{
+  \thispagestyle{empty}         % no page numbers here
+
+  \parindent 0 pt
+
+  \thesistitle
+
+  \thesissubtitle
+
+  \textsc{\thesisauthor}
+
+  \thesisisbn
+
+  \vskip 1pc
+
+  \copyright\enskip \textsc{\thesisauthor, \thesisyear.}
+
+  \vskip 1pc
+
+  \ifthenelse{\equal{\thesistype}{PhD}}{Doktorsavhandlingar}{Licentiatavhandlingar}
+   vid Chalmers tekniska högskola
+
+  \ifthenelse{\equal{\thesistype}{PhD}}{%
+    Ny serie nr \thesisnumber%
+  }{%
+    Technical report No. \thesisnumber%
+  }
+
+  \thesisissn
+
+  \vskip 1pc
+
+  Department of \thesisdepartment
+
+  Chalmers University of Technology
+
+  SE--412 96 Göteborg, Sweden
+
+  Telephone\enskip+ 46 (0) 31 -- 772 1000
+
+  \vfill
+
+  \thesiscoverdescription
+
+  \vskip 2pc
+
+  Typeset by the author using \LaTeX.
+
+  \vskip 1pc
+
+  Printed by Chalmers Reproservice
+
+  Göteborg, Sweden \thesisyear
+}
+
+\clearpage
