@@ -95,7 +95,9 @@ $k_{e}$ of the signal $s[k_e]$ at the source time-axis is given as
 \begin{equation}
  k_{e} = k_r - \Delta t (t) \cdot f_s
 \end{equation}
-where $f_s$ is the sampling frequency and $k_r$ the sample of the signal at the receiver time-axis. The received signal value $s$ at index $k_e$ is then determined by
+where $f_s$ is the sampling frequency and $k_r$ the sample of the signal at the
+receiver time-axis. The received signal value $s$ at index $k_e$ is then
+determined by
 \begin{equation}
  s[k_e] = \left( 1 - k_e +  \floor{k_e} \right) \cdot s \left[ \floor{k_e} \right] + \left( k_e - \floor{k_e} \right) * s \left[ \floor{k_e} + 1 \right]
 \end{equation}
@@ -103,7 +105,8 @@ where $\floor{k_e}$ corresponds to the floor function of $k_e$.
 The sound travel time was computed with the following expression for the speed of sound $c = 343.2 \sqrt{ \frac{T}{T_0} }$
 where $T$ is the temperature during the event and $T_0 = 293.15$ K the reference temperature.
 
-Figure \ref{fig:implementation:propagation:doppler} shows a spectrogram of the immission when the propagation delay is also considered.
+Figure \ref{fig:implementation:propagation:doppler} shows a spectrogram of the
+immission when the propagation delay is also considered.
 
 \begin{figure}[H]
   \centering
@@ -120,7 +123,8 @@ with a magnitude response based on ISO 9613-1:1993\cite{ISO9613-1}. A single-sid
  H_{aa} = 10^{- d \alpha(f) / 20}
 \end{equation}
 where $d$ is the source-receiver distance in \SI{}{meter} and $\alpha(f)$ the
-frequency-dependent attenuation coefficient in \SI{}{\decibel\per\meter}.
+frequency-dependent attenuation coefficient in \SI{}{\decibel\per\meter} computed using
+equation \ref{eq:theory:sound:atmospheric-attenuation}.
 % The air pressure, relative humidity, and temperature were recorded during the event.
 The impulse response of a magnitude-only filter is non-causal and therefore in
 order to create a causal filter a linear-phase filter corresponding to 90
@@ -229,23 +233,28 @@ implementation of the ISM.
 
 The ground reflection is considered as a second propagation path using a mirror receiver.
 % The implementation supports direction-dependent emission signals, but because we had only one emission...
-For the ground reflected path the same emission signal was used as for the direct path, thereby ignoring directivity of the sources.
-Why the directivity of the source is ignored will become clear in the following sections.
+For the ground reflected path the same emission signal was used as for the
+direct path, thereby ignoring directivity of the sources. Why the directivity of
+the source is ignored will become clear in the following sections.
 
-A filter was included to take into account the transfer funtion of the ground. For
-the ground reflection the plane wave reflection coefficient was used
-\begin{equation}
- R = \frac{Z\cos{\theta}-1}{Z\cos{\theta}+1}
-\end{equation}
-with impedance $Z$ calculated using Delany and Bazley's 1-parameter model
-\begin{equation}
- Z = 1 + 9.08 \left( \frac{1000f}{\sigma}\right)^{-0.75} - 11.9 j \left( \frac{1000f}{\sigma}\right)^{-0.73}
-\end{equation}
-which is a function of frequency and flow resistivity $\sigma$. The scenarios
-considered were landings. Because the area around the airport consists mostly of grass a
-flow resistivity of \SI{2e5}{\pascal\second\per\meter\squared} was chosen. The
-filter length was 4096 samples and the hop size 256 samples.
+A filter was included to take into account the transfer funtion of the ground.
+For the ground reflection the plane wave reflection coefficient was used (see
+equation \ref{eq:theory:sound:reflection:plane}) and the impedance $Z$ was
+calculated using Delany and Bazley's 1-parameter model (see equation
+\ref{eq:theory:sound:impedance:db}), which is a function of frequency and flow
+resistivity $\sigma$.
 
+Because aircraft are mostly overhead and at larger distances,
+using the plane wave reflection coefficient should typically be sufficient.
+However, when simulating noise sources at low elevation angles, the plane-wave
+assumption is no longer valid and must be replaced by a model that takes into
+account the reflection of spherical waves from a ground surface of finite
+impedance \cite{Tuttle2014}\todo{rewrite. Maybe move to theory}.
+
+The scenarios considered were landings. Because the area around the airport
+consists mostly of grass a flow resistivity of
+\SI{2e5}{\pascal\second\per\meter\squared} was chosen. The filter length was
+4096 samples and the hop size 256 samples.
 
 Figure \ref{fig:implementation:propagation:reflection} shows a spectrogram of
 the immission when a ground reflection was added. A hard ground was considered.

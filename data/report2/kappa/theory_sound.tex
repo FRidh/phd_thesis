@@ -121,9 +121,9 @@ Ambisonics
 
 \subsection{Atmospheric attenuation}\label{sec:theory_sound_atmospheric_attenuation}
 Soundwaves are attenuated due to relaxation processes in the medium.
-A model for atmospheric attenuation is given by Part 1 of ISO 9613-1:1993\cite{ISO9613-1}.
+A model for atmospheric attenuation is given in Part 1 of ISO 9613-1:1993\cite{ISO9613-1}.
 The attenuation coefficient $\alpha$, in dB/m, is given by
-\begin{align}
+\begin{align}\label{eq:theory:sound:atmospheric-attenuation}
  \alpha &= 8.686 f^2 \Biggl( \left[ 1.84 \times 10^{-11} \left(\frac{p_r}{p_a}\right)^{-1} \left(\frac{T}{T_0}\right)^{1/2} \right] + \left(\frac{T}{T_0}\right)^{-5/2} \nonumber \\ 
  &\times \Biggl\{ 0.01275 \left[ \exp{\frac{-2239.1}{T}} \right]  \left[f_{r,O} + \frac{f^2}{f_{r,O}} \right]^{-1} \nonumber \\
  &+ 0.1068 \left[ \exp{\frac{-3352.0}{T}} \right] \left[ f_{r,N} + \frac{f^2}{f_{r,N}} \right]^{-1} \Biggr\} \Biggr) 

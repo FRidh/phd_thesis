@@ -18,18 +18,24 @@ sounds of different aircraft types, in case of both recordings and
 auralisations. The similarity ratings between recordings and auralisations are
 similar to the similarity ratings between the two aircraft type, implying the
 auralisations sound like different aircraft than those that were recorded.
+The dissimilarity between the auralisations and recordings is believed to be
+caused by the incorrect reproduction of the blade passing frequency and its
+harmonics caused by an underestimation of the power and bandwidth during the
+feature-extraction.
 
-Therefore, future work should emphasise on further improving the simulations.
-The authors think that the most important point to improve is the simulation of
-the blade passing frequency and harmonics, and that would require a better
-estimation of their powers and bandwidths. Aside from that, it would seem the
-auralisation tool is capable of delivering plausible auralisations.
+Section \ref{sec:introduction:background:auralisation} listed several
+auralisation use cases. Whether it is relevant that the auralisations do not
+sound exactly similar to the recordings would depend on how the auralisations
+would be utilised.
 
 \subsubsection{Turbulence paper}\todo{rewrite and merge}
-Fluctuations in the refractive-index field due to variations in temperature and
-wind affects sound propagation and causes audible modulations. A method was
-presented for generating sequences of modulations and applying these to
-monochromatic as well as broadband signals.
+To improve the plausibility of the auralisations
+% in situations where the source-receiver distance is typically larger
+a method was developed to simulate for auralisations modulations
+due to atmospheric turbulence. Fluctuations in the refractive-index field due to
+variations in temperature and wind affects sound propagation and causes audible
+modulations. A method was presented for generating sequences of modulations and
+applying these to monochromatic as well as broadband signals.
 
 A Rytov approximation to first-order refractive-index flucutuations results in a complex
 phase which we can write as a log-amplitude $\chi$ and phase $S$ fluctuation.
@@ -56,9 +62,37 @@ auralizations, but this has not been validated yet with listening tests. The
 implementation of the model that was used in this paper to generate the figures
 can be found at \cite{Rietdijk2016}.
 
-
-
 \section{Future work}
+Future steps to be taken depends strongly on how auralisations would
+be used.
+% The next steps to be taken depend on how auralisations would be used.
+
+\subsubsection*{Investigate human response to aircraft sound}
+If one wants to study humans' response to aircraft sound, then the next step is
+to test whether auralisations of aircraft are sufficiently similar to the actual
+sound of aircraft, with respect to the parameter that is being investigated. If
+the conclusion is that auralisations and recordings give sufficiently similar
+results, then that would imply the auralisation method can be used to further
+study that aspect of human response within the domain that was considered. If
+significant differences would still be found, it would have to be tested what is
+causing the differences.
+
+\subsubsection*{Improve estimation and synthesis of blade passing frequency}
+From the study that was conducted and presented in this work, it followed that
+participants did indeed notice differences between the auralisations and the
+recordings. These differences are believed to be caused by the estimation of the
+power and bandwidth of the blade passing frequency and harmonics. Therefore, a
+future would be to enhance the feature-extraction algorithm to better estimate
+these properties.
+
+% The most important point to improve is likely the simulation of the
+% blade passing frequency and harmonics, and that would require a better
+% estimation of their powers and bandwidths. Aside from that, it would seem the
+% auralisation tool is capable of delivering plausible auralisations.
+
+\subsubsection*{Develop generic aircraft emission model}
+Because the auralisations appear to sound plausible it is concluded that the strategy\todo{what strategy? recording, backprop, ...}
+utilised works and therefore
 
 
-\subsection{Develop better indicators for annoyance and sleep disturbance}
+% \subsection{Develop better indicators for annoyance and sleep disturbance}

@@ -18,14 +18,14 @@
     ($ (current page.north west) + (1.8cm, -22.5cm) $)
      {
        \begin{spacing}{2}
-         \textnohyphenation{\Huge \bfseries \textls*[40]{\thesistitle}}
+         \textnohyphenation{\Huge \bfseries \thesistitle}
         \end{spacing}
      };
 
   % Name
   \node [inner sep=0pt,anchor=north west, text width=16cm]  at
     ($ (current page.north west) + (1.8cm, -23.5cm) $)
-     {\LARGE \textsc{\textls*[80]{\MakeUppercase{\thesisauthor}}}};
+     {\LARGE \textsc{\MakeUppercase{\thesisauthor}}};
 
   % University
   \node [inner sep=0pt,anchor=north west, text width=16cm]  at
@@ -34,7 +34,7 @@
      \begin{spacing}{1.05}
      \textit{\large{Department of \thesisdepartment}}
      \par \vspace{0.15cm} \noindent
-     \small \textsc{\textls*[80]{CHALMERS UNIVERSITY OF TECHNOLOGY}}
+     \small \textsc{CHALMERS UNIVERSITY OF TECHNOLOGY}
      \par \vspace{0.03cm} \noindent
      \large{Gothenburg, Sweden \thesisyear}
      \end{spacing}

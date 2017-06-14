@@ -13,7 +13,7 @@ in rec {
 
   # PDF version of the thesis
   thesis = callPackage ./nix/thesis {
-    inherit latex thesis-source;
+    inherit latex thesis-source python;
   };
 
   # PDF version of thesis announcement
@@ -28,7 +28,8 @@ in rec {
 
 
 
-  references = ./data/library.bib; #/home/freddy/Data/Media/References/library.bib;
+#   references = ./data/library.bib; #/home/freddy/Data/Media/References/library.bib;
+  references = /home/freddy/Data/Media/References/library.bib;
 
   # Media: figures and audio
   media = {

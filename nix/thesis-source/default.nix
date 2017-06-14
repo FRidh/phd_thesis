@@ -35,7 +35,7 @@ in stdenv.mkDerivation {
     ls -Al figures
 
     # We need the references
-    pushd report
+    pushd report2
     ln -s ${references} library.bib
     popd
   '';

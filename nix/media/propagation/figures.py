@@ -21,7 +21,7 @@ def create_figure(source, target, clim):
     s = Signal(s, meta['fs'])
     fig = s.plot_spectrogram(clim=clim, ylim=(0.0, 4000.0))
     fig.subplots_adjust(bottom=0.2, left=0.2)
-    fig.savefig(target)
+    fig.savefig(target, dpi=600)
 
 
 def main():
@@ -36,7 +36,8 @@ def main():
         'spreading':        (-10.0, +40.0),
         'doppler' :         (-10.0, +40.0),
         'attenuation':      (-10.0, +40.0),
-        'reflection':       (-10.0, +40.0)
+        'reflection':       (-10.0, +40.0),
+        'turbulence':       (-10.0, +40.0)
     }
 
     for filename in os.listdir(args.source):

@@ -1,7 +1,31 @@
-\documentclass[12pt,a4paper,twoside,openright,pdftex]{book}
-                              % Reproservice prints on G4, which is about 80% of A4.
-                              % With this scale, 12pt font becomes 9.6pt.
-                              % https://www.chalmers.se/insidan/SV/arbetsredskap/kommunikation/tryck-och-layout/mallar-for-trycksaker/avhandlingens-utformning
+% Reproservice prints on G4, which is about 80% of A4.
+% With this scale, 12pt font becomes 9.6pt.
+% https://student.portal.chalmers.se/doctoralportal/handbook/Doctoral%20Thesis%20Defence/Pages/Layout-of-the-thesis.aspx
+
+
+% If we print original on G5 and not rescale it.
+% \documentclass[10pt,a4paper,twoside,openright]{book}
+% \usepackage[
+%    papersize ={169mm, 239mm}
+%   ,twoside
+%   ,pass
+% %   ,inner=2.5cm                % inner margin
+% %   ,outer=2.5cm                % outer margin
+% %   ,bindingoffset=1cm       % additional binding offset on the inner side
+% %   ,bottom=3cm
+% ]{geometry}                   % Adjust the margins
+
+% If we print original on A4 and rescale it.
+\documentclass[10pt,a4paper,twoside,openright]{book}
+\usepackage[%                 %
+   a4paper
+  ,twoside                    %
+  ,inner=2.5cm                % inner margin
+  ,outer=2.5cm                % outer margin
+  ,bindingoffset=1cm       % additional binding offset on the inner side
+  ,bottom=3cm
+]{geometry}                   % Adjust the margins
+
 
 \synctex=1                    % instead of "pdflatex -synctex=1 main"
 
@@ -15,25 +39,16 @@
 
 \usepackage{amssymb, amsmath} % math symbols
 
-\usepackage{lmodern}          % better font
+% \usepackage{lmodern}          % better font
 
-\usepackage{microtype}        % micro typesetting (on errors use draft to disable)
+% \usepackage{microtype}        % micro typesetting (on errors use draft to disable)
 
 \usepackage{booktabs}         % better table formatting
 
-\usepackage[pdftex]{graphicx} % images
+\usepackage[]{graphicx}       % images
 
 \usepackage{tikz}             % simply amazing graphics library for LaTeX
 \usetikzlibrary{calc}
-
-\usepackage[%                 %
-  a4paper%
-  ,twoside                    %
-  ,inner=2.5cm                % inner margin
-  ,outer=2.5cm                % outer margin
-  ,bindingoffset=1cm       % additional binding offset on the inner side
-  ,bottom=3cm
-]{geometry}                   % Adjust the margins
 
 \usepackage{fancyhdr}         % fine-tuning of headers
 \pagestyle{fancy}
@@ -54,16 +69,18 @@
 \usepackage[%
   url=true,%                  % print URLs in references, except for the ones removed below
   backend=biber,%             % use biber instead of bibtex
-  style=authoryear,%          % cite as: (Author 2008)
-  maxbibnames=10,%            % max names in bibliography
-  maxcitenames=2,%            % max names in citation
-  mincitenames=1,%            % if there are more than maxcitenames, shrink to this
+  giveninits=true,
+  sorting=none,
+  style=numeric-comp,%          % cite as: (Author 2008)
+%   maxbibnames=10,%            % max names in bibliography
+%   maxcitenames=2,%            % max names in citation
+%   mincitenames=1,%            % if there are more than maxcitenames, shrink to this
   backref=true,%              % prints page numbers (wrong with \frontmatter and hypertexnames=false)
-  dashed=false                % do not replace repeated author with a dash in bibliography
+%   dashed=false                % do not replace repeated author with a dash in bibliography
 ]{biblatex}                   % Modern bibtex replacement (bibliography mgmt)
 
 \usepackage[%
-   pdftex%
+%    pdftex%
   ,hidelinks%
   ,linktoc=all%               % part of a ToC entry to be made into a link (section/page/all)
   ,unicode%
@@ -78,30 +95,52 @@
 
 \usepackage{bookmark}         % Create pdf bookmarks in one go
 
+% My packages
+\usepackage{todonotes}                              % To do notes and figures
+\usepackage{nicefrac}                               % Nice fractions
+\usepackage[super]{nth}                             % 1st, 2nd, 3rd, ...
+\usepackage{float}                                  % Floats for images
+\usepackage{siunitx}                                % SI units
+\usepackage{pdfpages}                               % To include pdf's
+% \usepackage{fullpage}                               % Use the full page
+
+% Nomenclature
+% \usepackage{nomencl}
+\usepackage{longtable}
+
+\usepackage{dirtytalk}  % Simple quotation
+% \usepackage{listings}   % Code highlighting
+\usepackage{minted}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\usetikzlibrary{shapes,arrows,positioning,calc}     % For the figures
 
 % % % Biblatex
 
 \addbibresource{library.bib}  % Bibliography file
 \renewcommand{\cite}{\parencite}
 
-% Remove URLs from common (easy-to-find) entries.
-\AtEveryBibitem{%
-  \ifboolexpr%
-    {%
-      test { \ifentrytype{book} }
-      or
-      test { \ifentrytype{inbook} }
-      or
-      test { \ifentrytype{inproceedings} }
-      or
-      test { \ifentrytype{incollection} }
-      or
-      test { \ifentrytype{article} }
-    }
-    {\clearfield{url}}
-    {}%
-}
-% End Biblatex
+% % Remove URLs from common (easy-to-find) entries.
+% \AtEveryBibitem{%
+%   \ifboolexpr%
+%     {%
+%       test { \ifentrytype{book} }
+%       or
+%       test { \ifentrytype{inbook} }
+%       or
+%       test { \ifentrytype{inproceedings} }
+%       or
+%       test { \ifentrytype{incollection} }
+%       or
+%       test { \ifentrytype{article} }
+%     }
+%     {\clearfield{url}}
+%     {}%
+% }
+% % End Biblatex
 
 
 % % % New environments
@@ -125,21 +164,21 @@
 % % % End new environments
 
 
-% Begin page content adjustments for putting more text on pages.
-\renewcommand{\topfraction}{.85}       % max fraction of floats at top
-\renewcommand{\bottomfraction}{.7}     % max fraction of floats at bottom
-\renewcommand{\textfraction}{.15}      % minimal text wrt. figs
-\renewcommand{\floatpagefraction}{.66} % fraction for page of floats. floatpagefraction MUST be less than topfraction 
-\renewcommand{\dbltopfraction}{.66}    % fit big float above 2-col. text
-\renewcommand{\dblfloatpagefraction}{.66}
-\setcounter{topnumber}{9}
-\setcounter{bottomnumber}{9}
-\setcounter{totalnumber}{20}
-\setcounter{dbltopnumber}{9}
-\widowpenalty=300                             % widow (at the beginning of page)
-\clubpenalty=300                              % orphans (at the end of page)
-\setlength{\parskip}{0ex plus 0.5ex}  % space between paragraphs
-% End page content adjustments
+% % Begin page content adjustments for putting more text on pages.
+% \renewcommand{\topfraction}{.85}       % max fraction of floats at top
+% \renewcommand{\bottomfraction}{.7}     % max fraction of floats at bottom
+% \renewcommand{\textfraction}{.15}      % minimal text wrt. figs
+% \renewcommand{\floatpagefraction}{.66} % fraction for page of floats. floatpagefraction MUST be less than topfraction
+% \renewcommand{\dbltopfraction}{.66}    % fit big float above 2-col. text
+% \renewcommand{\dblfloatpagefraction}{.66}
+% \setcounter{topnumber}{9}
+% \setcounter{bottomnumber}{9}
+% \setcounter{totalnumber}{20}
+% \setcounter{dbltopnumber}{9}
+% \widowpenalty=300                             % widow (at the beginning of page)
+% \clubpenalty=300                              % orphans (at the end of page)
+% \setlength{\parskip}{0ex plus 0.1ex}  % space between paragraphs
+% % End page content adjustments
 
 % % %
 % Begin remove page numbers from the "Part I" pages
@@ -176,15 +215,15 @@
 \title{\thesistitle}
 \author{\thesisauthor}
 
-\pdfinfo{%
-  /Title (\thesistitle)
-  /Author (\thesisauthor)
-}
+% \pdfinfo{%
+%   /Title (\thesistitle)
+%   /Author (\thesisauthor)
+% }
 
 % Compression options
-\pdfminorversion=5
-\pdfobjcompresslevel=3  % compression requires \pdfminorversion at least 5
-\pdfcompresslevel=9     % compression requires \pdfminorversion at least 5
+% \pdfminorversion=5
+% \pdfobjcompresslevel=3  % compression requires \pdfminorversion at least 5
+% \pdfcompresslevel=9     % compression requires \pdfminorversion at least 5
 
 
 \begin{document}
@@ -197,7 +236,7 @@
 
 \input{frontmatter/standard-copyrights-page}
 
-\input{frontmatter/dedications-page}
+% \input{frontmatter/dedications-page}
 
 % Add abstract to the ToC
 \cleardoublepage              % advance the pages
@@ -219,11 +258,17 @@
 \chapter*{List of Publications}
 \input{frontmatter/publications-list}
 
+% \cleardoublepage              % advance the pages
+% \phantomsection               % put pdf anchor
+% \addcontentsline{toc}{chapter}{List of Acronyms}  % add toc line with target at the last anchor
+% \chapter*{List of Acronyms}
+% \input{frontmatter/acronyms}
+
 \cleardoublepage              % advance the pages
 \phantomsection               % put pdf anchor
-\addcontentsline{toc}{chapter}{List of Acronyms}  % add toc line with target at the last anchor
-\chapter*{List of Acronyms}
-\input{frontmatter/acronyms}
+\addcontentsline{toc}{chapter}{Nomenclature}  % add toc line with target at the last anchor
+\chapter*{Nomenclature}
+\input{frontmatter/nomenclature}
 
 % add Contents to PDF bookmarks, but do not add it to the 'printed' Contents
 \cleardoublepage
@@ -234,7 +279,7 @@
 
 \mainmatter                   % normal arabic page numbers
 
-\part{Introductory chapters}
+% \part{Introductory chapters}
 
 % Headers, footers
 \fancyfoot{}                  % clean all
@@ -245,7 +290,7 @@
 
   \begin{refsection}
 
-    \include{kappa/body}
+    \input{kappa/body}
 
     \printbibliography[heading=bibintoc]
 
@@ -270,56 +315,61 @@
                               % For algorithms numbering see definition of
                               % \newfloat{algorithm} above.
 
-\newcommand{\paper}[7]
-% #1 Paper Title
-% #2 Short Title for page headers (ToC has the full title)
-% #3 Label for later (or earlier) \ref:s
-% #4 Authors
-% #5 Where published
-% #6 Comment (like "reprinted with a kind permission" and "reformatted for uniformity")
-% #7 File to input
-{
-  \chapter{#1\label{#3}}      % Title as Chapter
-  \chaptermark{#2}            % Short title for the page header
-  \thispagestyle{empty}       % no page numbers
-  {\Large #4}\par             % authors
-  \vspace{1cm}
-  \noindent\emph{\Large #5}\par % where published
-  \vspace{3cm}
-  \noindent\emph{\Large #6}   % Comment
-  \cleardoublepage            % skip back side of the page
-  \thispagestyle{plain}       % no header above paper title
-  \begin{center}
-    {\Large \bfseries Paper~\thechapter. #1}\par % title again
-    \vspace{1pc}
-    #4 \par                   % authors again
-    \vspace{3pc}
-  \end{center}
-  \begin{refsection}          % start of biblatex's refsection for sub-bibliography
-  \input{#7}                  % paper itself, starting from abstract (no title)
-  \printbibliography[heading=subbibintoc] % biblatex bibliography
-  \end{refsection}            % end of biblatex refsection
-}
+% \newcommand{\paper}[7]
+% % #1 Paper Title
+% % #2 Short Title for page headers (ToC has the full title)
+% % #3 Label for later (or earlier) \ref:s
+% % #4 Authors
+% % #5 Where published
+% % #6 Comment (like "reprinted with a kind permission" and "reformatted for uniformity")
+% % #7 File to input
+% {
+%   \chapter{#1\label{#3}}      % Title as Chapter
+%   \chaptermark{#2}            % Short title for the page header
+%   \thispagestyle{empty}       % no page numbers
+%   {\Large #4}\par             % authors
+%   \vspace{1cm}
+%   \noindent\emph{\Large #5}\par % where published
+%   \vspace{3cm}
+%   \noindent\emph{\Large #6}   % Comment
+%   \cleardoublepage            % skip back side of the page
+%   \thispagestyle{plain}       % no header above paper title
+%   \begin{center}
+%     {\Large \bfseries Paper~\thechapter. #1}\par % title again
+%     \vspace{1pc}
+%     #4 \par                   % authors again
+%     \vspace{3pc}
+%   \end{center}
+%   \begin{refsection}          % start of biblatex's refsection for sub-bibliography
+%   \input{#7}                  % paper itself, starting from abstract (no title)
+%   \printbibliography[heading=subbibintoc] % biblatex bibliography
+%   \end{refsection}            % end of biblatex refsection
+% }
 
-\newcommand{\reformatted}{The paper was reformatted for uniformity, but otherwise is unchanged.}
+% \newcommand{\reformatted}{The paper was reformatted for uniformity, but otherwise is unchanged.}
+%
+% % \part{Appended papers}        % in this part one chapter = one paper
+%
+% % Example of using the command \paper defined above:
+% \paper{SAT-solving in practice, with a tutorial example from supervisory control}
+%       {SAT-solving in practice, with a SCT example}
+%       {pap:supervisory}
+%       {Koen~Claessen, Niklas~Een, Mary~Sheeran, Niklas~Sörensson, Alexey~Voronov and Knut~Åkesson}
+%       {Journal of Discrete Event Dynamic Systems (2009), 19(4): 495--524.}
+%       {Reproduced with kind permission from Springer Science+Business Media. \reformatted}
+%       {paper-supervisory/body}
+%
+% \paper{The same paper, inserted second time for illustration}
+%       {SAT-solving in practice, with a SCT example}
+%       {pap:another-one}
+%       {Koen~Claessen, Niklas~Een, Mary~Sheeran, Niklas~Sörensson, Alexey~Voronov and Knut~Åkesson}
+%       {Journal of Discrete Event Dynamic Systems (2009), 19(4): 495--524.}
+%       {Reproduced with kind permission from Springer Science+Business Media. \reformatted}
+%       {paper-supervisory/body}
 
-\part{Appended papers}        % in this part one chapter = one paper
-
-% Example of using the command \paper defined above: 
-\paper{SAT-solving in practice, with a tutorial example from supervisory control}
-      {SAT-solving in practice, with a SCT example}
-      {pap:supervisory}
-      {Koen~Claessen, Niklas~Een, Mary~Sheeran, Niklas~Sörensson, Alexey~Voronov and Knut~Åkesson}
-      {Journal of Discrete Event Dynamic Systems (2009), 19(4): 495--524.}
-      {Reproduced with kind permission from Springer Science+Business Media. \reformatted}
-      {paper-supervisory/body}
-
-\paper{The same paper, inserted second time for illustration}
-      {SAT-solving in practice, with a SCT example}
-      {pap:another-one}
-      {Koen~Claessen, Niklas~Een, Mary~Sheeran, Niklas~Sörensson, Alexey~Voronov and Knut~Åkesson}
-      {Journal of Discrete Event Dynamic Systems (2009), 19(4): 495--524.}
-      {Reproduced with kind permission from Springer Science+Business Media. \reformatted}
-      {paper-supervisory/body}
+% \chapter{Paper A}
+% \includepdf[pages=-]{../papers/scintillations}
+% \chapter{Paper B}
+% \includepdf[pages=-]{../papers/overview}
 
 \end{document}

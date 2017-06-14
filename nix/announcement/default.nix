@@ -9,13 +9,13 @@
 with stdenv.lib;
 
 let
-  filename = "announcement";
+  filename = "main-for-defence-announcement";
   XELATEX="xelatex -halt-on-error";
 in stdenv.mkDerivation {
   name = "thesis-announcement.pdf";
   src = thesis-source;
 
-  sourceRoot = "${thesis-source.name}/report";
+  sourceRoot = "${thesis-source.name}/report2";
 
   buildInputs = [ latex biber ghostscript ];
 

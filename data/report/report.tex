@@ -63,8 +63,11 @@
 \bibliography{library.bib}
 
 \begin{document}
-\maketitle
-\thispagestyle{empty}	% Hide page number.
+
+\input{frontmatter/standard-cover-page}
+
+% \maketitle
+% \thispagestyle{empty}	% Hide page number.
 
 % Abstract
 \newpage\section*{Abstract}\input{abstract}
@@ -72,37 +75,22 @@
 \newpage\input{publications}
 % Acknowledgements
 \newpage\input{acknowledgements}
+
+
+
 % Table of Contents
 \newpage\tableofcontents
 % Nomenclature
-\input{nomenclature}
+\newpage\input{nomenclature}
 % \printnomenclature
 % \listoftables
 % \listoffigures
 
-\input{introduction}
-\input{theory}
-\input{implementation}
-\input{turbulence}
+\input{body/body}
 
-% \input{implementation_turbulence}
-
-% \input{implementation_reproduction}
-
-\input{listening_test}
-
-
-
-\input{conclusions}
-% \chapter{Future work}
-
-% \input{conclusions}
-
-
-\newpage
+\newpage\printbibliography
 % \bibliographystyle{plain}
 % \bibliography{references}
-\printbibliography
 
 \appendix
 \newpage
