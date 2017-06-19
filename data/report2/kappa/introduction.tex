@@ -124,9 +124,9 @@ unpleasant mental state, and is a term that is used in general for all negative
 feelings, such as nuisance, disturbance, unpleasantness and irritation
 \cite{Guski1999}. Aircraft noise can have a major impact on noise annoyance,
 and there are findings suggesting that people's attitude towards aircraft noise
-has changed over the less, rating aircraft noise noiser than before \cite{Babisch2009}.
+has changed over the years, rating aircraft noise noiser than before \cite{Babisch2009}.
 
-Another consequence of aircraft noise that is being studied is sleep disturance
+Another consequence of aircraft noise that is being studied is sleep disturbance
 \cite{Michaud2007}. Adequate sleep is essential to one's well being, and
 aircraft noise-induced sleep disturbance is therefore often seen as a potential
 public health hazard.
@@ -139,13 +139,13 @@ Furthermore, there's individual differences such age, sex and noise sensitivity.
 
 \subsection{Aircraft noise mitigation and modeling}
 Aircraft noise became a public issue in the 1950s and 1960s. As a consequence
-governments enacted legislative controls. Noise regulations typically put a constraint on
-the amount of noise that can be produced as measured at certain locations. Such
-a constraint can limit the amount of flight operations that are permitted within
-a certain time window. As a result, airports optimise their flight routes and
-schedules to reduce noise exposure. Furthermore, aircraft models may be banned
-if they're too noisy providing an extra incentive for aircraft manufacturers to
-develop more quiet aircraft.
+governments enacted legislative controls. Noise regulations typically put a
+constraint on the amount of noise that can be produced as measured at certain
+locations. Such a constraint can limit the amount of flight operations that are
+permitted within a certain time window. As a result, airports may optimise their
+flight routes and schedules to reduce noise exposure. Furthermore, aircraft
+types may be banned if they're too noisy, providing an incentive for
+aircraft manufacturers to develop more quiet aircraft.
 
 % The purpose of aircraft noise mitigation is to reduce noise pollution due to
 % aircraft and to the reduce its negative impacts.
@@ -156,14 +156,68 @@ specialised agency of the United Nations and is charged with coordinating and
 regulating international air travel. The ICAO adopts standards and guidelines on
 matters like navigation, infrastructure and inspection. They also provide
 guidelines related to aircraft noise. For example, Doc 9501 describes procedures
-for noise emission certification of aircraft \cite{ICAO_9601}.
+for noise emission certification of aircraft \cite{ICAO_9501}.
+% Airports may then restrict aircraft based on their emission certification.
+
+% The Effective Perceived Noise Level (EPNL) with unit EPNdB
 
 The European Civil Aviation Conference (ECAC), founded by ICAO and the Council
 of Europe, is an intergovernmental organization and is tasked with \say{the
 promotion of the continued development of a safe, efficient and sustainable
 European air transport system} \cite{ECAC2017}. The ECAC provides Doc 29, which
-provides a standardised method for computing noise contours around civil
-airports \cite{Doc29_fourth_2016}.
+contains a standardised method for computing noise contours around civil
+airports \cite{Doc29_fourth_2016} and is the recommended method for European
+Union member states \cite{directive_2002_49_ec}.
+
+As a counter-proposal to a people's initiative to limit the amount of flights
+from Zurich Airport, the Zurich cantonal government proposed to instead limit
+the amount of people that were allowed to be highly affected by the aircraft
+noise. This counter-proposal, the \say{Zürcher Fluglärm-Index} (ZFI) or Zurich
+Aircraft Noise Index was accepted \cite{Schaffer2012}. The ZFI is a single
+number, representing the amount of persons that are affected by annoyance and/or
+sleep disturbance due to aircraft noise related to a single airport.
+Exposure-response relations are used for both annoyance during daytime and sleep
+disturbance during nighttime.
+
+For the computation of indices like the ZFI it is necessary to obtain
+exposure-response relations as well as sound pressure levels that serve as
+input. Typically noise levels are predicted on the facades of houses, and a
+correction is made to obtain indoor levels. The ZFI considers as input for
+determining the amount of sleep disturbed people the A-weighted maximum sound
+pressure level $L_{A,max}$ per event and the A-weighted equivalent level
+$L_{A,eq}$ over the night period. For annoyance the $L_{A,eq}$ over the daytime
+period is used with an additional penalty of 5 dB for the first and last hour.
+
+While exposure response relations have been determined, the computation of the
+ZFI assumes that an event and environment can be entirely described by their
+noise levels. However, an assumption or simplication like this disregards the
+fact that other aspects than the average or maximum sound pressure level impact
+the human response as was mentioned before. Tonal components for example are
+known to significantly contribute to noise annoyance and therefore improved
+metrics may be needed \cite{Sahai2016,Sahai2016b}. Especially with developments
+like NASA's X-57 Maxwell Electric Propulsion Airplane
+\cite{Moore2012,Beutel2016} which features 14 propellers, each driven by its own
+electric engine, and the quadcopters \cite{Rizzi2015} that are now commonly used
+as drones. The phase relation between propellers, unsteadiness of the sources,
+interferences, fluctuations due to atmospheric turbulence. These parameters all
+affect the sound field and what is perceived by a listener. Simple
+models do not take into account these parameters, and are therefore insufficient
+for determining the impact of the sound on humans.
+
+% \subsection{Aircraft noise prediction models}
+
+% Rizzi2015 - Advances in Distributed Propulsor Acoustic Modeling
+% Simple models neglecting unsteadiness of the sources are
+% not suitable for use in human annoyance studies that are
+% intended to lead to low noise design strategies.
+
+
+
+
+% Aircraft noise prediction models like FLULA,
+
+
+
 
 % Mitigation - the goal of risk reduction
 
@@ -217,7 +271,7 @@ airports \cite{Doc29_fourth_2016}.
 
 % Soundscape
 
-
+\todo{rewrite}
 \subsection{Auralisation}\label{sec:introduction:background:auralisation}% of soundscapes}
 % \begin{quote}
 % Auralisation is the technique of creating audible sound files from numerical data
@@ -254,6 +308,7 @@ emission synthesis model can be established that relates tonal and spectral
 components to the operational state of the source.
 
 \todo{Describe auralisation use cases!!}
+\todo{refer to sonorus booklet}
 
 \subsection{Aircraft noise auralisation} \todo{split partly into aircraft noise modeling}
 
@@ -288,6 +343,25 @@ components in each band is divided by the amount of tones in that band.
 Nowadays the Heidmann model in ANOPP can output the frequencies and amplitudes
 of forward and aft radiated fan tones. Only Buzz-Saw noise is still output in
 \nicefrac{1}{3}-octaves.
+
+% Both ANOPP2 and INSTANT use spectral modelling
+% synthesis to generate an emission signal.
+
+Other models don't describe the contributions from the individual noise
+sources or spectral components but merge them together into a total spectrum.
+The ECAC Doc29 method \cite{Doc29_fourth_2016} uses the ICAO ANP database and
+provides 24 \nicefrac{1}{3}-octave bands, and so does CNOSSOS-EU which has
+adopted the \nth{3} edition of Doc29 \cite{Doc29_third_2005}. The Swiss sonAIR
+model \cite{Zellmann2016} computes an emission spectrum that is composed of two
+source spectra: an engine spectrum and an airframe spectrum. The current Swiss
+model, FLULA2, doesn't consider an emission spectrum but instead uses a database
+of immission spectra where propagation effects are already included
+\cite{EMPA2010,Schaffer2014}.
+
+Aside from ANOPP2 and INSTANT none of the mentioned models make a distinction
+between tonal and noise contributions, thereby making them unfit for the use of
+aircraft auralisation which requires explicit knowledge about tonal and noise
+contributions.
 
 
 %
@@ -333,9 +407,11 @@ different radiating components, the goal of this work is to investigate whether
 plausible sounding auralisations can be made with its emission properties
 derived from recordings.
 
+Current auralisations of aircraft are considered to sound artificial.
+
 Furthermore, in order to improve the plausibility of auralisations of aircraft
-at larger distances, a method is developed to include fluctuations due to
-atmospheric turbulence.
+at larger distances, a method is developed to include both amplitude and phase
+fluctuations due to atmospheric turbulence.
 
 
 % \todo{Check!}

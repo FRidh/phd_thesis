@@ -1,5 +1,5 @@
 """
-Plot propagation effects
+Plot
 """
 
 # Plotting
@@ -11,16 +11,23 @@ from acoustics import Signal
 from h5store import h5load
 
 import matplotlib as mpl
-mpl.rc("figure", figsize=(2.9, 2.5))
+mpl.rc("figure", figsize=(6.0, 3.0))
 mpl.rc("font", size=10)
 mpl.rc('text', usetex=True)
+
+#EXTENSION = "eps"
+EXTENSION = "png"
+
+#XLIM = (10.0, 38.0)
+YLIM = (0.0, 4000.0)
 
 
 def create_figure(source, target, clim):
     s, meta = h5load(source)
     s = Signal(s, meta['fs'])
-    fig = s.plot_spectrogram(clim=clim, ylim=(0.0, 4000.0))
-    fig.subplots_adjust(bottom=0.2, left=0.2)
+    fig = s.plot_spectrogram(clim=clim, ylim=YLIM, title='')
+    #fig.subplots_adjust(bottom=0.2, left=0.2)
+    fig.tight_layout()
     fig.savefig(target, dpi=600)
 
 

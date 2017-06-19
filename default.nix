@@ -33,21 +33,36 @@ in rec {
 
   # Media: figures and audio
   media = {
+    # Step-by-step add propagation effects
     propagation = callPackage ./nix/media/propagation {
       inherit python;
       inherit (lib) matplotlibHook;
     };
+    # Basic sound, attenuation
     sound = callPackage ./nix/media/sound {
       inherit python;
       inherit (lib) matplotlibHook;
     };
+    # Signal processing. Convolution.
     signal-processing = callPackage ./nix/media/signal-processing {
       inherit python;
       inherit (lib) matplotlibHook;
     };
+    # Distant source with aircraft-like spectrum. Atmospheric turbulence.
+    propagation-distant = callPackage ./nix/media/propagation-distant {
+      inherit python;
+      inherit (lib) matplotlibHook to_wav;
+    };
+    # From recording to auralisation. Samples from second paper.
+    recording-to-auralisation = callPackage ./nix/media/recording-to-auralisation {
+      inherit python;
+      inherit (lib) matplotlibHook to_wav;
+    };
   };
 
-  lib = callPackage ./nix/lib { };
+  lib = callPackage ./nix/lib {
+    inherit python;
+  };
 
   # Python interpreter that has extra packages available
   python = callPackage ./nix/packages { };

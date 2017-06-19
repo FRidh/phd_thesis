@@ -1,4 +1,7 @@
 { pkgs
+, python
+, runCommand
+, lib
 }:
 
 {
@@ -15,15 +18,35 @@
     substitutions = { inherit fontsConf; };
   } ./matplotlib.sh;
 
+  # Take a directory with .hdf5 files and convert to audio.
+  # - `name` is the name of the derivation
+  # - `source` is the absolute path to directory containing .hdf5 files.
+  # - `target` is the path relative to $out.
+  to_wav = name: source: target:
+    runCommand name {
+      buildInputs = [
+        (python.withPackages (ps: with ps; [ acoustics h5store ] ) )
+      ];
+    } ''
+      mkdir -p "$out/${target}"
+      python3 ${./audio.py} "${source}" "$out/${target}"
+    '';
 
-#   create_figure = { name, deps, script }:
+#   create_audio_figure = {name, source, target, script }:
 #     let
 #       kind = "figures";
+#       pythonEnv = (python.withPackages (ps: with ps; [ acoustics h5store matplotlib] ) );
 #     in runCommand "${name}-${kind}" {
-#       buildInputs = [ matplotlibHook ] + deps;
-#     ];
-#   } ''
-#     mkdir -p "$out/${kind}/generated/${name}"
-#     python3 ${script} "$out/${kind}/generated/${name}"
-#   '';
+#       buildInputs = [ pythonEnv lib.matplotlibHook ];
+#     } ''
+#       mkdir -p "$out/${kind}/generated/${name}"
+#       python3 ${script} "$out/${kind}/generated/${name}"
+#     '';
+
+#     figures-common-rc = {
+#       "figure.figsize" = [ 6.0 3.0 ];
+#       "font.size" = 10.0;
+#       "text.usetex" = true;
+#     };
+
 }
