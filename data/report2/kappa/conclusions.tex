@@ -95,4 +95,41 @@ Because the auralisations appear to sound plausible it is concluded that the str
 utilised works and therefore
 
 
+\subsection{Scintillations}
+
+\subsubsection*{Validate scintillations model}
+The scintillations model is based on an existing statistical model.
+
+\subsubsection*{Different model for describing turbulence spectrum}
+As mentioned in the text the basic method for generating scintillations should
+also work with other models, like the Von Karman spectrum. The Gaussian model
+was chosen for performance reasons, as its simplest, but also because it allowed
+further optimisations. Future work could be to develop an optimised algorithm
+that utilises other spectra like e.g. the Von Karman spectrum with the use of
+expressions given in \cite{Ostashev2015}.
+
+\subsubsection*{Non-isotropic and non-homogeneous atmosphere for the scintillations model}
+% \subsubsection*{Height-dependent parameters for the scintillations model}
+The current model assumes a isotropic and homogeneous atmosphere. In practice,
+the atmosphere is neither and parameters like the correlation length $L$ and the
+variance of the refractive-index fluctuations $\langle \mu^2 \rangle$ are
+height-dependent \cite{Krasnenko2013}. Ostashev et al. gave formulas for plane
+\cite{Ostashev1997b} and spherical \cite{Ostashev1997c} waves propagating
+through an anisotropic atmosphere and studies numerically the variances and
+correlation functions of the log-amplitude and phase fluctuations
+\cite{Ostashev2004}.
+
+\subsubsection*{Determine parameters for scintillations model}
+The model that was presented for generating scintillations uses a Gaussian
+correlation function. A Gaussian can be used as an applied filter to get a rough
+approximation to the actual turbulence spectrum within a certain wavenumber
+range. An open question is how to obtain adequate values for the correlation
+length $L$ and the variance of the refractive-index fluctuations $\langle \mu^2
+\rangle$. Values for both can be obtained with a setup as used by Daigle et. al.
+\cite{Daigle1983}, however, with such a setup values can only be obtained at
+relatively low heights.
+
+
+
+
 % \subsection{Develop better indicators for annoyance and sleep disturbance}

@@ -15,8 +15,8 @@ let
     auralisation = (import (fetchTarballFromGitHub {
       owner = "FRidh";
       repo = "auralisation-nix";
-      rev = "7a3b2694d5cbb0aaccf3d0d6aca5c174de32d060";
-      sha256 = "0kb5l5j5dbpj490ny9jc8nbr60lra84c6p2f5xxg0s876prrplwd";
+      rev = "746685780465d52b94351082dffda993e49f26dd";
+      sha256 = "0kri678pyxznkkz6595fll2bqw16v7fjh7m8w9hjyvlhnbq0pwib";
     }){}).stableOverrides;
 
     # Additional packages/overrides

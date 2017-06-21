@@ -15,8 +15,8 @@ mpl.rc("figure", figsize=(6.0, 3.0))
 mpl.rc("font", size=10)
 mpl.rc('text', usetex=True)
 
-#EXTENSION = "eps"
-EXTENSION = "png"
+EXTENSION = "eps"
+#EXTENSION = "png"
 
 XLIM = (10.0, 38.0)
 YLIM = (0.0, 4000.0)
@@ -28,7 +28,8 @@ def create_figure(source, target, plotargs=None):
         plotargs = {}
     s, meta = h5load(source)
     s = Signal(s, meta['fs'])
-    fig = s.plot_spectrogram(clim=CLIM, xlim=XLIM, ylim=YLIM, title='', **plotargs)
+    ax = s.plot_spectrogram(clim=CLIM, xlim=XLIM, ylim=YLIM, title='', **plotargs)
+    fig = ax.get_figure()
     #fig.subplots_adjust(bottom=0.2, left=0.2)
     fig.tight_layout()
     fig.savefig(target, dpi=600)

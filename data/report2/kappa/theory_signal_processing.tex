@@ -411,8 +411,40 @@ where $x$ is the sample at retarded time $t'$
 \end{equation}
 The frequency shift depends on the change of propagation delay. Therefore, when source and receiver are relatively close to one another, the method is most sensitive to uncertainties in source position and speed of sound.
 
+Figure \ref{fig:theory:signal-processing:resampling} shows spectrograms with
+Doppler-shifted tones for the two explained interpolation algorithms and
+different values of the kernelsize $a$. The artifacts are clearly less
+pronounced when using a larger kernelsize. However, a larger kernelsize does
+come at a cost of performance.
+% as shown in \ref{fig:theory_signal_processing_interpolation_benchmarks}.
 
-\todo{Figure with comparison of linear interp and Lanczos was here. Include it?}
+%
+\newpage
+\begin{figure}[H]
+%     \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/signal-processing-resampling/linear-None}
+        \caption{Linear interpolation}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/signal-processing-resampling/lanczos-2}
+        \caption{Lanczos interpolation with $a=2$}
+    \end{subfigure}
+%     ~
+%     \begin{subfigure}{\textwidth}\includegraphics[]{../figures/generated/signal-processing-resampling/lanczos-5}\end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics[]{../figures/generated/signal-processing-resampling/lanczos-10}
+        \caption{Lanczos interpolation with $a=10$}
+    \end{subfigure}
+    \caption{A comparison between linear interpolation (top) and Lanczos interpolation with different kernelsizes.}
+    \label{fig:theory:signal-processing:resampling}
+\end{figure}
+
+
+
+% \todo{Figure with comparison of linear interp and Lanczos was here. Include it?}
 % Figure \ref{fig:theory_signal_processing_interpolation} shows spectrograms with Doppler-shifted tones for the two explained interpolation algorithms and different values of the kernelsize $a$.
 % The artifacts are clearly less pronounced when using a larger kernelsize. However, a larger kernelsize does come at a cost of performance as shown in \ref{fig:theory_signal_processing_interpolation_benchmarks}.
 %

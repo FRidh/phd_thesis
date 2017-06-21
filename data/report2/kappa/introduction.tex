@@ -363,6 +363,40 @@ between tonal and noise contributions, thereby making them unfit for the use of
 aircraft auralisation which requires explicit knowledge about tonal and noise
 contributions.
 
+\subsection{Plausibility of aircraft auralisations and the influence of the atmosphere}
+In the last couple of years relatively many papers have been written about
+auralisation and aircraft auralisation. Initially basic propagation models were
+developed, and then emphasis shifted to the development of emission models. A
+common problem with current auralisations is that they can often still sound
+artificial because they sound \say{too perfect}.
+
+One cause is that one typically models only the source of interest, neglecting
+any background sounds. Another issue is the (un)steadiness of the source and/or
+the medium through which the waves propagate. Let's consider for example a
+rotating fan. The fan radiates aside from broadband noise also strong tonal
+components. Turbulent flow around the fan can cause additional motion of the
+fan. This motion will effect the sound that is radiated, typically causing
+modulations of the tonal components. Effects like these are typically not
+included in prediction models either, and this specific effect was shown to be
+important for the assessment of noise annoyance caused by quadcopters
+\cite{Rizzi2015}.
+
+In past work it was mentioned that auralisations of (distant) airplanes also
+lack a certain randomness or fluctuations in the sound \cite{Arntzen2014a}.
+Atmospheric turbulence can cause not only fluctuations of the emitted sound but
+can also scatter waves that propagate through the turbulent atmosphere. Temporal
+and spatial variations of temperature and wind velocity fields result in
+fluctuations of the refractive-index field. Multiple scattering in combination
+with these temporal and spatial variations results in log-amplitude and phase
+modulations. The log-amplitude fluctuations can often be noticed when listening
+to distant aircraft. The phase fluctuations are not perceived by humans
+directly, but will result in decorrelation and therefore additional attenuation
+which can be noticeable. Furthermore, the phase fluctuations can impact the
+interference between direct and (ground) reflected sound.
+
+\todo{coherence factor, phase, amplitude}
+
+Arntzen et al. included a coherence factor ...
 
 %
 % % TODO: clean up the following
@@ -407,11 +441,9 @@ different radiating components, the goal of this work is to investigate whether
 plausible sounding auralisations can be made with its emission properties
 derived from recordings.
 
-Current auralisations of aircraft are considered to sound artificial.
-
-Furthermore, in order to improve the plausibility of auralisations of aircraft
-at larger distances, a method is developed to include both amplitude and phase
-fluctuations due to atmospheric turbulence.
+To improve the plausibility of auralisations of aircraft at larger distances, a
+method is developed to include both amplitude and phase fluctuations due to
+atmospheric turbulence.
 
 
 % \todo{Check!}

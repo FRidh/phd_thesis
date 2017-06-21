@@ -1,10 +1,19 @@
 let
-  pkgs = let
-    src = {
-      url = https://github.com/NixOS/nixpkgs/archive/18bad38d3d928b7dd9ee09a38249dbeb217d34d1.tar.gz;
-      sha256 = "1ajcyj9h83gski7y6wscwxj94ahlqf0j5r54yqs7wsjnc2adx5vc";
+  # Function to fetch a tarball with Nix expressions from GitHub
+  fetchTarballFromGitHub = { repo, owner, rev, sha256, name ? "" }:
+    fetchTarball {
+      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+      inherit sha256;
+      inherit name;
     };
-  in import (fetchTarball src) {};
+
+  # import <nixpkgs> {}; but from a specific commit.
+  pkgs = import (fetchTarballFromGitHub {
+    owner = "NixOS";
+    repo = "nixpkgs";
+    rev= "18bad38d3d928b7dd9ee09a38249dbeb217d34d1";
+    sha256 = "1ajcyj9h83gski7y6wscwxj94ahlqf0j5r54yqs7wsjnc2adx5vc";
+  }){};
 
   inherit (pkgs) callPackage;
   latex = pkgs.texlive.combined.scheme-full;
@@ -26,8 +35,7 @@ in rec {
     inherit references media;
   };
 
-
-
+  # Bibtex library with references/citations
 #   references = ./data/library.bib; #/home/freddy/Data/Media/References/library.bib;
   references = /home/freddy/Data/Media/References/library.bib;
 
@@ -48,6 +56,12 @@ in rec {
       inherit python;
       inherit (lib) matplotlibHook;
     };
+    # Signal processing. Comparison interpolation methods.
+    signal-processing-resampling = callPackage ./nix/media/signal-processing-resampling {
+      inherit python;
+      inherit (lib) matplotlibHook to_wav;
+    };
+
     # Distant source with aircraft-like spectrum. Atmospheric turbulence.
     propagation-distant = callPackage ./nix/media/propagation-distant {
       inherit python;
@@ -60,6 +74,7 @@ in rec {
     };
   };
 
+  # Library of functions
   lib = callPackage ./nix/lib {
     inherit python;
   };

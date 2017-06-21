@@ -1,7 +1,3 @@
-"""
-Plot
-"""
-
 # Plotting
 import matplotlib.pyplot as plt
 #import seaborn as sns
@@ -18,14 +14,12 @@ mpl.rc('text', usetex=True)
 EXTENSION = "eps"
 #EXTENSION = "png"
 
-#XLIM = (10.0, 38.0)
-YLIM = (0.0, 4000.0)
-
-
-def create_figure(source, target, clim):
+def create_figure(source, target, plotargs=None):
+    if plotargs is None:
+        plotargs = {}
     s, meta = h5load(source)
     s = Signal(s, meta['fs'])
-    ax = s.plot_spectrogram(clim=clim, ylim=YLIM, title='')
+    ax = s.plot_spectrogram(clim=(-40,+40), title='', **plotargs)
     fig = ax.get_figure()
     #fig.subplots_adjust(bottom=0.2, left=0.2)
     fig.tight_layout()
@@ -39,17 +33,9 @@ def main():
     parser.add_argument('target', type=str)
     args = parser.parse_args()
 
-    clims = {
-        'recording'     :   (  +20.0, +70.0),
-        'reverted'      :   (  +50.0, +100.0),
-        'synthesis'     :   (  +50.0, +100.0),
-        'auralisation'  :   (  +20.0, +70.0),
-    }
-
-    for filename in filter(lambda x: x.endswith('.hdf5'), os.listdir(args.source)):
+    for filename in os.listdir(args.source):
         basename = os.path.splitext(filename)[0]
-        clim = clims[basename]
-        create_figure(os.path.join(args.source, filename), os.path.join(args.target, "{}.eps".format(basename)), clim)
+        create_figure(os.path.join(args.source, filename), os.path.join(args.target, "{}.{}".format(basename, EXTENSION)))
 
 if __name__ == '__main__':
     main()
