@@ -7,7 +7,7 @@ from acoustics import Signal
 from h5store import h5load
 
 import matplotlib as mpl
-mpl.rc("figure", figsize=(6.0, 3.0))
+mpl.rc("figure", figsize=(6.0, 2.5))
 mpl.rc("font", size=10)
 mpl.rc('text', usetex=True)
 

@@ -8,14 +8,14 @@
 }:
 
 let
- name = "propagation-distant";
+ name = "turbulence-parameters";
 in rec {
 
   computations = let
     kind = "computations";
   in runCommand "${name}-${kind}" {
     buildInputs = [
-      (python.withPackages (ps: with ps; [ acoustics auraliser h5store ] ) )
+      (python.withPackages (ps: with ps; [ common_simulation] ) )
     ];
   } ''
     mkdir -p $out
@@ -34,18 +34,6 @@ in rec {
     mkdir -p "$out/${kind}/generated/${name}"
     python3 ${./figures.py} ${computations} "$out/${kind}/generated/${name}"
   '';
-
-#   figures-slides = let
-#     kind = "figures-slides";
-#   in runCommand "${name}-${kind}" {
-#     buildInputs = [
-#       (python.withPackages (ps: with ps; [ acoustics h5store matplotlib] ) )
-#       matplotlibHook
-#     ];
-#   } ''
-#     mkdir -p "$out/${kind}/generated/${name}"
-#     python3 ${./figures-slides.py} ${computations} "$out/${kind}/generated/${name}"
-#   '';
 
   audio = let
     kind = "audio";

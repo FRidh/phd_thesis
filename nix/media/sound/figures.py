@@ -7,7 +7,7 @@ import seaborn as sns
 sns.set_context("paper", font_scale=4./3.)
 
 import matplotlib as mpl
-mpl.rc("figure", figsize=(6.0, 3.0))
+mpl.rc("figure", figsize=(6.0, 2.5))
 mpl.rc("font", size=10)
 mpl.rc('text', usetex=True)
 

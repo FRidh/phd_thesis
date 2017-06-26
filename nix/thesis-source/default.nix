@@ -25,14 +25,11 @@ in stdenv.mkDerivation {
     # Link all the figures we have in the figures folder
     pushd figures/generated
     for path in ${concatStringsSep " " figures}; do
-      echo "Linking path $path"
       for f in "$path/figures/generated/*"; do
-        echo $f
         ln -s $f
       done
     done
     popd
-    ls -Al figures
 
     # We need the references
     pushd report2
@@ -44,4 +41,34 @@ in stdenv.mkDerivation {
     mkdir -p $out
     mv * $out
   '';
+
+  preferLocalBuild = true;
 }
+
+# in runCommand "thesis-source" {
+#   preferLocalBuild = true;
+# } ''
+#   cp -r ${src}/* .
+#   chmod -R 0744 .
+#
+#   ls -Al
+#   ls -Al figures
+#
+#   # Link all the figures we have in the figures folder
+#   pushd figures/generated
+#   for path in ${concatStringsSep " " figures}; do
+#     for f in "$path/figures/generated/*"; do
+#       ln -s $f
+#     done
+#   done
+#   popd
+#
+#   # We need the references
+#   pushd report2
+#   ln -s ${references} library.bib
+#   popd
+#
+#   # Copy everything to $out
+#   mkdir -p $out
+#   mv * $out
+# ''

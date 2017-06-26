@@ -1,14 +1,9 @@
 import argparse
 import os
 import numpy as np
-from h5store import h5save
-from auraliser.propagation import apply_doppler#, interpolation_linear, interpolation_lanczos
 import pandas as pd
-
-#import matplotlib as mpl
-#mpl.rc("figure", figsize=(6.0, 10.0))
-#mpl.rc("font", size=10)
-##mpl.rc('text', usetex=True)
+from h5store import h5save
+from auraliser.propagation import apply_doppler
 
 
 def compute(folder):
@@ -54,26 +49,6 @@ def compute(folder):
     for method, kernelsize, signal in zip(*(zip(*jobs)), signals):
         name = os.path.join(folder, '{}-{}.hdf5'.format(method, kernelsize))
         h5save(name, pd.Series(signal), {'fs':fs})
-
-    #fig, axes = plt.subplots(4, 1)
-
-    #for ax, signal, label in zip(axes.flat, signals.values(), signals.keys()):
-        #signal.plot_spectrogram(ax=ax)
-
-
-    ##for ax, s, label in zip(axes.flat, signals, labels):
-        ##_, _, _, im = ax.specgram(s, Fs=s.fs, label=label, mode='psd', scale_by_freq=True, noverlap=128, NFFT=4096)
-        ##ax.set_ylim(0.0, signal.fs/2.0)
-        ##im.set_clim(clim)
-        ##ax.set_title(label)
-        ##ax.set_xlabel('$t$ in s')
-        ##ax.set_ylabel('$f$ in Hz')
-
-    #cb = fig.colorbar(im, ax=axes.ravel().tolist())
-
-    #fig.savefig()
-
-
 
 
 def main():

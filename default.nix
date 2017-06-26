@@ -11,8 +11,8 @@ let
   pkgs = import (fetchTarballFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
-    rev= "18bad38d3d928b7dd9ee09a38249dbeb217d34d1";
-    sha256 = "1ajcyj9h83gski7y6wscwxj94ahlqf0j5r54yqs7wsjnc2adx5vc";
+    rev= "afd2bdbad25db4b0007b52d07161345e6426ae72";
+    sha256 = "1n47x3y2q6pxncnp9xq7kxvc9p239g1xkp1wzdw2a9sp9hfva65q";
   }){};
 
   inherit (pkgs) callPackage;
@@ -61,7 +61,11 @@ in rec {
       inherit python;
       inherit (lib) matplotlibHook to_wav;
     };
-
+    #
+    turbulence-parameters = callPackage ./nix/media/turbulence-parameters {
+      inherit python;
+      inherit (lib) matplotlibHook to_wav;
+    };
     # Distant source with aircraft-like spectrum. Atmospheric turbulence.
     propagation-distant = callPackage ./nix/media/propagation-distant {
       inherit python;

@@ -14,7 +14,7 @@ in rec {
     kind = "computations";
   in runCommand "${name}-${kind}" {
     buildInputs = [
-      (python.withPackages (ps: with ps; [ acoustics auraliser h5store ] ) )
+      (python.withPackages (ps: with ps; [ common_simulation ] ) )
     ];
   } ''
     mkdir -p $out
@@ -28,6 +28,7 @@ in rec {
       (python.withPackages (ps: with ps; [ acoustics h5store matplotlib] ) )
       matplotlibHook
     ];
+    preferLocalBuild = true;
   } ''
     mkdir -p "$out/${kind}/generated/${name}"
     python3 ${./figures.py} ${computations} "$out/${kind}/generated/${name}"

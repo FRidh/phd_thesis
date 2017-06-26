@@ -11,7 +11,7 @@ from acoustics import Signal
 from h5store import h5load
 
 import matplotlib as mpl
-mpl.rc("figure", figsize=(6.0, 3.0))
+mpl.rc("figure", figsize=(6.0, 2.5))
 mpl.rc("font", size=10)
 mpl.rc('text', usetex=True)
 
@@ -51,7 +51,7 @@ def main():
     for filename in os.listdir(args.source):
         basename = os.path.splitext(filename)[0]
         clim = clims[basename]
-        create_figure(os.path.join(args.source, filename), os.path.join(args.target, "{}.eps".format(basename)), clim)
+        create_figure(os.path.join(args.source, filename), os.path.join(args.target, "{}.{}".format(basename, EXTENSION)), clim)
 
 if __name__ == '__main__':
     main()

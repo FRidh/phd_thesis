@@ -3,20 +3,20 @@
 % https://student.portal.chalmers.se/doctoralportal/handbook/Doctoral%20Thesis%20Defence/Pages/Layout-of-the-thesis.aspx
 
 
-% If we print original on G5 and not rescale it.
+% % If we print original on G5 and not rescale it.
 % \documentclass[10pt,a4paper,twoside,openright]{book}
 % \usepackage[
 %    papersize ={169mm, 239mm}
 %   ,twoside
 %   ,pass
-% %   ,inner=2.5cm                % inner margin
-% %   ,outer=2.5cm                % outer margin
-% %   ,bindingoffset=1cm       % additional binding offset on the inner side
-% %   ,bottom=3cm
+%   ,inner=2cm                % inner margin
+%   ,outer=2cm                % outer margin
+%   ,bindingoffset=0.8cm       % additional binding offset on the inner side
+%   ,bottom=2.4cm
 % ]{geometry}                   % Adjust the margins
 
 % If we print original on A4 and rescale it.
-\documentclass[10pt,a4paper,twoside,openright]{book}
+\documentclass[12pt,a4paper,twoside,openright]{book}
 \usepackage[%                 %
    a4paper
   ,twoside                    %
@@ -103,6 +103,12 @@
 \usepackage{siunitx}                                % SI units
 \usepackage{pdfpages}                               % To include pdf's
 % \usepackage{fullpage}                               % Use the full page
+\usepackage{bm}                                     % Bold matrices
+
+
+% Commands for matrix and vector quantities.
+\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+\newcommand{\vect}[1]{\mathbf{#1}}
 
 % Nomenclature
 % \usepackage{nomencl}

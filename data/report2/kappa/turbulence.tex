@@ -1,4 +1,4 @@
-\chapter{Modelling propagation in a turbulent atmosphere}\label{chapter:turbulence}\todo{From paper. Rewrite}
+\chapter{Propagation in a turbulent atmosphere}\label{chapter:turbulence}\todo{From paper. Rewrite}
 
 \section{Introduction}
 
@@ -641,6 +641,51 @@ Earlier it was assumed that the correlation length was much smaller than the Fre
 In this auralization the aircraft is moving close to the receiver. When the aircraft is closest, the distance is almost entirely given by the height which was approximately 100 meters.
 The correlation length was set at 20 meters. In that case the Fresnel zone is larger than the correlation length for the lower frequencies, and equation \eqref{eq:model_daigle} is not valid.
 Instead, the log-amplitude and phase variances should scale with respectively $d^3$ and $2k^2 d$ instead of $k^2 d$ \cite{Ishimaru1997}.
+
+
+\subsection{Influence of parameters}
+
+\begin{figure}[H]
+%     \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-1.0-1e-05}}}
+        \caption{\SI{1}{\meter}}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-05}}}
+        \caption{\SI{10}{\meter}}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-100.0-1e-05}}}
+        \caption{\SI{100}{\meter}}
+    \end{subfigure}
+    \caption{The influence of the correlation length $L$.}
+    \label{fig:turbulence:aircraft:parameters:correlation}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+%     \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-05}}}
+        \caption{\SI{1e-5}{}}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-06}}}
+        \caption{\SI{1e-6}{}}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-07}}}
+        \caption{\SI{1e-7}{}}
+    \end{subfigure}
+    \caption{The influence of the variance of the dynamic refractive-index $\sigma_{\mu}^2$.}
+    \label{fig:turbulence:aircraft:parameters:variance}
+\end{figure}
+
 
 \section{Conclusion}
 Fluctuations in the refractive-index field due to variations in temperature and

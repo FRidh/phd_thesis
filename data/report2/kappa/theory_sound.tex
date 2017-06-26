@@ -1,58 +1,134 @@
 \section{Sound}
 
-\cite{Arntzen2014a, Rienstra2017}
+A repetitive variation about a central value of some quantity is called an
+oscillation. Oscillations of mechanical nature are vibrations. An
+oscillation travelling through a medium and transferring energy is a wave. Sound
+is then a mechanical wave travelling through a fluid medium. Furthermore, only
+those oscillations that can be perceived by the human brain are typically
+considered sound.
+Being a small repetitive perturbation about the barometric
+mean pressure of the medium, the fluctuating or dynamic part of the pressure,
+denoted sound pressure, is typically many orders smaller than the mean
+pressure.
+
+In the \nth{17} century Newton proposed a model for sound waves in elastic media
+in his Principia. Already aware that the humidity of the air influences the
+speed of sound, Newton assumed an isothermal process for the wave motion and
+thereby computed incorrect values for the speed of sound. Laplace gave the
+correct derivation of the classical wave equation, describing the wave motion as
+a adiabatic process. In the \nth{19} century Kirchoff described the motion of a
+rigid body in an ideal fluid and Helmholtz gave a time-independent form of the
+wave equation. These were some of the important foundations for the classical
+theory of sound.
+% A limitation of the developed theory was the lack of sound generation models. In
+% the classical theory sound was only generated through a vibrating solid
+% boundary. In the 1950s
+In this section a brief overview is given of sound.
+
+
 
 \subsection{Wave equation}\label{sec:theory:sound:wave}
+% In his Principia, Newton gave an description of sound and a value of the speed of sound.
+The wave equation is a differential equation for describing waves and is used
+throughout physics. In the \nth{18} century d'Alembert discovered the
+one-dimensional wave equation, and a couple of years later Euler presented the
+three-dimensional wave equation. The acoustic wave equation describes the motion
+of sound waves and can be derived from the fundamental laws of fluid dynamics \cite{Arntzen2014a, Rienstra2017}.
 
-Equation for conservation of mass
+\subsubsection*{Mass and momentum conservation}
+The mass conservation or continuity equation is given by
+% Mass conservation equation
 \begin{equation}\label{eq:theory:sound:wave:mass}
- \frac{\partial \rho}{\partial t} + \nabla \cdot \rho \vec{u}
+ \frac{\partial \rho}{\partial t} + \nabla \cdot \rho \vect{u} = m
 \end{equation}
-Equation for conservation of momentum
+with $\rho$ the density of the medium, $t$ the time, $\vect{u}$ the flow velocity
+vector, $m$ the mass and $\nabla = \left( \frac{\partial}{\partial
+x_1},\frac{\partial}{\partial x_2},\frac{\partial}{\partial x_3} \right)$.
+The momentum conservation equation is
+% Momentum conservation equation
 \begin{equation}\label{eq:theory:sound:wave:momentum}
- \frac{\partial}{\partial t} \rho \vec{u} + \nabla \cdot \left( \rho \vec{u} \vec{u}  \right) + \nabla \cdot \bold{P} = \vec{F_n} + m \vec{u}
+ \frac{\partial}{\partial t} \rho \vect{u} + \nabla \cdot \left(\matr{P} + \rho \vect{u} \vect{u}  \right) = \vect{f} + m \vect{u}
 \end{equation}
-
-% % where $\rho$, $\vec{u}$ and $p$ are the fluid density, velocity and pressure.
-
-$\bold{P} = p \bold{I} - \tau$
-viscous tensor $\tau$
-
-Ignoring viscous effects, we can rewrite equation \ref{eq:theory:sound:wave:momentum} using equation \ref{eq:theory:sound:wave:mass} as
+where $\vect{u} \vect{u}$ is a dyadic product, $\vect{f}$ the external force
+density and $\matr{P}$ the fluid stress tensor. The fluid stress tensor relates the pressure $p$ and the viscous stress tensor $\matr{\tau}$by
+% Viscous stress tensor
 \begin{equation}
- \rho \left( \frac{\partial \vec{u}}{\partial t} + \left( \vec{u} \cdot \nabla \right) \vec{u} \right) + \nabla p = \vec{F}
+  \matr{P} = p \matr{I} - \matr{\tau}
 \end{equation}
-
-Linearization.
-Mass
+where $\matr{I}$ is a unit tensor. Viscous stresses are small compared to inertial
+forces. Ignoring them, and rewriting equation
+\ref{eq:theory:sound:wave:momentum} using equation
+\ref{eq:theory:sound:wave:mass}, we obtain
 \begin{equation}
- \frac{\partial \rho'}{\partial t} + \vec{u_0} \cdot \nabla \rho' + \rho_0 \nabla \cdot \vec{u'} = 0
+ \rho \left( \frac{\partial \vect{u}}{\partial t} + \left( \vect{u} \cdot \nabla \right) \vect{u} \right) + \nabla p = \vect{f}
 \end{equation}
-Momentum
+\subsubsection*{Linearisation}
+Sound is a small perturbation of a steady state, and so we can apply linearisation to obtain a wave equation.
+Ignoring the source term, the linearised versions of the mass and momentum equations are given by
+% Linearised versions of the homogeneous (= without source terms) mass and momentum equations
+\begin{align}
+ \frac{\partial \rho'}{\partial t} + \vect{u_0} \cdot \nabla \rho' + \rho_0 \nabla \cdot \vect{u'} = 0 \\
+% \end{equation}
+% \begin{equation}
+ \rho_0 \left( \frac{\partial \vect{u'}}{\partial t} + \left(\vect{u_0} \cdot \nabla \right) \vect{u'}\right) + \nabla p' = 0
+\end{align}
+with the fluctuating components of the variables denoted with a prime. Viscosity
+is neglected and thereby also heat transfer. The fluid is considered to behave
+adiabatic and therefore the following relation between pressure and density
+fluctuations can be used
 \begin{equation}
- \rho_0 \left( \frac{\partial \vec{u'}}{\partial t} + \left(\vec{u_0} \cdot \nabla \right) \vec{u'}\right) + \nabla p' = 0
+  p' = c^2 \rho'
 \end{equation}
+where $c$ is the speed of sound for an adiabatic process, i.e., a process at constant entropy $s$
+\begin{equation}
+  c = \sqrt{ \left( \frac{\partial p}{\partial \rho} \right)_{s} }
+\end{equation}
+In general, the speed of sound is given by $c = \sqrt{\frac{K}{\rho}}$ where $K$
+is the bulk modulus of the medium. For ideal gases the bulk modulus is $K=\gamma
+p$ where $\gamma=C_p/C_v$ is the ratio of specific heat capacity at constant
+pressure $C_p$ and volume $C_V$.
 
+\todo{combine into wave equation}
 ...
 Classical wave equation
 \begin{equation}\label{eq:theory:sound:wave:classic}
  \frac{1}{c} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = 0
 \end{equation}
-
 ...
 
-Helmholtz equation
+
+\subsubsection*{Helmholtz equation}
+
+\begin{equation}
+  p' (t, \vect{x}) = \hat{p} \left(\vect{x}\right) \exp{j \omega t}
+\end{equation}
+
+
 \begin{equation}\label{eq:theory:sound:wave:helmholtz}
  \nabla^2 \hat{p} + k^2 \hat{p} = 0
 \end{equation}
-\subsection{Green's function}\label{sec:theory:sound:green}
+
+
+\subsection{Convective wave equation}
+A mean flow has an effect on sound generation and propagation.
+The material derivative $D/Dt$ is defined as
+\begin{equation}
+  \frac{D}{Dt} = \frac{\partial}{\partial t} + \vect{u} \nabla
+\end{equation}
+and is a time derivative of some physical quantity for a portion of a material moving with a velocity $\vect{u}$.
+
+
+
+
+
+\subsubsection*{Green's function}\label{sec:theory:sound:green}
 % Homogeneous
 % \begin{equation}
 %
 % \end{equation}
 Non-homogeneous
 \begin{equation}
-\frac{1}{c^2}\frac{\partial^2 G}{\partial t^2} - \nabla^2 G = \delta \left( \vec{x} - \vec{y} \right) \delta \left(t - \tau \right)
+\frac{1}{c^2}\frac{\partial^2 G}{\partial t^2} - \nabla^2 G = \delta \left( \vect{x} - \vect{y} \right) \delta \left(t - \tau \right)
 \end{equation}
 
 Free-field solution
@@ -60,12 +136,37 @@ Free-field solution
  G = \frac{1}{4 \pi r} \delta \left( t - \tau - \frac{r}{c} \right)
 \end{equation}
 
-with $r = \left| \vec{x} - \vec{y} \right|$
+with $r = \left| \vect{x} - \vect{y} \right|$
 
 
 \subsection{Aerodynamic sound sources}\label{sec:theory:sound:aerodynamic}
-Lighthill
+The classic wave equation cannot describe aerodynamic sources. Lighthill
+provided the theory to take into account aerodynamic sources. The aero-acoustic
+analogy of Lighthill is the idea of representing a fluid mechanical process that
+acts as an acoustic source by an acoustically equivalent source term.
 
+He drew an analogy
+between the non-homogeneous versions of the fluid equations and the classical
+wave equation including the single acoustic source term.
+
+Taking the time derivative of the homogeneous version of the mass conservation
+equation (eq. \ref{eq:theory:sound:wave:mass}) and the divergence of the
+homogeneous version of the momentum conservation equation (eq.
+\ref{eq:theory:sound:wave:momentum}), then subtracting one from another and
+finally subtracting from both sides $c^2 \nabla^2 \rho$ results in the Lighthill
+equation
+\begin{equation}
+  \frac{\partial^2 \rho}{\partial t^2} - c^2 \nabla^2 \rho = \nabla^2 \matr{T}
+\end{equation}
+where $\matr{T}$ is the Lighthill stress tensor
+\begin{equation}
+  \matr{T} = \left( \left( p - c^2 \rho) \matr{I} - \matr{\tau}  \right)
+\end{equation}
+
+Lighthill's acoustic analogy has the limitation that the source field is not
+coupled to the acoustic field. That means situations where feedback occurs,
+i.e., the acoustic field modifies the flow field and vice versa, cannot be
+treated.
 
 \subsection{Elementary sources}
 
@@ -73,7 +174,7 @@ The elementary sources
 
 \missingfigure{Figure of monopole, dipole and quadrupole}
 
-\subsubsection{Monopole}
+\subsubsection*{Monopole}
 
 Volume source
 %
@@ -82,21 +183,21 @@ Volume source
 % \end{equation}
 
 \begin{equation}
- p' \left(\vec{x},t\right) = \frac{1}{4\pi} \frac{q \left(\vec{y}, t-r/c\right)}{r}
+ p' \left(\vect{x},t\right) = \frac{1}{4\pi} \frac{q \left(\vect{y}, t-r/c\right)}{r}
 \end{equation}
 
-\subsubsection{Dipole}
+\subsubsection*{Dipole}
 
 \begin{equation}
- p' \left(\vec{x}, t\right) =
+ p' \left(\vect{x}, t\right) =
 \end{equation}
 
 
-\subsubsection{Quadrupole}
+\subsubsection*{Quadrupole}
 
 Moment
 
-\subsubsection{Multipoles and spherical harmonics}\todo{Unless I would write a piece about Ambisonics I have no need for this so could skip it}
+\subsubsection*{Multipoles and spherical harmonics}\todo{Unless I would write a piece about Ambisonics I have no need for this so could skip it}
 
 
 \missingfigure{Multipoles and spherical harmonics}
@@ -190,6 +291,19 @@ Another example of a model is the 2-parameter model by Attenborough. In this mod
 \end{equation}
 and depends on the speed of sound in air $c_0$, the density of air $\rho_0$, $\alpha$, $\gamma_0$ and again the flow resistivity $\sigma$ and frequency $f$.
 
+%
+% Table \ref{tab:theory:sound:impedance:flow-resistivity} lists co
+%
+%
+% \begin{tabular}{l c}
+% Team              & P & W & D & L & F  & A & Pts \\
+% \hline
+% Manchester United & 6 & 4 & 0 & 2 & 10 & 5 & 12  \\
+% Celtic            & 6 & 3 & 0 & 3 &  8 & 9 &  9  \\
+% Benfica           & 6 & 2 & 1 & 3 &  7 & 8 &  7  \\
+% FC Copenhagen     & 6 & 2 & 1 & 3 &  5 & 8 &  7  \\
+% \end{tabular}
+
 
 
 \subsubsection{Reflection coefficient}
@@ -215,11 +329,12 @@ and
 
 
 
-\missingfigure{SPL relative to free field comparison}
+% \missingfigure{SPL relative to free field comparison}
 
 
 
 \subsubsection{Image source method}
+\todo{while implemented I don't consider multiple reflections}
 
 \missingfigure{Illustration of ISM}
 

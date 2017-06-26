@@ -27,6 +27,7 @@
       buildInputs = [
         (python.withPackages (ps: with ps; [ acoustics h5store ] ) )
       ];
+      preferLocalBuild = true;
     } ''
       mkdir -p "$out/${target}"
       python3 ${./audio.py} "${source}" "$out/${target}"

@@ -281,13 +281,28 @@ for determining the impact of the sound on humans.
 % Auralisation is a technique to simulate the audible sound of an object or environment.
 Auralisation is a method to render audible virtual sound fields \cite{Kleiner1993}.
 The method has been used to simulate the audible sound inside
-rooms, but also for the sound of
+rooms, but also for the exterior sound of
 cars \cite{Forssen2009,Maillard2012,Pieren2015,Hoffmann2016,Hoffmann2016a},
 trains \cite{Pieren2016},
 windturbines \cite{Pieren2014,Heutschi2014},
 fans \cite{Merino2016} and
 aircraft \cite{Arntzen2014a, Rizzi2016a, Rizzi2016}. Auralisation of outdoor sources
 and environments is a key topic of the VASTCON Technical Working Group \cite{Vastcon}.
+With auralisation the audible sound of an object or environment is produced and
+this allows studying the impact of that on humans and the development of improved descriptors.
+
+\todo{refer to sonorus booklet}
+\todo{Describe auralisation use cases}
+The method can also be used as a communication tool for example when discussing
+urban development. Typically noise contours are used to communicate how much
+noise is present at locations. These are typically hard to interpret for
+non-specialists, and they also give no insight in what the noise may sound like.
+Lelystad airport in The Netherlands is expanding and residents living nearby
+were initially presented with noise contours. Because they struggled with
+interpreting the Netherlands Aerospace Centre (NLR) was asked with to help
+residents understanding the implications by using auralisations at townhall
+meetings \cite{Arntzen2015}.
+
 
 % Common reasons for generating auralisations is to determine how new and old spaces sound,
 
@@ -307,8 +322,6 @@ strategy can be considered separate from the underlying model, and therefore a
 emission synthesis model can be established that relates tonal and spectral
 components to the operational state of the source.
 
-\todo{Describe auralisation use cases!!}
-\todo{refer to sonorus booklet}
 
 \subsection{Aircraft noise auralisation} \todo{split partly into aircraft noise modeling}
 
@@ -371,13 +384,19 @@ common problem with current auralisations is that they can often still sound
 artificial because they sound \say{too perfect}.
 
 One cause is that one typically models only the source of interest, neglecting
-any background sounds. Another issue is the (un)steadiness of the source and/or
+any background sounds. Aside from impacting how plausible an auralisation
+sounds, the lack of such background sounds may also help listeners discriminate
+between recordings and auralisations. E.g., in a listening test where recordings
+and auralisations of windturbines were compared, cow bells were audible in the
+recordings but missing in the auralisations \cite{Pieren2014}.
+
+Another issue is the (un)steadiness of the source and/or
 the medium through which the waves propagate. Let's consider for example a
 rotating fan. The fan radiates aside from broadband noise also strong tonal
 components. Turbulent flow around the fan can cause additional motion of the
-fan. This motion will effect the sound that is radiated, typically causing
+fan. This motion will effect the sound that is radiated, causing
 modulations of the tonal components. Effects like these are typically not
-included in prediction models either, and this specific effect was shown to be
+included in prediction models, and a similar effect was shown to be
 important for the assessment of noise annoyance caused by quadcopters
 \cite{Rizzi2015}.
 
@@ -390,13 +409,18 @@ fluctuations of the refractive-index field. Multiple scattering in combination
 with these temporal and spatial variations results in log-amplitude and phase
 modulations. The log-amplitude fluctuations can often be noticed when listening
 to distant aircraft. The phase fluctuations are not perceived by humans
-directly, but will result in decorrelation and therefore additional attenuation
-which can be noticeable. Furthermore, the phase fluctuations can impact the
-interference between direct and (ground) reflected sound.
+directly, but will result in decorrelation or loss of self-coherence, and
+therefore additional attenuation which may be noticeable. Furthermore, the phase
+fluctuations can impact the interference between direct and (ground) reflected
+sound.
 
-\todo{coherence factor, phase, amplitude}
-
-Arntzen et al. included a coherence factor ...
+A coherence factor was introduced in earlier work \cite{Shin2006, Arntzen2014b,
+Arntzen2014a}. The factor was used to influence the self-coherence of the sound
+along a path by introducing phase fluctuations. These fluctuations then resulted
+in less pronounced interference dips when multiple propagation paths were
+considered. When modelling the different sound sources on a aircraft as separate
+sources, their contributions may be Doppler shifted differently, resulting in
+audible beating \cite{Rizzi2013}. Decorrelation can reduce the beating.
 
 %
 % % TODO: clean up the following
@@ -443,7 +467,9 @@ derived from recordings.
 
 To improve the plausibility of auralisations of aircraft at larger distances, a
 method is developed to include both amplitude and phase fluctuations due to
-atmospheric turbulence.
+atmospheric turbulence. The method should improve the plausibility of the
+auralisations while at the same time have a physical basis and preferably
+perform well enough for use in real-time simulators.
 
 
 % \todo{Check!}
@@ -485,6 +511,10 @@ Finally, the work is summarised in Chapter \ref{chapter:conclusions} and future 
 
 
 \section{Limitations}
-The goal is to develop a tool that can deliver auralisations that \todo{write}
+The goal is to develop a tool that can deliver auralisations that sound plausible.
+
+% \begin{itemize}
+%
+% \end{itemize}
 
 

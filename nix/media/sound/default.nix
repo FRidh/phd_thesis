@@ -13,6 +13,7 @@ rec {
     (python.withPackages (ps: with ps; [ acoustics matplotlib seaborn ] ) )
     matplotlibHook
     ];
+    preferLocalBuild = true;
   } ''
     mkdir -p "$out/${kind}/generated/${name}"
     python3 ${./figures.py} "$out/${kind}/generated/${name}"

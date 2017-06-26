@@ -8,22 +8,56 @@ let
       inherit name;
     };
 
-  python = pkgs.python35;
+  python = pkgs.python3;
+
+
 
   packageOverrides = let
     # Set with auraliser and dependencies
     auralisation = (import (fetchTarballFromGitHub {
       owner = "FRidh";
       repo = "auralisation-nix";
-      rev = "746685780465d52b94351082dffda993e49f26dd";
-      sha256 = "0kri678pyxznkkz6595fll2bqw16v7fjh7m8w9hjyvlhnbq0pwib";
+      rev = "fd6e6a30e3f6a9a75b5f4bf10b74340353a52ef0";
+      sha256 = "1ks54pwzff448nxhyqiajlnhlwb8dnsdm42ymi5ncwm7ynd152jy";
     }){}).stableOverrides;
 
     # Additional packages/overrides
     overrides = self: super: {
+        # Package for loading and saving tabular data with metadata.
         h5store = super.callPackage /home/freddy/Code/libraries/h5store { };
+
+        # Function for creating one-file package modules.
+        pythonModule = { src, ... } @attrs:
+          let
+            filename = (builtins.baseNameOf (builtins.toString src));
+          in self.buildPythonPackage ({
+            format = "other";
+            preferLocalBuild = true;
+            inherit src;
+            name = filename;
+            # We copy the file so we can modify it if we have to.
+            unpackPhase = ''
+            cp $src ${filename}
+            '';
+            installPhase = ''
+              runHook preInstall
+              mkdir -p "$out/${python.sitePackages}"
+              cp *.py "$out/${python.sitePackages}/${filename}"
+              runHook postInstall
+            '';
+          } // attrs);
+
+        # Simple module providing function for creating the default/common simulation
+        common_simulation = self.pythonModule {
+          src = ./common_simulation.py;
+          propagatedBuildInputs = [ super.auraliser self.h5store ];
+        };
       };
-  in (pkgs.lib.composeExtensions overrides auralisation);
+
+  in (pkgs.lib.composeExtensions auralisation overrides);
+
+
+
 
 in python.override {inherit packageOverrides; }
 

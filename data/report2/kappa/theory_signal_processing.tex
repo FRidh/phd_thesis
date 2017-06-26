@@ -5,10 +5,9 @@ We now would like to synthesise the sound of aircraft. This requires generating
 signals and modifying them. Therefore, we will first discuss certain signal
 processing techniques that are useful or required to develop auralisations.
 
-
-In this chapter we consider all operations to be in time and/or frequency
+In this chapter we consider all operations to be in time or frequency
 domain. Generally, these operations also apply on other domain pairs, like for
-example space and/or wavenumber domain.
+example the space-wavenumber domain pair.
 
 
 \newpage
@@ -75,11 +74,44 @@ storage required.
 % DFT.
 
 \subsubsection{Sine and cosine transform}
+The Fourier transform takes a complex-valued function and returns complex
+exponentials. The sine and cosine transforms operate on real-valued data with
+respectively odd and even symmetry. A function $f$ is even when $f(x)=f(-x)$
+holds in which case the graph of the function is symmetric with respect to the
+y-axis or ordinate. When $-f(x)=f(-x)$ holds the function is odd and the graph
+remains unchanged after rotation of 180 degrees about the origin. Just as with
+Hermitian symmetry, the sine and cosine transform are computationally more
+efficient reducing again by a factor two the required computations and storage.
 
 \todo{I mention the DCT in turbulence paper}
 
 
 \subsection{Transfer functions and filters}
+Consider a system that has an input $x(t)$ and an output $y(t)$. Function often
+exist that can describe the relation between the input $x(t)$ and the output
+$y(t)$. A relation is typically described in frequency-domain between the
+Fourier transforms of the signals, $X(\exp{j\omega})$ and $Y(\exp{j\omega})$.
+The system is linear when it satisfies the properties of superposition,
+additivity and homogeneity. When the output does not depend on the particular
+time the input is applied the system is called time-invariant.
+
+The transfer function of a linear time-invariant system is then given by
+\begin{equation}
+  H(\exp{j\omega}) = \frac{Y(\exp{j\omega})}{X(\exp{j\omega})}
+\end{equation}
+and describes in frequency-domain the relation between the input and output.
+% Multiplication in frequency-domain of the input with the transfer function gives the output.
+
+%
+% In time-domain the convolution operator describes the relation between the input and output
+% \begin{equation}
+%  y(t) = (h \star x)(t) = \int_{-\infty}^{\infty} h(\tau)x(t-\tau) \mathrm{d}\tau
+% \end{equation}
+%
+%
+
+\todo{finish}
+
 
 % \section{Filters}
 
@@ -438,7 +470,7 @@ come at a cost of performance.
         \includegraphics[]{../figures/generated/signal-processing-resampling/lanczos-10}
         \caption{Lanczos interpolation with $a=10$}
     \end{subfigure}
-    \caption{A comparison between linear interpolation (top) and Lanczos interpolation with different kernelsizes.}
+    \caption{A comparison between linear interpolation (top) and Lanczos interpolation with different kernelsizes. The artifacts are weaker for Lanczos interpolation, especially with larger kernelsize $a$.}
     \label{fig:theory:signal-processing:resampling}
 \end{figure}
 
