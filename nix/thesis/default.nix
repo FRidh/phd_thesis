@@ -26,7 +26,7 @@ in stdenv.mkDerivation {
   name = "thesis.pdf";
   src = thesis-source;
 
-  sourceRoot = "${thesis-source.name}/report2";
+  sourceRoot = "${thesis-source.name}/report";
 
   # pythonEnv and which are needed for the `minted` latex package
   buildInputs = [ latex biber ghostscript pythonEnv which ];

@@ -15,7 +15,7 @@ let
 #   in  mapAttrsToList (k: v: "${k} ${toString v.figures}") filtered ;
 #   args = mapAttrsToList (k: v: "${k} ${v}" ) figures;
 
-  src = ./../../data;
+  src = ./../../data/report;
 
 in stdenv.mkDerivation {
   name = "thesis-source";
@@ -32,7 +32,7 @@ in stdenv.mkDerivation {
     popd
 
     # We need the references
-    pushd report2
+    pushd report
     ln -s ${references} library.bib
     popd
   '';
@@ -64,7 +64,7 @@ in stdenv.mkDerivation {
 #   popd
 #
 #   # We need the references
-#   pushd report2
+#   pushd report
 #   ln -s ${references} library.bib
 #   popd
 #
