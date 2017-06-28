@@ -2,33 +2,37 @@
 
 \section{Introduction}
 
+% TODO: rewrite paragraph from paper
 In an outdoor situation, spatial and temporal variations in temperature and wind
 velocity cause small changes in the refractive index. As waves pass through the
 atmosphere, the index-of-refraction variations in effect cause scintillations,
 i.e. fluctuations in the received intensity of the wave. Scintillations affect
 both sound and electromagnetic waves. They are a major limitation for
-astronomical observations using Earth-based telescopes and also reduce performance of
-wireless communication systems. Scintillations can also be noticed when hearing
-sound emitted by a source at a large distance, like for example by an aircraft or distant windturbine \cite{Heutschi2014}.
+astronomical observations using Earth-based telescopes and also reduce
+performance of wireless communication systems. Scintillations can also be
+noticed when hearing sound emitted by a source at a large distance, like for
+example by an aircraft or distant windturbine \cite{Heutschi2014}.
 
-Within the SONORUS project \cite{Scheuren2014}, a tool was developed to
-auralize the sound of aircraft flying over urban areas \cite{Rietdijk2015}.
-Scintillations affect the audible sound, and it is presumed that including
-scintillations increases the perceived realism of auralizations. Earlier work
-introduced a coherence factor to include the loss of coherence due to phase
-fluctuations \cite{Shin2006, Arntzen2014b, Arntzen2014a}. Fluctuations due to
-turbulence have also been included in auralizations by simulating the amplitude
-modulations that were observed in measurements \cite{Heutschi2014, Minard2016}.
+The fluctuations due to atmospheric turbulence can be clearly audible, and
+therefore it is presumed that including scintillations in auralisations
+increases their perceived realism.
 
+The multiple scattering affects the phase of the signal as well as the
+log-amplitude. In previous work a coherence factor was introduced that would
+account for coherence loss due to phase \cite{Shin2006, Arntzen2014b,
+Arntzen2014a}. Fluctuations due to turbulence have also been included in
+auralisations by simulating the amplitude modulations that were observed in
+measurements \cite{Heutschi2014, Minard2016}.
 
-In this paper a method is presented to generate time series of sound pressure
+% TODO: rewrite paragraph from paper
+A method is presented to generate time series of sound pressure
 fluctuations caused by line-of-sight propagation through a weakly turbulent
 atmosphere. Novel in this field, the method includes both log-amplitude and
 phase fluctuations. The presented method is based on \cite{Jurado-navas2006}
 where it was used to predict the performance of wireless communication links,
 and \cite{Forssen2000} where it was used to determine the influence of
 turbulence on the performance of a barrier. The method was used by the authors
-to increase the perceptual validity of auralizations
+to increase the perceptual validity of auralisations
 \cite{Rietdijk2014,Rietdijk2014a}.
 
 \newpage

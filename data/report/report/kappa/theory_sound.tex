@@ -50,7 +50,7 @@ The momentum conservation equation is
  \frac{\partial}{\partial t} \rho \vect{u} + \nabla \cdot \left(\matr{P} + \rho \vect{u} \vect{u}  \right) = \vect{f} + m \vect{u}
 \end{equation}
 where $\vect{u} \vect{u}$ is a dyadic product, $\vect{f}$ the external force
-density and $\matr{P}$ the fluid stress tensor. The fluid stress tensor relates the pressure $p$ and the viscous stress tensor $\matr{\tau}$by
+density and $\matr{P}$ the fluid stress tensor. The fluid stress tensor relates the pressure $p$ and the viscous stress tensor $\matr{\tau}$ by
 % Viscous stress tensor
 \begin{equation}
   \matr{P} = p \matr{I} - \matr{\tau}
@@ -58,13 +58,13 @@ density and $\matr{P}$ the fluid stress tensor. The fluid stress tensor relates 
 where $\matr{I}$ is a unit tensor. Viscous stresses are small compared to inertial
 forces. Ignoring them, and rewriting equation
 \ref{eq:theory:sound:wave:momentum} using equation
-\ref{eq:theory:sound:wave:mass}, we obtain
+\ref{eq:theory:sound:wave:mass}, we obtain the following form for the momentum conservation equation
 \begin{equation}
  \rho \left( \frac{\partial \vect{u}}{\partial t} + \left( \vect{u} \cdot \nabla \right) \vect{u} \right) + \nabla p = \vect{f}
 \end{equation}
 \subsubsection*{Linearisation}
 Sound is a small perturbation of a steady state, and so we can apply linearisation to obtain a wave equation.
-Ignoring the source term, the linearised versions of the mass and momentum equations are given by
+Ignoring the source term at the right-hand side, the linearised versions of the mass and momentum equations are given by
 % Linearised versions of the homogeneous (= without source terms) mass and momentum equations
 \begin{align}
  \frac{\partial \rho'}{\partial t} + \vect{u_0} \cdot \nabla \rho' + \rho_0 \nabla \cdot \vect{u'} = 0 \\
@@ -74,15 +74,18 @@ Ignoring the source term, the linearised versions of the mass and momentum equat
 \end{align}
 with the fluctuating components of the variables denoted with a prime. Viscosity
 is neglected and thereby also heat transfer. The fluid is considered to behave
-adiabatic and therefore the following relation between pressure and density
+adiabatic and thus the following relation between pressure and density
 fluctuations can be used
+% Adiabatic relation between pressure and density fluctuations
 \begin{equation}
   p' = c^2 \rho'
 \end{equation}
-where $c$ is the speed of sound for an adiabatic process, i.e., a process at constant entropy $s$
+where $c$ is the speed of sound
+% Speed of sound for adiabatic process
 \begin{equation}
   c = \sqrt{ \left( \frac{\partial p}{\partial \rho} \right)_{s} }
 \end{equation}
+The subscript $s$ indicates a process at constant entropy $s$ or adiabatic process.
 In general, the speed of sound is given by $c = \sqrt{\frac{K}{\rho}}$ where $K$
 is the bulk modulus of the medium. For ideal gases the bulk modulus is $K=\gamma
 p$ where $\gamma=C_p/C_v$ is the ratio of specific heat capacity at constant
@@ -145,22 +148,21 @@ provided the theory to take into account aerodynamic sources. The aero-acoustic
 analogy of Lighthill is the idea of representing a fluid mechanical process that
 acts as an acoustic source by an acoustically equivalent source term.
 
-He drew an analogy
-between the non-homogeneous versions of the fluid equations and the classical
-wave equation including the single acoustic source term.
+% He drew an analogy between the non-homogeneous versions of the fluid equations and the classical
+% wave equation including the single acoustic source term.
 
 Taking the time derivative of the homogeneous version of the mass conservation
 equation (eq. \ref{eq:theory:sound:wave:mass}) and the divergence of the
 homogeneous version of the momentum conservation equation (eq.
-\ref{eq:theory:sound:wave:momentum}), then subtracting one from another and
-finally subtracting from both sides $c^2 \nabla^2 \rho$ results in the Lighthill
+\ref{eq:theory:sound:wave:momentum}), then subtracting one from another, and
+finally subtracting from both sides of the equation $c^2 \nabla^2 \rho$, results in the Lighthill
 equation
 \begin{equation}
   \frac{\partial^2 \rho}{\partial t^2} - c^2 \nabla^2 \rho = \nabla^2 \matr{T}
 \end{equation}
 where $\matr{T}$ is the Lighthill stress tensor
 \begin{equation}
-  \matr{T} = \left( \left( p - c^2 \rho) \matr{I} - \matr{\tau}  \right)
+  \matr{T} = \rho \vect{u}\vect{u} + \left( \left( p - c^2 \rho \right) \matr{I} - \matr{\tau}  \right)
 \end{equation}
 
 Lighthill's acoustic analogy has the limitation that the source field is not
@@ -267,29 +269,62 @@ c = 343.2 \left( \frac{T}{T_0} \right)
         \label{fig:theory:sound:attenuation}
 \end{figure}
 
-\subsection{Descriptors}
-
-
 \newpage
 \subsection{Reflections}
+Sound hitting a boundary between materials of different impedance may be
+transmitted, reflected or absorbed. When sound is transmitted the incident wave
+is partially refracted. Sound reflected by a smooth surface results in a
+specular reflection, and sound reflected on a rough surface results in a diffuse
+reflection. In outdoor situations sound is typically reflected by the ground surface and other
+obstacles like buildings. The sound pressure at a receiver is then the sum of
+the direct contribution as well as indirect contributions from reflections.
+Due to this superposition strong interference effects may occur.
 
-\subsubsection{Impedance}
-Several models exist for the prediction of the impedance of a surface.
-Attenborough made a comparison of impedance models\cite{Attenborough2011a}.
+\subsubsection*{Impedance}
+An impedance is a complex ratio between two interdependent dynamic quantities
+and describes the resistance to a direct flow (resistance) and alternating flow
+(reactance). The specific acoustical impedance of a material is the ratio of the
+sound pressure to the particle velocity normal to the surface $Z_{s} =
+p/\vect{u}$. The specific acoustical impedance of a material or surface
+normalised by the impedance of air $Z_{s, air} = \rho c$ is called the
+normalised specific acoustic impedance. This impedance is typically used to
+characterise surfaces, and is what impedance in the following text refers to.
 
-
-One such models is the empirical 1-parameter model by Delaney and Bazley which
-only depends on the flow resistivity $\sigma$ aside from the frequency $f$.
-According to this model, the normalised impedance $Z$ is given by
+Multiple models are available for the prediction of the impedance of a surface.
+Attenborough et. al. made a comparison of impedance models and recommends the
+Delany and Bazley one-parameter model for predicting outdoor ground impedance
+\cite{Attenborough2011a}. The empirical one-parameter model by Delaney and
+Bazley is widely used and depends on the flow resistivity of the material
+$\sigma$ and the frequency $f$
 \begin{equation}\label{eq:theory:sound:impedance:db}
  Z = 1 + 9.08 \left( \frac{1000f}{\sigma}\right)^{-0.75} - 11.9 j \left( \frac{1000f}{\sigma}\right)^{-0.73}
 \end{equation}
+Flow resistivity describes how difficult it is for air to flow through a
+surface. Values for surfaces can vary significantly, with average values ranging
+from \SI{29}{\kilo\pascal\second\per\square\meter} for snow to
+\SI{200000}{\kilo\pascal\second\per\square\meter} for painted concrete. Grass
+has an average flow resistivity of
+\SI{200}{\kilo\pascal\second\per\square\meter} \cite{Crocker1997}.
+Furthermore, a surface is called locally reacting if at a certain point the
+particle velocity $\vect{u}$ depends only on the sound pressure $p$ at that
+point. In case it doesn't the surface has an extended reaction.
+Figure \ref{fig:theory:sound:impedance} shows the impedance of grass according to the Delaney and Bazley model.
+\todo{drop or expand?}
 
-Another example of a model is the 2-parameter model by Attenborough. In this model, the impedance is given by
-\begin{equation}\label{eq:theory:sound:impedance:att}
- Z = \frac{\left( 1-j\right) \sqrt{\sigma/f}}{\sqrt{\pi \gamma_0 \rho_0}} - \frac{jc\alpha}{8 \pi \gamma_0 f}
-\end{equation}
-and depends on the speed of sound in air $c_0$, the density of air $\rho_0$, $\alpha$, $\gamma_0$ and again the flow resistivity $\sigma$ and frequency $f$.
+\begin{figure}
+        \centering
+        \includegraphics[]{../figures/generated/sound/impedance}
+        \caption{Impedance for grass with a flow resistivity of \SI{200}{\kilo\pascal\second\per\square\meter} according to Delany and Bazley one-parameter model.}
+        \label{fig:theory:sound:impedance}
+\end{figure}
+
+
+%
+% Another example of a model is the 2-parameter model by Attenborough. In this model, the impedance is given by
+% \begin{equation}\label{eq:theory:sound:impedance:att}
+%  Z = \frac{\left( 1-j\right) \sqrt{\sigma/f}}{\sqrt{\pi \gamma_0 \rho_0}} - \frac{jc\alpha}{8 \pi \gamma_0 f}
+% \end{equation}
+% and depends on the speed of sound in air $c_0$, the density of air $\rho_0$, $\alpha$, $\gamma_0$ and again the flow resistivity $\sigma$ and frequency $f$.
 
 %
 % Table \ref{tab:theory:sound:impedance:flow-resistivity} lists co
@@ -305,45 +340,79 @@ and depends on the speed of sound in air $c_0$, the density of air $\rho_0$, $\a
 % \end{tabular}
 
 
-
+% \newpage
 \subsubsection{Reflection coefficient}
-
-The plane wave reflection coefficient is given by
+The pressure reflection coefficient describes the ratio between the sound
+pressure of an incident wave $p_i$ and the pressure of the reflected wave $p_r$
+and considers a wave incident on an infinite plane that is locally
+reacting and has impedance $Z$
+\begin{equation}
+  R = \frac{p_r}{p_i}
+\end{equation}
+The plane wave reflection coefficient gives the ratio of incident and reflected pressure assuming the incident wave is plane
 \begin{equation}\label{eq:theory:sound:reflection:plane}
- R = \frac{Z\cos{\theta}-1}{Z\cos{\theta}+1}
+  R = \frac{Z\cos{\theta}-1}{Z\cos{\theta}+1}
 \end{equation}
+and is a function of the angle of incidence $\theta$ of the incident wave.
+If the source is relatively close to the reflecting surface,
+then typically the wave front is not plane. In such case a spherical wave
+reflection factor is used that considers an incident spherical wave.
 
-The spherical reflection coefficient is given by
-\begin{equation}\label{eq:theory:sound:reflection:spherical}
- Q = R \left(1 - R \right) F
-\end{equation}
-with 
-\begin{equation}
- F = 1 - j \sqrt{ \pi} w e^{-w^2} \mathrm{erfc} \left( j w \right) 
-\end{equation}
-and
-\begin{equation}
- w = \sqrt{-j k r  \left( 1 + \frac{1}{Z} \cos{\theta} - \sqrt{1 - \left( \frac{1}{Z} \right)^2} \sin{\theta} \right) }
-\end{equation}
-
-
-
-
-% \missingfigure{SPL relative to free field comparison}
+The impedance and reflection coefficient models together with their parameters
+determine in computations how much sound is reflected and how much is
+transmitted or absorbed. Because the reflection coefficient is complex-valued
+the reflected contribution may have not only a different magnitude than the
+direct contribution, but also an additional frequency-dependent phase shift or
+propagation delay. Surfaces that attenuate and phase shift the reflected wave
+are called acoustically soft surfaces. In case the normalised impedance
+approaches infinity, neither attenuation nor phase shift occur, and the surface
+is considered acoustically hard. Figure \ref{fig:theory:sound:reflection} shows
+both the absolute value and the phase angle of the plane wave reflection angle
+as function of frequency and angle of incidence.
 
 
+% Another commonly used reflection coefficient is the spherical wave reflection coefficient.
 
-\subsubsection{Image source method}
-\todo{while implemented I don't consider multiple reflections}
+% The spherical reflection coefficient is given by
+% \begin{equation}\label{eq:theory:sound:reflection:spherical}
+%  Q = R \left(1 - R \right) F
+% \end{equation}
+% with
+% \begin{equation}
+%  F = 1 - j \sqrt{ \pi} w e^{-w^2} \mathrm{erfc} \left( j w \right)
+% \end{equation}
+% and
+% \begin{equation}
+%  w = \sqrt{-j k r  \left( 1 + \frac{1}{Z} \cos{\theta} - \sqrt{1 - \left( \frac{1}{Z} \right)^2} \sin{\theta} \right) }
+% \end{equation}
 
-\missingfigure{Illustration of ISM}
-
+\begin{figure}
+%     \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/sound/reflection-abs}
+        \caption{Absolute value of the reflection coefficient.}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/sound/reflection-angle}
+        \caption{Phase angle of the reflection coefficient.}
+    \end{subfigure}
+    \caption{Absolute value and phase angle of the plane wave reflection angle as function of both frequency and angle of incidence. The impedance was calculated using equation \ref{eq:theory:sound:impedance:db} and the average value for grass was chosen for the flow resistivity.}
+    \label{fig:theory:sound:reflection}
+\end{figure}
 
 \subsubsection{Ground effect}
+In outdoor situations the ground is typically providing the second-largest
+contribution and is important when considering an elevated source.
+As mentioned before, impedances of surfaces can vary significantly, and this is especially the case
+for the ground surface.
 
-A prominent reflection is the reflection with the ground. When the 
-reflecting surface is sufficiently hard the Lloyd's 
-mirror effect can be heard.
+...
+
+
+% A prominent reflection is the reflection with the ground. When the
+% reflecting surface is sufficiently hard the Lloyd's
+% mirror effect can be heard.
 The spectogram in figure \ref{fig:propagation_reflections_mirror_effect} shows the Lloyd's mirror effect as well.
 
 % \begin{figure}[H]
@@ -352,6 +421,21 @@ The spectogram in figure \ref{fig:propagation_reflections_mirror_effect} shows t
 %         \caption{Spectrogram of a white noise source flying at a height of 100 meters over an acoustically hard surface. The spectrogram clearly shows the Lloyd's mirorr effect.}
 %         \label{fig:theory_reflections_mirror_effect}
 % \end{figure}
+
+% \missingfigure{SPL relative to free field comparison}
+
+
+\subsubsection{Image source method}
+\todo{while implemented I don't consider multiple reflections}
+
+\missingfigure{Illustration of ISM}
+
+
+
+
+\subsection{Descriptors}
+
+
 
 
 

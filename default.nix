@@ -46,10 +46,15 @@ in rec {
       inherit python;
       inherit (lib) matplotlibHook;
     };
-    # Basic sound, attenuation
+    # Basic sound, impedance, reflection, attenuation
     sound = callPackage ./nix/media/sound {
       inherit python;
       inherit (lib) matplotlibHook;
+    };
+    # Basic sound, Lloyd's mirror effect.
+    sound-mirror-effect = callPackage ./nix/media/sound-mirror-effect {
+      inherit python;
+      inherit (lib) matplotlibHook to_wav;
     };
     # Signal processing. Convolution.
     signal-processing = callPackage ./nix/media/signal-processing {

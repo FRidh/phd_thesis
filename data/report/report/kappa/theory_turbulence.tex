@@ -129,17 +129,17 @@ Saturation of the log-amplitude fluctuations can now be included by multiplying 
 \end{equation}
 
 
-\subsection{Applying the modulations to the original signal}
-In case the input signal consists of just one frequency $f$ and the modulation 
-signal $m$ is calculated for that specific frequency, then the modulation can simply be 
-applied by multiplying the two in the time-domain.
-However, for the auralisation we have broadband sounds with more than one frequency line to consider. 
-As the fluctuations are frequency-dependent, the modulation 
-signal would have to be calculated for every frequency line.
-
-One of the design criteria of the auralisation tool is to produce at or near 
-real-time auralisations. Since computing the modulation signal for every 
-frequency line is computationally relatively heavy, another solution is sought.
-The variances of the log-amplitude and phase fluctuations increase according to 
-this simple theory linearly with frequency. Therefore, another option would be to scale both 
-$\chi(t,f)$ and $S(t,f)$ accordingly. Care should be taken considering the saturation distance is frequency-dependent.
+% \subsection{Applying the modulations to the original signal}
+% In case the input signal consists of just one frequency $f$ and the modulation
+% signal $m$ is calculated for that specific frequency, then the modulation can simply be
+% applied by multiplying the two in the time-domain.
+% However, for the auralisation we have broadband sounds with more than one frequency line to consider.
+% As the fluctuations are frequency-dependent, the modulation
+% signal would have to be calculated for every frequency line.
+%
+% One of the design criteria of the auralisation tool is to produce at or near
+% real-time auralisations. Since computing the modulation signal for every
+% frequency line is computationally relatively heavy, another solution is sought.
+% The variances of the log-amplitude and phase fluctuations increase according to
+% this simple theory linearly with frequency. Therefore, another option would be to scale both
+% $\chi(t,f)$ and $S(t,f)$ accordingly. Care should be taken considering the saturation distance is frequency-dependent.
