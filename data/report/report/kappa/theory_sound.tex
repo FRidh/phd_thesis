@@ -397,23 +397,39 @@ as function of frequency and angle of incidence.
         \includegraphics{../figures/generated/sound/reflection-angle}
         \caption{Phase angle of the reflection coefficient.}
     \end{subfigure}
-    \caption{Absolute value and phase angle of the plane wave reflection angle as function of both frequency and angle of incidence. The impedance was calculated using equation \ref{eq:theory:sound:impedance:db} and the average value for grass was chosen for the flow resistivity.}
+    \caption{Absolute value and phase angle of the plane wave reflection angle as function of both frequency and angle of incidence. The impedance was calculated using equation \ref{eq:theory:sound:impedance:db} and for the flow resistivity the average value for grass was chosen.}
     \label{fig:theory:sound:reflection}
 \end{figure}
 
 \subsubsection{Ground effect}
 In outdoor situations the ground is typically providing the second-largest
-contribution and is important when considering an elevated source.
-As mentioned before, impedances of surfaces can vary significantly, and this is especially the case
-for the ground surface.
+contribution and is important when considering an elevated source. As mentioned
+before, impedances of surfaces can vary significantly, and this is especially
+the case for the ground surface. Spectrograms of recordings of aircraft often
+show a distinct interference pattern called the Lloyd's mirror effect. Figure
+\ref{fig:theory:sound:reflection:ground} shows a (synthesised) example of the
+Lloyd's mirror effect as caused by an elevated moving source.
 
-...
-
+\begin{figure}
+%     \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/sound-mirror-effect/hard}
+        \caption{Hard surface.}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/sound-mirror-effect/soft}
+        \caption{Soft surface.}
+    \end{subfigure}
+    \caption{Superposition of the direct contribution and ground-reflected contribution results in an interference pattern known as the Lloyd's mirror effect.}
+    \label{fig:theory:sound:reflection:ground}
+\end{figure}
+\todo{interference pattern is shifted}
 
 % A prominent reflection is the reflection with the ground. When the
 % reflecting surface is sufficiently hard the Lloyd's
 % mirror effect can be heard.
-The spectogram in figure \ref{fig:propagation_reflections_mirror_effect} shows the Lloyd's mirror effect as well.
+
 
 % \begin{figure}[H]
 %         \centering

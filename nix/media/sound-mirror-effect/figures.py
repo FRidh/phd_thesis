@@ -20,7 +20,7 @@ EXTENSION = "eps"
 
 #XLIM = (10.0, 38.0)
 YLIM = (0.0, 4000.0)
-CLIM = None
+CLIM = (10.0, 80.0)
 
 
 def create_figure(source, target):
@@ -38,15 +38,6 @@ def main():
     parser.add_argument('source', type=str)
     parser.add_argument('target', type=str)
     args = parser.parse_args()
-
-    clims = {
-        'emission' :        (+20.0, +70.0),
-        'spreading':        (-10.0, +40.0),
-        'doppler' :         (-10.0, +40.0),
-        'attenuation':      (-10.0, +40.0),
-        'reflection':       (-10.0, +40.0),
-        'turbulence':       (-10.0, +40.0)
-    }
 
     for filename in os.listdir(args.source):
         basename = os.path.splitext(filename)[0]

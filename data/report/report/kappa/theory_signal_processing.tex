@@ -450,12 +450,14 @@ pronounced when using a larger kernelsize. However, a larger kernelsize does
 come at a cost of performance.
 % as shown in \ref{fig:theory_signal_processing_interpolation_benchmarks}.
 
+
+
 %
-\newpage
-\begin{figure}[H]
+% \newpage
+\begin{figure}
 %     \centering
     \begin{subfigure}{\textwidth}
-        \includegraphics{../figures/generated/signal-processing-resampling/linear-None}
+        \includegraphics{../figures/generated/signal-processing-resampling/linear}
         \caption{Linear interpolation}
     \end{subfigure}
     ~
@@ -463,8 +465,6 @@ come at a cost of performance.
         \includegraphics{../figures/generated/signal-processing-resampling/lanczos-2}
         \caption{Lanczos interpolation with $a=2$}
     \end{subfigure}
-%     ~
-%     \begin{subfigure}{\textwidth}\includegraphics[]{../figures/generated/signal-processing-resampling/lanczos-5}\end{subfigure}
     ~
     \begin{subfigure}{\textwidth}
         \includegraphics[]{../figures/generated/signal-processing-resampling/lanczos-10}
@@ -473,6 +473,14 @@ come at a cost of performance.
     \caption{A comparison between linear interpolation (top) and Lanczos interpolation with different kernelsizes. The artifacts are weaker for Lanczos interpolation, especially with larger kernelsize $a$.}
     \label{fig:theory:signal-processing:resampling}
 \end{figure}
+
+\begin{figure}
+%     \centering
+    \includegraphics{../figures/generated/signal-processing-resampling/levels}
+    \caption{Signal level as function of time.}
+    \label{fig:theory:signal-processing:resampling:levels}
+\end{figure}
+\todo{discuss, also errors at higher-speed}
 
 
 

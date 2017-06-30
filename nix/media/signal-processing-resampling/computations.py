@@ -40,15 +40,19 @@ def compute(folder):
     jobs = [
         ('linear', None),
         ('lanczos', 2),
-        ('lanczos', 5),
+        #('lanczos', 5),
         ('lanczos', 10)
     ]
 
     signals = [ apply_doppler(signal, delay, fs, method, kernelsize) for method, kernelsize in jobs ]
 
     for method, kernelsize, signal in zip(*(zip(*jobs)), signals):
-        name = os.path.join(folder, '{}-{}.hdf5'.format(method, kernelsize))
-        h5save(name, pd.Series(signal), {'fs':fs})
+        if kernelsize is None:
+            basename = method
+        else:
+            basename = '{}-{}'.format(method, kernelsize)
+        name = os.path.join(folder, '{}.hdf5'.format(basename))
+        h5save(name, pd.Series(signal), {'fs':fs, 'method': method, 'kernelsize': kernelsize})
 
 
 def main():
