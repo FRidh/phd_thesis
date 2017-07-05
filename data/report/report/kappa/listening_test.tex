@@ -1,19 +1,38 @@
 \chapter{Subjective validation of synthesis method}\label{chapter:test}\todo{From paper. Rewrite}
 
 \section{Introduction}
-In chapter \ref{chapter:tool} an overview was given of the auralisation tool. A
+In the previous chapter an overview was given of the auralisation tool. A
 propagation model for aircraft sound was developed but still missing is an
 emission model. An algorithm was presented for extracting select features from
-recordings and these features could potentially be used for the development of
-an (semi-)empirical emission model.
+recordings and these features could be used for emission synthesis.
 
 This chapter describes a listening test that was conducted. The purpose of the
-test was to determine whether the auralisation tool produces auralisations that
-sound similar to recordings. Because the available data sets permits simulating
-and comparing different aircraft types, the purpose was also to test whether
-participants can distinguish between aircraft types.
+listening test was to check the plausiblity or perceptual validity of the
+auralisations and a comparison was therefore made between recordings and
+auralisations.
 
-\todo{discuss several methods?}
+How sounds are perceived can depend on a lot of factors. Factors can be
+properties of the sound, but also of the listener or the environment.
+Psychoacoustic measures describe how a sound is perceived by most listeners and
+can therefore be used to characterise a sound. Many of these measures exist, but
+not all measures are appliceable to all sounds. Therefore, care should be taken
+when choosing measures.
+
+Due to time-constraints none of these dimensions were investigated. Instead, the
+overall similarity between stimuli was determined.
+
+% The purpose of the
+% test was to determine whether the auralisation tool produces auralisations that
+% sound similar to recordings, where the auralisations use for the emission
+% synthesis features that were extracted from the recordings. Because the
+% available data sets permits simulating and comparing different aircraft types,
+% the purpose was also to test whether participants can distinguish between
+% aircraft types.
+%
+% The purpose was not to determine similarity with respect to a certain aspect,
+% like for example annoyance, but instead the overall similarity as the goal was to create a tool capable of
+
+% TODO several methods
 
 \section{Method}
 
@@ -26,34 +45,43 @@ pairs of stimuli and asked to rate how similar they sounded.
 % determine the similarity. The MUSHRA (MUltiple Stimuli with Hidden Reference and
 % Anchor) test is methodology used for evaluating audio quality \cite{}, and has also been used for determining the plausibility of synthesised vehicle pass-by sounds when compared to recordings \cite{Southern2016}.
 
-Eight different stimuli were considered and they were 12 seconds long.
-Because the sounds vary considerably over time, they were each split into parts
-of 4 seconds, corresponding to the approach, fly-over and distancing. For each
-part all combinations were considered. Each part therefore consisted of 28 pairs
-of stimuli of four seconds.
+Eight different sounds were considered and they were each 12 seconds long. The
+sounds include the approach of an aircraft, its flyover and its distancing.
+Because the character of the sounds varies considerably over time, they were
+each split into parts of four seconds, corresponding to the approach, fly-over
+and distancing. The listening test was also divided in these three parts. First,
+participants were presented to all approach stimuli, then all fly-over stimuli
+and finally all distancing stimuli. In each test part all stimuli combinations
+were considered. Therefore, each part consisted of 28 pairs of stimuli of four
+seconds.
 
-Of the eight stimuli four were recordings, and four were auralisations with each
-of them based on one of the recordings. Two aircraft types were considered, an
-A320 and a RJ1H, and two events per aircraft type.
+Of the eight sounds four were recordings, and four were auralisations. Each
+auralisation was based on one of the recordings. Two aircraft types were
+considered, an A320 and a RJ1H, as well as two events per aircraft type.
 % The recordings were made close to the airport. \todo{this sentence can be dropped if we have a Measurements section}
 % with the aircraft passing by at approximately 90 meters.
-Headphones were used and HRTF's were not included.
+Headphones were used with a single channel. Head-related transfer functions were
+not included.
 
-Because similarity is relative, an anchor is typically used. In this test the
-participants were for each part first given the set of stimuli, in order to
-become familiar with the type of sounds and the spread in the sounds of that
-part, and then continued with rating the pairs. The rating was done on an eleven
-point Likert scale. The left side of the scale said ``not so much'' and the right
-side ``very much''. The scale was not numbered.
+Similarity is relative, and therefore an anchor is typically used. For each
+part, participants were first given the set of stimuli, in order to become
+familiar with the type of sounds and the spread in the sounds of that part, and
+then continued with rating the pairs. The rating was done on an eleven point
+Likert scale. The left side of the scale said ``not so much'' and the right side
+``very much''. The scale was not numbered. The order of the stimuli was
+randomised for each test.
 
 
 \section{Results}
 The results of the participants were scaled linearly from 0 to 1 with 0
-correspond to ``not so much'' and 1 corresponding to ``very much''. Since not
-all participants used the full scale, they were rescaled per participant to use
-the full scale. There were 17 participants, all graduate students, and of which
-the majority studied acoustics. The results that are shown are obtained after
-joining the data of all participants and all three test parts.
+corresponding to ``not so much'' and 1 corresponding to ``very much''. Not all
+of the participants used the entire scale, and therefore they were rescaled per
+participant and per test part to use the full scale. There were 17 participants,
+all graduate students, and of which the majority studied acoustics. The results
+that are shown are obtained after joining the data of all participants and all
+three test parts.
+
+% TODO rewrite what follows. Above is OK
 
 Figure \ref{fig:ratings_recordings} shows the similarity ratings grouped per
 aircraft combination, considering only recordings. Figure
