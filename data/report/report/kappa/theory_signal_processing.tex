@@ -250,9 +250,11 @@ However, there are better performing algorithms. According to the convolution th
 This algorithm generally performs better for larger lengths of $h$ and $x$.
 
 \subsubsection{Overlap-add method}
-If one of the sequences is much longer than the other, then it might be worth splitting up the long sequence into blocks and apply the convolution on each block.
-The overlap-add method is an example of such algorithm. In the overlap-add method the signal $x[n]$ is divided into blocks of size $L$.
-We now define
+If one of the sequences is much longer than the other, then it might be worth
+splitting up the long sequence into blocks and apply the convolution on each
+block. The overlap-add method is an example of such algorithm. In the
+overlap-add method the signal $x[n]$ is divided into blocks of size $L$. We now
+define
 \begin{equation}
  x_k[n] =
  \begin{cases}
@@ -279,9 +281,10 @@ For longer sequences the overlap-add method is much faster than the naive
 (direct-form) method, and especially when using the overlap-add method in
 combination with Fourier transformations (equation
 \ref{eq:theory_signal_processing_convolution_fourier}) for the short
-convolutions. A disadvantage of overlap-add in a real-time simulation is that, it overlap-add operates on blocks, the simulation will incur a latency.
+convolutions. A disadvantage of overlap-add in a real-time simulation is that,
+it overlap-add operates on blocks, the simulation will incur a latency.
 
-\subsubsection{Overlap-save or overlap-discard method}
+\subsubsection{Overlap-discard method}
 A method similar to overlap-add is overlap-discard, known also as overlap-save.
 \todo{}
 

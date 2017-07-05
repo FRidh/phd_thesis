@@ -1,22 +1,20 @@
-% This page is hand-made. I could not make Biblatex to output the papers the way I wanted.
-
 \begin{refsection}
 
 This thesis is based on the work contained in the following appended journal papers,
 referred to by roman numerals in the text:
 \todo{Citation aliasing}
-\begin{itemize}
- \item \fullcite{Rietdijk2017} % Turbulence
- \item \fullcite{Rietdijk2017c} % Overview
-\end{itemize}
+\begin{enumerate}[I]
+ \item \label{paper:turbulence} \fullcite{Rietdijk2017} % Turbulence
+ \item \label{paper:overview} \fullcite{Rietdijk2017c} % Overview % TODO
+\end{enumerate}
 The following conference papers are not included in the thesis due to an overlap
 of content with the previous papers:
-\begin{itemize}
- \item \fullcite{Rietdijk2014} % Forum Acusticum 2014
- \item \fullcite{Rietdijk2014a} % ASA Indianapolis 2014
- \item \fullcite{Rietdijk2015} % EuroNoise Maastricht 2015
- \item \fullcite{Rietdijk2016a} % Internoise Hamburg 2016
-\end{itemize}
-
+\begin{enumerate}[I]
+ \setcounter{enumi}{2}
+ \item \label{paper:forum2014} \fullcite{Rietdijk2014} % Forum Acusticum 2014
+ \item \label{paper:asa2014} \fullcite{Rietdijk2014a} % ASA Indianapolis 2014
+ \item \label{paper:euronoise2015} \fullcite{Rietdijk2015} % EuroNoise Maastricht 2015
+ \item \label{paper:internoise2016} \fullcite{Rietdijk2016a} % Internoise Hamburg 2016
+\end{enumerate}
 
 \end{refsection}
