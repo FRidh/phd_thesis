@@ -35,6 +35,10 @@ in rec {
     inherit references media;
   };
 
+  audio = callPackage ./nix/audio {
+    inherit media;
+  };
+
   # Bibtex library with references/citations
 #   references = ./data/library.bib; #/home/freddy/Data/Media/References/library.bib;
   references = /home/freddy/Data/Media/References/library.bib;
