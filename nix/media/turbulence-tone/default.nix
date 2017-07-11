@@ -1,10 +1,6 @@
 { python
 , runCommand
-, texlive
-, fontconfig
-, pkgs
 , matplotlibHook
-, to_wav
 }:
 
 let
