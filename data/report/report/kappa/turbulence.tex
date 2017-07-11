@@ -568,14 +568,14 @@ As expected the phase fluctuations cause spectral broadening of the tone as can 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[]{../figures/manual/turbulence-model/logamp_and_phase}
+  \includegraphics[]{../figures/generated/turbulence-tone/logamp_and_phase}
   \caption{Amplitude and phase fluctuations as function of time. The fluctuations are less strong for the amplitude fluctuations due to saturation.}
   \label{fig:results_tone_logamp_and_phase}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[]{../figures/manual/turbulence-model/modulated_levels}
+  \includegraphics[]{../figures/generated/turbulence-tone/modulated_levels}
   \caption{Sound pressure level of the tone as function of time, with and without fluctuations.}
   \label{fig:results_tone_levels}
 \end{figure}
@@ -584,7 +584,7 @@ As expected the phase fluctuations cause spectral broadening of the tone as can 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[]{../figures/manual/turbulence-model/tone_broadening}
+  \includegraphics[]{../figures/generated/turbulence-tone/tone_broadening}
   \caption{The power spectrum of the tone shows the broadening due to the phase fluctuations.}
   \label{fig:results_tone_broadening}
 \end{figure}
@@ -597,7 +597,7 @@ Figure \ref{fig:results_scintillations_correlation} shows the correlation functi
 different transverse speeds.
 \begin{figure}[H]
   \centering
-  \includegraphics[]{../figures/manual/turbulence-model/correlation}
+  \includegraphics[]{../figures/generated/turbulence-tone/correlation}
   \caption{Correlation as function of time for different transverse speeds given in meters per second.}
   \label{fig:results_scintillations_correlation}
 \end{figure}
@@ -605,7 +605,7 @@ With a high transverse speed the correlation drops
 faster, and this will result in relatively more high-frequency fluctuations, as is shown in Figure \ref{fig:results_scintillations_levels}.
 \begin{figure}[H]
   \centering
-  \includegraphics[]{../figures/manual/turbulence-model/scintillations_levels}
+  \includegraphics[]{../figures/generated/turbulence-tone/scintillations_levels}
   \caption{Sound pressure level as function of time for scintillations
 corresponding to different transverse speeds given in meters per second. The
 same $z[n]$ were used for each case. A compression in time of the modulations with increasing velocity can be observed.}
@@ -665,7 +665,7 @@ Instead, the log-amplitude and phase variances should scale with respectively $d
         \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-100.0-1e-05}}}
         \caption{\SI{100}{\meter}}
     \end{subfigure}
-    \caption{The influence of the correlation length $L$.}
+    \caption{The influence of the correlation length $L$. The variance of the dynamic refractive-index is $\SI{1e-5}{}$.}
     \label{fig:turbulence:aircraft:parameters:correlation}
 \end{figure}
 
@@ -686,7 +686,7 @@ Instead, the log-amplitude and phase variances should scale with respectively $d
         \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-07}}}
         \caption{\SI{1e-7}{}}
     \end{subfigure}
-    \caption{The influence of the variance of the dynamic refractive-index $\sigma_{\mu}^2$.}
+    \caption{The influence of the variance of the dynamic refractive-index $\sigma_{\mu}^2$. The correlation length is \SI{1}{\meter}.}
     \label{fig:turbulence:aircraft:parameters:variance}
 \end{figure}
 
@@ -717,7 +717,7 @@ corresponding to amplitude modulations as well as an increase in the amount of
 decorrelation. Furthermore the transverse velocity dependence on the frequency
 content of the modulations is demonstrated.
 
-According to the authors the method results in more realistic sounding
+According to the author the method results in more realistic sounding
 auralizations, but this has not been validated yet with listening tests. The
 implementation of the model that was used in this paper to generate the figures
 can be found at \cite{Rietdijk2016}.

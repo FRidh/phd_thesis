@@ -11,7 +11,7 @@ fly-overs of airplanes. The goal was to develop a tool that can create
 auralisations of the current fleet of aircraft.
 
 The auralisation tool consists of an emission synthesiser and a propagation
-model based on geometrical acoustics. Emission synthesiser used spectral
+model based on geometrical acoustics. The emission synthesiser used spectral
 modelling synthesis as synthesis strategy and used features extracted from
 recordings as input. These features were automatically extracted from a signal
 that was obtained after applying an inverse propagation model to a recording.
@@ -39,40 +39,44 @@ would be utilised.
 % Turbulence paper
 To improve the plausibility of the auralisations
 % in situations where the source-receiver distance is typically larger
-a method was developed to simulate modulations due to atmospheric turbulence.
-Spatial and temporal variations in temperature and cause variations in the soundspeed field.
-As sound propagates through a turbulent atmosphere, the variations will cause
-multiple scattering and result in audible modulations, known as scintillations.
-A method was presented for generating sequences of modulations and applying
-these to both monochromatic and broadband signals.
+a method was developed to simulate modulations due to weak atmospheric
+turbulence. Spatial and temporal variations in temperature and cause variations
+in the soundspeed field. As sound propagates through a turbulent atmosphere, the
+variations will cause multiple scattering and result in audible modulations,
+known as scintillations. A method was presented for generating sequences of
+modulations and applying these to both monochromatic and broadband signals.
 
-% TODO rewrite rest of section (turbulence paper)
+Starting with a Helmholtz equation for the sound pressure and a random
+soundspeed field, a Rytov approximation to first-order refractive-index
+fluctuations was done yielding the sound pressure as a sum of complex phases
+with increasing order. The zeroth order represents the unperturbed field and the
+first-order represents first-order perturbations of log-amplitude $\chi$ and
+phase $S$. Sound that is propagated is modelled as a time-varying channel and
+the perturbations are represented by two random sequences, one for the
+log-amplitude fluctuations, and another for the phase fluctuations.
 
-A Rytov approximation to first-order refractive-index fluctuations results in a complex
-phase which we can write as a log-amplitude $\chi$ and phase $S$ fluctuation.
-The propagating sound is modelled as a time-varying channel where we consider
-two sequences, one for the log-amplitude fluctuations, and another for the phase
-fluctuations.
+The random fluctuations have a Gaussian statistical distribution and a spectrum.
+The spectrum is the Fourier transformation of the covariance of the random
+temporal fluctuations. To approximate the spectrum of the turbulence a Gaussian
+model was used. While other turbulence model are available and could be used,
+the Gaussian model was chosen for its simplicity and because its computationally
+least demanding. In the Gaussian model the correlation depends on the
+correlation length $L$ of the turbulence and the transverse speed $v_{bot}$, and
+the variance on distance $d$, correlation length $L$, wavenumber $k$ and
+variance of the dynamic refractive-index field. Because of the
+frequency-dependency, the fluctuations or modulations were implemented as a
+time-variant filter.
 
-The fluctuations are frequency-dependent and therefore a filter was designed to take that into account.
-% A Gaussian applied filter was used to model the atmospheric turbulence because of its simplicity and because it is computationally least demanding.
-A Gaussian turbulence spectrum was considered, but the general method can be
-used with other turbulence spectra as well. The Von Karman spectrum describes
-real turbulence spectra typically better than the Gaussian spectrum, however,
-the Von Karman spectrum is computationally much more demanding.
-% The Gaussian model also allows implementing the phase fluctuation with a Variable Delay Line (VDL).
+Examples were shown where the method is applied to a pure tone and to airplane
+auralisations. The log-amplitude fluctuations cause clearly audible modulations,
+and the phase fluctuations result in spectral broadening. The spectrograms of
+the airplane auralisations show spikes corresponding to amplitude modulations.
+They also show an increase in the amount of decorrelation. Furthermore, the
+impact of the transverse velocity on the frequency content of the modulations
+was demonstrated. The method seems to result in more realistic sounding
+auralisations, but this has not been validated with listening tests.
 
-Examples are shown where the method is applied to a tone and to an aircraft
-auralization. The aircraft auralization spectrogram shows several spikes
-corresponding to amplitude modulations as well as an increase in the amount of
-decorrelation. Furthermore the transverse velocity dependence on the frequency
-content of the modulations is demonstrated.
-
-The method seems to result in more realistic sounding
-auralizations, but this has not been validated yet with listening tests. The
-implementation of the model that was used in this paper to generate the figures
-can be found at \cite{Rietdijk2016}.
-
+\newpage
 \section{Future work}
 Future steps to be taken depends strongly on how auralisations would
 be used.

@@ -20,7 +20,7 @@ EXTENSION = "eps"
 
 #XLIM = (10.0, 38.0)
 YLIM = (0.0, 8000.0)
-CLIM = (-25, +50)
+CLIM = (-30, +40)
 
 
 def create_figure(source, target):

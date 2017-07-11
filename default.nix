@@ -70,7 +70,11 @@ in rec {
       inherit python;
       inherit (lib) matplotlibHook to_wav;
     };
-    #
+    # Chapter 5. Turbulence and a pure tone.
+    turbulence-tone = callPackage ./nix/media/turbulence-tone {
+      inherit python;
+      inherit (lib) matplotlibHook to_wav;
+    };
     turbulence-parameters = callPackage ./nix/media/turbulence-parameters {
       inherit python;
       inherit (lib) matplotlibHook to_wav;

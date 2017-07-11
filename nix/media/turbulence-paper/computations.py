@@ -58,6 +58,7 @@ def create_auralisation(modelfile, settings):
     duration = 10.
     nsamples = int(fs*duration)
 
+
 def main():
 
     # Without turbulence
