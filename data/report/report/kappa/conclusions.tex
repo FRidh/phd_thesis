@@ -4,42 +4,49 @@
 
 % TODO: comment Jens, sounds plausible
 
-\todo{remove sections}
-\subsubsection{Auralization paper}\todo{rewrite and merge}
-In order to investigate the impact of aircraft sound on humans a tool was
-developed to auralise aircraft sound. The goal was to develop a tool that can
-create auralisations that sound similar to the target aircraft and is capable of
-creating auralisations of the current fleet of aircraft.
+% Overview paper
+Aircraft noise has a negative impact on humans. To further study its impact on
+humans a tool was developed to simulate the audible sound field caused by
+fly-overs of airplanes. The goal was to develop a tool that can create
+auralisations of the current fleet of aircraft.
 
-A propagation model based on geometrical acoustics was developed and the
-emission synthesis was based on features extracted from recordings with the use
-of an inverse propagation model and a feature extraction algorithm. A listening
-test was conducted to determine whether the chosen features are sufficient for
-creating auralisations that sound similar to the actual aircraft.
+The auralisation tool consists of an emission synthesiser and a propagation
+model based on geometrical acoustics. Emission synthesiser used spectral
+modelling synthesis as synthesis strategy and used features extracted from
+recordings as input. These features were automatically extracted from a signal
+that was obtained after applying an inverse propagation model to a recording.
+To verify whether the auralisations sound similar to recordings of the
+respective airplane types, a listening test was conducted.
 
-From the listening test it follows that listeners can discriminate between
-sounds of different aircraft types, in case of both recordings and
-auralisations. The similarity ratings between recordings and auralisations are
-similar to the similarity ratings between the two aircraft type, implying the
-auralisations sound like different aircraft than those that were recorded.
-The dissimilarity between the auralisations and recordings is believed to be
-caused by the incorrect reproduction of the blade passing frequency and its
-harmonics caused by an underestimation of the power and bandwidth during the
-feature-extraction.
+Participants were presented with a paired comparison test. Participants were
+able to discriminate between sounds of different aircraft types, in case of both
+recordings and auralisations. The similarity ratings between recordings and
+auralisations are roughly similar to the similarity ratings between the two
+aircraft type. That would imply the auralisations sound like different aircraft
+than those that were recorded.
+
+An incorrect reproduction of the blade passing frequency and its harmonics is
+the likely cause of the dissimilatity between the auralisations and recordings.
+The feature-extraction algorithm was tuned for the relatively small bandwidth of
+the Buzz-Saw tones and is therefore underestimating the power and bandwidth of
+the blade-passing frequency and harmonics.
 
 Section \ref{sec:introduction:background:auralisation} listed several
 auralisation use cases. Whether it is relevant that the auralisations do not
 sound exactly similar to the recordings would depend on how the auralisations
 would be utilised.
 
-\subsubsection{Turbulence paper}\todo{rewrite and merge}
+% Turbulence paper
 To improve the plausibility of the auralisations
 % in situations where the source-receiver distance is typically larger
-a method was developed to simulate for auralisations modulations
-due to atmospheric turbulence. Fluctuations in the refractive-index field due to
-variations in temperature and wind affects sound propagation and causes audible
-modulations. A method was presented for generating sequences of modulations and
-applying these to monochromatic as well as broadband signals.
+a method was developed to simulate modulations due to atmospheric turbulence.
+Spatial and temporal variations in temperature and cause variations in the soundspeed field.
+As sound propagates through a turbulent atmosphere, the variations will cause
+multiple scattering and result in audible modulations, known as scintillations.
+A method was presented for generating sequences of modulations and applying
+these to both monochromatic and broadband signals.
+
+% TODO rewrite rest of section (turbulence paper)
 
 A Rytov approximation to first-order refractive-index fluctuations results in a complex
 phase which we can write as a log-amplitude $\chi$ and phase $S$ fluctuation.

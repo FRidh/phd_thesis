@@ -23,9 +23,8 @@ theory of sound.
 % A limitation of the developed theory was the lack of sound generation models. In
 % the classical theory sound was only generated through a vibrating solid
 % boundary. In the 1950s
-In this section a brief overview is given of sound.
-
-
+In this section a brief overview is given of sound. Discussed are sound
+generation, propagation, and the effect of flow.
 
 \subsection{Wave equation}\label{sec:theory:sound:wave}
 % In his Principia, Newton gave an description of sound and a value of the speed of sound.
@@ -211,14 +210,38 @@ Ambisonics
 
 
 \subsection{Moving source}
+The sound field produced by a moving source is different from that of a fixed source.
+
+\subsubsection{Doppler shift}
+A commonly known effect related to movement is the Doppler shift.
+Movements of source, receiver and medium can cause
+Doppler shifts. If we consider a moving harmonic point source, $S(t) = \hat{S}_0
+\exp{\left(j\omega_0 t\right)} $, in a homogeneous fluid at rest, then the sound
+field is given by
+\begin{equation}
+  p'(\vect{x},t) = \sum_{t_e} \frac{\hat{S}_0 \exp{\left(j \omega_0 t_e\right)}}{4\pi r \left(t_e\right) \abs{1-M_r (t_e)}}
+\end{equation}
+and represents a summation of the sound pressure contributions at all emision
+times $t_e$. The Mach number $M_r = \vect{M} \cdot \vect{e}_r = M \cos{\theta}$ is
+the projection of the Mach number of the source in the direction towards the
+receiver. The Mach number of the source is $\vect{M}=\vect{v}/c$ and
+$\vect{e}_r=\vect{r}/r$ is the unit vector pointing towards the receiver.
+If we consider a moving source and fixed receiver, then the instantaneous
+frequency is given by
+\begin{equation}
+  \omega = \frac{\omega_0}{1 - M_r(t_e)}
+\end{equation}
+% with $M_r(t_e) = M(t_e) \cos{\theta(t_e)}$.
 
 \subsubsection{Convective amplification}
+Another effect that occurs and is especially relevant for fast-moving sources is
+convective amplification.
+
+\cite{Dowling1976}
 
 \missingfigure{Convective amplification illustration}
 
-\subsubsection{Doppler shift}
 
-\missingfigure{Doppler shift illustration}
 
 
 
@@ -278,10 +301,10 @@ Sound hitting a boundary between materials of different impedance may be
 transmitted, reflected or absorbed. When sound is transmitted the incident wave
 is partially refracted. Sound reflected by a smooth surface results in a
 specular reflection, and sound reflected on a rough surface results in a diffuse
-reflection. In outdoor situations sound is typically reflected by the ground surface and other
-obstacles like buildings. The sound pressure at a receiver is then the sum of
-the direct contribution as well as indirect contributions from reflections.
-Due to this superposition strong interference effects may occur.
+reflection. In outdoor situations sound is typically reflected by the ground
+surface and other obstacles like buildings. The sound pressure at a receiver is
+then the sum of the direct contribution as well as indirect contributions from
+reflections. Due to this superposition strong interference effects may occur.
 
 \subsubsection*{Impedance}
 An impedance is a complex ratio between two interdependent dynamic quantities
@@ -443,7 +466,11 @@ Lloyd's mirror effect as caused by an elevated moving source.
 % \missingfigure{SPL relative to free field comparison}
 
 
-\subsubsection{Multiple reflections and shielding} % TODO don't talk about shielding
+\subsubsection{Multiple reflections and shielding} % TODO don't talk about shielding?
+In urban environments there are more reflecting surfaces besides the ground.
+Buildings can reflect sound and shield as well. In courtyards or street canyons
+multiple reflections and strong rerverberance may occur.
+
 Sound can be considered as a ray if the wavelength of the sound is much smaller
 than the characteristic lengths of the objects or geometries. % TODO: move sentence
 
@@ -463,14 +490,14 @@ receiver.
 
 When neither source nor receiver move, the image sources have to be determined
 only once, and their validity, that is, line-of-sight between image source and
-receiver, has to be checked only once. If instead the receiver moves,
+receiver, needs to be checked only once as well. If instead the receiver moves,
 line-of-sight will have to be checked as function of time. When both move, both
 the mirror source search as well as the line-of-sight validation has to be
 performed as function of time. An interesting question is how to connect image
 sources at one instance in time to the image sources the next instance,
 considering sources can appear and disappear over time. If only the source
-moves, it may be more interesting to consider instead of mirror sources mirror
-receivers.
+moves, it may be more interesting to consider mirror receivers instead of miror
+sources.
 
 % In urban environments multiple reflections generally occur.
 

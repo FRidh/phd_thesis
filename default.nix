@@ -85,6 +85,11 @@ in rec {
       inherit python;
       inherit (lib) matplotlibHook to_wav;
     };
+    # Listening test data
+    listening = callPackage ./nix/media/listening {
+      inherit python;
+      inherit (lib) matplotlibHook;
+    };
   };
 
   # Library of functions
