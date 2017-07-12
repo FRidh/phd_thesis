@@ -73,35 +73,39 @@ and the phase fluctuations result in spectral broadening. The spectrograms of
 the airplane auralisations show spikes corresponding to amplitude modulations.
 They also show an increase in the amount of decorrelation. Furthermore, the
 impact of the transverse velocity on the frequency content of the modulations
-was demonstrated. The method seems to result in more realistic sounding
-auralisations, but this has not been validated with listening tests.
+was demonstrated. While not validated with listening tests, it is the authors
+opinion that the method does seem to result in more realistic sounding
+auralisations.
 
 \newpage
 \section{Future work}
-Future steps to be taken depends strongly on how auralisations would
-be used.
+In this section a list of possible future steps is given. The research that was
+presented spanned several topics, and therefore the suggested future steps are
+quite broad as well. Furthermore, future steps may also depend on the purpose of
+e.g. the auralisations as was explained in the introduction.
 % The next steps to be taken depend on how auralisations would be used.
 
 \subsubsection*{Investigate human response to aircraft sound}
 If one wants to study humans' response to aircraft sound, then the next step is
 to test whether auralisations of aircraft are sufficiently similar to the actual
-sound of aircraft, with respect to the parameter that is being investigated. If
-the conclusion is that auralisations and recordings give sufficiently similar
-results, then that would imply the auralisation method can be used to further
-study that aspect of human response within the domain that was considered. If
-significant differences would still be found, it would have to be tested what is
-causing the differences.
-
-% TODO comment Jens
-% Future work: I suggest to add some example for the reader, at "If one wants to study humans’ response to aircraft sound, then the next step is to test whether auralisations of aircraft are sufficiently similar to the actual sound of aircraft, with respect to the parameter that is being investigated", like e.g. ", e.g. perceived annoyance or sleep disturbance."
+sound of aircraft, with respect to the parameter that is being investigated. For
+example, if one is interested in perceived annoyance, then the test should
+compare annoyance ratings of the recordings and auralisations. If the conclusion
+is that auralisations and recordings give sufficiently similar results, then
+that would imply the auralisation method can be used to further study that
+aspect of human response within the domain that was considered. If significant
+differences would still be found, it would have to be tested what is causing the
+differences.
 
 \subsubsection*{Improve estimation and synthesis of blade passing frequency}
-From the study that was conducted and presented in this work, it followed that
+From the study that was conducted and presented, it followed that
 participants did indeed notice differences between the auralisations and the
 recordings. A probable cause of these differences is the estimation of the
 power and bandwidth of the blade passing frequency and harmonics. Therefore, a
 possible improvement would be to enhance the feature-extraction algorithm to
-better estimate these properties.
+better estimate these properties. If the amount of fan blades is known, then that
+could be used as input to change the behaviour of the algoritm at the blade passing
+frequency and its harmonics.
 
 % The most important point to improve is likely the simulation of the
 % blade passing frequency and harmonics, and that would require a better
@@ -109,14 +113,23 @@ better estimate these properties.
 % auralisation tool is capable of delivering plausible auralisations.
 
 \subsubsection*{Develop generic aircraft emission model}
-Because the auralisations appear to sound plausible it is concluded that the strategy\todo{what strategy? recording, backprop, ...}
-utilised works and therefore
+The emission synthesiser uses features determined from one specific event. The
+chosen emission synthesis strategy (spectral modeling synthesis with extracted features)
+produced auralisations that sound plausible. Therefore, a future step
+is to construct a emission model that produces these features as function of
+input parameters (e.g. thrust settings).
 
-
-\subsection{Scintillations}
-
-\subsubsection*{Validate scintillations model}
-The scintillations model is based on an existing statistical model.
+\subsubsection*{Subjective validation of scintillations model}
+The scintillations model is based on an existing statistical model. While the
+Gaussian model does not describe the whole turbulence spectrum, it may produce
+correct results within a limited domain of the spectrum. In this work the
+assumption was made the Gaussian model is sufficient along with other
+assumptions (e.g. that the correlation length is much smaller than the Fresnel
+zone). A possible future step would be a subjective validation to verify whether
+auralisations that use the model sound as realistic as recordings. An open
+question is how to conduct such a test, because due the statistical nature of
+the turbulence the auralisations and recordings there is a limitation to how
+similar they may sound.
 
 \subsubsection*{Different model for describing turbulence spectrum}
 As mentioned in the text the basic method for generating scintillations should
@@ -128,24 +141,28 @@ expressions given in \cite{Ostashev2015}.
 
 \subsubsection*{Non-isotropic and non-homogeneous atmosphere for the scintillations model}
 % \subsubsection*{Height-dependent parameters for the scintillations model}
-The current model assumes a isotropic and homogeneous atmosphere. In practice,
+The current model assumes an isotropic and homogeneous atmosphere. In practice,
 the atmosphere is neither and parameters like the correlation length $L$ and the
 variance of the refractive-index fluctuations $\langle \mu^2 \rangle$ are
 height-dependent \cite{Krasnenko2013}. Ostashev et al. gave formulas for plane
 \cite{Ostashev1997b} and spherical \cite{Ostashev1997c} waves propagating
 through an anisotropic atmosphere and studies numerically the variances and
 correlation functions of the log-amplitude and phase fluctuations
-\cite{Ostashev2004}.
+\cite{Ostashev2004}. A future step would be to enhance the scintillations model
+to take into account an anisotropic atmosphere.
 
-\subsubsection*{Determine parameters for scintillations model}
-The model that was presented for generating scintillations uses a Gaussian
-correlation function. A Gaussian can be used as an applied filter to get a rough
-approximation to the actual turbulence spectrum within a certain wavenumber
-range. An open question is how to obtain adequate values for the correlation
-length $L$ and the variance of the refractive-index fluctuations $\langle \mu^2
-\rangle$. Values for both can be obtained with a setup as used by Daigle et. al.
-\cite{Daigle1983}, however, with such a setup values can only be obtained at
-relatively low heights.
+
+% TODO check mail Jens with comments about determining parameters
+
+% \subsubsection*{Determine parameters for scintillations model}
+% The model that was presented for generating scintillations uses a Gaussian
+% correlation function. A Gaussian can be used as an applied filter to get a rough
+% approximation to the actual turbulence spectrum within a certain wavenumber
+% range. An open question is how to obtain adequate values for the correlation
+% length $L$ and the variance of the refractive-index fluctuations $\langle \mu^2
+% \rangle$. Values for both can be obtained with a setup as used by Daigle et. al.
+% \cite{Daigle1983}, however, with such a setup values can only be obtained at
+% relatively low heights.
 
 
 
