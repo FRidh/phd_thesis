@@ -3,7 +3,7 @@
 
 \section{Background}
 
-\subsection{History of aviation}\todo{Include more names of the events?}
+\subsection*{History of aviation}\todo{Include more names of the events?}
 On December 17th, 1903, the Wright brothers made the first sustained and
 controlled flight of a powered, heavier-than-air, airplane, and in the years
 after developed the first practical fixed-wing aircraft, the Flyer III. Their
@@ -57,7 +57,7 @@ Atlantic became reality. Furthermore, the solar-powered airplane Solar Impulse 2
 completed a circumnavigation of the Earth demonstrating the possibilities of
 using renewable energy in an aircraft.
 
-\subsection{Urbanisation, transportation and the impact of aviation}
+\subsection*{Urbanisation, transportation and the impact of aviation}
 In 2014 54\% of the world population was living in urban areas. % and this proportion is expected to increase to 66\% by 2050 \cite{UnitedNations2014}.
 The world population is growing rapidly and it is expected that the given
 percentage increases to 66\% by 2050 \cite{UnitedNations2014}, resulting
@@ -86,7 +86,7 @@ operation and growth of airports. Indeed, aircraft noise is already a limiting
 factor for the capacity of regional and international airports throughout the
 world \cite{Zaporozhets2011}.
 
-\subsection{Aircraft noise and human response}
+\subsection*{Aircraft noise and human response}
 Aircraft noise is noise associated with the operation of airports and in
 particular the noise that is caused by aircraft during take-off, flight, or
 landing \cite{Zaporozhets2011}. Aircraft noise is a major environmental
@@ -127,7 +127,7 @@ duration of the noise, how many sources there are and where the sources are situ
 character of the sound, and thereby also the intermittency of aircraft noise.
 Furthermore, there's individual differences such age, sex and noise sensitivity.
 
-\subsection{Aircraft noise mitigation and modeling}
+\subsection*{Aircraft noise mitigation and modeling}
 Aircraft noise became a public issue in the 1950s and 1960s. As a consequence
 governments enacted legislative controls. Noise regulations typically put a
 constraint on the amount of noise that can be produced as measured at certain
@@ -203,7 +203,7 @@ determining the impact of the sound on humans.
 % intended to lead to low noise design strategies.
 
 
-\subsection{Auralisation}\label{sec:introduction:background:auralisation}% of soundscapes}
+\subsection*{Auralisation}\label{sec:introduction:background:auralisation}% of soundscapes}
 % \begin{quote}
 % Auralisation is the technique of creating audible sound files from numerical data
 % \end{quote} \cite{Vorlander2008}.
@@ -231,57 +231,58 @@ development of improved descriptors.
 The method, essentially a form of virtual reality, can also be used as a
 communication tool, for example, when discussing urban development. Noise
 contours are typically computed and plotted to show the spatial distribution of
-noise. These figures are typically hard to interpret for non-specialists, and
+% noise. These figures are often hard to interpret for non-specialists, and
 they also give no insight in what the noise may sound like.
 
 In 2015 Lelystad airport in The Netherlands was expanding. Residents living
 nearby were initially presented with noise contours but struggled with with
 interpreting them. The Netherlands Aerospace Centre (NLR) was asked to help
-residents understanding the implications of the airport changes by using
-auralisations at townhall meetings \cite{Arntzen2015}.
+residents understanding the implications of the airport changes and
+for this they were using auralisations at townhall meetings \cite{Arntzen2015}.
 
 Generating audible sounds can be done in several ways. Often the entire sound is
-synthesised, but this isn't necessarily the case, one could work with existing
+synthesised, but this isn't necessarily the case. One could work with existing
 sounds and modify these instead. An example would be to take a recording made
 outside in front of a building and then simulate the sound indoors by applying a
 filter to account for the attenuation of walls and windows.
-
 As with noise prediction, emission synthesis and sound propagation are often
 separated. This isn't always possible, for example, when using a wave-based
 method \cite{Hornikx2016,Georgiou2016,Georgiou2016a}.
 
-% TODO rewrite paragraph somewhat, similar to overview paper
-Two common methods for emission synthesis are spectral modelling synthesis (SMS)
-and granular synthesis. Granular synthesis considers grains that are typically
-based on measurements and is a computationally fast method. Spectral modelling
-synthesis generates a signal through a superposition of two types of signal
-components: tones and noise. Whereas with granular synthesis each grain
-typically corresponds to specific conditions (e.g. the speed of and distance to
-the source), with spectral modelling synthesis the synthesis strategy can be
-considered separate from the underlying model, and therefore a emission
-synthesis model can be established that relates tonal and spectral components to
-the operational state of the source.
+% Paragraph may still be quite similar to overview paper
+Methods that are commonly used for emission synthesis are spectral modelling
+synthesis (SMS) and granular synthesis. With granular synthesis small parts of
+existing signals are considered, and a new signal is synthesised by combining
+these small parts called grains. Grains are often based on measurements, but
+that is not necessarily the case. A grain typically corresponds to specific
+conditions, for example the speed of and distance to the source. Granular
+synthesis is a computationally fast method. With spectral modelling synthesis a
+signal is created from a superposition of tone and noise components. An
+advantage of spectral modelling synthesis is that the synthesis strategy can be
+considered separate from the underlying model. Therefore, an emission synthesis
+model can be established that relates tonal and spectral components to the
+operational state of the source.
 
-
-\subsection{Aircraft noise auralisation} \todo{split partly into aircraft noise modeling}
-
-% TODO: taken from overview paper
-Aircraft auralisation has been used to study future aircraft types
-\cite{Rizzi2013,Rizzi2016,Rizzi2016a} and flight procedures \cite{Sahai2016} but
-also to investigate the perceived unpleasantness of aircraft flyover noise as
-function of certain temporal parameters \cite{Pate2017}.
+% TODO: rewrite from overview paper
+% TODO: split partly into aircraft noise modeling
+\subsection*{Aircraft noise auralisation}
+Auralisation is an interesting method and has been used to study future aircraft
+types \cite{Rizzi2013,Rizzi2016,Rizzi2016a} and flight procedures
+\cite{Sahai2016}. Furthermore, the method was used to investigate the perceived
+unpleasantness of aircraft flyover noise as function of certain temporal
+parameters \cite{Pate2017}.
 
 Aspects to consider when simulating the sound of aircraft are the different
 noise sources on the aircraft, the state of the aircraft and thereby the state
-of these sources, as well as the condition of the environment.
-% \subsection{Aircraft emission}
-The main noise sources of a turbojet aircraft are jet noise, fan and turbine
-noise, combustion noise and airframe noise. In the case of turboprop aircraft
-the main source is the propellor\cite{Zaporozhets2011}. Fan or propellor noise
-is mostly tonal whereas the other sources are broadband noise.
-Which exact sources are most relevant depends on the aircraft type and flight
-procedure as well as the position of the source with respect to the receiver due
-to directivity of the sources \cite{Bertsch2015}.
+of these sources, as well as the condition of the environment. Main noise
+sources on an airplane with turbofan engines are the jet, fan, turbine,
+combustor and airframe. The significance of these sources depends on aircraft
+type, flight procedure, as well as the position of the source with respect to
+the receiver due to directivity of the sources \cite{Bertsch2015}.
+
+% Noise emission prediction models often typically output a spectrum in
+% (fractional-)octaves and where no distinction is made between whether the
+% emission corresponds to tonal components or noise.
 
 The aircraft emission prediction tools found in the ANOPP-Source Functional
 Module of ANOPP2 \cite{Lopes2016, Tuttle2017} and INSTANT\cite{Sahai2016b}, which is based
@@ -316,7 +317,7 @@ between tonal and noise contributions, thereby making them unfit for the use of
 aircraft auralisation which requires explicit knowledge about tonal and noise
 contributions.
 
-\subsection{Plausibility of aircraft auralisations and the influence of the atmosphere}
+\subsection*{Plausibility of aircraft auralisations and the influence of the atmosphere}
 In the last couple of years relatively many papers have been written about
 auralisation and aircraft auralisation. Initially basic propagation models were
 developed, and then emphasis shifted to the development of emission models. A
