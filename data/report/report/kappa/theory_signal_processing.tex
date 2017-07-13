@@ -84,7 +84,7 @@ remains unchanged after rotation of 180 degrees about the origin. Just as with
 Hermitian symmetry, the sine and cosine transform are computationally more
 efficient reducing again by a factor two the required computations and storage.
 
-\todo{I mention the DCT in turbulence paper}
+% TODO I mention the DCT in turbulence paper
 
 
 \subsection{Transfer functions and filters}
@@ -111,14 +111,15 @@ and describes in frequency-domain the relation between the input and output.
 %
 %
 
-\todo{finish}
+% TODO FINISH
 
 
 % \section{Filters}
 
 \subsubsection{Delay and gain}
 
-\todo{write}
+% TODO write
+
 
 \subsubsection{Finite and Infinite Impulse Response filters}
 We will now consider two types of filters. In the following expressions $x[n]$ is an input signal to a filter, and $y[n]$ the signal after filtering.
@@ -165,7 +166,9 @@ linear function of frequency. In case of linear phase, all frequency components
 are delayed in time by the same amount and consequently there is no phase 
 distortion. This phase distortion, which is basically dispersion, is highly 
 undesired in auralisations. Therefore, linear phase is a must for filters used 
-in auralisations. \todo{Citation}
+in auralisations.
+% TODO citation
+
 
 However, while a filter with linear phase causes no phase distortion, it still 
 does cause a group delay of the signal. The delay in samples is $(L-1)/2$ with 
@@ -173,12 +176,14 @@ $L$ the length of the filter. If the filter length remains constant over time,
 then the signal will experience a constant delay. This is a known problem with 
 real-time systems; the filters cause a latency in the system and this can effect 
 the experience, especially when it is possible to interact with the simulated 
-environment. \todo{Citation}
+environment.
+% TODO citation
 
 A possible method to correct for the group delay is by filtering the signal 
 twice, once forward and once backward. This method, known as zero-phase 
 filtering, is however only possible for offline auralisations because the 
-operation is non-causal. \todo{Citation}
+operation is non-causal.
+% TODO citation
 
 \missingfigure{Show tone, forward only filtered, and zero-phase filtered.}
 
@@ -286,8 +291,7 @@ it overlap-add operates on blocks, the simulation will incur a latency.
 
 \subsubsection{Overlap-discard method}
 A method similar to overlap-add is overlap-discard, known also as overlap-save.
-\todo{}
-
+% TODO
 
 \subsubsection{Linear time-variant system}
 So far we considered linear time-invariant systems. In a linear time-variant
@@ -388,7 +392,7 @@ integer factor is done first, followed by upsampling. Again, because of the
 order of operations it is sufficient to low-pass filter only one with the lower
 of the two cut-off frequencies.
 
-\subsubsection{Interpolation}\todo{Rewrite section, more general, less specific to Doppler shift.}
+\subsubsection{Interpolation} % TODO Rewrite section, more general, less specific to Doppler shift.
 The low-pass filters used when resampling are basically interpolation filters.
 Interpolation filters can also be used when applying a delay to a system in case
 the delay is not exactly an integer of the sample time, or when the delay
@@ -421,7 +425,7 @@ There are methods to reduce these artefacts. For example, upsampling the signal 
 Another possibility is a different interpolation scheme.
 
 % \subsubsection{Lanczos interpolation}
-\todo{Not using Lanczos anymore. Keep it in?}
+% TODO Not using Lanczos anymore. Keep it in?
 Theoretically, the optimal reconstruction filter is a sinc filter. In practice
 only approximations of this filter can be used, and these approximations are
 generally achieved by windowing and truncating the sinc function. One of these
@@ -484,11 +488,11 @@ come at a cost of performance.
     \caption{Signal level as function of time.}
     \label{fig:theory:signal-processing:resampling:levels}
 \end{figure}
-\todo{discuss, also errors at higher-speed}
+% TODO discuss, also errors at higher-speed
 
 
 
-% \todo{Figure with comparison of linear interp and Lanczos was here. Include it?}
+% TODO{Figure with comparison of linear interp and Lanczos was here. Include it?}
 % Figure \ref{fig:theory_signal_processing_interpolation} shows spectrograms with Doppler-shifted tones for the two explained interpolation algorithms and different values of the kernelsize $a$.
 % The artifacts are clearly less pronounced when using a larger kernelsize. However, a larger kernelsize does come at a cost of performance as shown in \ref{fig:theory_signal_processing_interpolation_benchmarks}.
 %

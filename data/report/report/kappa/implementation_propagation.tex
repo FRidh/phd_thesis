@@ -12,8 +12,9 @@ that are taken. Because of source motion all propagation effects are
 time-variant. The following sections will describe each of these steps in
 detail.
 
+% TODO explain situation - check noise signal!!
 To demonstrate the different propagation effects we simulate a situation and
-will sequentially add propagation effects. \todo{explain situation}. A simple
+will sequentially add propagation effects. A simple
 emission signal is considered consisting of brown noise and a tone with a
 frequency of \SI{1000}{\hertz}, both modelled as a monopole point source. An
 "aircraft" moves at a height of \SI{200}{\meter} and with a speed of
@@ -55,7 +56,7 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
   \label{fig:propagation_block_diagram}
 \end{figure}
 
-\subsection{Geometrical spreading}\todo{refer to theory}
+\subsection{Geometrical spreading} % TODO refer to theory
 Geometrical spreading causes a decrease in amplitude with distance due to divergence and increase
 in propagation delay with distance due to the finite speed of sound. Far field
 is assumed in which case we obtain the sound pressure at the receiver $p_{\mathrm{rcv}}$
@@ -115,8 +116,8 @@ immission when the propagation delay is also considered.
   \label{fig:implementation:propagation:doppler}
 \end{figure}
 
-
-\subsection{Atmospheric attenuation}\todo{refer to theory}
+\newpage
+\subsection{Atmospheric attenuation} % TODO refer to theory
 Atmospheric attenuation is accounted for by creating a time-variant filter of length $N_{aa}$
 with a magnitude response based on ISO 9613-1:1993\cite{ISO9613-1}. A single-sided magnitude spectrum is calculated as
 \begin{equation}
@@ -148,7 +149,7 @@ was considered.
   \label{fig:implementation:propagation:attenuation}
 \end{figure}
 
-% \subsection{Atmospheric turbulence}\todo{This overlaps with next chapter. Remove. Small parts can be reused.}
+% \subsection{Atmospheric turbulence} % TODO this overlaps with next chapter. Remove. Small parts can be reused.
 % Fluctuations in the atmosphere of wind velocity and temperature affect sound
 % propagation resulting in fluctuations of both the amplitude and the phase.
 % Depending on the situation these fluctuations can be clearly audible and
@@ -225,7 +226,8 @@ was considered.
 %   \label{fig:implementation:propagation:turbulence}
 % \end{figure}
 
-\subsection{Ground reflection}\todo{refer to theory. Extend?}
+\newpage
+\subsection{Ground reflection} % TODO refer to theory. Extend?
 While the Image Source Method \cite{Mechel2013} was implemented with image
 receivers instead of image sources, we consider here only one additional path,
 a ground reflection, and therefore won't go into details about the
@@ -247,7 +249,7 @@ using the plane wave reflection coefficient should typically be sufficient.
 However, when simulating noise sources at low elevation angles, the plane-wave
 assumption is no longer valid and must be replaced by a model that takes into
 account the reflection of spherical waves from a ground surface of finite
-impedance \cite{Tuttle2014}\todo{rewrite. Maybe move to theory}.
+impedance \cite{Tuttle2014} % TODO rewrite. Maybe move to theory
 
 The scenarios considered were landings. Because the area around the airport
 consists mostly of grass a flow resistivity of
@@ -262,7 +264,7 @@ the immission when a ground reflection was added. A hard ground was considered.
   \includegraphics[]{../figures/generated/propagation/reflection}
   \caption{Spectrogram of the immission when a ground reflection is present. The Lloyd's mirror effect is clearly visible.}
   \label{fig:implementation:propagation:reflection}
-\end{figure}\todo{text}
+\end{figure} % TODO text
 
 
 %

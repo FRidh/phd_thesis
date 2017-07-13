@@ -43,8 +43,21 @@ in rec {
 #   references = ./data/library.bib; #/home/freddy/Data/Media/References/library.bib;
   references = /home/freddy/Data/Media/References/library.bib;
 
+  data = rec {
+    # Tarball with listening test data.
+    listening-test-tests = pkgs.fetchurl {
+      url = https://zenodo.org/record/376263/files/test.tar.gz;
+      sha256 = "1zg9yg794g3wk2kqv259134hlkd5rwqib8zvlvwz70589cc1pism";
+    };
+    # CSV text file with listening test results
+    listening-test-results = pkgs.fetchurl {
+      url = https://zenodo.org/record/376268/files/results.csv;
+      sha256 = "0f32451gcr2ikxcb7qwj28q6m7rq148s6vic14j66b1g3hnh7vv8";
+    };
+  };
+
   # Media: figures and audio
-  media = {
+  media = rec {
     # Step-by-step add propagation effects
     propagation = callPackage ./nix/media/propagation {
       inherit python;
@@ -93,6 +106,12 @@ in rec {
     listening = callPackage ./nix/media/listening {
       inherit python;
       inherit (lib) matplotlibHook;
+      inherit (data) listening-test-tests;
+    };
+    listening-analysis = callPackage ./nix/media/listening-analysis {
+      inherit python;
+      inherit (lib) matplotlibHook;
+      inherit (data) listening-test-tests listening-test-results;
     };
   };
 

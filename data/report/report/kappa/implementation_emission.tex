@@ -173,7 +173,7 @@ A 2 seconds window proved to be a good balance between temporal resolution
 and frequency resolution.
 
 % For the development of an emission model it is expected that
-% the uncertainties could be reduced through ensemble averaging. \todo{include this?}
+% the uncertainties could be reduced through ensemble averaging. % TODO include this?
 
 \subsection{Emission and immission synthesis}
 % As mentioned before the emission was synthesised using spectral modelling
@@ -206,7 +206,9 @@ was chosen for each harmonic.
 
 Figures \ref{fig:synthesis} and \ref{fig:auralisation} show spectrograms of respectively the emission synthesis and the auralisation at the receiver.
 
-\begin{figure}[H]
+\newpage
+\afterpage{
+\begin{figure}[p]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/synthesis}
   \caption{Emission synthesis of the aircraft. Inputs to the emission synthesiser were obtained by applying the feature-extraction algorithm to the signal shown in Figure \ref{fig:backpropagated}. The level of the tonal components vary over time. The blade passing frequency is not clearly visible because the determined level of the tone was underestimated.}
@@ -214,14 +216,14 @@ Figures \ref{fig:synthesis} and \ref{fig:auralisation} show spectrograms of resp
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[p]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/auralisation}
   \caption{Auralisation of the event shown in Figure \ref{fig:recording} .
   The Doppler-shifted tones and the mirror-effect are clearly visible. The Doppler-shifted tones are not very smooth. This is due to fluctuations in the aircraft position due to uncertainties.}
   \label{fig:auralisation}
 \end{figure}
-
+}
 
 
 %
