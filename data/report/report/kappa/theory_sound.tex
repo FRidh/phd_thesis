@@ -48,7 +48,7 @@ The momentum conservation equation is
 \begin{equation}\label{eq:theory:sound:wave:momentum}
  \frac{\partial}{\partial t} \rho \vect{u} + \nabla \cdot \left(\matr{P} + \rho \vect{u} \vect{u}  \right) = \vect{f} + m \vect{u}
 \end{equation}
-where $\vect{u} \vect{u}$ is a dyadic product, $\vect{f}$ the external force
+where $\vect{u} \vect{u}$ is a dyadic product\footnote{The dyadic product of the vectors $\vect{a}$ and $\vect{b}$ is the tensor $\vect{a}\vect{b}=a_i b_j$}, $\vect{f}$ the external force
 density and $\matr{P}$ the fluid stress tensor. The fluid stress tensor relates the pressure $p$ and the viscous stress tensor $\matr{\tau}$ by
 % Viscous stress tensor
 \begin{equation}
@@ -61,18 +61,21 @@ forces. Ignoring them, and rewriting equation
 \begin{equation}
  \rho \left( \frac{\partial \vect{u}}{\partial t} + \left( \vect{u} \cdot \nabla \right) \vect{u} \right) + \nabla p = \vect{f}
 \end{equation}
+
 \subsubsection*{Linearisation}
 Sound is a small perturbation of a steady state, and so we can apply linearisation to obtain a wave equation.
-Ignoring the source term at the right-hand side, the linearised versions of the mass and momentum equations are given by
+Ignoring the source term at the right-hand side (thus considering the homogeneous solution), the linearised versions of the mass and momentum equations are given by
 % Linearised versions of the homogeneous (= without source terms) mass and momentum equations
 \begin{align}
- \frac{\partial \rho'}{\partial t} + \vect{u_0} \cdot \nabla \rho' + \rho_0 \nabla \cdot \vect{u'} = 0 \\
+ \frac{\partial \rho'}{\partial t} + \vect{u_0} \cdot \nabla \rho' + \rho_0 \nabla \cdot \vect{u'} = 0  \label{eq:theory:sound:linearisation:mass} \\
 % \end{equation}
 % \begin{equation}
- \rho_0 \left( \frac{\partial \vect{u'}}{\partial t} + \left(\vect{u_0} \cdot \nabla \right) \vect{u'}\right) + \nabla p' = 0
+ \rho_0 \left( \frac{\partial \vect{u'}}{\partial t} + \left(\vect{u_0} \cdot \nabla \right) \vect{u'}\right) + \nabla p' = 0 \label{eq:theory:sound:linearisation:momentum}
 \end{align}
-with the fluctuating components of the variables denoted with a prime. Viscosity
-is neglected and thereby also heat transfer. The fluid is considered to behave
+with the fluctuating components of the variables denoted with a prime and the steady components subscripted with a zero.
+
+\subsubsection*{Speed of sound}
+Viscosity is neglected and thereby also heat transfer. The fluid is considered to behave
 adiabatic and thus the following relation between pressure and density
 fluctuations can be used
 % Adiabatic relation between pressure and density fluctuations
@@ -84,34 +87,13 @@ where $c$ is the speed of sound
 \begin{equation}
   c = \sqrt{ \left( \frac{\partial p}{\partial \rho} \right)_{s} }
 \end{equation}
-The subscript $s$ indicates a process at constant entropy $s$ or adiabatic process.
+The subscript $s$ indicates an isentropic (constant entropy $s$) or adiabatic process.
 In general, the speed of sound is given by $c = \sqrt{\frac{K}{\rho}}$ where $K$
 is the bulk modulus of the medium. For ideal gases the bulk modulus is $K=\gamma
-p$ where $\gamma=C_p/C_v$ is the ratio of specific heat capacity at constant
-pressure $C_p$ and volume $C_V$.
+p$ where $\gamma=C_p/C_v$ is the ratio of specific heat capacities at constant
+pressure $C_p$ and constant volume $C_V$.
 
-% TODO combine into wave equation
-...
-Classical wave equation
-\begin{equation}\label{eq:theory:sound:wave:classic}
- \frac{1}{c} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = 0
-\end{equation}
-...
-
-
-\subsubsection*{Helmholtz equation}
-
-\begin{equation}
-  p' (t, \vect{x}) = \hat{p} \left(\vect{x}\right) \exp{j \omega t}
-\end{equation}
-
-
-\begin{equation}\label{eq:theory:sound:wave:helmholtz}
- \nabla^2 \hat{p} + k^2 \hat{p} = 0
-\end{equation}
-
-
-\subsection{Convective wave equation}
+\subsubsection*{Convective wave equation}
 A mean flow has an effect on sound generation and propagation.
 The material derivative $D/Dt$ is defined as
 \begin{equation}
@@ -119,30 +101,90 @@ The material derivative $D/Dt$ is defined as
 \end{equation}
 and is a time derivative of some physical quantity for a portion of a material moving with a velocity $\vect{u}$.
 
+Taking the material derivative of the linearised mass conservation equation and subtracting the divergence of the
+linearised momentum conservation equation results in the convective wave equation.
+% \begin{equation}
+%   \frac{\partial^2 \rho'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) \rho' \right) + \left( \vect{u}_0 \cdot \nabla \right) \left( \vect{u}_0 \nabla \rho' \right) - \nabla^2 p' = 0
+% \end{equation}
+Assuming an adiabatic process, the convective wave equation then becomes
+\begin{equation}
+  \frac{\partial^2 \rho'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) p' \right) + \left( \vect{u}_0 \cdot \nabla \right)^2 p' - c^2 \nabla^2 p' = 0
+\end{equation}
 
+\subsubsection*{Classical wave equation}
+The convective wave equation considers a flow with a velocity $\vect{u}$. If the velocity is zero, the equation reduces to the classical wave equation
+\begin{equation}\label{eq:theory:sound:wave:classic}
+ \frac{1}{c^2} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = 0
+\end{equation}
 
-The Mach number $M = v / c$ represents the ratio of the flow velocity to the
-local speed of sound.
+\subsubsection*{Harmonic wave}
+In acoustics harmonic waves in the following complex form are typically considered
+\begin{equation}
+  p' (\vect{x}, t) = \hat{p} \left(\vect{x}\right) \exp{\left(j \omega t \right)}
+\end{equation}
+where $\hat{p} \left(\vect{x}\right)$ is the amplitude of the wave and $\omega=2 \pi f$ the angular frequency.
 
+\subsubsection*{Helmholtz equation}
+Inserting the (derivatives of) a harmonic wave in the wave equation results in
+the Helmholt equation
+\begin{equation}\label{eq:theory:sound:wave:helmholtz}
+ \left( \nabla^2 + k^2 \right) \hat{p} = 0
+\end{equation}
+where $k=w/c$ is the wavenumber.
 
+\subsubsection*{Plane wave solution}
+The solution to the wave equation in one dimension is
+\begin{equation}
+  p'(x,t) = p'_{+} (t-x/c) + p'_{-} (t+x/c)
+\end{equation}
+where $p'_{+}$ and $p'_{-}$ are respectively a right and left travelling function.
+
+\subsubsection*{Spherical wave solution}
+A solution in three dimensions assuming spherical symmetry is the spherical wave solution
+\begin{equation}
+  p'(r,t) = \frac{1}{r} p'_{+} (t-r/c) + \frac{1}{r} p'_{-} (t+r/c)
+\end{equation}
+and looks similar to the plane wave solution. In this expression $r$ is the
+distance travelled by the wave. The spherical wave solution represents the sum
+of a wave propagating out from the origin and that of a wave propagating towards
+the origin. In acoustics only the outgoing wave is typically kept. Contrary to
+a plane wave the pressure of a spherical wave decreases with $1/r$.
+
+\subsubsection*{Wave equation with source terms}
+The above solutions considered a homogeneous wave equation and therefore do not
+take into account any source terms. Linearisation of the mass and momentum equations
+would have resulted in a unsteady mass injection $m'$ and unsteady external
+force $\vect{f'}$. The wave equation with these terms is
+\begin{equation}
+   \frac{1}{c^2} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = \frac{\partial m'}{\partial t} - \nabla \cdot \vect{f}'
+\end{equation}
+In general a source term can be written as a source $s(\vect{x}, t)$.
 
 \subsubsection*{Green's function}\label{sec:theory:sound:green}
-% Homogeneous
+The simplest possible source is a point source that is represented by a Dirac
+delta function $\delta(\vect{x}-\vect{x}_0)$ where $\vect{x}_0$ is the position
+of the point source. A Green's function is a solution or impulse response of an
+inhomogeneous linear differential equation.
+Therefore, the solution of the wave equation with such a point source excitation is a Green's function.
+For a harmonic point source the Green's function $\hat{G}$ should satisfy
+\begin{equation}
+  \left( \nabla^2 + k^2 \right) \hat{G} = - \delta \left( \vect{x} - \vect{x}_0 \right)
+\end{equation}
+Note that because a harmonic point source is considered the Helmholtz equation
+is used. The solution of this inhomogeneous Helmholtz equation is again an
+ingoing and outgoing spherical wave. Because of causality we consider only the
+outgoing wave. In free field the Green's function of this outgoing wave is
+\begin{equation}
+  \hat{G} = \frac{\exp{\left(jkr\right)}}{4 \pi r}
+\end{equation}
+with $r = \left| \vect{x} - \vect{x}_0 \right|$ the distance from point source to receiver.
+% The point source represented by a Dirac delta pulse is a monopole point source of unit amplitude
+% and the resulting field is a monopole field.
+
+% Free-field solution
 % \begin{equation}
-%
+%  G = \frac{1}{4 \pi r} \delta \left( t - \tau - \frac{r}{c} \right)
 % \end{equation}
-Non-homogeneous
-\begin{equation}
-\frac{1}{c^2}\frac{\partial^2 G}{\partial t^2} - \nabla^2 G = \delta \left( \vect{x} - \vect{y} \right) \delta \left(t - \tau \right)
-\end{equation}
-
-Free-field solution
-\begin{equation}
- G = \frac{1}{4 \pi r} \delta \left( t - \tau - \frac{r}{c} \right)
-\end{equation}
-
-with $r = \left| \vect{x} - \vect{y} \right|$
-
 
 \subsection{Aerodynamic sound sources}\label{sec:theory:sound:aerodynamic}
 The classic wave equation cannot describe aerodynamic sources. Lighthill
@@ -172,6 +214,12 @@ coupled to the acoustic field. That means situations where feedback occurs,
 i.e., the acoustic field modifies the flow field and vice versa, cannot be
 treated.
 
+
+The Mach number $M = v / c$ represents the ratio of the flow velocity to the
+local speed of sound.
+
+
+
 \subsection{Elementary sources}
 
 The elementary sources 
@@ -187,8 +235,9 @@ Volume source
 % \end{equation}
 
 \begin{equation}
- p' \left(\vect{x},t\right) = \frac{1}{4\pi} \frac{q \left(\vect{y}, t-r/c\right)}{r}
+ p' \left(\vect{x},t\right) = \frac{\dot{m} \left(\vect{y}, t-r/c\right)}{ 4 \pi r}
 \end{equation}
+where $\dot{m} = \partial m / \partial t$ is the time derivative of the unsteady mass flow $\dot{m}$.
 
 \subsubsection*{Dipole}
 
