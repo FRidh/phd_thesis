@@ -126,7 +126,7 @@ where $\hat{p} \left(\vect{x}\right)$ is the amplitude of the wave and $\omega=2
 
 \subsubsection*{Helmholtz equation}
 Inserting the (derivatives of) a harmonic wave in the wave equation results in
-the Helmholt equation
+the Helmholtz equation
 \begin{equation}\label{eq:theory:sound:wave:helmholtz}
  \left( \nabla^2 + k^2 \right) \hat{p} = 0
 \end{equation}
@@ -154,7 +154,7 @@ a plane wave the pressure of a spherical wave decreases with $1/r$.
 The above solutions considered a homogeneous wave equation and therefore do not
 take into account any source terms. Linearisation of the mass and momentum equations
 would have resulted in a unsteady mass injection $m'$ and unsteady external
-force $\vect{f'}$. The wave equation with these terms is
+force $\vect{f'}$ that correspond to a vibrating solid boundary. The wave equation with these terms is
 \begin{equation}
    \frac{1}{c^2} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = \frac{\partial m'}{\partial t} - \nabla \cdot \vect{f}'
 \end{equation}
@@ -165,13 +165,16 @@ The simplest possible source is a point source that is represented by a Dirac
 delta function $\delta(\vect{x}-\vect{x}_0)$ where $\vect{x}_0$ is the position
 of the point source. A Green's function is a solution or impulse response of an
 inhomogeneous linear differential equation.
-Therefore, the solution of the wave equation with such a point source excitation is a Green's function.
-For a harmonic point source the Green's function $\hat{G}$ should satisfy
+Therefore, the solution of the wave equation with such a point source excitation
+is a Green's function. For a harmonic point source the Green's function
+$\hat{G}$ should satisfy
 \begin{equation}
   \left( \nabla^2 + k^2 \right) \hat{G} = - \delta \left( \vect{x} - \vect{x}_0 \right)
 \end{equation}
 Note that because a harmonic point source is considered the Helmholtz equation
-is used. The solution of this inhomogeneous Helmholtz equation is again an
+is used.
+
+The solution of this inhomogeneous Helmholtz equation is again an
 ingoing and outgoing spherical wave. Because of causality we consider only the
 outgoing wave. In free field the Green's function of this outgoing wave is
 \begin{equation}
@@ -187,20 +190,24 @@ with $r = \left| \vect{x} - \vect{x}_0 \right|$ the distance from point source t
 % \end{equation}
 
 \subsection{Aerodynamic sound sources}\label{sec:theory:sound:aerodynamic}
-The classic wave equation cannot describe aerodynamic sources. Lighthill
-provided the theory to take into account aerodynamic sources. The aero-acoustic
-analogy of Lighthill is the idea of representing a fluid mechanical process that
-acts as an acoustic source by an acoustically equivalent source term.
+Classical acoustics provides a method for modeling sound generation due to
+vibrating solid boundaries. Aerodynamic sources such as combustion or other
+unsteady fluid processes cannot be handled, however. With the development of
+jet-powered aircraft a description was needed to model such sources. Lighthill
+provided the theory to take into account aerodynamic sources. The idea is that
+an unsteady flow will produce sound. A simple example is the sound that is
+generated when flow passes a string or antenna. The aero-acoustic analogy of
+Lighthill is the idea of representing a fluid mechanical process that acts as an
+acoustic source by an acoustically equivalent source term.
 
 % He drew an analogy between the non-homogeneous versions of the fluid equations and the classical
 % wave equation including the single acoustic source term.
 
 Taking the time derivative of the homogeneous version of the mass conservation
-equation (eq. \ref{eq:theory:sound:wave:mass}) and the divergence of the
-homogeneous version of the momentum conservation equation (eq.
-\ref{eq:theory:sound:wave:momentum}), then subtracting one from another, and
-finally subtracting from both sides of the equation $c^2 \nabla^2 \rho$, results in the Lighthill
-equation
+equation and the divergence of the homogeneous version of the momentum
+conservation equation, then subtracting one from another, and finally
+subtracting from both sides of the equation $c^2 \nabla^2 \rho$, results in the
+Lighthill equation
 \begin{equation}
   \frac{\partial^2 \rho}{\partial t^2} - c^2 \nabla^2 \rho = \nabla^2 \matr{T}
 \end{equation}
