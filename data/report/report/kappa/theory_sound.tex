@@ -38,7 +38,7 @@ of sound waves and can be derived from the fundamental laws of fluid dynamics \c
 The mass conservation or continuity equation is given by
 % Mass conservation equation
 \begin{equation}\label{eq:theory:sound:wave:mass}
- \frac{\partial \rho}{\partial t} + \nabla \cdot \rho \vect{u} = m
+ \frac{\partial \rho}{\partial t} + \nabla \cdot \left( \rho \vect{u} \right) = m
 \end{equation}
 with $\rho$ the density of the medium, $t$ the time, $\vect{u}$ the flow velocity
 vector, $m$ the mass and $\nabla = \left( \frac{\partial}{\partial
@@ -55,7 +55,7 @@ density and $\matr{P}$ the fluid stress tensor. The fluid stress tensor relates 
   \matr{P} = p \matr{I} - \matr{\tau}
 \end{equation}
 where $\matr{I}$ is a unit tensor. Viscous stresses are small compared to inertial
-forces. Ignoring them, and rewriting equation
+forces. Assuming an ideal fluid by ignoring the viscous stresses, and rewriting equation
 \ref{eq:theory:sound:wave:momentum} using equation
 \ref{eq:theory:sound:wave:mass}, we obtain the following form for the momentum conservation equation
 \begin{equation}
@@ -125,7 +125,7 @@ In acoustics harmonic waves in the following complex form are typically consider
 where $\hat{p} \left(\vect{x}\right)$ is the amplitude of the wave and $\omega=2 \pi f$ the angular frequency.
 
 \subsubsection*{Helmholtz equation}
-Inserting the (derivatives of) a harmonic wave in the wave equation results in
+Inserting (the derivatives of) a harmonic wave in the wave equation results in
 the Helmholtz equation
 \begin{equation}\label{eq:theory:sound:wave:helmholtz}
  \left( \nabla^2 + k^2 \right) \hat{p} = 0
@@ -196,9 +196,10 @@ unsteady fluid processes cannot be handled, however. With the development of
 jet-powered aircraft a description was needed to model such sources. Lighthill
 provided the theory to take into account aerodynamic sources. The idea is that
 an unsteady flow will produce sound. A simple example is the sound that is
-generated when flow passes a string or antenna. The aero-acoustic analogy of
-Lighthill is the idea of representing a fluid mechanical process that acts as an
-acoustic source by an acoustically equivalent source term.
+generated when flow passes a string or antenna.
+The aero-acoustic analogy of Lighthill is the idea of representing a fluid
+mechanical process that acts as an acoustic source by an acoustically equivalent
+source term.
 
 % He drew an analogy between the non-homogeneous versions of the fluid equations and the classical
 % wave equation including the single acoustic source term.
@@ -209,21 +210,33 @@ conservation equation, then subtracting one from another, and finally
 subtracting from both sides of the equation $c^2 \nabla^2 \rho$, results in the
 Lighthill equation
 \begin{equation}
-  \frac{\partial^2 \rho}{\partial t^2} - c^2 \nabla^2 \rho = \nabla^2 \matr{T}
+  \frac{\partial^2 \rho}{\partial t^2} - c^2 \nabla^2 \rho = \nabla \cdot \nabla \cdot \matr{T}
 \end{equation}
 where $\matr{T}$ is the Lighthill stress tensor
 \begin{equation}
-  \matr{T} = \rho \vect{u}\vect{u} + \left( \left( p - c^2 \rho \right) \matr{I} - \matr{\tau}  \right)
+  \matr{T} = \rho \vect{u}\vect{u} + \left( p - c^2 \rho \right) \matr{I} - \matr{\tau}
 \end{equation}
+The right-hand side of the Lighthill equation describes the non-homogeneous
+fluid in a finite volume $V$. This area is called the source region or source
+field. The left-hand side of the equation is called the sound field, it
+describes the homogeneous fluid and this is where the classical wave equation
+governs sound propagation.
 
-Lighthill's acoustic analogy has the limitation that the source field is not
-coupled to the acoustic field. That means situations where feedback occurs,
-i.e., the acoustic field modifies the flow field and vice versa, cannot be
-treated.
+The Lighthill stress tensor consists of three aero-acoustic processes that are sources of sound \cite{Rienstra2017}:
+\begin{enumerate}
+  \item non-linear convective forces as described by the stress tensor $\rho \vect{u}\vect{u}$,
+  \item viscous forces $\tau$,
+  \item deviations from a uniform soundspeed $c_0$ or isentropic behaviour $p' - c_0^2 \rho'$. \todo{requires linearisation}
+\end{enumerate}
+
+% Lighthill's acoustic analogy has the limitation that the source field is not
+% coupled to the acoustic field. That means situations where feedback occurs,
+% i.e., the acoustic field modifies the flow field and vice versa, cannot be
+% treated.
 
 
-The Mach number $M = v / c$ represents the ratio of the flow velocity to the
-local speed of sound.
+% The Mach number $M = v / c$ represents the ratio of the flow velocity to the
+% local speed of sound.
 
 
 
@@ -257,12 +270,12 @@ where $\dot{m} = \partial m / \partial t$ is the time derivative of the unsteady
 
 Moment
 
-\subsubsection*{Multipoles and spherical harmonics} % TODO Unless I would write a piece about Ambisonics I have no need for this so could skip it
-
-
-\missingfigure{Multipoles and spherical harmonics}
-
-Ambisonics
+% \subsubsection*{Multipoles and spherical harmonics} % TODO Unless I would write a piece about Ambisonics I have no need for this so could skip it
+%
+%
+% \missingfigure{Multipoles and spherical harmonics}
+%
+% Ambisonics
 
 
 \subsection{Moving source}
@@ -305,8 +318,18 @@ convective amplification.
 
 
 \subsection{Atmospheric attenuation}\label{sec:theory_sound_atmospheric_attenuation}
-Soundwaves are attenuated due to relaxation processes in the medium.
-A model for atmospheric attenuation is given in Part 1 of ISO 9613-1:1993\cite{ISO9613-1}.
+As sound waves travel through an atmosphere the waves are attenuated through
+atmospheric attenuation. There are two effects causing attenuation. The first
+effect causing attenuation is classical heat conduction and shear viscosity.
+These effects were considered insignificant when deriving the wave equation. The
+second effect is on a molecular scale and is due to an energy exchange between
+translation and rotational or vibrational modes. Molecules collide and are
+excited when a wave passes resulting in energy transfer. The energy transfer is
+a function of the relaxation time of the molecules. Because the molecules need a
+certain time to reach equilibrium the heat capacity of the medium is
+time-dependent thus resulting in an irreversible process causing losses.
+
+A model for atmospheric attenuation is given in Part 1 of ISO 9613-1:1993 \cite{ISO9613-1}.
 The attenuation coefficient $\alpha$, in dB/m, is given by
 \begin{align}\label{eq:theory:sound:atmospheric-attenuation}
  \alpha &= 8.686 f^2 \Biggl( \left[ 1.84 \times 10^{-11} \left(\frac{p_r}{p_a}\right)^{-1} \left(\frac{T}{T_0}\right)^{1/2} \right] + \left(\frac{T}{T_0}\right)^{-5/2} \nonumber \\ 
