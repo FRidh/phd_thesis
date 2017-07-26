@@ -395,24 +395,26 @@ audible beating \cite{Rizzi2013}. Decorrelation can reduce the beating.
 % \subsection{Aim}
 
 The aim of the thesis is to develop a tool to simulate the audible sound of
-airplanes in an urban environment, so that in the future new methodologies can be
-developed to assess annoyance and sleep disturbance due to aircraft noise.
+airplanes in an urban environment, so that in the future aspects like annoyance
+and sleep disturbance due to aircraft noise can be investigated using
+auralisations as provided by the tool. The auralisation tool should therefore
+provide auralisations that sound sufficiently plausible to investigate these
+aspects.
 
-There's a large variety of different aircraft in use nowadays, that could each
+There is a large variety of different aircraft in use nowadays, that could each
 be perceived differently. In order to investigate the human response impact of
 each of these aircraft, an additional requirement is that the tool should be
-able to simulate the audible sound of of the current fleet of aircraft. Instead
-of simulating the emission of the aircraft based on emission models for the
-different radiating components, the goal of this work is to investigate whether
-plausible sounding auralisations can be made with its emission properties
-derived from recordings.
+able to simulate the audible sound of of the current fleet of airplanes. Instead
+of simulating the emission of the aircraft based on (existing) emission models
+for the different radiating components, the goal of this work is to investigate
+whether plausible sounding auralisations can be made with its emission
+properties derived from recordings.
 
-To improve the plausibility of auralisations of aircraft at larger distances, a
-method is developed to include both amplitude and phase fluctuations due to
-atmospheric turbulence. The method should improve the plausibility of the
-auralisations while at the same time have a physical basis and preferably
-perform well enough for use in real-time simulators.
-
+To improve the plausibility of auralisations of aircraft at especially larger
+distances, a second goal is to develop a method for incorporating amplitude and
+phase fluctuations due to atmospheric turbulence. The method should improve the
+plausibility of the auralisations while at the same time have a physical basis
+and preferably perform well enough for use in real-time simulators.
 
 
 %
@@ -436,11 +438,15 @@ perform well enough for use in real-time simulators.
 The thesis is structured as follows.
 \newline
 \newline
-Chapter \ref{chapter:theory} provides an overview of theory required to understand the concepts that are used throughout the thesis.
-Discussed the basics of sound, signal processing, auralisation, previous work on aircraft auralisation and emission synthesis, and finally atmospheric turbulence.
+Chapter \ref{chapter:theory} provides an overview of theory required to
+understand the concepts that are used throughout the thesis. Discussed are the
+basics of sound, signal processing, auralisation, previous work on aircraft
+auralisation and emission synthesis, and finally atmospheric turbulence.
 \newline
 \newline
-Chapter \ref{chapter:tool} describes the auralisation tool that was developed. The propagation model is explained as well as the algorithm that is used to extract features from recordings and synthesise aircraft sounds based on that.
+Chapter \ref{chapter:tool} describes the auralisation tool that was developed.
+The propagation model is explained as well as the algorithm that is used to
+extract features from recordings and synthesise aircraft sounds based on that.
 \newline
 \newline
 Chapter \ref{chapter:test} aims to answer the question whether the auralisation
@@ -452,7 +458,8 @@ algorithm for simulating fluctuations due to atmospheric turbulence and how to
 apply this algorithm in auralisations to improve their plausibility.
 \newline
 \newline
-Finally, the work is summarised in Chapter \ref{chapter:conclusions} and future work is suggested.
+Finally, the work is summarised in Chapter \ref{chapter:conclusions} and future
+work is suggested.
 
 
 \subsection{Limitations}
@@ -460,6 +467,15 @@ The goal is to develop a tool that can deliver auralisations of airplanes that
 sound plausible. Unless mentioned otherwise, the type of aircraft considered are
 commercial airliners that have jet engines.
 
+Events that are considered are take-offs relatively close to the airport. In
+this case, the airport is Zurich airport as that is where data was gathered.
+Take-offs are considered instead of landings because landings can contain
+relatively fast-varying frequency components due to thrust corrections made by the pilot.
+
+The auralisation tool considers only source motion and not receiver motion
+or a mean motion of the medium. The basic propagation model assumes a homogeneous
+and isotropic atmosphere and can therefore not take into account wind or
+temperature gradients.
 
 % \begin{itemize}
 %

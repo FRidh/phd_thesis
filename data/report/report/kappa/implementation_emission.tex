@@ -1,10 +1,45 @@
-\section{Backpropagation and emission synthesis}
+\section{Backpropagation and emission synthesis}\label{sec:tool:synthesis}
+
+\subsection{Introduction}
+The previous section treated the propagation model of the tool. In order to
+simulate the audible sound of aircraft an emission signal is needed. Thus far a
+simple signal consisting of noise and a tone was considered. This section
+describes a method to create an emission signal from features derived from
+recordings. The propagation model can then be used to compute an auralisation or
+pseudo-recording at a receiver position. Figure
+\ref{fig:tool:backpropagation:introduction:block-diagram} shows a block diagram of
+the steps that are treated in this section.
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[auto, node distance=1cm,>=latex']
+\tikzset{
+block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimum width=5em, text width=5em, align=center},
+}
+    % Main nodes
+    \node [block]                       (recording)     {Recording};
+    \node [block, right=of recording]   (backprop)      {Back-\\propagation};
+    \node [block, right=of backprop]    (feature)       {Feature\\extraction};
+    \node [block, right=of feature]     (emission)      {Emission\\synthesis};
+%     \node [block, right=of emission]    (auralisation)  {Auralisation};
+
+    % Main edges
+    \draw [->]  (recording)     --  (backprop);
+    \draw [->]  (backprop)      --  (feature);
+    \draw [->]  (feature)       --  (emission);
+%     \draw [->]  (emission)      --  (immission);
+
+\end{tikzpicture}
+  \caption{Block diagram of the backpropagation, synthesis and auralisation method.}
+  \label{fig:tool:backpropagation:introduction:block-diagram}
+\end{figure}
+
 % An automated procedure was developed to a) backpropagate from source to receiver
 % in time-domain and b) analyze the resulting signal to extract features that could be
 % used in the development of an emission model or to directly resynthesise the
 % emission.
 
-\subsection{Measurement data}
+% \subsection{Measurement data}
 For the emission synthesis a signal is generated that is based on measurements
 conducted as part of the sonAIR project \cite{Zellmann2013}. Measurements of
 sound were conducted at various positions nearby Z\"{u}rich Airport. An
@@ -38,9 +73,9 @@ trajectory.}
 An automated procedure was developed to backpropagate from receiver to source in
 time-domain. The procedure assumes there is only one propagation path,
 the direct path, and that the aircraft can be considered a point source.
-As shown in Figure \ref{fig:backpropagation_block_diagram} the
+As shown in Figure \ref{fig:backpropagation_block_diagram}, the
 backpropagation algorithm undoes atmospheric attenuation, the Doppler shift, and
-geometrical spreading (magnitude) in that specific orderand using the methods as
+geometrical spreading (magnitude) in that specific order and using the methods as
 described in the previous section \cite{Rietdijk2015}.
 % A recording is taken, and assuming there were no reflections, the atmospheric attenuation and spherical spreading were undone.
 Because only the direct path was considered all parameters that were used in the
@@ -118,9 +153,13 @@ function of frequency.
 A tone-seeking algorithm (in frequency domain) was developed \cite{Rietdijk2016}
 that utilises ISO 1996-2:2007 Annex C \cite{ISO1996-2_2007}. The tone-seeking
 algorithm as described in the standard did not prove capable of detecting all
-tones, and therefore an improved method was needed. The tones in the spectra
-considered, typically consist of only \say{Buzz-Saw} and blade pass frequency
-harmonics. Therefore, the assumption was made that all tones found by the
+tones, and therefore an improved method was needed.
+
+The situations considered are landings, and therefore the tonal components
+in the spectra are not only the blade passing frequency of the fan and its
+harmonics, but also \say{Buzz-Saw} tones. The common denominator of the frequencies of
+these components is the frequency at which the engine shaft rotates.
+The assumption was therefore made that all tones found by the
 tone-seeking algorithm from the standard were harmonics and that the fundamental
 frequency was within a specified range.
 
@@ -138,7 +177,7 @@ order
 \begin{equation}
  e = \sum_{i=0}^{n} \left( \frac{f_i}{f_0} - \mathrm{round}\left(\frac{f_i}{f_0}\right) \right)^2
 \end{equation}
-An estimate of the fundamental frequency is obtained by minimizing this error.
+An estimate of the fundamental frequency is obtained by minimising this error.
 
 An earlier version of the algorithm did not use the $\mathrm{gcd}$ in
 combination with the optimisation algorithm but instead determined the
@@ -148,10 +187,10 @@ complex cepstrum, the value that was obtained was not sufficiently accurate
 for determining higher harmonics.
 
 In the method as described in Annex C of ISO 1996-2:2007 each spectral line is
-assigned a label, e.g. whether the line is part of a tone or noise. Tones typically
-have a bandwidth and can therefore, depending on the frequency resolution, be spread over multiple lines.
-% and consists therefore, depending on frequency resolutionin which case a single tone is, depending on the frequency resolution used, described by multiple lines.
-In order to compute the level of a tone, the spectral lines corresponding to that tone need to be integrated.
+assigned a label, e.g. whether the line is part of a tone or noise. Tones
+typically have a bandwidth and can therefore, depending on the frequency
+resolution, be spread over multiple lines. In order to compute the level of a
+tone, the spectral lines corresponding to that tone need to be integrated.
 
 The bandwidth of the tonal components depends on various aspects, like frequency
 or phase modulations at the source or during propagation, e.g. due to
@@ -178,37 +217,44 @@ and frequency resolution.
 \subsection{Emission and immission synthesis}
 % As mentioned before the emission was synthesised using spectral modelling
 % synthesis.
-With the extracted features, which were obtained as function of time
-and at several receiver positions, it is possible to develop an emission model
-that takes into account directivity.
+With the extracted features, which were obtained as function of time and at
+several receiver positions, it is possible to develop an emission model that
+takes into account directivity of the spectral components. Such emission model
+would then output input for the SMS synthesiser and the created emission signal
+would be propagated to a receiver a location.
 
-An important question to ask is whether the extracted features and the spectral
-modelling synthesis is sufficient. Therefore, for a listening test auralisations
-of emission and immission were made based on recordings. For a specific event
-and receiver, the immission was backpropagated and features were extracted.
-These features were used to re-synthesise the emission.
+An important question to ask is whether the described methodology of extracting
+features, synthesising an emission signal and propagating it would result in
+plausible auralisations. For example, it could be possible that the chosen
+synthesis strategy and features cannot reproduce certain characteristics in the
+sound. Therefore, the next chapter describes a comparison between auralisations
+and recordings with the auralisations based on recordings.
 
-The emission signal was propagated to the receiver, and a direct path and a
-single reflection were considered. The assumption was made that the emission is
+For a specific event and receiver, the immission was backpropagated and features
+were extracted. These features were used to re-synthesise the emission. The
+emission signal was propagated to the receiver, and a direct path and a single
+reflection were considered. The assumption was made that the emission is
 identical for the emission angles corresponding to direct and reflected path.
 
 The feature extraction method provided frequencies and levels of tonal
 components as function of time. Variations in the frequencies as function of
 time could be observed, but with a two second window that would result in only
-few data points. We therefore ignored variations in frequency and computed an
+few data points. Variations in frequency were therefore ignored and computed was an
 average value for the fundamental and each of the harmonics.
 
-As mentioned in the previous section, values for the phase of the tones could not be obtained, and therefore values had to be chosen.
-Because the harmonics are \say{Buzz-Saw} noise, a phase corresponding to a sawtooth
-signal was initially assumed. Participants in a preliminary test found the simulations
-sound metallic compared to the recordings \cite{Rietdijk2016a}. Therefore, eventually a random phase
-was chosen for each harmonic.
+As mentioned in the previous section, values for the phase of the tones could
+not be obtained, and therefore values had to be chosen. Because the harmonics
+are \say{Buzz-Saw} noise, a phase corresponding to a sawtooth signal was
+initially assumed. Participants in a preliminary test found the simulations
+sound metallic compared to the recordings \cite{Rietdijk2016a}. Therefore,
+eventually a random phase was chosen for each harmonic.
 
-Figures \ref{fig:synthesis} and \ref{fig:auralisation} show spectrograms of respectively the emission synthesis and the auralisation at the receiver.
+Figures \ref{fig:synthesis} and \ref{fig:auralisation} show spectrograms of
+respectively the emission synthesis and the auralisation at the receiver.
 
 \newpage
 \afterpage{
-\begin{figure}[p]
+\begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/synthesis}
   \caption{Emission synthesis of the aircraft. Inputs to the emission synthesiser were obtained by applying the feature-extraction algorithm to the signal shown in Figure \ref{fig:backpropagated}. The level of the tonal components vary over time. The blade passing frequency is not clearly visible because the determined level of the tone was underestimated.}
@@ -216,7 +262,7 @@ Figures \ref{fig:synthesis} and \ref{fig:auralisation} show spectrograms of resp
 \end{figure}
 
 
-\begin{figure}[p]
+\begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/auralisation}
   \caption{Auralisation of the event shown in Figure \ref{fig:recording} .

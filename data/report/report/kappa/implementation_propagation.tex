@@ -1,35 +1,27 @@
 \section{Propagation model}
 
 \subsection{Introduction}
-The propagation model takes into account geometrical spreading, Doppler shift,
-atmospheric attenuation and the ground reflection. Furthermore, a model was
-developed to include scintillations, that is, fluctuations in the sound due to atmospheric
-turbulence \cite{Rietdijk2017}. Convective amplification is supported in the
-propagation model but was ignored here.
+The propagation model covers sound propagation in the far field through a
+homogeneous and isotropic atmosphere. Sound is modelled as rays. The propagation
+model takes into account geometrical spreading, Doppler shift, atmospheric
+attenuation and the ground reflection. These propagation effects are taken into
+account as signal processing operations.
+A model was developed to include scintillations, that is, fluctuations in the
+sound due to atmospheric turbulence \cite{Rietdijk2017}. That part is discussed
+in detail in chapter \ref{chapter:turbulence}.
 
 Figure \ref{fig:propagation_block_diagram} shows a block diagram of the steps
 that are taken. Because of source motion all propagation effects are
-time-variant. The following sections will describe each of these steps in
-detail.
+time-variant. The order of the operation matters although some could be
+exchanged. The Doppler-shift occurs between the source and the medium and
+therefore divergence is computed first. The shifted frequencies are then
+attenuated in the atmosphere. A reflection is modeled as a parallel path with a
+filter representing the reflection coefficient. In case there is no movement
+this filter may be considered part of the mirror source, however, as movement is
+considered it needs to be placed after the Doppler-shift has been applied. The
+following sections will describe each of these steps in detail.
 
-% TODO explain situation - check noise signal!!
-To demonstrate the different propagation effects we simulate a situation and
-will sequentially add propagation effects. A simple
-emission signal is considered consisting of brown noise and a tone with a
-frequency of \SI{1000}{\hertz}, both modelled as a monopole point source. An
-"aircraft" moves at a height of \SI{200}{\meter} and with a speed of
-\SI{100}{\meter\per\second} straight over the receiver.
-
-Figure \ref{fig:implementation:propagation:emission} shows a spectrogram of the
-emission signal.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[]{../figures/generated/propagation/emission}
-  \caption{Spectrogram of the immission. Because in this case we do not consider sound propagation this in facts corresponds to the emission of the aircraft as function of the orientation.}
-  \label{fig:implementation:propagation:emission}
-\end{figure}
-
+% TODO remove turbulence from block diagram?
 \begin{figure}[H]
   \centering
 \begin{tikzpicture}[auto, node distance=1cm,>=latex']
@@ -56,17 +48,45 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
   \label{fig:propagation_block_diagram}
 \end{figure}
 
-\subsection{Geometrical spreading} % TODO refer to theory
-Geometrical spreading causes a decrease in amplitude with distance due to divergence and increase
-in propagation delay with distance due to the finite speed of sound. Far field
-is assumed in which case we obtain the sound pressure at the receiver $p_{\mathrm{rcv}}$
-by scaling the magnitude of the sound pressure $p_{\mathrm{src}}$ at some other distance
-from the source $r_{\mathrm{src}}$
+% TODO convective amplification is a source motion effect, not propagation.
+% Discuss in other section?
+% Convective amplification is supported in the
+% propagation model but was ignored here.
+
+% TODO explain situation - check noise signal!!
+To demonstrate the different propagation effects a fixed situation is considered
+and propagation effects are added sequentially. A simple
+emission signal is considered consisting of brown noise and a tone with a
+frequency of \SI{1000}{\hertz}, both modelled as a monopole point source. The
+\say{aircraft} moves at a height of \SI{200}{\meter} and with a speed of
+\SI{100}{\meter\per\second} straight over the receiver.
+Figure \ref{fig:implementation:propagation:emission} shows a spectrogram of the
+emission signal.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../figures/generated/propagation/emission}
+  \caption{Spectrogram of the immission. Because in this case we do not consider sound propagation this in facts corresponds to the emission of the aircraft as function of the orientation. An omni-directional source is considered and therefore the emission is stationary.}
+  \label{fig:implementation:propagation:emission}
+\end{figure}
+
+
+\newpage
+\subsection{Geometrical spreading}
+Geometrical spreading causes a decrease in amplitude with distance due to
+divergence and increase in propagation delay with distance due to the finite
+speed of sound. Far field is assumed in which case the sound pressure at the
+receiver $p_{\mathrm{rcv}}$ is given by the Green's function given in equation
+\eqref{eq:theory:sound:green-free-field}. The emission signal $p_{\mathrm{src}}$
+is computed at a fixed distance from the source $r_{\mathrm{src}}$. The sound
+pressure at a receiver at distance $r_{\mathrm{rcv}}$ can be obtained by
+rescaling the magnitude of the sound pressure of the emission signal with the
+ratio of the distances
 \begin{equation}
  p_{\mathrm{rcv}} = p_{\mathrm{src}} \frac{r_{\mathrm{src}}}{r_{\mathrm{rcv}}}
 \end{equation}
-
-Figure \ref{fig:implementation:propagation:spreading} shows a spectrogram of the
+This operation is implemented as a simple gain. Figure
+\ref{fig:implementation:propagation:spreading} shows a spectrogram of the
 immission when geometrical spreading is taken into account.
 
 \begin{figure}[H]
@@ -82,29 +102,37 @@ is taken into account by resampling the discretized sound pressure signal with a
 Variable Delay Line. Since the signal is discrete and the delay is generally not
 an integer multiple of the sample time, an interpolation scheme is required.
 
-Different interpolation schemes exist and in this case a linear interpolation
-scheme was chosen due to its simplicity and computational performance \cite{Heutschi2014}.
-As a side-effect, linear interpolation causes low-pass filtering of the signal as
-well as aliasing. These side-effects can be minimized by choosing another
-interpolation scheme, like e.g. Lanczos \cite{Rietdijk2015, Pieren2015}.
+% TODO some of it needs to go to theory
+As explained in section \ref{sec:theory:signal:resampling}, multiple
+interpolation schemes exist, including Lanczos interpolation that was used for
+auralisation as well \cite{Rietdijk2015, Pieren2015}. In this case a linear
+interpolation scheme was chosen due to its simplicity and computational
+performance \cite{Heutschi2014}. While linear interpolation can cause audible
+artifacts, these are in the case of a broadband signal less pronounced than if
+solely a tonal component is considered as was demonstrated in Figure
+\ref{fig:theory:signal-processing:resampling}.
 
-% The following describes a method for resampling and linearly interpolating a signal using array processing.
-% The actual implementation used a Variable Delay Line (VDL) because a real-time implementation was desired.
+For a given sound travel time $\Delta t(t)$ from source to receiver, the non-integer sample index
+$n_{e}$ of the signal $y[n_e]$ at the source time-axis is given as
+\begin{equation}
+ n_{e} = n_r - \Delta t (t) \cdot f_s
+\end{equation}
+where $f_s$ is the fixed sampling frequency and $n_r$ the integer sample index
+of the signal at the receiver time-axis. Equation
+\eqref{eq:theory:signal:resampling:interpolation-linear} can then be used for
+applying the Doppler shift when using $n=\floor{n_e}$ and $\eta = n_e - \floor{n_e}$
+where $\floor{n_e}$ corresponds to the floor function of $n_e$.
+Furthermore, an emission time should exist and therefore there is the
+requirement $\floor{n_e} >= 0$.
 
-For a given sound travel time $\Delta t(t)$ from source to receiver, the index
-$k_{e}$ of the signal $s[k_e]$ at the source time-axis is given as
-\begin{equation}
- k_{e} = k_r - \Delta t (t) \cdot f_s
-\end{equation}
-where $f_s$ is the sampling frequency and $k_r$ the sample of the signal at the
-receiver time-axis. The received signal value $s$ at index $k_e$ is then
-determined by
-\begin{equation}
- s[k_e] = \left( 1 - k_e +  \floor{k_e} \right) \cdot s \left[ \floor{k_e} \right] + \left( k_e - \floor{k_e} \right) * s \left[ \floor{k_e} + 1 \right]
-\end{equation}
-where $\floor{k_e}$ corresponds to the floor function of $k_e$.
-The sound travel time was computed with the following expression for the speed of sound $c = 343.2 \sqrt{ \frac{T}{T_0} }$
-where $T$ is the temperature during the event and $T_0 = 293.15$ K the reference temperature.
+% The received signal value $y$ at index $n_e$ is then determined by
+% \begin{equation}
+%  y[n_e] = \left( 1 - n_e +  \floor{n_e} \right) \cdot y \left[ \floor{n_e} \right] + \left( n_e - \floor{n_e} \right) * y \left[ \floor{n_e} + 1 \right]
+% \end{equation}
+% where $\floor{n_e}$ corresponds to the floor function of $n_e$.
+The sound travel time was computed with the following expression for the speed of sound $c =
+343.2 \sqrt{ \frac{T}{T_0} }$ where $T$ is the temperature during the event and
+$T_0 = 293.15$ K the reference temperature.
 
 Figure \ref{fig:implementation:propagation:doppler} shows a spectrogram of the
 immission when the propagation delay is also considered.
@@ -118,16 +146,17 @@ immission when the propagation delay is also considered.
 
 \newpage
 \subsection{Atmospheric attenuation} % TODO refer to theory
-Atmospheric attenuation is accounted for by creating a time-variant filter of length $N_{aa}$
-with a magnitude response based on ISO 9613-1:1993\cite{ISO9613-1}. A single-sided magnitude spectrum is calculated as
+Atmospheric attenuation is accounted for by creating a time-variant filter of length $N_{aa}$.
+A single-sided magnitude spectrum is calculated as
 \begin{equation}
- H_{aa} = 10^{- d \alpha(f) / 20}
+ \left| H_{aa} \right| = 10^{- d \alpha(f) / 20}
 \end{equation}
 where $d$ is the source-receiver distance in \SI{}{meter} and $\alpha(f)$ the
 frequency-dependent attenuation coefficient in \SI{}{\decibel\per\meter} computed using
 equation \ref{eq:theory:sound:atmospheric-attenuation}.
+
 % The air pressure, relative humidity, and temperature were recorded during the event.
-The impulse response of a magnitude-only filter is non-causal and therefore in
+The impulse response of a magnitude-only or zero-phase filter is non-causal and therefore in
 order to create a causal filter a linear-phase filter corresponding to 90
 degrees is added. The spectrum is real and even, and therefore the impulse
 response is real and even as well. After convolving the signal with the designed
@@ -136,7 +165,7 @@ by the linear-phase factor.
 
 Convolution was performed using an overlap-save algorithm. The filter length was
 4096 samples and the hop size 256 samples. Transitioning to the next impulse
-response was done without smoothing.
+response was done without smoothing because the impulse responses are relatively small.
 
 Figure \ref{fig:implementation:propagation:attenuation} shows a spectrogram of
 the immission when atmospheric attenuation is included. A reference atmosphere
@@ -228,10 +257,10 @@ was considered.
 
 \newpage
 \subsection{Ground reflection} % TODO refer to theory. Extend?
-While the Image Source Method \cite{Mechel2013} was implemented with image
-receivers instead of image sources, we consider here only one additional path,
-a ground reflection, and therefore won't go into details about the
-implementation of the ISM.
+While the image source method (ISM) was implemented with image
+receivers instead of image sources, only one additional path,
+a ground reflection, was considered. Therefore, the implementation of the ISM
+will not be treated any further.
 
 The ground reflection is considered as a second propagation path using a mirror receiver.
 % The implementation supports direction-dependent emission signals, but because we had only one emission...
@@ -240,16 +269,15 @@ direct path, thereby ignoring directivity of the sources. Why the directivity of
 the source is ignored will become clear in the following sections.
 
 A filter was included to take into account the transfer funtion of the ground.
-For the ground reflection the plane wave reflection coefficient was used (eq. \ref{eq:theory:sound:reflection:plane}) and the impedance $Z$ was
-calculated using Delany and Bazley's one-parameter model (eq.
-\ref{eq:theory:sound:impedance:db}).
+For the ground reflection the plane wave reflection coefficient was used (eq. \eqref{eq:theory:sound:reflection:plane}) and the impedance $Z$ was
+calculated using Delany and Bazley's one-parameter model (eq. \eqref{eq:theory:sound:impedance:db}).
 
 Because aircraft are mostly overhead and at larger distances,
 using the plane wave reflection coefficient should typically be sufficient.
 However, when simulating noise sources at low elevation angles, the plane-wave
 assumption is no longer valid and must be replaced by a model that takes into
 account the reflection of spherical waves from a ground surface of finite
-impedance \cite{Tuttle2014} % TODO rewrite. Maybe move to theory
+impedance \cite{Tuttle2014}. % TODO rewrite. Maybe move to theory
 
 The scenarios considered were landings. Because the area around the airport
 consists mostly of grass a flow resistivity of
@@ -257,7 +285,8 @@ consists mostly of grass a flow resistivity of
 4096 samples and the hop size 256 samples.
 
 Figure \ref{fig:implementation:propagation:reflection} shows a spectrogram of
-the immission when a ground reflection was added. A hard ground was considered.
+the immission when a ground reflection was added. A hard ground was considered for this figure.
+The effect of a soft ground was already demonstrated in Figure \ref{fig:theory:sound:reflection:ground}.
 
 \begin{figure}[H]
   \centering

@@ -1,23 +1,30 @@
 \section{Overview}
 
-The aim was to develop a tool for the auralisation of airplanes. In this chapter, which is based on Paper \ref{paper:overview}, such a tool is described.
-% As explained in the introduction, the goal is to develop a tool that can produce auralisations that are physically as correct as possible, yet at low computational cost.
+The aim was to develop a tool for the auralisation of airplanes. In this
+chapter, which is based on Paper \ref{paper:overview}, such a tool is described.
+% As explained in the introduction, the goal is to develop a tool that can
+% produce auralisations that are physically as correct as possible, yet at low
+% computational cost.
+The auralisation tool consists roughly of three parts as shown also in Figure
+\ref{fig:implementation:overview}:
 
-As with Lighthill's theory we consider a source and sound region. The source is assumed to be composed of one or multiple compact/point sources.
-Prominent sources like the engines are indeed small compared to the wavelengths
+\begin{itemize}
+\item The first part covers emission synthesis and generates as function of time and
+emission angle a signal. Sources are considered to be point sources and the
+generated values correspond to their emission at 1 meter from the point source.
+Spectral modelling synthesis is chosen as synthesis strategy.
 
+\item The second part describes sound propagation in the far field through a,
+for now, isotropic and homogeneous atmosphere. The assumption is made that sound
+can be considered a ray.
 
-Sound in the sound region satisfies the homogeneous wave equation.
-The
-The assumption is made that source and propagation can be 
-described independently of each other. 
-
-% \begin{figure}[H]
-%         \centering
-%         \includegraphics[height=0.4\textheight]{../figures/implementation_overview}
-%         \caption{Overview.}
-%         \label{fig:implementation_overview}
-% \end{figure}
+\item The third part deals with sound immission and more specifically sound immission
+encoding. For each source an immission of sound pressure is recorded along with
+the angle of incidence as a unit vector. With this data the emission can be
+encoded into various formats, for example, as an Ambisonics format using
+spherical harmonics, or as monoaural by adding the pressure contributions
+ignoring the angles of incidence.
+\end{itemize}
 
 \begin{figure}[H]
   \centering
@@ -35,16 +42,25 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
     \draw [->]  (propagation)   --  (immission);
 
 \end{tikzpicture}
-  \caption{Overview.}
+  \caption{The three separate parts the auralisation tool consists of.}
   \label{fig:implementation:overview}
 \end{figure}
 
-The tools mentioned in \ref{sec:theory:auralisation:software} as well as other
-general-purpose languages were considered for the implemention.
-% TODO further motivation
+The next section discusses the propagation model in detail. The chosen synthesis
+strategy requires as input spectral information of the source. The section after
+describes the emission synthesis along with a method
+for determining input values from recordings of airplanes. The perceived realism
+of these auralisations is then compared to that of the recordings in the next
+chapter by means of a listening test. Parameters that are given in this section
+correspond to those that were used for that test.
 
-The auralisation tool was implemented mostly in Python 3.5 \cite{Python} and
-Cython \cite{Behnel2011,Cython}. Extensive use was made of the
-Numpy\cite{VanderWalt2011,Numpy}, Scipy\cite{Scipy} and
+% TODO Skip?
+The tools mentioned in \ref{sec:theory:auralisation:software}, as well as other
+general-purpose languages, were considered for the implemention.
+Eventually the Python general-purpose language was chosen because of its flexibility,
+well-tested libraries for computing and signal processing as well as sufficiently good
+performance. The auralisation tool was implemented in Python 3.5 \cite{Python}.
+Certain computationally intensive routines were implemented in Cython \cite{Behnel2011,Cython}.
+Extensive use was made of the Numpy\cite{VanderWalt2011,Numpy}, Scipy\cite{Scipy} and
 Pandas\cite{Mckinney2010} libraries. A full implementation of the tool can be
 found at \cite{Rietdijk2017d}.

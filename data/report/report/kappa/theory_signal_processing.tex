@@ -370,7 +370,7 @@ Figure \ref{} shows a spectrogram of a frequency-swept sinusoidal.
 
 
 \newpage
-\subsection{Resampling and interpolation}
+\subsection{Resampling and interpolation}\label{sec:theory:signal:resampling}
 Generally a single, fixed, sample frequency is used in a chain of signal
 processing operations. However, sometimes it is necessary to resample a signal.
 
@@ -387,46 +387,40 @@ necessary to upsample first, and then downsample. Both operations require
 low-pass filtering, but because of the order of operations it is sufficient to
 low-pass filter only once and with the lower of the two cut-off frequencies.
 
-Similarly, when downsampling with an rational fraction the downsampling with an
+Similarly, when downsampling with a rational fraction, the downsampling with an
 integer factor is done first, followed by upsampling. Again, because of the
-order of operations it is sufficient to low-pass filter only one with the lower
+order of operations it is sufficient to low-pass filter only once with the lower
 of the two cut-off frequencies.
 
 \subsubsection{Interpolation} % TODO Rewrite section, more general, less specific to Doppler shift.
 The low-pass filters used when resampling are basically interpolation filters.
-Interpolation filters can also be used when applying a delay to a system in case
+Interpolation filters can be used when applying for example a delay to a system in case
 the delay is not exactly an integer of the sample time, or when the delay
-changes as function of time. The latter is called a Variable Delay Line (VDL). A
-typical example of how a VDL is used in auralisations is to apply the
-propagation delay of sound and in effect the Doppler shift.
+changes as function of time. The latter is called a Variable Delay Line (VDL).
 
-
-% Since the signal is discrete and the delay is generally not an integer multiple of the sample time, an interpolation scheme is required.
-
-% \subsubsection{Linear interpolation}
-Initially, linear interpolation was used.
-For a given sound travel time $\Delta t(t)$ from source to receiver, the index
-$k_{r}^{'}$ is given as
+A simple interpolator is a linear interpolator. A linear interpolator works by
+basically drawing a straight line between two neighboring samples and returning
+the requested value along that line. Consider a discrete signal $y[n]$, and let
+$\eta$ be a number between 0 and 1 that represents by how much we want to
+interpolate the signal $y$ between samples $n$ and $n+1$. The interpolator
 \begin{equation}
- k_{r}^{'} = k_e + \Delta t (t) \cdot f_s
+  y_{\mathrm{lin}} (n + \eta) = (1-\eta) \cdot y[n] + \eta \cdot y[n+1]
 \end{equation}
-where $f_s$ is the sampling frequency.
-
-
-\begin{equation}
- y = y_i + (y_j-y_i) \cdot \frac{x-x_i}{x_j-x_i}
+returns then the value at non-integer sample $n+\eta$. Rewriting this expression to
+\begin{equation}\label{eq:theory:signal:resampling:interpolation-linear}
+  y_{\mathrm{lin}} (n + \eta) = y[n] + \eta \cdot \left( y[n+1] - y[n] \right)
 \end{equation}
+shows that the operation needs only one multiplication and two additions.
+% The given expression describes an interpolated table lookup. In case
+% interpolation needs to be done in real-time,
 
+An interpolation filter acts as a low-pass filter and therefore introduces
+amplitude errors at higher frequencies. Furthermore, sampling the interpolated
+values results in aliasing. There are methods to reduce these artefacts. For
+example, upsampling the signal before resampling decreases the prominence of the
+artifacts. Another possibility is a different interpolation scheme.
 
-The Doppler shifted tonal component is clearly visible, however, strong artefacts are also visible and indeed audible.
-In practice, these artifacts are often masked by noise components but this however cannot be guaranteed.
-
-There are methods to reduce these artefacts. For example, upsampling the signal before resampling decreases the prominence of the artifacts.
-Another possibility is a different interpolation scheme.
-
-% \subsubsection{Lanczos interpolation}
-% TODO Not using Lanczos anymore. Keep it in?
-Theoretically, the optimal reconstruction filter is a sinc filter. In practice
+Theoretically, the optimal reconstruction filter is a sinc filter. In practice,
 only approximations of this filter can be used, and these approximations are
 generally achieved by windowing and truncating the sinc function. One of these
 approximations is the Lanczos filter or kernel, which is the sinc function
@@ -439,25 +433,49 @@ The Lanczos kernel is given by
          0, & \text{otherwise}
         \end{cases}
 \end{equation}
-where $a$ is the size of the kernel. Consider now a signal with samples $s_i$
-for integer values of $i$ where sample $s_i$ corresponds to the sample at $t=i/f_s$.
-The value at retarded time $t'$ is then given by
+where $a$ is the size of the kernel and $z$ a non-integer sample.
+The interpolator performs a convolution of the signal $x[n]$ with the kernel
 \begin{equation}
- S(x) = \sum_{\floor{x} - a + 1}^{\floor{x} + a} s_i L(x-i)
+ y_{\mathrm{lanc}}(z) = \sum_{\floor{z} - a + 1}^{\floor{z} + a} x[n] L(z-n)
 \end{equation}
-where $x$ is the sample at retarded time $t'$
-\begin{equation}
- x = -t' + i
-\end{equation}
-The frequency shift depends on the change of propagation delay. Therefore, when source and receiver are relatively close to one another, the method is most sensitive to uncertainties in source position and speed of sound.
 
-Figure \ref{fig:theory:signal-processing:resampling} shows spectrograms with
-Doppler-shifted tones for the two explained interpolation algorithms and
-different values of the kernelsize $a$. The artifacts are clearly less
-pronounced when using a larger kernelsize. However, a larger kernelsize does
-come at a cost of performance.
+Figure \ref{fig:theory:signal-processing:resampling} compares the two
+interpolators. The figure shows spectrograms of a Doppler-shifted tone for the
+two explained interpolation algorithms and two values of the kernelsize $a$.
+Aside from the Doppler-shifted tones artifacts are clearly present and indeed
+also audible. The artifacts are clearly less pronounced when using a larger
+kernelsize. However, a larger kernelsize does come at a cost of performance.
+
+
+% TODO put in implementation
+% The Doppler shifted tonal component is clearly visible, however, strong artefacts are also visible and indeed audible.
+% In practice, these artifacts are often masked by noise components but this however cannot be guaranteed.
+
+%
+% The frequency shift depends on the change of propagation delay. Therefore, when
+% source and receiver are relatively close to one another, the method is most
+% sensitive to uncertainties in source position and speed of sound.
+
+
+% % % % TODO following sentence maybe in another section?
+% % % % A typical example of how a VDL is used in auralisations is to apply the
+% % % % propagation delay of sound and in effect the Doppler shift.
+% % %
+% % % % Since the signal is discrete and the delay is generally not an integer multiple of the sample time, an interpolation scheme is required.
+% % %
+% % % % \subsubsection{Linear interpolation}
+% % % For a given sound travel time $\Delta t(t)$ from source to receiver, the index
+% % % $k_{r}^{'}$ is given as
+% % % \begin{equation}
+% % %  k_{r}^{'} = k_e + \Delta t (t) \cdot f_s
+% % % \end{equation}
+% % % where $f_s$ is the sampling frequency.
+% % %
+% % % \begin{equation}
+% % %  y = y_i + (y_j-y_i) \cdot \frac{x-x_i}{x_j-x_i}
+% % % \end{equation}
+
 % as shown in \ref{fig:theory_signal_processing_interpolation_benchmarks}.
-
 
 
 %
@@ -482,13 +500,14 @@ come at a cost of performance.
     \label{fig:theory:signal-processing:resampling}
 \end{figure}
 
-\begin{figure}
-%     \centering
-    \includegraphics{../figures/generated/signal-processing-resampling/levels}
-    \caption{Signal level as function of time.}
-    \label{fig:theory:signal-processing:resampling:levels}
-\end{figure}
-% TODO discuss, also errors at higher-speed
+% % TODO discuss, also errors at higher-speed
+% \begin{figure}
+% %     \centering
+%     \includegraphics{../figures/generated/signal-processing-resampling/levels}
+%     \caption{Signal level as function of time.}
+%     \label{fig:theory:signal-processing:resampling:levels}
+% \end{figure}
+
 
 
 

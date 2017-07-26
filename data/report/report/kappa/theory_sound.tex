@@ -26,13 +26,15 @@ theory of sound.
 In this section a brief overview is given of sound. Discussed are sound
 generation, propagation, and the effect of flow.
 
-\subsection{Wave equation}\label{sec:theory:sound:wave}
+% \subsection{Wave equation}\label{sec:theory:sound:wave}
 % In his Principia, Newton gave an description of sound and a value of the speed of sound.
 The wave equation is a differential equation for describing waves and is used
 throughout physics. In the \nth{18} century d'Alembert discovered the
 one-dimensional wave equation, and a couple of years later Euler presented the
 three-dimensional wave equation. The acoustic wave equation describes the motion
 of sound waves and can be derived from the fundamental laws of fluid dynamics \cite{Arntzen2014a, Rienstra2017}.
+In this section a brief overview is given of the different wave equations and
+expressions that are relevant when considering sound emitted by aircraft.
 
 \subsubsection*{Mass and momentum conservation}
 The mass conservation or continuity equation is given by
@@ -48,8 +50,11 @@ The momentum conservation equation is
 \begin{equation}\label{eq:theory:sound:wave:momentum}
  \frac{\partial}{\partial t} \rho \vect{u} + \nabla \cdot \left(\matr{P} + \rho \vect{u} \vect{u}  \right) = \vect{f} + m \vect{u}
 \end{equation}
-where $\vect{u} \vect{u}$ is a dyadic product\footnote{The dyadic product of the vectors $\vect{a}$ and $\vect{b}$ is the tensor $\vect{a}\vect{b}=a_i b_j$}, $\vect{f}$ the external force
-density and $\matr{P}$ the fluid stress tensor. The fluid stress tensor relates the pressure $p$ and the viscous stress tensor $\matr{\tau}$ by
+where $\vect{u} \vect{u}$ is a dyadic product\footnote{The dyadic product of the
+vectors $\vect{a}$ and $\vect{b}$ is the tensor $\vect{a}\vect{b}=a_i b_j$},
+$\vect{f}$ the external force density and $\matr{P}$ the fluid stress tensor.
+The fluid stress tensor relates the pressure $p$ and the viscous stress tensor
+$\matr{\tau}$ by
 % Viscous stress tensor
 \begin{equation}
   \matr{P} = p \matr{I} - \matr{\tau}
@@ -63,8 +68,10 @@ forces. Assuming an ideal fluid by ignoring the viscous stresses, and rewriting 
 \end{equation}
 
 \subsubsection*{Linearisation}
-Sound is a small perturbation of a steady state, and so we can apply linearisation to obtain a wave equation.
-Ignoring the source term at the right-hand side (thus considering the homogeneous solution), the linearised versions of the mass and momentum equations are given by
+Sound is a small perturbation of a steady state, and so we can apply
+linearisation to obtain a wave equation. Ignoring the source term at the
+right-hand side (thus considering the homogeneous solution), the linearised
+versions of the mass and momentum equations are given by
 % Linearised versions of the homogeneous (= without source terms) mass and momentum equations
 \begin{align}
  \frac{\partial \rho'}{\partial t} + \vect{u_0} \cdot \nabla \rho' + \rho_0 \nabla \cdot \vect{u'} = 0  \label{eq:theory:sound:linearisation:mass} \\
@@ -72,11 +79,12 @@ Ignoring the source term at the right-hand side (thus considering the homogeneou
 % \begin{equation}
  \rho_0 \left( \frac{\partial \vect{u'}}{\partial t} + \left(\vect{u_0} \cdot \nabla \right) \vect{u'}\right) + \nabla p' = 0 \label{eq:theory:sound:linearisation:momentum}
 \end{align}
-with the fluctuating components of the variables denoted with a prime and the steady components subscripted with a zero.
+with the fluctuating components of the variables denoted with a prime and the
+steady components subscripted with a zero.
 
 \subsubsection*{Speed of sound}
-Viscosity is neglected and thereby also heat transfer. The fluid is considered to behave
-adiabatic and thus the following relation between pressure and density
+Viscosity is neglected and thereby also heat transfer. The fluid is considered
+to behave adiabatic and thus the following relation between pressure and density
 fluctuations can be used
 % Adiabatic relation between pressure and density fluctuations
 \begin{equation}
@@ -93,16 +101,18 @@ is the bulk modulus of the medium. For ideal gases the bulk modulus is $K=\gamma
 p$ where $\gamma=C_p/C_v$ is the ratio of specific heat capacities at constant
 pressure $C_p$ and constant volume $C_V$.
 
-\subsubsection*{Convective wave equation}
+\subsubsection*{Convective wave equation}\todo{keep this for other section?}
 A mean flow has an effect on sound generation and propagation.
 The material derivative $D/Dt$ is defined as
 \begin{equation}
   \frac{D}{Dt} = \frac{\partial}{\partial t} + \vect{u} \nabla
 \end{equation}
-and is a time derivative of some physical quantity for a portion of a material moving with a velocity $\vect{u}$.
+and is a time derivative of some physical quantity for a portion of a material
+moving with a velocity $\vect{u}$.
 
-Taking the material derivative of the linearised mass conservation equation and subtracting the divergence of the
-linearised momentum conservation equation results in the convective wave equation.
+Taking the material derivative of the linearised mass conservation equation and
+subtracting the divergence of the linearised momentum conservation equation
+results in the convective wave equation.
 % \begin{equation}
 %   \frac{\partial^2 \rho'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) \rho' \right) + \left( \vect{u}_0 \cdot \nabla \right) \left( \vect{u}_0 \nabla \rho' \right) - \nabla^2 p' = 0
 % \end{equation}
@@ -154,7 +164,7 @@ a plane wave the pressure of a spherical wave decreases with $1/r$.
 The above solutions considered a homogeneous wave equation and therefore do not
 take into account any source terms. Linearisation of the mass and momentum equations
 would have resulted in a unsteady mass injection $m'$ and unsteady external
-force $\vect{f'}$ that correspond to a vibrating solid boundary. The wave equation with these terms is
+force $\vect{f'}$ that correspond to a vibrating solid boundary. The classical wave equation with these terms is
 \begin{equation}
    \frac{1}{c^2} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = \frac{\partial m'}{\partial t} - \nabla \cdot \vect{f}'
 \end{equation}
@@ -177,7 +187,7 @@ is used.
 The solution of this inhomogeneous Helmholtz equation is again an
 ingoing and outgoing spherical wave. Because of causality we consider only the
 outgoing wave. In free field the Green's function of this outgoing wave is
-\begin{equation}
+\begin{equation}\label{eq:theory:sound:green-free-field}
   \hat{G} = \frac{\exp{\left(jkr\right)}}{4 \pi r}
 \end{equation}
 with $r = \left| \vect{x} - \vect{x}_0 \right|$ the distance from point source to receiver.
@@ -188,6 +198,8 @@ with $r = \left| \vect{x} - \vect{x}_0 \right|$ the distance from point source t
 % \begin{equation}
 %  G = \frac{1}{4 \pi r} \delta \left( t - \tau - \frac{r}{c} \right)
 % \end{equation}
+
+\section{Sound generation}
 
 \subsection{Aerodynamic sound sources}\label{sec:theory:sound:aerodynamic}
 Classical acoustics provides a method for modeling sound generation due to
@@ -222,12 +234,15 @@ field. The left-hand side of the equation is called the sound field, it
 describes the homogeneous fluid and this is where the classical wave equation
 governs sound propagation.
 
-The Lighthill stress tensor consists of three aero-acoustic processes that are sources of sound \cite{Rienstra2017}:
-\begin{enumerate}
-  \item non-linear convective forces as described by the stress tensor $\rho \vect{u}\vect{u}$,
-  \item viscous forces $\tau$,
-  \item deviations from a uniform soundspeed $c_0$ or isentropic behaviour $p' - c_0^2 \rho'$. \todo{requires linearisation}
-\end{enumerate}
+The Lighthill stress tensor consists of three aero-acoustic processes that are
+sources of sound \cite{Rienstra2017}. The first are non-linear convective forces
+as described by the Reynold stress tensor $\rho \vect{u}\vect{u}$. The second
+viscous forces $\tau$ and the third deviations from a uniform soundspeed
+$c_0$ or isentropic behaviour $p' - c_0^2 \rho'$. \todo{requires linearisation}
+
+A limitation of Lighthill's analogy is that it cannot handle situations where
+feedback occurs because the source field is decoupled from the sound field.
+
 
 % Lighthill's acoustic analogy has the limitation that the source field is not
 % coupled to the acoustic field. That means situations where feedback occurs,
@@ -281,6 +296,16 @@ Moment
 \subsection{Moving source}
 The sound field produced by a moving source is different from that of a fixed source.
 
+\subsubsection{Convective amplification}
+Another effect that occurs and is especially relevant for fast-moving sources is
+convective amplification.
+
+\cite{Dowling1976}
+
+\missingfigure{Convective amplification illustration}
+
+\section{Sound propagation}
+
 \subsubsection{Doppler shift}
 A commonly known effect related to movement is the Doppler shift.
 Movements of source, receiver and medium can cause
@@ -301,18 +326,6 @@ frequency is given by
   \omega = \frac{\omega_0}{1 - M_r(t_e)}
 \end{equation}
 % with $M_r(t_e) = M(t_e) \cos{\theta(t_e)}$.
-
-\subsubsection{Convective amplification}
-Another effect that occurs and is especially relevant for fast-moving sources is
-convective amplification.
-
-\cite{Dowling1976}
-
-\missingfigure{Convective amplification illustration}
-
-
-
-
 
 % \chapter{Sound propagation}
 
@@ -362,6 +375,7 @@ where
 \end{equation}
 In this equation $T_{01}$ is the triple-point isotherm temperature of 273.16 K.
 
+% TODO what to do with this
 The standard furthermore mentions the following expression for the speed of sound
 \begin{equation}
 c = 343.2 \left( \frac{T}{T_0} \right)
