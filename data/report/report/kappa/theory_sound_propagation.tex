@@ -1,0 +1,431 @@
+\section{Propagation of sound}
+
+\subsection{Doppler shift}
+A commonly known effect related to movement is the Doppler shift.
+Relative motion between source, receiver and medium can cause
+Doppler shifts. If we consider a moving harmonic point source, $S(t) = \hat{S}_0
+\exp{\left(j\omega_0 t\right)} $, in a homogeneous fluid at rest, then the sound
+field is given by
+\begin{equation}
+  p'(\vect{x},t) = \sum_{t_e} \frac{\hat{S}_0 \exp{\left(j \omega_0 t_e\right)}}{4\pi r \left(t_e\right) \abs{1-M_r (t_e)}}
+\end{equation}
+and represents a summation of the sound pressure contributions at all emision
+times $t_e$. The Mach number $M_r = \vect{M} \cdot \vect{e}_r = M \cos{\theta}$ is
+the projection of the Mach number of the source in the direction towards the
+receiver. The Mach number of the source is $\vect{M}=\vect{v}/c$ and
+$\vect{e}_r=\vect{r}/r$ is the unit vector pointing towards the receiver.
+If we consider a moving source and fixed receiver, then the instantaneous
+frequency is given by
+\begin{equation}
+  \omega = \frac{\omega_0}{1 - M_r(t_e)}
+\end{equation}
+% with $M_r(t_e) = M(t_e) \cos{\theta(t_e)}$.
+
+% \chapter{Sound propagation}
+
+
+\subsection{Atmospheric attenuation}\label{sec:theory_sound_atmospheric_attenuation}
+As sound waves travel through an atmosphere the waves are attenuated through
+atmospheric attenuation. There are two effects causing attenuation. The first
+effect causing attenuation is classical heat conduction and shear viscosity.
+These effects were considered insignificant when deriving the wave equation. The
+second effect is on a molecular scale and is due to an energy exchange between
+translation and rotational or vibrational modes. Molecules collide and are
+excited when a wave passes resulting in energy transfer. The energy transfer is
+a function of the relaxation time of the molecules. Because the molecules need a
+certain time to reach equilibrium the heat capacity of the medium is
+time-dependent thus resulting in an irreversible process causing losses.
+
+A model for atmospheric attenuation is given in Part 1 of ISO 9613-1:1993 \cite{ISO9613-1}.
+The attenuation coefficient $\alpha$, in dB/m, is given by
+\begin{align}\label{eq:theory:sound:atmospheric-attenuation}
+ \alpha &= 8.686 f^2 \Biggl( \left[ 1.84 \times 10^{-11} \left(\frac{p_r}{p_a}\right)^{-1} \left(\frac{T}{T_0}\right)^{1/2} \right] + \left(\frac{T}{T_0}\right)^{-5/2} \nonumber \\
+ &\times \Biggl\{ 0.01275 \left[ \exp{\frac{-2239.1}{T}} \right]  \left[f_{r,O} + \frac{f^2}{f_{r,O}} \right]^{-1} \nonumber \\
+ &+ 0.1068 \left[ \exp{\frac{-3352.0}{T}} \right] \left[ f_{r,N} + \frac{f^2}{f_{r,N}} \right]^{-1} \Biggr\} \Biggr)
+\end{align}
+and is a function of the ambient temperature in kelvin $T$, the reference
+temperature $T_0=293.15$ K, the ambient pressure $p_a$ in kilopascal, the
+reference pressure $p_r=101.325$ kPa and the relaxation frequencies for oxygen
+$f_{r,O}$ and nitrogen $f_{r,N}$.
+The relaxation frequency of oxygen is given by
+\begin{equation}
+ f_{r,O} = \frac{p_a}{p_r} \left( 24 + 4.04 \cdot 10^4 h \frac{0.02 + h}{0.391 + h}  \right)
+\end{equation}
+and the relaxation frequency of nitrogen by
+\begin{equation}
+ f_{r,N} = \frac{p_a}{p_r} \left( \frac{T}{T_0} \right)^{-1/2} \cdot \left( 9 + 280 h \exp{\left\{ -4.170 \left[ \left(\frac{T}{T_0} \right)^{-1/3} -1 \right] \right\} } \right)
+\end{equation}
+Both depend on the molar concentration of water vapour $h$, given by
+\begin{equation}
+ h = h_r  \frac{p_{sat}}{p_a}
+\end{equation}
+The molar concentration of water vapour is a function of the saturation pressure
+\begin{equation}
+ p_{sat} = 10^C \cdot p_r
+\end{equation}
+where
+\begin{equation}
+ C = -6.8346 \cdot \left( \frac{T_{01}}{T} \right)^{1.261}  + 4.6151
+\end{equation}
+In this equation $T_{01}$ is the triple-point isotherm temperature of 273.16 K.
+
+% % TODO what to do with this
+% The standard furthermore mentions the following expression for the speed of sound
+% \begin{equation}
+% c = 343.2 \left( \frac{T}{T_0} \right)
+% \end{equation}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[]{../figures/generated/sound/attenuation}
+        \caption{Atmospheric attenuation as function of frequency for a standard atmosphere.}
+        \label{fig:theory:sound:attenuation}
+\end{figure}
+
+\newpage
+\subsection{Reflections}
+Sound hitting a boundary between materials of different impedance may be
+transmitted, reflected or absorbed. When sound is transmitted the incident wave
+is partially refracted. Sound reflected by a smooth surface results in a
+specular reflection, and sound reflected on a rough surface results in a diffuse
+reflection. In outdoor situations sound is typically reflected by the ground
+surface and other obstacles like buildings. The sound pressure at a receiver is
+then the sum of the direct contribution as well as indirect contributions from
+reflections. Due to this superposition strong interference effects may occur.
+
+\subsubsection*{Impedance}
+An impedance is a complex ratio between two interdependent dynamic quantities
+and describes the resistance to a direct flow (resistance) and alternating flow
+(reactance). The specific acoustical impedance of a material is the ratio of the
+sound pressure to the particle velocity normal to the surface $Z_{s} =
+p/\vect{u}$. The specific acoustical impedance of a material or surface
+normalised by the impedance of air $Z_{s, air} = \rho c$ is called the
+normalised specific acoustic impedance. This impedance is typically used to
+characterise surfaces, and is what impedance in the following text refers to.
+
+Multiple models are available for the prediction of the impedance of a surface.
+Attenborough et. al. made a comparison of impedance models and recommends the
+Delany and Bazley one-parameter model for predicting outdoor ground impedance
+\cite{Attenborough2011a}. The empirical one-parameter model by Delaney and
+Bazley is widely used and depends on the flow resistivity of the material
+$\sigma$ and the frequency $f$
+\begin{equation}\label{eq:theory:sound:impedance:db}
+ Z = 1 + 9.08 \left( \frac{1000f}{\sigma}\right)^{-0.75} - 11.9 j \left( \frac{1000f}{\sigma}\right)^{-0.73}
+\end{equation}
+Flow resistivity describes how difficult it is for air to flow through a
+surface. Values for surfaces can vary significantly, with average values ranging
+from \SI{29}{\kilo\pascal\second\per\square\meter} for snow to
+\SI{200000}{\kilo\pascal\second\per\square\meter} for painted concrete. Grass
+has an average flow resistivity of
+\SI{200}{\kilo\pascal\second\per\square\meter} \cite{Crocker1997}.
+Furthermore, a surface is called locally reacting if at a certain point the
+particle velocity $\vect{u}$ depends only on the sound pressure $p$ at that
+point. In case it doesn't the surface has an extended reaction.
+Figure \ref{fig:theory:sound:impedance} shows the impedance of grass according to the Delaney and Bazley model.
+% TODO drop or expand?
+
+\begin{figure}
+        \centering
+        \includegraphics[]{../figures/generated/sound/impedance}
+        \caption{Impedance for grass with a flow resistivity of \SI{200}{\kilo\pascal\second\per\square\meter} according to Delany and Bazley one-parameter model.}
+        \label{fig:theory:sound:impedance}
+\end{figure}
+
+
+%
+% Another example of a model is the 2-parameter model by Attenborough. In this model, the impedance is given by
+% \begin{equation}\label{eq:theory:sound:impedance:att}
+%  Z = \frac{\left( 1-j\right) \sqrt{\sigma/f}}{\sqrt{\pi \gamma_0 \rho_0}} - \frac{jc\alpha}{8 \pi \gamma_0 f}
+% \end{equation}
+% and depends on the speed of sound in air $c_0$, the density of air $\rho_0$, $\alpha$, $\gamma_0$ and again the flow resistivity $\sigma$ and frequency $f$.
+
+%
+% Table \ref{tab:theory:sound:impedance:flow-resistivity} lists co
+%
+%
+% \begin{tabular}{l c}
+% Team              & P & W & D & L & F  & A & Pts \\
+% \hline
+% Manchester United & 6 & 4 & 0 & 2 & 10 & 5 & 12  \\
+% Celtic            & 6 & 3 & 0 & 3 &  8 & 9 &  9  \\
+% Benfica           & 6 & 2 & 1 & 3 &  7 & 8 &  7  \\
+% FC Copenhagen     & 6 & 2 & 1 & 3 &  5 & 8 &  7  \\
+% \end{tabular}
+
+
+% \newpage
+\subsubsection{Reflection coefficient}
+The pressure reflection coefficient describes the ratio between the sound
+pressure of an incident wave $p_i$ and the pressure of the reflected wave $p_r$
+and considers a wave incident on an infinite plane that is locally
+reacting and has impedance $Z$
+\begin{equation}
+  R = \frac{p_r}{p_i}
+\end{equation}
+The plane wave reflection coefficient gives the ratio of incident and reflected pressure assuming the incident wave is plane
+\begin{equation}\label{eq:theory:sound:reflection:plane}
+  R = \frac{Z\cos{\theta}-1}{Z\cos{\theta}+1}
+\end{equation}
+and is a function of the angle of incidence $\theta$ of the incident wave.
+If the source is relatively close to the reflecting surface,
+then typically the wave front is not plane. In such case a spherical wave
+reflection factor is used that considers an incident spherical wave.
+
+The impedance and reflection coefficient models together with their parameters
+determine in computations how much sound is reflected and how much is
+transmitted or absorbed. Because the reflection coefficient is complex-valued
+the reflected contribution may have not only a different magnitude than the
+direct contribution, but also an additional frequency-dependent phase shift or
+propagation delay. Surfaces that attenuate and phase shift the reflected wave
+are called acoustically soft surfaces. In case the normalised impedance
+approaches infinity, neither attenuation nor phase shift occur, and the surface
+is considered acoustically hard. Figure \ref{fig:theory:sound:reflection} shows
+both the absolute value and the phase angle of the plane wave reflection angle
+as function of frequency and angle of incidence.
+
+% Another commonly used reflection coefficient is the spherical wave reflection coefficient.
+
+% The spherical reflection coefficient is given by
+% \begin{equation}\label{eq:theory:sound:reflection:spherical}
+%  Q = R \left(1 - R \right) F
+% \end{equation}
+% with
+% \begin{equation}
+%  F = 1 - j \sqrt{ \pi} w e^{-w^2} \mathrm{erfc} \left( j w \right)
+% \end{equation}
+% and
+% \begin{equation}
+%  w = \sqrt{-j k r  \left( 1 + \frac{1}{Z} \cos{\theta} - \sqrt{1 - \left( \frac{1}{Z} \right)^2} \sin{\theta} \right) }
+% \end{equation}
+
+\begin{figure}
+%     \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/sound/reflection-abs}
+        \caption{Absolute value of the reflection coefficient.}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/sound/reflection-angle}
+        \caption{Phase angle of the reflection coefficient.}
+    \end{subfigure}
+    \caption{Absolute value and phase angle of the plane wave reflection angle as function of both frequency and angle of incidence. The impedance was calculated using equation \ref{eq:theory:sound:impedance:db} and for the flow resistivity the average value for grass was chosen.}
+    \label{fig:theory:sound:reflection}
+\end{figure}
+
+\subsubsection{Ground effect}
+In outdoor situations the ground is typically providing the second-largest
+contribution and is important when considering an elevated source. As mentioned
+before, impedances of surfaces can vary significantly, and this is especially
+the case for the ground surface. Spectrograms of recordings of aircraft often
+show a distinct interference pattern called the Lloyd's mirror effect. Figure
+\ref{fig:theory:sound:reflection:ground} shows a (synthesised) example of the
+Lloyd's mirror effect as caused by an elevated moving source.
+
+\begin{figure}
+%     \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/sound-mirror-effect/hard}
+        \caption{Hard surface.}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{\textwidth}
+        \includegraphics{../figures/generated/sound-mirror-effect/soft}
+        \caption{Soft surface.}
+    \end{subfigure}
+    \caption{Superposition of the direct contribution and ground-reflected contribution results in an interference pattern known as the Lloyd's mirror effect.}
+    \label{fig:theory:sound:reflection:ground}
+\end{figure}
+% TODO interference pattern is shifted}
+
+% A prominent reflection is the reflection with the ground. When the
+% reflecting surface is sufficiently hard the Lloyd's
+% mirror effect can be heard.
+
+
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{../figures/ipynb/theory_reflections_mirror_effect/figure1}
+%         \caption{Spectrogram of a white noise source flying at a height of 100 meters over an acoustically hard surface. The spectrogram clearly shows the Lloyd's mirorr effect.}
+%         \label{fig:theory_reflections_mirror_effect}
+% \end{figure}
+
+% \missingfigure{SPL relative to free field comparison}
+
+
+\subsubsection{Multiple reflections and shielding} % TODO don't talk about shielding?
+In urban environments there are more reflecting surfaces besides the ground.
+Buildings can reflect sound and shield as well. In courtyards or street canyons
+multiple reflections and strong rerverberance may occur.
+
+Sound can be considered as a ray if the wavelength of the sound is much smaller
+than the characteristic lengths of the objects or geometries. % TODO: move sentence
+
+Assuming sound can be described as a ray, a raytracer could be used to determine
+the immission at a receiver position, taking into account refractions and
+reflections. Raytracers are commonly used in room acoustics but also in
+environmental acoustics for noise prediction.
+
+The image source method is a computationally fast algorithm for taking into
+account reflections and uses the concept of mirror sources
+\cite{Allen1979,Mechel2013}. Mirror sources are found by mirroring the original
+source with respect to the reflective surface that is considered. Higher-order
+mirror sources can be found by repeating the process, mirroring the previous
+order mirror source with respect to another surface. Care should be taken to
+determine whether there is in fact line-of-sight between a mirror-source and the
+receiver.
+
+When neither source nor receiver move, the image sources have to be determined
+only once, and their validity, that is, line-of-sight between image source and
+receiver, needs to be checked only once as well. If instead the receiver moves,
+line-of-sight will have to be checked as function of time. When both move, both
+the mirror source search as well as the line-of-sight validation has to be
+performed as function of time. An interesting question is how to connect image
+sources at one instance in time to the image sources the next instance,
+considering sources can appear and disappear over time. If only the source
+moves, it may be more interesting to consider mirror receivers instead of miror
+sources.
+
+% In urban environments multiple reflections generally occur.
+
+
+% \subsection{Descriptors}
+
+
+\subsection{Atmospheric turbulence}
+
+% TODO: rewrite paragraph from paper
+In an outdoor situation, spatial and temporal variations in temperature and wind
+velocity cause small changes in the refractive index. As waves pass through the
+atmosphere, the index-of-refraction variations in effect cause scintillations,
+i.e. fluctuations in the received intensity of the wave. Scintillations affect
+both sound and electromagnetic waves. They are a major limitation for
+astronomical observations using Earth-based telescopes and also reduce
+performance of wireless communication systems. Scintillations can also be
+noticed when hearing sound emitted by a source at a large distance, like for
+example by an aircraft or distant windturbine \cite{Heutschi2014}.
+
+\subsubsection*{Rytov approximation}
+Variations in temperature and wind in both position $\mathbf{r}$ and time $t$
+cause variations in the refractive index field $n(\mathbf{r},t)$. We are
+interested in how these variations affect wave propagation and follow
+\cite{Ishimaru1997} and \cite{Jurado-navas2006}, but instead of electromagnetic
+waves, we consider sound waves. We consider for now spatial variations only, and
+as a starting point we use the following Helmholtz equation
+\begin{equation}\label{eq:helmholtz_without_fluctuations}
+ \left( \nabla^2 + k^2 n^2(\mathbf{r}) \right) p(\mathbf{r})= 0
+\end{equation}
+with pressure $p$, wavenumber $k$, and refractive-index field
+\begin{equation}\label{eq:refractive_index_field}
+ n(\mathbf{r}) = n_0 + n_1(\mathbf{r})
+\end{equation}
+with mean value $n_0 = E[n(\mathbf{r})] = 1$ and first-order perturbation $n_1(\mathbf{r}) \ll 1$. Merging equations \eqref{eq:helmholtz_without_fluctuations} and \eqref{eq:refractive_index_field} results in
+\begin{equation}\label{eq:helmholtz_with_fluctuations}
+ \left( \nabla^2 + k^2 (n_0 + n_1(\mathbf{r}))^2 \right) p(\mathbf{r}) = 0
+\end{equation}
+For weak fluctuations, an approximation to equation \eqref{eq:helmholtz_with_fluctuations} for small $n_1$ is used.
+The Rytov solution to equation \eqref{eq:helmholtz_with_fluctuations} is
+\begin{equation}
+ p = \exp{\left(\psi_0 + \psi_1 + \psi_2 + \dots \right)} = \exp{(\psi)}
+\end{equation}
+where $\psi_0$ is the complex phase of the unperturbed wave in free space, and $\psi_1$ and $\psi_2$ respectively first-order and second-order complex phase perturbations.
+
+We are interested in the effect of first-order perturbations $n_1$, on the sound pressure,
+and therefore write $\psi = \psi_0 + \psi_1$. The refractive index $n$ is written in terms of
+an average $\langle n \rangle$ and fluctuation $n_1$, with
+\begin{equation}
+ \delta n = (1 + n_1)^2 -1 = 2 n_1 + n_1^2
+\end{equation}
+As derived in \cite{Ishimaru1997}, $\psi_{1}$ satisfies the following integral equation
+\begin{equation}
+ \psi_{1}(\mathbf{r}) = \frac{1}{p_0(\mathbf{r})} \int_{V'} G(\mathbf{r}-\mathbf{r}') \left[ \nabla \psi_1 \cdot \nabla \psi_1 + k^2 \delta n  \right]  p_0(\mathbf{r}') dV'
+\end{equation}
+where $G(\mathbf{r}-\mathbf{r}')$ is the free field Green's function. By iteration a series solution can be obtained. For the first iteration we set $\psi_1 = 0$ inside the integral and obtain the first Rytov solution
+\begin{equation}
+ \psi_{10}(\mathbf{r}) = \frac{k^2}{p_0(\mathbf{r})} \int_{V'} G(\mathbf{r}-\mathbf{r}') \delta n(\mathbf{r}') p_0(\mathbf{r}') dV'
+\end{equation}
+where $p_0(\mathbf{r})$ is the unperturbed sound pressure field. %, $\mathbf{r}$ a
+The sound pressure after the first iteration is then
+\begin{equation}
+ p (\mathbf{r}) = e^{(\psi_0 + \psi_{10})} = p_0(\mathbf{r}) e^{(\psi_{10})}
+\end{equation}
+
+The first-order complex phase perturbation $\psi_{1}$ can be understood as a sum of waves,
+generated at various points $\mathbf{r}'$ throughout the scattering volume $V'$.
+The strength of each of these waves is proportional to the product of the unperturbed field term ${p_0}$, and the refractive-index perturbation $\delta n$ at a point $\mathbf{r}'$ \cite{Jurado-navas2006}.
+
+\subsubsection*{Amplitude and phase fluctuations}
+We now want to find expressions for the log-amplitude and phase fluctuations, and will use Rytov's first solution.
+We approximate the refractive-index fluctuation as
+\begin{equation}
+ \delta n = 2 n_1 + n_1^2 \simeq 2 n_1
+\end{equation}
+and write
+\begin{equation}\label{eq:complex_exponential}
+ p(\mathbf{r}) = A(\mathbf{r}) e^{jS(\mathbf{r})},  \quad p_0(\mathbf{r}) = A_0(\mathbf{r}) e^{jS_0(\mathbf{r})}
+\end{equation}
+where $A$ and $S$ are respectively the amplitude and phase of the fluctuating field $p(\mathbf{r})$,
+and obtain for the first order perturbations
+\begin{equation}\label{eq:chi_and_S}
+ \psi_1 ({\mathbf{r}}) = \chi + j S = \log{(A/A_0)} + j (S-S_0)
+\end{equation}
+In this expression $\chi$ and $S$ represent respectively the log-amplitude fluctuation and phase fluctuation.
+
+By applying the central limit theorem to the first Rytov solution, it follows that the complex phase follows a normal probability distribution \cite{Jurado-navas2006}.
+This is an important result to keep in mind when generating sequences of fluctuations.
+
+\subsubsection*{Amplitude and phase covariance}
+The log-amplitude and phase fluctuations are considered to be the result of a
+random temperature fluctuation field. A characteristic of a random function or
+field is its correlation function \cite{Tatarskii1971}. The spatial correlation
+function of a random field $f(\mathbf{r})$, as function of distance $\mathbf{r}=\mathbf{r}_2-\mathbf{r}_1$
+between observation points $\mathbf{r}_1$ and $\mathbf{r}_2$, is defined as
+\begin{equation}
+ C(\mathbf{r}_1, \mathbf{r}_2) = \langle f(\mathbf{r}_1)  f(\mathbf{r}_2) \rangle
+\end{equation}
+In a homogeneous and isotropic random field the correlation function
+$C(r)$ depends only on the distance $r = \lVert \mathbf{r}_2-\mathbf{r}_1 \rVert$ between the observation points and not the path $\mathbf{r}=\mathbf{r}_2-\mathbf{r}_1$ \cite{Salomons2001}.
+Note that at this point, the atmosphere is assumed frozen in time, i.e., variations are only spatially, not temporal.
+
+We would like to obtain expressions for the covariance functions of the
+log-amplitude and phase fluctuations. A specific part of the turbulence spectrum
+can be approximated with a Gaussian correlation function
+\begin{equation}
+ C_{\mu} = \langle \mu(r_1) \mu(r_2) \rangle = \sigma_{\mu}^2 e^{-x^2/L^2}
+\end{equation}
+where $\sigma_{\mu}^2$ is the variance of the dynamic refractive index,
+$x=r_1-r_2$ the distance between two points in space and $L$ the correlation
+distance or length \cite{Ishimaru1997}.
+
+% TODO Explain why we go from $x$ to $\rho$ and $d$, i.e., 2 dimensions.
+We shall now consider a line-of-sight situation where $d$ is the
+distance between the source and a receiver pair along the wave propagation
+direction, and $\rho$ the spatial separation of the receivers transverse to the
+wave propagation direction.
+
+If the correlation length $L$ is much smaller than the Fresnel zone size of the sound
+$\sqrt{\lambda d}$, then the log-amplitude and phase variance scale with
+$\sigma_{\chi}^2=\sigma_{S}^2 \sim k^2 d$
+\cite{Ishimaru1997} and the variances of the fluctuations are given by \cite{Daigle1983}
+\begin{equation}\label{eq:model_daigle}
+ \sigma_{\chi}^2 = \sigma_{S}^2 = \frac{\sqrt{\pi}}{2} \sigma_{\mu}^2 k^2 d L
+\end{equation}
+
+For spherical waves the covariances of the fluctuations, $B_{\chi}(\rho)$ and
+$B_{S}(\rho)$, normalized to their variances, are given by
+\begin{equation}
+ \frac{B_{\chi} (\rho)}{\sigma_{\chi}^2} = \frac{B_{S} (\rho)}{\sigma_{S}^2} = \frac{\Phi\left(\rho/L\right)}{\rho/L} = C_{sp}(\rho)
+\end{equation}
+where
+\begin{align}\label{eq:gaussian_correlation}
+ \Phi \left(\rho/L \right) &= \int_0^{\rho/L} \exp{\left(-u^2\right)} \mathrm{d} u  \\
+ &= \frac{1}{2} \sqrt{\pi} \mathrm{erf}\left( \rho/L \right)
+\end{align}
+and $\mathrm{erf}$ is the error function.
+The covariance functions of the fluctuations $B_{\chi}(\rho)$ and $B_{S}(\rho)$ are thus
+\begin{equation}\label{eq:variances}
+ B_{\chi} (\rho) = B_{S}(\rho) = \frac{\sqrt{\pi}}{2} \sigma_{\mu}^2 k^2 d L
+\frac{\Phi(\rho/L) }{\rho / L}
+\end{equation}
+% according to Daigle's model.
+

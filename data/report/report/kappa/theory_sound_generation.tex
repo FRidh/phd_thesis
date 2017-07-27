@@ -1,0 +1,105 @@
+\section{Generation of sound}
+
+\subsection{Aerodynamic sound sources}\label{sec:theory:sound:aerodynamic}
+Classical acoustics provides a method for modeling sound generation due to
+vibrating solid boundaries. Aerodynamic sources such as combustion or other
+unsteady fluid processes cannot be handled, however. With the development of
+jet-powered aircraft a description was needed to model such sources. Lighthill
+provided the theory to take into account aerodynamic sources. The idea is that
+an unsteady flow will produce sound. A simple example is the sound that is
+generated when flow passes a string or antenna.
+The aero-acoustic analogy of Lighthill is the idea of representing a fluid
+mechanical process that acts as an acoustic source by an acoustically equivalent
+source term.
+
+% He drew an analogy between the non-homogeneous versions of the fluid equations and the classical
+% wave equation including the single acoustic source term.
+
+Taking the time derivative of the homogeneous version of the mass conservation
+equation and the divergence of the homogeneous version of the momentum
+conservation equation, then subtracting one from another, and finally
+subtracting from both sides of the equation $c^2 \nabla^2 \rho$, results in the
+Lighthill equation
+\begin{equation}
+  \frac{\partial^2 \rho}{\partial t^2} - c^2 \nabla^2 \rho = \nabla \cdot \nabla \cdot \matr{T}
+\end{equation}
+where $\matr{T}$ is the Lighthill stress tensor
+\begin{equation}
+  \matr{T} = \rho \vect{u}\vect{u} + \left( p - c^2 \rho \right) \matr{I} - \matr{\tau}
+\end{equation}
+The right-hand side of the Lighthill equation describes the non-homogeneous
+fluid in a finite volume $V$. This area is called the source region or source
+field. The left-hand side of the equation is called the sound field, it
+describes the homogeneous fluid and this is where the classical wave equation
+governs sound propagation.
+
+The Lighthill stress tensor consists of three aero-acoustic processes that are
+sources of sound \cite{Rienstra2017}. The first are non-linear convective forces
+as described by the Reynold stress tensor $\rho \vect{u}\vect{u}$. The second
+viscous forces $\tau$ and the third deviations from a uniform soundspeed
+$c_0$ or isentropic behaviour $p' - c_0^2 \rho'$. \todo{requires linearisation}
+
+A limitation of Lighthill's analogy is that it cannot handle situations where
+feedback occurs because the source field is decoupled from the sound field.
+
+
+% Lighthill's acoustic analogy has the limitation that the source field is not
+% coupled to the acoustic field. That means situations where feedback occurs,
+% i.e., the acoustic field modifies the flow field and vice versa, cannot be
+% treated.
+
+
+% The Mach number $M = v / c$ represents the ratio of the flow velocity to the
+% local speed of sound.
+
+
+
+\subsection{Elementary sources}
+
+The elementary sources
+
+\missingfigure{Figure of monopole, dipole and quadrupole}
+
+\subsubsection*{Monopole}
+
+Volume source
+%
+% \begin{equation}
+%  \frac{d^2 \rho'}{dt^2}
+% \end{equation}
+
+\begin{equation}
+ p' \left(\vect{x},t\right) = \frac{\dot{m} \left(\vect{y}, t-r/c\right)}{ 4 \pi r}
+\end{equation}
+where $\dot{m} = \partial m / \partial t$ is the time derivative of the unsteady mass flow $\dot{m}$.
+
+\subsubsection*{Dipole}
+
+\begin{equation}
+ p' \left(\vect{x}, t\right) =
+\end{equation}
+
+
+\subsubsection*{Quadrupole}
+
+Moment
+
+% \subsubsection*{Multipoles and spherical harmonics} % TODO Unless I would write a piece about Ambisonics I have no need for this so could skip it
+%
+%
+% \missingfigure{Multipoles and spherical harmonics}
+%
+% Ambisonics
+
+
+\subsection{Moving source}
+The sound field produced by a moving source is different from that of a fixed source.
+
+\subsubsection{Convective amplification}
+Another effect that occurs and is especially relevant for fast-moving sources is
+convective amplification.
+
+\cite{Dowling1976}
+
+\missingfigure{Convective amplification illustration}
+
