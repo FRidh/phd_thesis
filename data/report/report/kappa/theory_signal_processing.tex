@@ -271,7 +271,7 @@ and rewrite $x[n]$ as
 \begin{equation}
  x[n] = \sum_k x_k[n-kL]
 \end{equation}
-Equation \ref{eq:theory_signal_processing_convolution_fir} can then be written as a sum of short convolutions
+Equation \eqref{eq:theory_signal_processing_convolution_fir} can then be written as a sum of short convolutions
 \begin{equation}
 y[n] = h[n] \star \left( \sum_k x_k[n-kL] \right) = \sum_k \left( h[n] \star x_k[n-kL] \right)
 \end{equation}
@@ -285,7 +285,7 @@ the tail of each convolution and add it to the head of the next convolution.
 For longer sequences the overlap-add method is much faster than the naive
 (direct-form) method, and especially when using the overlap-add method in
 combination with Fourier transformations (equation
-\ref{eq:theory_signal_processing_convolution_fourier}) for the short
+\eqref{eq:theory_signal_processing_convolution_fourier}) for the short
 convolutions. A disadvantage of overlap-add in a real-time simulation is that,
 it overlap-add operates on blocks, the simulation will incur a latency.
 
@@ -296,7 +296,7 @@ A method similar to overlap-add is overlap-discard, known also as overlap-save.
 \subsubsection{Linear time-variant system}
 So far we considered linear time-invariant systems. In a linear time-variant
 system the impulse response can change over time. Consider again the Toeplitz
-matrix as shown in \ref{eq:theory_signal_processing_convolution_toeplitz}. In
+matrix as shown in \eqref{eq:theory_signal_processing_convolution_toeplitz}. In
 the time-invariant case each column is a time-shifted copy of the same impulse
 response. In the time-variant case, however, each column can be a entirely
 different impulse response.

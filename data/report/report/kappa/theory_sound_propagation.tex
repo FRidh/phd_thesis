@@ -209,7 +209,7 @@ as function of frequency and angle of incidence.
         \includegraphics{../figures/generated/sound/reflection-angle}
         \caption{Phase angle of the reflection coefficient.}
     \end{subfigure}
-    \caption{Absolute value and phase angle of the plane wave reflection angle as function of both frequency and angle of incidence. The impedance was calculated using equation \ref{eq:theory:sound:impedance:db} and for the flow resistivity the average value for grass was chosen.}
+    \caption{Absolute value and phase angle of the plane wave reflection angle as function of both frequency and angle of incidence. The impedance was calculated using equation \eqref{eq:theory:sound:impedance:db} and for the flow resistivity the average value for grass was chosen.}
     \label{fig:theory:sound:reflection}
 \end{figure}
 
@@ -276,15 +276,15 @@ determine whether there is in fact line-of-sight between a mirror-source and the
 receiver.
 
 When neither source nor receiver move, the image sources have to be determined
-only once, and their validity, that is, line-of-sight between image source and
-receiver, needs to be checked only once as well. If instead the receiver moves,
-line-of-sight will have to be checked as function of time. When both move, both
-the mirror source search as well as the line-of-sight validation has to be
-performed as function of time. An interesting question is how to connect image
-sources at one instance in time to the image sources the next instance,
-considering sources can appear and disappear over time. If only the source
-moves, it may be more interesting to consider mirror receivers instead of miror
-sources.
+only once, and their validity, that is, whether there is line-of-sight between
+image source and receiver, needs to be checked only once as well. If instead the
+receiver moves, line-of-sight will have to be checked as function of time. When
+both move, both the mirror source search as well as the line-of-sight validation
+has to be performed as function of time. An interesting question is how to
+connect image sources at one instance in time to the image sources the next
+instance, considering sources can appear and disappear over time. If only the
+source moves, it may be more interesting to consider mirror receivers instead of
+miror sources.
 
 % In urban environments multiple reflections generally occur.
 
@@ -304,6 +304,17 @@ astronomical observations using Earth-based telescopes and also reduce
 performance of wireless communication systems. Scintillations can also be
 noticed when hearing sound emitted by a source at a large distance, like for
 example by an aircraft or distant windturbine \cite{Heutschi2014}.
+
+Scintillations are modulations and refractive-index field fluctuations can cause
+amplitude and phase modulations. Shown is in this section how weak fluctuations
+cause sound pressure perturbations. Weak turbulence fluctuations are
+non-linearities but they are assumed to be small.
+
+Atmospheric turbulence is a stochastic process and therefore the modulations are
+also random. The random process has a distribution and a power spectral density.
+Several models are available for describing the spectrum of turbulence.
+Furthermore, the shape of the wavefront is relevant when considering sound
+propagation through a turbulent atmosphere.
 
 \subsubsection*{Rytov approximation}
 Variations in temperature and wind in both position $\mathbf{r}$ and time $t$
@@ -350,9 +361,11 @@ The sound pressure after the first iteration is then
  p (\mathbf{r}) = e^{(\psi_0 + \psi_{10})} = p_0(\mathbf{r}) e^{(\psi_{10})}
 \end{equation}
 
-The first-order complex phase perturbation $\psi_{1}$ can be understood as a sum of waves,
-generated at various points $\mathbf{r}'$ throughout the scattering volume $V'$.
-The strength of each of these waves is proportional to the product of the unperturbed field term ${p_0}$, and the refractive-index perturbation $\delta n$ at a point $\mathbf{r}'$ \cite{Jurado-navas2006}.
+The first-order complex phase perturbation $\psi_{1}$ can be understood as a sum
+of waves, generated at various points $\mathbf{r}'$ throughout the scattering
+volume $V'$. The strength of each of these waves is proportional to the product
+of the unperturbed field term ${p_0}$, and the refractive-index perturbation
+$\delta n$ at a point $\mathbf{r}'$ \cite{Jurado-navas2006}.
 
 \subsubsection*{Amplitude and phase fluctuations}
 We now want to find expressions for the log-amplitude and phase fluctuations, and will use Rytov's first solution.
@@ -371,8 +384,10 @@ and obtain for the first order perturbations
 \end{equation}
 In this expression $\chi$ and $S$ represent respectively the log-amplitude fluctuation and phase fluctuation.
 
-By applying the central limit theorem to the first Rytov solution, it follows that the complex phase follows a normal probability distribution \cite{Jurado-navas2006}.
-This is an important result to keep in mind when generating sequences of fluctuations.
+By applying the central limit theorem to the first Rytov solution, it follows
+that the complex phase follows a normal probability distribution
+\cite{Jurado-navas2006}. This is an important result to keep in mind when
+generating sequences of fluctuations.
 
 \subsubsection*{Amplitude and phase covariance}
 The log-amplitude and phase fluctuations are considered to be the result of a
@@ -383,9 +398,12 @@ between observation points $\mathbf{r}_1$ and $\mathbf{r}_2$, is defined as
 \begin{equation}
  C(\mathbf{r}_1, \mathbf{r}_2) = \langle f(\mathbf{r}_1)  f(\mathbf{r}_2) \rangle
 \end{equation}
-In a homogeneous and isotropic random field the correlation function
-$C(r)$ depends only on the distance $r = \lVert \mathbf{r}_2-\mathbf{r}_1 \rVert$ between the observation points and not the path $\mathbf{r}=\mathbf{r}_2-\mathbf{r}_1$ \cite{Salomons2001}.
-Note that at this point, the atmosphere is assumed frozen in time, i.e., variations are only spatially, not temporal.
+In a homogeneous and isotropic random field the correlation function $C(r)$
+depends only on the distance $r = \lVert \mathbf{r}_2-\mathbf{r}_1 \rVert$
+between the observation points and not the path
+$\mathbf{r}=\mathbf{r}_2-\mathbf{r}_1$ \cite{Salomons2001}. Note that at this
+point, the atmosphere is assumed frozen in time, i.e., variations are only
+spatially, not temporal.
 
 We would like to obtain expressions for the covariance functions of the
 log-amplitude and phase fluctuations. A specific part of the turbulence spectrum
