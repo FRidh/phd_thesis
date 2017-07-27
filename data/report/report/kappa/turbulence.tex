@@ -1,23 +1,14 @@
 \chapter{Propagation in a turbulent atmosphere}\label{chapter:turbulence} % TODO From paper. Rewrite
 
 \section{Introduction}
+Spatial and temporal variations in the atmosphere affect sound propagation and
+can cause audible modulations. Because they can be clearly audible it is
+presumed that including scintillations in auralisations increases their
+perceived realism. This chapter describes a method, published in Paper
+\ref{paper:turbulence}, for generating sequences of scintillations and including
+them in auralisations.
 
-...as written in Paper \ref{paper:turbulence}.
-
-% TODO: rewrite paragraph from paper
-In an outdoor situation, spatial and temporal variations in temperature and wind
-velocity cause small changes in the refractive index. As waves pass through the
-atmosphere, the index-of-refraction variations in effect cause scintillations,
-i.e. fluctuations in the received intensity of the wave. Scintillations affect
-both sound and electromagnetic waves. They are a major limitation for
-astronomical observations using Earth-based telescopes and also reduce
-performance of wireless communication systems. Scintillations can also be
-noticed when hearing sound emitted by a source at a large distance, like for
-example by an aircraft or distant windturbine \cite{Heutschi2014}.
-
-The fluctuations due to atmospheric turbulence can be clearly audible, and
-therefore it is presumed that including scintillations in auralisations
-increases their perceived realism.
+% TODO rewrite
 
 The multiple scattering affects the phase of the signal as well as the
 log-amplitude. In previous work a coherence factor was introduced that would
@@ -37,130 +28,9 @@ turbulence on the performance of a barrier. The method was also
 to increase the perceptual validity of auralisations
 \cite{Rietdijk2014,Rietdijk2014a}.
 
-\newpage
-\section{Wave propagation in random media}
+% \newpage
+% \section{Wave propagation in random media}
 
-\subsection{Rytov approximation}
-Variations in temperature and wind in both position $\mathbf{r}$ and time $t$ cause variations in the refractive index field $n(\mathbf{r},t)$.
-We are interested in how these variations affect wave propagation and follow \cite{Ishimaru1997} and \cite{Jurado-navas2006}, but instead of electromagnetic waves, we consider sound waves.
-We consider for now spatial variations only, and as a starting point we use the following Helmholtz equation %\cite{Ishimaru1997}
-% Helmholtz equation is a stochastic differential equation % Because n(r) is a stochastic field
-\begin{equation}\label{eq:helmholtz_without_fluctuations}
- \left( \nabla^2 + k^2 n^2(\mathbf{r}) \right) p(\mathbf{r})= 0
-\end{equation}
-with pressure $p$, wavenumber $k$, and refractive-index field
-\begin{equation}\label{eq:refractive_index_field}
- n(\mathbf{r}) = n_0 + n_1(\mathbf{r})
-\end{equation}
-with mean value $n_0 = E[n(\mathbf{r})] = 1$ and first-order perturbation $n_1(\mathbf{r}) \ll 1$. Merging equations \eqref{eq:helmholtz_without_fluctuations} and \eqref{eq:refractive_index_field} results in
-\begin{equation}\label{eq:helmholtz_with_fluctuations}
- \left( \nabla^2 + k^2 (n_0 + n_1(\mathbf{r}))^2 \right) p(\mathbf{r}) = 0
-\end{equation}
-For weak fluctuations, an approximation to equation \eqref{eq:helmholtz_with_fluctuations} for small $n_1$ is used.
-The Rytov solution to equation \eqref{eq:helmholtz_with_fluctuations} is
-\begin{equation}
- p = \exp{\left(\psi_0 + \psi_1 + \psi_2 + \dots \right)} = \exp{(\psi)}
-\end{equation}
-where $\psi_0$ is the complex phase of the unperturbed wave in free space, and $\psi_1$ and $\psi_2$ respectively first-order and second-order complex phase perturbations.
-
-We are interested in the effect of first-order perturbations $n_1$, on the sound pressure,
-and therefore write $\psi = \psi_0 + \psi_1$. The refractive index $n$ is written in terms of
-an average $\langle n \rangle$ and fluctuation $n_1$, with
-\begin{equation}
- \delta n = (1 + n_1)^2 -1 = 2 n_1 + n_1^2
-\end{equation}
-As derived in \cite{Ishimaru1997}, $\psi_{1}$ satisfies the following integral equation
-\begin{equation}
- \psi_{1}(\mathbf{r}) = \frac{1}{p_0(\mathbf{r})} \int_{V'} G(\mathbf{r}-\mathbf{r}') \left[ \nabla \psi_1 \cdot \nabla \psi_1 + k^2 \delta n  \right]  p_0(\mathbf{r}') dV'
-\end{equation}
-where $G(\mathbf{r}-\mathbf{r}')$ is the free field Green's function. By iteration a series solution can be obtained. For the first iteration we set $\psi_1 = 0$ inside the integral and obtain the first Rytov solution
-\begin{equation}
- \psi_{10}(\mathbf{r}) = \frac{k^2}{p_0(\mathbf{r})} \int_{V'} G(\mathbf{r}-\mathbf{r}') \delta n(\mathbf{r}') p_0(\mathbf{r}') dV'
-\end{equation}
-where $p_0(\mathbf{r})$ is the unperturbed sound pressure field. %, $\mathbf{r}$ a
-The sound pressure after the first iteration is then
-\begin{equation}
- p (\mathbf{r}) = e^{(\psi_0 + \psi_{10})} = p_0(\mathbf{r}) e^{(\psi_{10})}
-\end{equation}
-
-The first-order complex phase perturbation $\psi_{1}$ can be understood as a sum of waves,
-generated at various points $\mathbf{r}'$ throughout the scattering volume $V'$.
-The strength of each of these waves is proportional to the product of the unperturbed field term ${p_0}$, and the refractive-index perturbation $\delta n$ at a point $\mathbf{r}'$ \cite{Jurado-navas2006}.
-
-\subsection{Amplitude and phase fluctuations}
-We now want to find expressions for the log-amplitude and phase fluctuations, and will use Rytov's first solution.
-We approximate the refractive-index fluctuation as
-\begin{equation}
- \delta n = 2 n_1 + n_1^2 \simeq 2 n_1
-\end{equation}
-and write
-\begin{equation}\label{eq:complex_exponential}
- p(\mathbf{r}) = A(\mathbf{r}) e^{jS(\mathbf{r})},  \quad p_0(\mathbf{r}) = A_0(\mathbf{r}) e^{jS_0(\mathbf{r})}
-\end{equation}
-where $A$ and $S$ are respectively the amplitude and phase of the fluctuating field $p(\mathbf{r})$,
-and obtain for the first order perturbations
-\begin{equation}\label{eq:chi_and_S}
- \psi_1 ({\mathbf{r}}) = \chi + j S = \log{(A/A_0)} + j (S-S_0)
-\end{equation}
-In this expression $\chi$ and $S$ represent respectively the log-amplitude fluctuation and phase fluctuation.
-
-By applying the central limit theorem to the first Rytov solution, it follows that the complex phase follows a normal probability distribution \cite{Jurado-navas2006}.
-This is an important result to keep in mind when generating sequences of fluctuations.
-
-\subsection{Amplitude and phase covariance}
-The log-amplitude and phase fluctuations are considered to be the result of a
-random temperature fluctuation field. A characteristic of a random function or
-field is its correlation function \cite{Tatarskii1971}. The spatial correlation
-function of a random field $f(\mathbf{r})$, as function of distance $\mathbf{r}=\mathbf{r}_2-\mathbf{r}_1$
-between observation points $\mathbf{r}_1$ and $\mathbf{r}_2$, is defined as
-\begin{equation}
- C(\mathbf{r}_1, \mathbf{r}_2) = \langle f(\mathbf{r}_1)  f(\mathbf{r}_2) \rangle
-\end{equation}
-In a homogeneous and isotropic random field the correlation function
-$C(r)$ depends only on the distance $r = \lVert \mathbf{r}_2-\mathbf{r}_1 \rVert$ between the observation points and not the path $\mathbf{r}=\mathbf{r}_2-\mathbf{r}_1$ \cite{Salomons2001}.
-Note that at this point, the atmosphere is assumed frozen in time, i.e., variations are only spatially, not temporal.
-
-We would like to obtain expressions for the covariance functions of the
-log-amplitude and phase fluctuations. A specific part of the turbulence spectrum
-can be approximated with a Gaussian correlation function
-\begin{equation}
- C_{\mu} = \langle \mu(r_1) \mu(r_2) \rangle = \sigma_{\mu}^2 e^{-x^2/L^2}
-\end{equation}
-where $\sigma_{\mu}^2$ is the variance of the dynamic refractive index,
-$x=r_1-r_2$ the distance between two points in space and $L$ the correlation
-distance or length \cite{Ishimaru1997}.
-
-% TODO Explain why we go from $x$ to $\rho$ and $d$, i.e., 2 dimensions.
-We shall now consider a line-of-sight situation where $d$ is the
-distance between the source and a receiver pair along the wave propagation
-direction, and $\rho$ the spatial separation of the receivers transverse to the
-wave propagation direction.
-
-If the correlation length $L$ is much smaller than the Fresnel zone size of the sound
-$\sqrt{\lambda d}$, then the log-amplitude and phase variance scale with
-$\sigma_{\chi}^2=\sigma_{S}^2 \sim k^2 d$
-\cite{Ishimaru1997} and the variances of the fluctuations are given by \cite{Daigle1983}
-\begin{equation}\label{eq:model_daigle}
- \sigma_{\chi}^2 = \sigma_{S}^2 = \frac{\sqrt{\pi}}{2} \sigma_{\mu}^2 k^2 d L
-\end{equation}
-
-For spherical waves the covariances of the fluctuations, $B_{\chi}(\rho)$ and
-$B_{S}(\rho)$, normalized to their variances, are given by
-\begin{equation}
- \frac{B_{\chi} (\rho)}{\sigma_{\chi}^2} = \frac{B_{S} (\rho)}{\sigma_{S}^2} = \frac{\Phi\left(\rho/L\right)}{\rho/L} = C_{sp}(\rho)
-\end{equation}
-where
-\begin{align}\label{eq:gaussian_correlation}
- \Phi \left(\rho/L \right) &= \int_0^{\rho/L} \exp{\left(-u^2\right)} \mathrm{d} u  \\
- &= \frac{1}{2} \sqrt{\pi} \mathrm{erf}\left( \rho/L \right)
-\end{align}
-and $\mathrm{erf}$ is the error function.
-The covariance functions of the fluctuations $B_{\chi}(\rho)$ and $B_{S}(\rho)$ are thus
-\begin{equation}\label{eq:variances}
- B_{\chi} (\rho) = B_{S}(\rho) = \frac{\sqrt{\pi}}{2} \sigma_{\mu}^2 k^2 d L
-\frac{\Phi(\rho/L) }{\rho / L}
-\end{equation}
-% according to Daigle's model.
 
 Still assuming Taylor's hypothesis regarding frozen turbulence, we can perform a
 space-to-time conversion of the correlation and covariance functions to obtain
@@ -183,7 +53,9 @@ with and computationally least demanding, but the method can also be used with
 covariance functions that describe other turbulence spectra, like e.g. the Von
 Karman spectrum \cite{Ostashev2015}.
 
-\subsection{Propagation in the turbulent atmosphere as a multichannel}
+
+
+% \subsection{Propagation in the turbulent atmosphere as a multichannel}
 The fluctuations in the atmosphere are temporal and/or spatial. Therefore, to
 model sound propagation of a signal $x(t)$ through such an atmosphere a
 time-varying channel is necessary. The received signal $y(t)$ consists of a
