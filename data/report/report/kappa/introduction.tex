@@ -255,7 +255,7 @@ synthesis (SMS) and granular synthesis. With granular synthesis small parts of
 existing signals are considered, and a new signal is synthesised by combining
 these small parts called grains. Grains are often based on measurements, but
 that is not necessarily the case. A grain typically corresponds to specific
-conditions, for example the speed of and distance to the source. Granular
+conditions, for example the speed of the source. Granular
 synthesis is a computationally fast method. With spectral modelling synthesis a
 signal is created from a superposition of tone and noise components. An
 advantage of spectral modelling synthesis is that the synthesis strategy can be
@@ -269,12 +269,12 @@ operational state of the source.
 Auralisation is an interesting method and has been used to study future aircraft
 types \cite{Rizzi2013,Rizzi2016,Rizzi2016a} and flight procedures
 \cite{Sahai2016}. Furthermore, the method was used to investigate the perceived
-unpleasantness of aircraft flyover noise as function of certain temporal
+unpleasantness of aircraft flyover noise as a function of certain temporal
 parameters \cite{Pate2017}.
 
 Aspects to consider when simulating the sound of aircraft are the different
-noise sources on the aircraft, the state of the aircraft and thereby the state
-of these sources, as well as the condition of the environment. Main noise
+noise sources on the aircraft, the state of the aircraft (e.g. thrust setting) and thereby the state
+of these sources (e.g. frequency engine shaft), as well as the condition of the environment. Main noise
 sources on an airplane with turbofan engines are the jet, fan, turbine,
 combustor and airframe. The significance of these sources depends on aircraft
 type, flight procedure, as well as the position of the source with respect to
@@ -301,19 +301,19 @@ of forward and aft radiated fan tones. Only Buzz-Saw noise is still output in
 % Both ANOPP2 and INSTANT use spectral modelling
 % synthesis to generate an emission signal.
 
-Other models don't describe the contributions from the individual noise
-sources or spectral components but merge them together into a total spectrum.
+Other models do not describe the contributions from the individual noise
+sources or spectral components but merge them together into a single spectrum.
 The ECAC Doc29 method \cite{Doc29_fourth_2016} uses the ICAO ANP database and
 provides 24 \nicefrac{1}{3}-octave bands, and so does CNOSSOS-EU which has
 adopted the \nth{3} edition of Doc29 \cite{Doc29_third_2005}. The Swiss sonAIR
 model \cite{Zellmann2016} computes an emission spectrum that is composed of two
 source spectra: an engine spectrum and an airframe spectrum. The current Swiss
-model, FLULA2, doesn't consider an emission spectrum but instead uses a database
+model, FLULA2, does not consider an emission spectrum but instead uses a database
 of immission spectra where propagation effects are already included
 \cite{EMPA2010,Schaffer2014}.
 
 Aside from ANOPP2 and INSTANT none of the mentioned models make a distinction
-between tonal and noise contributions, thereby making them unfit for the use of
+between tonal and broadband noise contributions, thereby making them unfit for the use of
 aircraft auralisation which requires explicit knowledge about tonal and noise
 contributions.
 

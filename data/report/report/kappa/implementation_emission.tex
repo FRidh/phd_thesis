@@ -43,13 +43,13 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
 For the emission synthesis a signal is generated that is based on measurements
 conducted as part of the sonAIR project \cite{Zellmann2013}. Measurements of
 sound were conducted at various positions nearby Z\"{u}rich Airport. An
-optical tracking system consisting of two camera's was used to determine the
-position of the aircraft in close vicinity of the aircraft.
+optical tracking system consisting of two cameras was used to determine the
+position of the aircraft in close vicinity of the airport.
 
-For the data presented in this paper measurements from only a single microphone
-was used, situated at a height of 4 meters. Figure \ref{fig:figure_trajectory}
-shows an overview of the airport, the trajectory and the receiver. Aircraft were
-taking off and their height steadily increased from 30 to 260 meters.
+For the data presented measurements from only a single microphone
+were used, situated at a height of 4 meters. Figure \ref{fig:figure_trajectory}
+shows an overview of the airport, the trajectory and the receiver.
+Aircraft took off and their height steadily increased from 30 to 260 meters.
 
 % For the development of the sonAIR model \cite{Zellmann2016} sound recordings
 % were made for a large amount of events nearby Z\"{u}rich Airport
@@ -75,7 +75,7 @@ time-domain. The procedure assumes there is only one propagation path,
 the direct path, and that the aircraft can be considered a point source.
 As shown in Figure \ref{fig:backpropagation_block_diagram}, the
 backpropagation algorithm undoes atmospheric attenuation, the Doppler shift, and
-geometrical spreading (magnitude) in that specific order and using the methods as
+geometrical spreading (magnitude) in that specific order, and using the methods as
 described in the previous section \cite{Rietdijk2015}.
 % A recording is taken, and assuming there were no reflections, the atmospheric attenuation and spherical spreading were undone.
 Because only the direct path was considered all parameters that were used in the
@@ -134,14 +134,14 @@ propagation delay.
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/reverted}
-  \caption{Spectrogram of the recording in Figure \ref{fig:recording} after backpropagation to the source. The Doppler-shift has mostly been removed. Artifacts like the mirror-effect and amplitude modulations due to atmospheric turbulence remain.}
+  \caption{Spectrogram of the recording shown in Figure \ref{fig:recording} after backpropagation to the source. The Doppler-shift has mostly been removed. Artifacts like the mirror-effect and amplitude modulations due to atmospheric turbulence remain.}
   \label{fig:backpropagated}
 \end{figure}
 
 \subsection{Feature extraction}
 Spectral modelling synthesis was chosen as emission synthesis strategy. With
 spectral modelling synthesis a signal is generated as a superposition of tones
-and (bandpass-filtered) noise.
+and bandpass-filtered noise.
 % In order to synthesise the emission of the aircraft
 % We're interested in entirely synthesizing the emission of the aircraft and chose to use
 % spectral modelling synthesis, that is, a method where a signal is generated
@@ -168,11 +168,11 @@ The fundamental frequency is given by
  f_{0} = \mathrm{gcd}\left(f_1, f_2, \dots, f_n \right)
 \end{equation}
 where $\mathrm{gcd}$ is the \emph{greatest common divisor}.
-Implementations of the $\mathrm{gcd}$ attempt to find an exact solution.
+Implementations of the $\mathrm{gcd}$ operator attempt to find an exact solution.
 Due to errors in the estimation of the frequency of the tones and because some tones are
 not harmonics, an exact solution does not exist. Given an initial estimate of
 the fundamental frequency, one could define an error as the sum of the squared
-deviation between the target order of the harmonics and the actual (inaccurate)
+deviation between the target order of the harmonics and the actual estimated
 order
 \begin{equation}
  e = \sum_{i=0}^{n} \left( \frac{f_i}{f_0} - \mathrm{round}\left(\frac{f_i}{f_0}\right) \right)^2
@@ -183,7 +183,7 @@ An earlier version of the algorithm did not use the $\mathrm{gcd}$ in
 combination with the optimisation algorithm but instead determined the
 fundamental frequency using the complex cepstrum \cite{Rietdijk2015}.
 While it was possible to reliably determine the fundamental frequency with the
-complex cepstrum, the value that was obtained was not sufficiently accurate
+complex cepstrum, the value which was obtained was not sufficiently accurate
 for determining higher harmonics.
 
 In the method as described in Annex C of ISO 1996-2:2007 each spectral line is

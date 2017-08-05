@@ -120,7 +120,7 @@ has an average flow resistivity of
 \SI{200}{\kilo\pascal\second\per\square\meter} \cite{Crocker1997}.
 Furthermore, a surface is called locally reacting if at a certain point the
 particle velocity $\vect{u}$ depends only on the sound pressure $p$ at that
-point. In case it doesn't the surface has an extended reaction.
+point. In case it does not, the surface has an extended reaction.
 Figure \ref{fig:theory:sound:impedance} shows the impedance of grass according to the Delaney and Bazley model.
 % TODO drop or expand?
 
@@ -266,7 +266,7 @@ the immission at a receiver position, taking into account refractions and
 reflections. Raytracers are commonly used in room acoustics but also in
 environmental acoustics for noise prediction.
 
-The image source method is a computationally fast algorithm for taking into
+The Image Source Method (ISM) is a computationally fast algorithm for taking into
 account reflections and uses the concept of mirror sources
 \cite{Allen1979,Mechel2013}. Mirror sources are found by mirroring the original
 source with respect to the reflective surface that is considered. Higher-order
@@ -292,7 +292,7 @@ miror sources.
 % \subsection{Descriptors}
 
 
-\subsection{Atmospheric turbulence}
+\subsection{Atmospheric turbulence}\label{theory:sound-propagation:atmospheric-turbulence}
 
 % TODO: rewrite paragraph from paper
 In an outdoor situation, spatial and temporal variations in temperature and wind
@@ -316,13 +316,13 @@ flow, intertial forces dominate, fluid motion is chaotic and fluid particles no
 longer follow a straight path. Instead, they may loop, forming instabilities
 such as eddies and vortices. The Reynolds number $\mathrm{Re}$ may be used to
 predict the transition from laminar to turbulent flow and is the dimensionless
-ratio between inertial and viscous forces,
-\begin{equation}
-  \mathrm{Re} = \frac{\rho \nu L}{\mu}
-\end{equation}
-where $\rho$ is the fluid density, $\nu$ the characteristic velocity of the
-fluid, $L$ a characteristic dimension, and $\mu$ the dynamic viscosity of the
-fluid.
+ratio between inertial and viscous forces.
+% \begin{equation}
+%   \mathrm{Re} = \frac{\rho \nu L}{\mu}
+% \end{equation}
+% where $\rho$ is the fluid density, $\nu$ the characteristic velocity of the
+% fluid, $L$ a characteristic dimension, and $\mu$ the dynamic viscosity of the
+% fluid.
 
 % \subsubsection*{Eddies}
 The onset of turbulence and formation of eddies can be explained by considering
@@ -368,7 +368,7 @@ Variations in temperature and wind in both position $\mathbf{r}$ and time $t$
 cause variations in the refractive index field $n(\mathbf{r},t)$.
 Interested in how these variations affected wave propagation, a first-order Rytov approximation is done to obtain expressions for the fluctuating pressure.
 The following expressions are based on \cite{Ishimaru1997} and \cite{Jurado-navas2006}, but instead of electromagnetic
-waves, we consider sound waves. We consider for now spatial variations only, and
+waves, sound waves are considered. We consider for now spatial variations only, and
 as a starting point we use the following Helmholtz equation
 \begin{equation}\label{eq:helmholtz_without_fluctuations}
  \left( \nabla^2 + k^2 n^2(\mathbf{r}) \right) p(\mathbf{r})= 0

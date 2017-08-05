@@ -4,34 +4,35 @@
 Spatial and temporal variations in the atmosphere affect sound propagation and
 can cause audible modulations. Because they can be clearly audible it is
 presumed that including scintillations in auralisations increases their
-perceived realism. This chapter describes a method, published in Paper
-\ref{paper:turbulence}, for generating sequences of scintillations and including
-them in auralisations.
+perceived realism. The multiple scattering affects the phase of the signal as
+well as the log-amplitude. In previous work a coherence factor was introduced
+that would account for coherence loss due to phase modulations \cite{Shin2006,
+Arntzen2014b, Arntzen2014a}. Fluctuations due to turbulence have also been
+included in auralisations by simulating the amplitude modulations that were
+observed in measurements \cite{Heutschi2014, Minard2016}.
 
-% TODO rewrite
-
-The multiple scattering affects the phase of the signal as well as the
-log-amplitude. In previous work a coherence factor was introduced that would
-account for coherence loss due to phase \cite{Shin2006, Arntzen2014b,
-Arntzen2014a}. Fluctuations due to turbulence have also been included in
-auralisations by simulating the amplitude modulations that were observed in
-measurements \cite{Heutschi2014, Minard2016}.
-
-% TODO: rewrite paragraph from paper
-A method is presented to generate time series of sound pressure
-fluctuations caused by line-of-sight propagation through a weakly turbulent
+This chapter describes a method, published in Paper \ref{paper:turbulence}, for
+generating sequences of scintillations and including them in auralisations. The
+method considers line-of-sight propagation through a weakly turbulent
 atmosphere. Novel in this field, the method includes both log-amplitude and
 phase fluctuations. The presented method is based on \cite{Jurado-navas2006}
 where it was used to predict the performance of wireless communication links,
 and \cite{Forssen2000} where it was used to determine the influence of
-turbulence on the performance of a barrier. The method was also
-to increase the perceptual validity of auralisations
-\cite{Rietdijk2014,Rietdijk2014a}.
+turbulence on the performance of a barrier. An early version of the method was
+discussed in \cite{Rietdijk2014,Rietdijk2014a}.
 
 % \newpage
 % \section{Wave propagation in random media}
 
+\section{Generating sequences of scintillations}
 
+\subsection{Space-to-time conversion}
+
+In section \ref{theory:sound-propagation:atmospheric-turbulence} an introduction
+to atmospheric turbulence was given. Consider the line-of-sight situation where
+$d$ is the distance between a source and a receiver pair along the wave
+propagation direction, and $\rho$ the spatial separation of the receivers
+transverse to the wave propagation direction.
 Still assuming Taylor's hypothesis regarding frozen turbulence, we can perform a
 space-to-time conversion of the correlation and covariance functions to obtain
 $C(\tau)$ and $B(\tau)$ respectively. The turbulence correlation time is given
@@ -47,21 +48,19 @@ where $v_{\bot}$ is the transverse speed, corresponding to e.g. the mean speed
 at which the field is carried by the wind transverse to the wave propagation
 direction.
 
-In this paper we will continue to use the covariance for spherical waves and a
-Gaussian spectrum, because the Gaussian spectrum is the simplest model to work
-with and computationally least demanding, but the method can also be used with
-covariance functions that describe other turbulence spectra, like e.g. the Von
-Karman spectrum \cite{Ostashev2015}.
+In this chapter the covariance for spherical waves and a Gaussian spectrum is
+considered, because the Gaussian spectrum is the simplest model to work with and
+computationally least demanding. The method can also be used with covariance
+functions that describe other turbulence spectra, like e.g. the Von Karman
+spectrum \cite{Ostashev2015}.
 
-
-
-% \subsection{Propagation in the turbulent atmosphere as a multichannel}
+\subsection{Propagation in the turbulent atmosphere as a multichannel}
 The fluctuations in the atmosphere are temporal and/or spatial. Therefore, to
 model sound propagation of a signal $x(t)$ through such an atmosphere a
 time-varying channel is necessary. The received signal $y(t)$ consists of a
 line-of-sight contribution and additional contributions from scattering,
 together forming a multichannel \cite{Jurado-navas2006}.
-Ignoring beam spreading, we can write this as %The received signal can be written as the sum of $n$ channels
+Ignoring beam spreading, this can be written as %The received signal can be written as the sum of $n$ channels
 \begin{equation}
  y(t) = \sum_{n} \alpha_{sc_{n}}(t) x(t-\tau_n(t))
 \end{equation}
@@ -78,7 +77,6 @@ Because the attenuation is very similar for the different multipaths, we can wri
 \end{equation}
 Therefore, the received signal is obtained by shifting the emitted signal $x(t)$ with a time-varying propagation delay $\tau(t)$, and multiplying the result with a time-varying gain $\alpha_{sc}(t)$.
 
-\section{Generating sequences of scintillations}
 
 \subsection{Design of scintillation sequence}
 We will now design a sequence of scintillations and for that we need to know the

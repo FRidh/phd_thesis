@@ -57,7 +57,7 @@ def get_pairs(tests):
                 yield Pair(instance, part, i+1, pair[0]['hash'], pair[1]['hash'])
 
 
-def makefig(data, x, y, hue=None, xlabel="", title="", plotkind="swarm"):
+def makefig(target, data, x, y, hue=None, xlabel="", title="", plotkind="swarm"):
     PLOT = {
         "swarm": sns.swarmplot,
         "box" : sns.boxplot,
@@ -73,10 +73,11 @@ def makefig(data, x, y, hue=None, xlabel="", title="", plotkind="swarm"):
     ax.set_title(title)#Similarity ratings grouped by aircraft type combinations. Recordings only.")
     fig = ax.get_figure()
     fig.suptitle("")
+    legend = ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     #labels = ax.get_xticklabels()
     #for label in labels:
         #label.set_rotation(30)
-    fig.tight_layout()
+    fig.savefig(target, dpi=DPI, bbox_extra_artists=[legend], bbox_inches='tight')
     return fig
 
 
@@ -128,7 +129,8 @@ def get_dataset(folder_test, file_results):
 
     # Normalize ratings from 0 to 1.
     normalize = lambda x: (x-x.min()) / (x.max()-x.min())
-    results.rating = results.groupby(['participant', 'part']).rating.transform(normalize)
+    #results.rating = results.groupby(['participant', 'part']).rating.transform(normalize)
+    results.rating /= 10.0
 
     # And use a multi-index
     results = results.set_index(['part', 'pair', 'participant'])
@@ -144,6 +146,12 @@ def get_dataset(folder_test, file_results):
     del full['part_a']
     del full['part_b']
     full = full.assign(aircraft=(full.aircraft_a+", "+full.aircraft_b), kind=(full.kind_a+", "+full.kind_b)).replace("sim, rec", "rec, sim")
+
+    full = full.replace({
+        'start' :   'approach',
+        'center':   'fly-over',
+        'end'   :   'distancing'
+        })
 
     return full
 
@@ -190,14 +198,14 @@ def create_figures(data, target):
     #
     aircraft = 'A320'
     selection = data[(data.aircraft_a==aircraft) & (data.aircraft_b==aircraft)]# & (data.part=='end')]
-    fig = makefig(selection, 'kind', 'rating', hue="part", xlabel="Stimuli type combinations", plotkind='box')
-    fig.savefig(os.path.join(target, 'figure5_ratings_{}.eps'.format('part_'+aircraft)), dpi=DPI)
+    makefig(os.path.join(target, 'figure5_ratings_{}.eps'.format('part_'+aircraft)),
+            selection, 'kind', 'rating', hue="part", xlabel="Stimuli type combinations", plotkind='box')
 
     #
     aircraft = 'RJ1H'
     selection = data[(data.aircraft_a==aircraft) & (data.aircraft_b==aircraft)]# & (data.part=='end')]
-    fig = makefig(selection, 'kind', 'rating', hue="part", xlabel="Stimuli type combinations", plotkind='box')
-    fig.savefig(os.path.join(target, 'figure6_ratings_{}.eps'.format('part_'+aircraft)), dpi=DPI)
+    makefig(os.path.join(target, 'figure6_ratings_{}.eps'.format('part_'+aircraft)),
+            selection, 'kind', 'rating', hue="part", xlabel="Stimuli type combinations", plotkind='box')
 
 
 def main():
@@ -209,7 +217,10 @@ def main():
     args = parser.parse_args()
 
     data = get_dataset(args.folder_tests, args.file_results)
-    create_figures(data, args.target)
+
+    print(data.columns)
+
+    #create_figures(data, args.target)
 
 
 

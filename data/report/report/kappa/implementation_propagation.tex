@@ -178,86 +178,9 @@ was considered.
   \label{fig:implementation:propagation:attenuation}
 \end{figure}
 
-% \subsection{Atmospheric turbulence} % TODO this overlaps with next chapter. Remove. Small parts can be reused.
-% Fluctuations in the atmosphere of wind velocity and temperature affect sound
-% propagation resulting in fluctuations of both the amplitude and the phase.
-% Depending on the situation these fluctuations can be clearly audible and
-% therefore have to be included in order to produce realistic sounding
-% auralisations.
-%
-% A method for including phase fluctuations utilizing the mutual
-% coherence function was presented in \cite{Arntzen2014a, Arntzen2014b, Shin2006}.
-% The phase fluctuations cause decorrelation between the direct and
-% ground-reflected contributions resulting in less-pronounced interference
-% and generally more plausible auralisations.
-%
-% The authors of this paper developed a model that includes both log-amplitude and phase fluctuations due to
-% atmospheric turbulence in auralisations \cite{Rietdijk2014, Rietdijk2014a,
-% Rietdijk2017}. As the aircraft moves through the turbulent atmosphere, the
-% refractive-index fluctuations are sampled by the waves propagating from source
-% to receiver. The model considers a line-of-sight situation and assumes a frozen
-% atmosphere. Other assumptions were a Gaussian applied turbulence spectrum and
-% spherical wavefront \cite{Wilson1999,Daigle1983}. The model takes into account
-% saturation of the log-amplitude fluctuations. Details about the model and how it
-% can be used in auralisations can be found in \cite{Rietdijk2017}.
-%
-% The autocorrelation function of the Gaussian spectrum is given by \cite{Daigle1983}
-% \begin{equation}
-%  C = \frac{\Phi\left(\rho/L\right)}{\rho/L}
-% \end{equation}
-% and determines the shape of the log-amplitude $\chi$ and phase fluctuations $S$
-% spectra. Because of the Wiener-Khinchin theorem we can take the type-1 Discrete
-% Cosine Transform (DCT-1) to obtain the shape of the autospectra.
-%
-% The autocorrelation is a function of $\rho$, the spatial separation between two receivers,
-% perpendicular to the wave propagation direction, and $L$, the correlation
-% length. Instead of two non-moving receivers we consider a moving source
-% % that samples the refractive-index fluctuations,
-% and therefore perform a space-to-time conversion to obtain $C(\tau)$ and $\rho=v_{\bot}\tau$ where
-% $v_{\bot}$ is the speed of the aircraft perpendicular to the wave propagation
-% direction.
-%
-% Gaussian white noise is shaped with this spectrum through a convolution to
-% obtain log-amplitude and phase fluctuations. Time-variance of the speed is taken
-% into account not by updating the filter but instead by resampling the sequence of
-% fluctuations using a Variable Delay Line with a delay based on the time-varying transverse speed.
-%
-% At this point the fluctuations have a variance of 1. The fluctuations are scaled
-% by the square root of the desired variances \cite{Daigle1983}
-% \begin{equation}\label{eq:variances}
-%  \sigma_{\chi}^2 = \sigma_{S}^2 = \frac{\sqrt{\pi}}{2} \sigma_{\mu}^2 k^2 d L
-% \end{equation}
-% which are a function of the variance of the refractive-index fluctuations
-% $\sigma_{\mu}^2$, wavenumber $k$, source-receiver distance $d$ and correlation
-% length $L$. This scaling can be time-variant.
-%
-% The fluctuations are relatively slow, and therefore a filter is constructed to
-% apply the log-amplitude fluctuations as this also allows to take into account the
-% frequency-dependency of the fluctuations as shown in equation
-% \ref{eq:variances}. This filter is obtained by taking the Inverse Discrete
-% Fourier Transform (IDFT) of $\exp(\chi)$. From equation \ref{eq:variances} it
-% also follows that the phase-fluctuations have a linear-phase. Therefore, the
-% phase fluctuations are converted to a propagation delay fluctuation and applied
-% with a Variable Delay Line.
-%
-% The variance of the dynamic refractive-index $\sigma_{\mu}^2$ was \SI{3e-5}{}
-% and the correlation length $L$ \SI{10}{\meter}. The sequences of fluctuations were
-% initially computed at \SI{100}{\hertz}. The autocorrelation filter had a length
-% of 8192 samples. The time-variant filter for the amplitude modulations had 512 samples
-% and hop size was 128 samples. The impulse response transitions were not smoothed.
-%
-% Figure \ref{fig:implementation:propagation:turbulence} shows a spectrogram of the immission when atmospheric attenuation is included.
-%
-% \begin{figure}[H]
-%   \centering
-%   \includegraphics[]{../figures/generated/propagation/turbulence}
-%   \caption{Propagation turbulence signal.}
-%   \label{fig:implementation:propagation:turbulence}
-% \end{figure}
-
 \newpage
 \subsection{Ground reflection} % TODO refer to theory. Extend?
-While the image source method (ISM) was implemented with image
+While the Image Source Method was implemented with image
 receivers instead of image sources, only one additional path,
 a ground reflection, was considered. Therefore, the implementation of the ISM
 will not be treated any further.
@@ -265,7 +188,7 @@ will not be treated any further.
 The ground reflection is considered as a second propagation path using a mirror receiver.
 % The implementation supports direction-dependent emission signals, but because we had only one emission...
 For the ground reflected path the same emission signal was used as for the
-direct path, thereby ignoring directivity of the sources. Why the directivity of
+direct path, thereby ignoring directivity of the sources. The reason why the directivity of
 the source is ignored will become clear in the following sections.
 
 A filter was included to take into account the transfer funtion of the ground.

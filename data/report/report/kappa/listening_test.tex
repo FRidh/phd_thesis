@@ -63,8 +63,8 @@ considered, an A320 and a RJ1H, as well as two events per aircraft type.
 % The recordings were made close to the airport.
 % TODO this sentence can be dropped if we have a Measurements section
 % with the aircraft passing by at approximately 90 meters.
-Fade in and fade out was applied to the stimuli. Headphones were used with a
-single channel. Head-related transfer functions were not included.
+Fade in and fade out was applied to the stimuli. The signals were mono and
+presented with headphones. Head-related transfer functions were not included.
 
 Similarity is relative, and therefore an anchor is typically used. For each
 part, participants were first given the set of stimuli, in order to become
@@ -72,38 +72,42 @@ familiar with the type of sounds and the spread in the sounds of that part, and
 then continued with rating the pairs. The rating was done on an eleven point
 Likert scale. The left side of the scale said ``not so much'' and the right side
 ``very much''. The scale was not numbered. The order of the stimuli was
-randomised for each test.
+randomised for each test and each part.
 
 Figures \ref{fig:listening:results:recording-A320} and
 \ref{fig:listening:results:simulation-A320} show spectrograms of some of the stimuli
 that were used. The blade passing frequency and harmonics are not as prominent
 in the auralisation as they are in the recording.
 
-\afterpage{
+% \newpage
+% \afterpage{
 \begin{figure}
   \centering
   \includegraphics[]{../figures/generated/listening/recording-A320}
-  \caption{Spectrograms of the ``start'', ``center'' and ``stop'' parts of a recording of an A320.}
+  \caption{Spectrograms of the approach, fly-over and distancing parts of a recording of an A320.}
   \label{fig:listening:results:recording-A320}
-\end{figure}
-
-\begin{figure}
+% \end{figure}
+%
+% \begin{figure}
   \centering
   \includegraphics[]{../figures/generated/listening/turbulence-A320}
-  \caption{Spectrograms of the ``start'', ``center`` and ``stop'' parts of an auralisation of an A320.}
+  \caption{Spectrograms of the approach, ``center`` and distancing parts of an auralisation of an A320.}
   \label{fig:listening:results:simulation-A320}
 \end{figure}
-}
+% }
+% \clearpage
 
+\newpage
 \section{Results}
 The results of the participants were scaled linearly from 0 to 1 with 0
-corresponding to ``not so much'' and 1 corresponding to ``very much''. Not all
-of the participants used the entire scale, and therefore they were rescaled per
-participant and per test part to use the full scale. There were 17 participants,
-all graduate students, and of which the majority studied acoustics. The results
-that are shown are obtained after joining the data of all participants and all
-three test parts. The listening test and results can be found at respectively
-\cite{Rietdijk2017a} and \cite{Rietdijk2017b}.
+corresponding to ``not so much'' and 1 corresponding to ``very much''.
+% Not all of the participants used the entire scale, and therefore they were rescaled per
+% participant and per test part to use the full scale.
+There were 17 participants, all graduate students, and of which the majority
+studied acoustics. The results that are shown are obtained after joining the
+data of all participants and all three test parts. The listening test and
+results can be found at respectively \cite{Rietdijk2017a} and
+\cite{Rietdijk2017b}.
 
 Figure \ref{fig:listening:ratings-aircraft-type-combinations} shows the distribution of the similarity ratings grouped by
 aircraft combination for both the recordings and the auralisations.
@@ -115,7 +119,8 @@ The curves are then summed to obtain a density and finally normalised so that th
 }. A Gaussian kernel was used.
 
 
-\afterpage{
+% \newpage
+% \afterpage{
 \begin{figure}
 %     \centering
     \begin{subfigure}{0.5\textwidth}
@@ -130,9 +135,10 @@ The curves are then summed to obtain a density and finally normalised so that th
     \end{subfigure}
     \caption{Similarity ratings grouped by aircraft type combinations. The left figure shows the ratings for the recordings and the right figure for the auralisations.}
     \label{fig:listening:ratings-aircraft-type-combinations}
-\end{figure}
+% \end{figure}
+% \clearpage
 
-\begin{figure}
+% \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \includegraphics[]{{{../figures/generated/listening-analysis/figure3_ratings_A320}}}
         \caption{A320}
@@ -146,7 +152,8 @@ The curves are then summed to obtain a density and finally normalised so that th
     \caption{Similarity ratings grouped by stimuli type combinations. The left figure shows the ratings for the A320 and the right figure for the RJ1H.}
     \label{fig:listening:ratings-stimuli-type-combinations}
 \end{figure}
-}
+% }
+% \clearpage
 
 % \begin{figure}[H]
 %   \centering
@@ -180,45 +187,49 @@ In Figures \ref{fig:listening:results:ratings-A320-parts} and
 \ref{fig:listening:results:ratings-RJ1H-parts} the results were split by part.
 To improve clarity the amount of information is reduced by using Tukey boxplots.
 
-Participants mentioned they noted larger differences at especially the beginning
-of the events (``start`` parts) and also at the end of the events (``end`` parts). A
-common answer to the question how many aircraft they heard was ``two or three``.
+Participants mentioned they noted larger differences at especially the approach of the events and the distancing.
+A common answer to the question how many different aircraft they heard was ``two or three``.
 Occasionally, the answer would start at ``two`` but go to ``two or more`` after they
 were told they were listening to not only recordings but also simulations. Some
 participants were surprised when told that simulations were included,
 others said they had thought so, and a few of the participants were already
 aware the test was possibly going to contain simulations.
-
-\newpage
-\afterpage{
-\begin{figure}[p]
+%
+% \newpage
+% \afterpage{
+% \begin{float}
+\begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/listening-analysis/figure5_ratings_part_A320}
   \caption{Similarity ratings for the A320 grouped by stimuli type combinations and stimuli part.}
   \label{fig:listening:results:ratings-A320-parts}
-\end{figure}
+% \end{figure}
 % TODO discuss
 
-\begin{figure}[p]
+% \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/listening-analysis/figure6_ratings_part_RJ1H}
   \caption{Similarity ratings for the RJ1H grouped by stimuli type combinations and stimuli part.}
   \label{fig:listening:results:ratings-RJ1H-parts}
 \end{figure}
+% \end{float}
 % TODO discuss
-}
+% }
 
 \newpage
 \section{Discussion}
-As can be seen in Figure \ref{fig:listening:ratings-aircraft-type-combinations:recordings}, the A320's are judged to be very
-similar to each other, and the RJ1H's as quite similar to each other. The A320's
-are not rated as very similar to the RJ1H's and therefore we conclude that the
-participants can discriminate between the two aircraft types.
+As can be seen in Figure
+\ref{fig:listening:ratings-aircraft-type-combinations:recordings}, the A320's
+are judged to be very similar to each other, and the RJ1H's as quite similar to
+each other as well. The A320's are not rated as very similar to the RJ1H's and therefore
+it appears that the participants can discriminate between the two aircraft
+types.
 
-In the case of the auralisations, Figure \ref{fig:listening:ratings-aircraft-type-combinations:auralisations}, the
+In the case of the auralisations, Figure
+\ref{fig:listening:ratings-aircraft-type-combinations:auralisations}, the
 participants can also discriminate between the aircraft types, but now the
-RJ1H's are judged to be relatively more similar than the A320's. Compared to the recordings
-the difference between the A320's and the RJ1H's is slightly smaller.
+RJ1H's are judged to be relatively more similar than the A320's. Compared to the
+recordings the difference between the A320's and the RJ1H's is slightly smaller.
 
 % One might argue from these findings that the whole set of auralisations is more similar than the set of recordings.
 
@@ -232,13 +243,13 @@ groups in Figures
 \ref{fig:listening:ratings-aircraft-type-combinations:auralisations}. Therefore,
 it would appear that listeners can discriminate between aircraft types, but that
 the auralisations are considered to be of different aircraft types than the
-recordings they're based on.
+recordings they are based on.
 
-Figures \ref{fig:listening:ratings-stimuli-type-combinations:A320} and
-\ref{fig:listening:ratings-stimuli-type-combinations:RJ1H} show the same data
+Figures \ref{fig:listening:results:ratings-A320-parts} and
+\ref{fig:listening:results:ratings--parts} show the same data
 but now further grouped by stimuli part. Judging from Figure
 \ref{fig:listening:ratings-stimuli-type-combinations:A320} there appears to be a
-relative large dissimilarity between the ``start'' parts of the A320 recordings
+relative large dissimilarity between the approach parts of the A320 recordings
 and also between the ``end'' parts of the A320 auralisations. The groups ``(rec,
 rec)'' and ``(sim, sim)'' consist however of only 17 data points each whereas
 the ``(rec, sim)'' group has 68 data points.
