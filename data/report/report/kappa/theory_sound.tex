@@ -101,28 +101,11 @@ is the bulk modulus of the medium. For ideal gases the bulk modulus is $K=\gamma
 p$ where $\gamma=C_p/C_v$ is the ratio of specific heat capacities at constant
 pressure $C_p$ and constant volume $C_V$.
 
-\subsubsection*{Convective wave equation}\todo{keep this for other section?}
-A mean flow has an effect on sound generation and propagation.
-The material derivative $D/Dt$ is defined as
-\begin{equation}
-  \frac{D}{Dt} = \frac{\partial}{\partial t} + \vect{u} \nabla
-\end{equation}
-and is a time derivative of some physical quantity for a portion of a material
-moving with a velocity $\vect{u}$.
-
-Taking the material derivative of the linearised mass conservation equation and
-subtracting the divergence of the linearised momentum conservation equation
-results in the convective wave equation.
-% \begin{equation}
-%   \frac{\partial^2 \rho'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) \rho' \right) + \left( \vect{u}_0 \cdot \nabla \right) \left( \vect{u}_0 \nabla \rho' \right) - \nabla^2 p' = 0
-% \end{equation}
-Assuming an adiabatic process, the convective wave equation then becomes
-\begin{equation}
-  \frac{\partial^2 \rho'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) p' \right) + \left( \vect{u}_0 \cdot \nabla \right)^2 p' - c^2 \nabla^2 p' = 0
-\end{equation}
-
 \subsubsection*{Classical wave equation}
-The convective wave equation considers a flow with a velocity $\vect{u}$. If the velocity is zero, the equation reduces to the classical wave equation
+Taking the time derivative of the linearised mass conservation equation,
+subtracting the divergence of the linearised momentum conservation equation
+and assuming an adiabatic process results in the classical wave equation
+% The convective wave equation considers a flow with a velocity $\vect{u}$. If the velocity is zero, the equation reduces to the classical wave equation
 \begin{equation}\label{eq:theory:sound:wave:classic}
  \frac{1}{c^2} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = 0
 \end{equation}
@@ -168,7 +151,7 @@ force $\vect{f'}$ that correspond to a vibrating solid boundary. The classical w
 \begin{equation}
    \frac{1}{c^2} \frac{\partial^2 p'}{\partial t^2} - \nabla^2 p' = \frac{\partial m'}{\partial t} - \nabla \cdot \vect{f}'
 \end{equation}
-In general a source term can be written as a source $s(\vect{x}, t)$.
+In general a source term can be written as a source $s$.
 
 \subsubsection*{Green's function}\label{sec:theory:sound:green}
 The simplest possible source is a point source that is represented by a Dirac
@@ -181,8 +164,9 @@ $\hat{G}$ should satisfy
 \begin{equation}
   \left( \nabla^2 + k^2 \right) \hat{G} = - \delta \left( \vect{x} - \vect{x}_0 \right)
 \end{equation}
-Note that because a harmonic point source is considered the Helmholtz equation
-is used.
+Note that a Helmholtz equation is used because a harmonic point source is considered.
+
+
 
 The solution of this inhomogeneous Helmholtz equation is again an
 ingoing and outgoing spherical wave. Because of causality we consider only the

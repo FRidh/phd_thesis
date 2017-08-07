@@ -8,6 +8,7 @@ import collections
 import itertools
 import numpy as np
 import seaborn as sns
+import csv
 
 import matplotlib as mpl
 mpl.rc("figure", figsize=(3.0, 2.5))
@@ -78,7 +79,7 @@ def makefig(target, data, x, y, hue=None, xlabel="", title="", plotkind="swarm")
     #for label in labels:
         #label.set_rotation(30)
     fig.savefig(target, dpi=DPI, bbox_extra_artists=[legend], bbox_inches='tight')
-    return fig
+    #return fig
 
 
 def makefig_kdeplot(data, x, y, xlabel="Similarity rating", ylabel="Kernel density estimate", title=""):
@@ -98,6 +99,22 @@ def makefig_kdeplot(data, x, y, xlabel="Similarity rating", ylabel="Kernel densi
         #label.set_rotation(30)
     fig.tight_layout()#subplots_adjust(bottom=0.35, left=0.25)
     return fig
+
+
+def kdeplot_of_groups(groups, target, xlabel="Similarity rating", ylabel="Kernel density estimate"):
+    fig, ax = plt.subplots(1, 1, figsize=FIGSIZE_WIDE)
+
+    lines = ['-', '--', '-.', ':']
+
+    for label, group, line in zip(*zip(*groups), itertools.cycle(lines)):
+        sns.kdeplot(group.rating.dropna(), ax=ax, label="{}, {}".format(*label), linestyle=line)
+    ax.set_xlim(0.0, 1.0)
+    ax.set_ylim(0.0, 2.3)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    legend = ax.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
+    fig.subplots_adjust(right=0.8)
+    fig.savefig(target, dpi=DPI, bbox_extra_artists=[legend], bbox_inches='tight')
 
 
 def get_dataset(folder_test, file_results):
@@ -208,6 +225,23 @@ def create_figures(data, target):
             selection, 'kind', 'rating', hue="part", xlabel="Stimuli type combinations", plotkind='box')
 
 
+    kdeplot_of_groups(data.groupby(['aircraft', 'kind']), os.path.join(target, 'figure_kde.eps'))
+
+
+def write_latex_table(df, filename):
+
+    names = {
+        'mean'   :   '$\mu$',
+        'std'    :   '$\sigma$',
+        'count'  :   '$n$',
+        'kind'   :   'stimuli'
+        }
+    pd.set_option('precision', 2) # Precision of floats
+    df = df.rename(columns=names)
+
+    with open(filename, 'w') as f:
+        f.write(df.to_latex(escape=False))
+
 def main():
 
     parser = argparse.ArgumentParser()
@@ -218,11 +252,14 @@ def main():
 
     data = get_dataset(args.folder_tests, args.file_results)
 
-    print(data.columns)
+    # Tables
+    agg = data.groupby(['part', 'kind', 'aircraft']).rating.aggregate(['mean', 'std', 'count'])
+    write_latex_table(agg, os.path.join(args.target, 'table_analysis_parts.tex'))
+    agg = data.groupby(['kind', 'aircraft']).rating.aggregate(['mean', 'std', 'count'])
+    write_latex_table(agg, os.path.join(args.target, 'table_analysis.tex'))
 
-    #create_figures(data, args.target)
-
-
+    # Figures
+    create_figures(data, args.target)
 
 if __name__ == '__main__':
     main()

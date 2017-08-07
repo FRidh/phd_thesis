@@ -20,7 +20,7 @@ equation and the divergence of the homogeneous version of the momentum
 conservation equation, then subtracting one from another, and finally
 subtracting from both sides of the equation $c^2 \nabla^2 \rho$, results in the
 Lighthill equation
-\begin{equation}
+\begin{equation}\label{eq:theory:sound:generation:lighthill}
   \frac{\partial^2 \rho}{\partial t^2} - c^2 \nabla^2 \rho = \nabla \cdot \nabla \cdot \matr{T}
 \end{equation}
 where $\matr{T}$ is the Lighthill stress tensor
@@ -29,18 +29,20 @@ where $\matr{T}$ is the Lighthill stress tensor
 \end{equation}
 The right-hand side of the Lighthill equation describes the non-homogeneous
 fluid in a finite volume $V$. This area is called the source region or source
-field. The left-hand side of the equation is called the sound field, it
-describes the homogeneous fluid and this is where the classical wave equation
+field. The left-hand side of the equation describes a homogeneous fluid. This
+region is called the sound field and is where the classical wave equation
 governs sound propagation.
 
-The Lighthill stress tensor consists of three aero-acoustic processes that are
+The Lighthill stress tensor can be considered as a source term of a jet in an
+acoustic medium at rest and consists of three aero-acoustic processes that are
 sources of sound \cite{Rienstra2017}. The first are non-linear convective forces
-as described by the Reynold stress tensor $\rho \vect{u}\vect{u}$. The second
-viscous forces $\tau$ and the third deviations from a uniform soundspeed
-$c_0$ or isentropic behaviour $p' - c_0^2 \rho'$. \todo{requires linearisation}
+as described by the Reynold stress tensor $\rho \vect{u}\vect{u}$, the second
+viscous forces $\tau$ and the third deviations from a uniform soundspeed $c$
+and/or isentropic behaviour $p - c^2 \rho$.
 
-A limitation of Lighthill's analogy is that it cannot handle situations where
-feedback occurs because the source field is decoupled from the sound field.
+
+% A limitation of Lighthill's analogy is that it cannot handle situations where
+% feedback occurs because the source field is decoupled from the sound field.
 
 
 % Lighthill's acoustic analogy has the limitation that the source field is not
@@ -52,48 +54,82 @@ feedback occurs because the source field is decoupled from the sound field.
 % The Mach number $M = v / c$ represents the ratio of the flow velocity to the
 % local speed of sound.
 
-
-
 \subsection{Elementary sources}
+The Lighthill equation is an exact reformulation of the fundamental equations.
+Equation \eqref{eq:theory:sound:generation:lighthill} is the density-based variant of the Lighthill equation.
+Linearisation of the pressure-based variant results in
+\begin{equation}
+ \frac{1}{c_0^2}\frac{\partial^2 p'}{\partial t^2} - \frac{\partial^2 p'}{\partial x_i^2} = \frac{\partial}{\partial t} \left( m + \frac{1}{c_0^2}\frac{\partial}{\partial t}\left(p' - c_0^2 \rho' \right) \right) - \frac{\partial f_i}{\partial x_i} + \frac{\partial^2 }{\partial x_i x_j} \left( \rho u_i u_j - \tau_{ij} \right)
+\end{equation}
+where Cartesian tensor notation is used.
+The source term can be split into the following three parts
+\begin{align}
+  s_1 &= \frac{\partial}{\partial t} \left( m + \frac{1}{c_0^2}\frac{\partial}{\partial t}\left(p' - c_0^2 \rho' \right) \right) \\
+  s_2 &= - \frac{\partial f_i}{\partial x_i} \\
+  s_3 &= \frac{\partial^2 }{\partial x_i x_j} \left( \rho u_i u_j - \tau_{ij} \right)
+\end{align}
+which are respectively the monopole, dipole and quadrupole source terms.
 
-The elementary sources
 
-\missingfigure{Figure of monopole, dipole and quadrupole}
-
-\subsubsection*{Monopole}
-
-Volume source
+%
+% The term $s_1$ is the monopole source term, the term $s_2$ the dipole source term
+%
+% and corresponds to a superposition of monopole fields.
+%
+%
+% Volume source
+% %
+% % \begin{equation}
+% %  \frac{d^2 \rho'}{dt^2}
+% % \end{equation}
 %
 % \begin{equation}
-%  \frac{d^2 \rho'}{dt^2}
+%  p' \left(\vect{x},t\right) = \frac{\dot{m} \left(\vect{y}, t-r/c\right)}{ 4 \pi r}
 % \end{equation}
-
-\begin{equation}
- p' \left(\vect{x},t\right) = \frac{\dot{m} \left(\vect{y}, t-r/c\right)}{ 4 \pi r}
-\end{equation}
-where $\dot{m} = \partial m / \partial t$ is the time derivative of the unsteady mass flow $\dot{m}$.
-
-\subsubsection*{Dipole}
-
-\begin{equation}
- p' \left(\vect{x}, t\right) =
-\end{equation}
-
-
-\subsubsection*{Quadrupole}
-
-Moment
-
-% \subsubsection*{Multipoles and spherical harmonics} % TODO Unless I would write a piece about Ambisonics I have no need for this so could skip it
+% where $\dot{m} = \partial m / \partial t$ is the time derivative of the unsteady mass flow $\dot{m}$.
+%
+% \subsubsection*{Dipole}
+%
+% \begin{equation}
+%  p' \left(\vect{x}, t\right) =
+% \end{equation}
 %
 %
-% \missingfigure{Multipoles and spherical harmonics}
+% \subsubsection*{Quadrupole}
 %
-% Ambisonics
+% Moment
+%
+% % \subsubsection*{Multipoles and spherical harmonics} % TODO Unless I would write a piece about Ambisonics I have no need for this so could skip it
+% %
+% %
+% % \missingfigure{Multipoles and spherical harmonics}
+% %
+% % Ambisonics
 
 
 \subsection{Moving source}
 The sound field produced by a moving source is different from that of a fixed source.
+
+\subsubsection*{Convective wave equation}\todo{keep this for other section?}
+A mean flow has an effect on sound generation and propagation.
+The material derivative $D/Dt$ is defined as
+\begin{equation}
+  \frac{D}{Dt} = \frac{\partial}{\partial t} + \vect{u} \nabla
+\end{equation}
+and is a time derivative of some physical quantity for a portion of a material
+moving with a velocity $\vect{u}$.
+
+Taking the material derivative of the linearised mass conservation equation and
+subtracting the divergence of the linearised momentum conservation equation
+results in the convective wave equation.
+% \begin{equation}
+%   \frac{\partial^2 \rho'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) \rho' \right) + \left( \vect{u}_0 \cdot \nabla \right) \left( \vect{u}_0 \nabla \rho' \right) - \nabla^2 p' = 0
+% \end{equation}
+Assuming an adiabatic process, the convective wave equation then becomes
+\begin{equation}
+  \frac{\partial^2 p'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) p' \right) + \left( \vect{u}_0 \cdot \nabla \right)^2 p' - c^2 \nabla^2 p' = 0
+\end{equation}
+
 
 \subsubsection{Convective amplification}
 Another effect that occurs and is especially relevant for fast-moving sources is

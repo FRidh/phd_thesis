@@ -4,7 +4,7 @@
 A commonly known effect related to movement is the Doppler shift.
 Relative motion between source, receiver and medium can cause
 Doppler shifts. If we consider a moving harmonic point source, $S(t) = \hat{S}_0
-\exp{\left(j\omega_0 t\right)} $, in a homogeneous fluid at rest, then the sound
+\exp{\left(j\omega_0 t\right)} $, a homogeneous fluid at rest, and a non-moving receiver, then the sound
 field is given by
 \begin{equation}
   p'(\vect{x},t) = \sum_{t_e} \frac{\hat{S}_0 \exp{\left(j \omega_0 t_e\right)}}{4\pi r \left(t_e\right) \abs{1-M_r (t_e)}}
@@ -14,8 +14,7 @@ times $t_e$. The Mach number $M_r = \vect{M} \cdot \vect{e}_r = M \cos{\theta}$ 
 the projection of the Mach number of the source in the direction towards the
 receiver. The Mach number of the source is $\vect{M}=\vect{v}/c$ and
 $\vect{e}_r=\vect{r}/r$ is the unit vector pointing towards the receiver.
-If we consider a moving source and fixed receiver, then the instantaneous
-frequency is given by
+The instantaneous angular frequency is then given by
 \begin{equation}
   \omega = \frac{\omega_0}{1 - M_r(t_e)}
 \end{equation}
@@ -67,7 +66,7 @@ where
 \begin{equation}
  C = -6.8346 \cdot \left( \frac{T_{01}}{T} \right)^{1.261}  + 4.6151
 \end{equation}
-In this equation $T_{01}$ is the triple-point isotherm temperature of 273.16 K.
+and where $T_{01}$ is the triple-point isotherm temperature of 273.16 K.
 
 % % TODO what to do with this
 % The standard furthermore mentions the following expression for the speed of sound
@@ -219,7 +218,7 @@ contribution and is important when considering an elevated source. As mentioned
 before, impedances of surfaces can vary significantly, and this is especially
 the case for the ground surface. Spectrograms of recordings of aircraft often
 show a distinct interference pattern called the Lloyd's mirror effect. Figure
-\ref{fig:theory:sound:reflection:ground} shows a (synthesised) example of the
+\ref{fig:theory:sound:reflection:ground} shows a synthesised example of the
 Lloyd's mirror effect as caused by an elevated moving source.
 
 \begin{figure}

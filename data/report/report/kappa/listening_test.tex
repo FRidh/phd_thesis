@@ -1,4 +1,4 @@
-\chapter{Subjective validation of synthesis method}\label{chapter:test}
+\chapter{Subjective validation of auralisation method}\label{chapter:test}
 % TODO From paper. Rewrite
 
 \section{Introduction}
@@ -8,10 +8,15 @@ emission model. An algorithm was presented for extracting select features from
 recordings with the underlying idea of using those features for the development
 of an empirical emission model.
 
-This chapter describes a listening test that was conducted and as written also in
-Paper \ref{paper:overview}. The purpose of the listening test was to check the
-plausiblity or perceptual validity of the auralisations and a comparison was
-therefore made between recordings and auralisations.
+This chapter describes a listening test that was conducted. The purpose of the
+listening test was to check the plausiblity or perceptual validity of the
+auralisations and a comparison was therefore made between recordings and
+auralisations.
+
+The hypothesis is that \emph{recordings and auralisations of aircraft of the same
+type and under similar conditions are samples of the same group}.
+Audible differences are likely to occur and are also acceptable, because even
+among recordings of the same aircraft type there are audible differences.
 
 % TODO maybe drop this part?
 How sounds are perceived can depend on many factors. Factors can be properties
@@ -20,8 +25,14 @@ measures describe how a sound is perceived by most listeners and can therefore
 be used to characterise a sound. Many measures exist, but not all measures are
 appliceable to all sounds and care should therefore be taken when choosing
 measures. Examples of common measures are loudness, roughness and sharpness.
-Due to time-constraints psychoacoustic measures were not measured. Instead, the
-overall similarity between stimuli was determined.
+
+Due to time-constraints psychoacoustic measures were not measured. Instead, an
+overall similarity between stimuli was determined. Recordings were compared not
+only with auralisations, but also with other recordings, and similarly,
+auralisations with other auralisations. Each of these comparisons can be
+considered a group. If the hypothesis is valid, then the distribution of the
+group with comparisons between recordings and auralisations, should be the same
+as the other two distributions.
 
 % The purpose of the
 % test was to determine whether the auralisation tool produces auralisations that
@@ -81,7 +92,7 @@ in the auralisation as they are in the recording.
 
 % \newpage
 % \afterpage{
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/listening/recording-A320}
   \caption{Spectrograms of the approach, fly-over and distancing parts of a recording of an A320.}
@@ -105,18 +116,50 @@ corresponding to ``not so much'' and 1 corresponding to ``very much''.
 % participant and per test part to use the full scale.
 There were 17 participants, all graduate students, and of which the majority
 studied acoustics. The results that are shown are obtained after joining the
-data of all participants and all three test parts. The listening test and
-results can be found at respectively \cite{Rietdijk2017a} and
-\cite{Rietdijk2017b}.
+data of all participants. % and all three test parts.
+% Update raw results??
+The listening test data can be found at \cite{Rietdijk2017a} and the
+raw results along with a brief analysis at \cite{Rietdijk2017b}.
 
+Table \ref{table:listening:results:analysis-parts} shows the mean $\mu$,
+standard deviation $\sigma$ and amount of samples $n$ per group.
+Averaging was done over participants. Table \ref{table:listening:results:analysis} is similar,
+but with this table averaging was done not over only participants but also over the three test parts.
+
+Figure \ref{fig:listening:ratings-kde-overall} shows the distribution of the similarity ratings grouped by aircraft and stimuli type combinations.
+The vertical axes show kernel density estimations for how common the given ratings were\footnote{
+A kernel density estimation can be seen as a continuous version of a histogram. Each sample is replaced by a kernel function centered at the value of the sample.
+The curves are then summed to obtain a density and finally normalised so that the area under the resulting curve is 1.
+}. A Gaussian kernel was used. Averaging is done over participants and test parts.
+
+Figures \ref{fig:listening:ratings-aircraft-type-combinations} and \ref{fig:listening:ratings-stimuli-type-combinations} show mostly the same curves as Figure \ref{fig:listening:ratings-kde-overall} but the curves are grouped.
 Figure \ref{fig:listening:ratings-aircraft-type-combinations} shows the distribution of the similarity ratings grouped by
 aircraft combination for both the recordings and the auralisations.
 Figure \ref{fig:listening:ratings-stimuli-type-combinations} shows the distribution of the similarity ratings grouped by stimuli type combination
 for both the A320 and the RJ1H. In both cases the results encompass all parts.
-The vertical axes show kernel density estimations for how common the given ratings were\footnote{
-A kernel density estimation can be seen as a continuous version of a histogram. Each sample is replaced by a kernel function centered at the value of the sample.
-The curves are then summed to obtain a density and finally normalised so that the area under the resulting curve is 1.
-}. A Gaussian kernel was used.
+
+
+\begin{table}
+  \centering
+  \caption{The mean value $\mu$, standard deviation $\sigma$ and amount of samples $n$ per aircraft type combination, and stimuli type combination. Averaging was done over participants and parts.}
+  \label{table:listening:results:analysis}
+  \input{../figures/generated/listening-analysis/table_analysis.tex}
+\end{table}
+
+\begin{table}
+  \centering
+  \caption{The mean value $\mu$, standard deviation $\sigma$ and amount of samples $n$ per test part, aircraft type combination, and stimuli type combination. Averaging was done over participants.}
+  \label{table:listening:results:analysis-parts}
+  \input{../figures/generated/listening-analysis/table_analysis_parts.tex}
+\end{table}
+
+
+\begin{figure}
+  \centering
+  \includegraphics{{{../figures/generated/listening-analysis/figure_kde}}}
+  \caption{Similarity ratings grouped by both aircraft combinations and stimuli type combinations.}% Groups considering only recordings and compare only one aircraft type have relatively high similarity ratings. Groups that consider two aircraft types have relatively the lowest ratings. }
+  \label{fig:listening:ratings-kde-overall}
+\end{figure}
 
 
 % \newpage
@@ -218,6 +261,8 @@ aware the test was possibly going to contain simulations.
 
 \newpage
 \section{Discussion}
+To test whether the hypothesis is true, the distributions of similarity ratings of a
+
 As can be seen in Figure
 \ref{fig:listening:ratings-aircraft-type-combinations:recordings}, the A320's
 are judged to be very similar to each other, and the RJ1H's as quite similar to
