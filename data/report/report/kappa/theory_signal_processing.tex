@@ -3,7 +3,6 @@ The previous sections discussed sound generation and propagation. Synthesising
 the sound of aircraft requires generating and modifying signals. This section
 discusses several signal processing techniques that are useful or required to
 create auralisations.
-
 In this chapter all operations are considered to be in time or frequency
 domain. Generally, these operations can also be used with other domain pairs, like for
 example the space-wavenumber pair.
@@ -33,13 +32,13 @@ returns, finite discrete signals.
 
 The forward DFT can be defined as
 \begin{equation}
- X_k = \sum_{n=0}^{N-1} x_n \cdot e^{-j 2\pi k n / N}
+ X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-j 2\pi k n / N}
 \end{equation}
 where $x_n$ is a discrete signal in time-domain, $X_k$ the resulting signal in
 frequency domain, $N$ the amount of complex numbers the input and output signal
 consists of, and $k$ integer frequencies. The corresponding definition of the inverse DFT is
 \begin{equation}
- x_n = \frac{1}{N} \sum_{k=0}^{N-1} X_k e^{+j 2 \pi k n/N}
+ x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] e^{+j 2 \pi k n/N}
 \end{equation}
 The factor $\frac{1}{N}$ is a normalisation factor. As with the
 continuous Fourier transform there are multiple conventions for the DFT, with
@@ -84,7 +83,7 @@ efficient reducing again by a factor two the required computations and storage.
 
 
 \subsection{Transfer functions and filters}
-Consider a system that has an input $x(t)$ and an output $y(t)$. Functions often
+Consider a continuous-time system that has an input $x(t)$ and an output $y(t)$. Functions often
 exist that can describe the relation between an input $x(t)$ and an output
 $y(t)$. A relation is typically described in frequency-domain between the
 Fourier transforms of the signals, $X(e^{j\omega})$ and $Y(e^{j\omega})$.
@@ -92,7 +91,7 @@ The system is linear when it satisfies the properties of superposition,
 additivity and homogeneity. When the output does not depend on the particular
 time the input is applied the system is called time-invariant.
 
-The transfer function of a linear time-invariant system is then given by
+The transfer function of a continuous-time linear time-invariant system is then given by
 \begin{equation}
   H(e^{j\omega}) = \frac{Y(e^{j\omega})}{X(e^{j\omega})}
 \end{equation}
