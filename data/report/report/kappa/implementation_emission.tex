@@ -5,10 +5,10 @@ The previous section treated the propagation model of the tool. In order to
 simulate the audible sound of aircraft an emission signal is needed. Thus far a
 simple signal consisting of noise and a tone was considered. This section
 describes a method to create an emission signal from features derived from
-recordings. The propagation model can then be used to compute an auralisation or
-pseudo-recording at a receiver position. Figure
-\ref{fig:tool:backpropagation:introduction:block-diagram} shows a block diagram of
-the steps that are treated in this section.
+recordings. An auralisation or pseudo-recording at a receiver position can then
+be created by propagating the signal using the propagation model. Figure
+\ref{fig:tool:backpropagation:introduction:block-diagram} shows a block diagram
+of the steps that are treated in this section.
 
 \begin{figure}[H]
   \centering
@@ -40,16 +40,16 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
 % emission.
 
 % \subsection{Measurement data}
-For the emission synthesis a signal is generated that is based on measurements
-conducted as part of the sonAIR project \cite{Zellmann2013}. Measurements of
-sound were conducted at various positions nearby Z\"{u}rich Airport. An
-optical tracking system consisting of two cameras was used to determine the
-position of the aircraft in close vicinity of the airport.
 
-For the data presented measurements from only a single microphone
-were used, situated at a height of 4 meters. Figure \ref{fig:figure_trajectory}
-shows an overview of the airport, the trajectory and the receiver.
-Aircraft took off and their height steadily increased from 30 to 260 meters.
+For the emission synthesis a signal is generated that is based on measurements
+that were made for the sonAIR project as described in section
+\ref{sec:introduction:sonair}. Figure \ref{fig:figure_trajectory} shows an
+overview of the airport, the trajectory and the receiver of the events
+considered. Aircraft took off and their height steadily increased from 30 to 260
+meters.
+% For the data presented measurements from only a single microphone
+% were used, situated at a height of 4 meters.
+
 
 % For the development of the sonAIR model \cite{Zellmann2016} sound recordings
 % were made for a large amount of events nearby Z\"{u}rich Airport
@@ -76,7 +76,7 @@ the direct path, and that the aircraft can be considered a point source.
 As shown in Figure \ref{fig:backpropagation_block_diagram}, the
 backpropagation algorithm undoes atmospheric attenuation, the Doppler shift, and
 geometrical spreading (magnitude) in that specific order, and using the methods as
-described in the previous section \cite{Rietdijk2015}.
+described in the previous section.
 % A recording is taken, and assuming there were no reflections, the atmospheric attenuation and spherical spreading were undone.
 Because only the direct path was considered all parameters that were used in the
 backpropagation were based on values corresponding to that path.
@@ -106,7 +106,8 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
 After application of the backpropagation algorithm, a time-domain signal is
 obtained that corresponds to the emission of the aircraft. The influence of the
 ground reflection is non-negligible. A soft ground is still relatively
-hard and therefore a -3 dB correction was applied.
+hard and therefore a -3 dB correction was applied. Ideally, a microphone on the ground was used,
+but the dataset that was available consisted of recordings at a height of 4 meters.
 
 Figures \ref{fig:recording} and \ref{fig:backpropagated} show spectrograms of
 respectively the recording and of the signal that was backpropagated. The signal
@@ -150,7 +151,7 @@ Therefore, a method is needed to extract from the backpropagated recordings the
 frequency, phase, and level of the tones, as well as the level of the noise as
 function of frequency.
 
-A tone-seeking algorithm (in frequency domain) was developed \cite{Rietdijk2016}
+A tone-seeking algorithm (in frequency domain) was developed (Paper \ref{paper:internoise2016})
 that utilises ISO 1996-2:2007 Annex C \cite{ISO1996-2_2007}. The tone-seeking
 algorithm as described in the standard did not prove capable of detecting all
 tones, and therefore an improved method was needed.
@@ -181,7 +182,7 @@ An estimate of the fundamental frequency is obtained by minimising this error.
 
 An earlier version of the algorithm did not use the $\mathrm{gcd}$ in
 combination with the optimisation algorithm but instead determined the
-fundamental frequency using the complex cepstrum \cite{Rietdijk2015}.
+fundamental frequency using the complex cepstrum (Paper \ref{paper:euronoise2015}).
 While it was possible to reliably determine the fundamental frequency with the
 complex cepstrum, the value which was obtained was not sufficiently accurate
 for determining higher harmonics.
@@ -246,7 +247,7 @@ As mentioned in the previous section, values for the phase of the tones could
 not be obtained, and therefore values had to be chosen. Because the harmonics
 are \say{Buzz-Saw} noise, a phase corresponding to a sawtooth signal was
 initially assumed. Participants in a preliminary test found the simulations
-sound metallic compared to the recordings \cite{Rietdijk2016a}. Therefore, the
+sound metallic compared to the recordings (Paper \ref{paper:internoise2016}). Therefore, the
 assumption was made that the initial phase relation between the Buzz-Saw tones
 was entirely lost and could therefore be chosen randomly. In that case the
 probability distribution would be uniform.
@@ -337,7 +338,7 @@ respectively the emission synthesis and the auralisation at the receiver.
 %
 % \subsubsection{Using complex cepstrum}
 %
-% Using the complex cepstrum it was possible to obtain an accurate estimate for the fundamental frequency \cite{Rietdijk2015}. However, the estimate proved not accurate enough to determine the higher-frequency harmonics.
+% Using the complex cepstrum it was possible to obtain an accurate estimate for the fundamental frequency. However, the estimate proved not accurate enough to determine the higher-frequency harmonics.
 % Since the frequency of an harmonic is the fundamental multiplied by the order, any inaccuracy in the estimate is multiplied as well. For harmonics around the blade passing frequency and up the error was generally too big.
 % Therefore, another method was sought.
 %

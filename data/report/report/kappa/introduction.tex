@@ -38,10 +38,10 @@ countermeasure against long-range bombers. The development of intercontinental
 ballistic missiles and the succesful launch of the Sputnik 1 began the Space
 Race increasing again the pace of aeronautical developments.
 
-The year 1969 is well known for being the year when the first humans set foot on
-the moon. But 1969 was also the year that saw the unveiling of the iconic "Jumbo
-Jet" Boeing 747, and the maiden flight of the Concorde supersonic passenger
-airliner. Commercial airliners started using higher bypass-ratios, resulting in
+In 1969 the Apollo 11 landed the first humans on the moon. It was also the year
+that both the iconic "Jumbo Jet" Boeing 747 and the Concorde supersonic
+passenger airliner had their first flights.
+Around this time, commercial airliners started using higher bypass-ratios, resulting in
 better fuel economy and less noise. % TODO rewrite part
 
 In the last quarter of the \nth{20} century, the Digital Age, emphasis changed.
@@ -160,9 +160,9 @@ airports \cite{Doc29_fourth_2016} and is the recommended method for European
 Union member states \cite{directive_2002_49_ec}.
 
 As a counter-proposal to a people's initiative to limit the amount of flights
-from Zurich Airport, the Zurich cantonal government proposed to instead limit
+from Z\"{u}rich Airport, the Z\"{u}rich cantonal government proposed to instead limit
 the amount of people that were allowed to be highly affected by the aircraft
-noise. This counter-proposal, the \say{Zürcher Fluglärm-Index} (ZFI) or Zurich
+noise. This counter-proposal, the \say{Zürcher Fluglärm-Index} (ZFI) or Z\"{u}rich
 Aircraft Noise Index was accepted \cite{Schaffer2012}. The ZFI is a single
 number, representing the amount of persons that are affected by annoyance and/or
 sleep disturbance due to aircraft noise related to a single airport.
@@ -386,6 +386,27 @@ audible beating \cite{Rizzi2013}. Decorrelation can reduce the beating.
 % \end{figure}
 %
 
+
+\subsection{Measurements for sonAIR}\label{sec:introduction:sonair}
+Between 2012 and 2016 a new aircraft noise calculation model called sonAIR was
+developed at Empa \cite{Zellmann2013,Zellmann2016}. This semi-empirical model is
+based on data obtained from flights that occured at Z\"{u}rich airport in 2013 and
+2014.
+
+The main dataset consists of sound recordings at various positions nearby the
+airport as well as at larger distances. Sound recordings were made with
+microphones at a height of 4 meters above ground level and at several locations
+simultaneously. The position of the aircraft were recorded in several ways. Two
+special cameras were used to determine the aircraft their position when they
+were close to the strip. Radar information was available as well. Furthermore,
+for a subset of the events additional data was available from the Flight Data
+Recorder (FDR). Some examples of data the FDR provides are the trajectory,
+engine shaft rotational frequency and configuration of the gear and flaps. All
+data was time-synchronised using GPS receivers. Finally, meteorological data was
+available.
+
+
+
 \newpage
 \section{Thesis}
 
@@ -440,13 +461,12 @@ The thesis is structured as follows.
 \newline
 Chapter \ref{chapter:theory} provides an overview of theory required to
 understand the concepts that are used throughout the thesis. Discussed are the
-basics of sound, signal processing, auralisation, previous work on aircraft
-auralisation and emission synthesis, and finally atmospheric turbulence.
+basics of sound, signal processing, and aircraft noise emission.
 \newline
 \newline
 Chapter \ref{chapter:tool} describes the auralisation tool that was developed.
-The propagation model is explained as well as the algorithm that is used to
-extract features from recordings and synthesise aircraft sounds based on that.
+The propagation model is explained, as well as an algorithm that was used to
+extract features from recordings that were then used to synthesise aircraft sounds.
 \newline
 \newline
 Chapter \ref{chapter:test} aims to answer the question whether the auralisation
@@ -468,7 +488,7 @@ sound plausible. Unless mentioned otherwise, the type of aircraft considered are
 commercial airliners that have jet engines.
 
 Events that are considered are take-offs relatively close to the airport. In
-this case, the airport is Zurich airport as that is where data was gathered.
+this case, the airport is Z\"{u}rich airport as that is where data was gathered.
 Take-offs are considered instead of landings because landings can contain
 relatively fast-varying frequency components due to thrust corrections made by the pilot.
 

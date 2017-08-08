@@ -1,14 +1,47 @@
 \section{Propagation model}
 
 \subsection{Introduction}
+% TODO remove turbulence from block diagram?
+\begin{wrapfigure}{r}{0.3\textwidth}
+  \centering
+\begin{tikzpicture}[auto, node distance=1cm,>=latex']
+\tikzset{
+block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimum width=5em, text width=5em, align=center},
+}
+    % Main nodes
+    \node [block]                       (emission)      {Emission\\Generator};
+    \node [block, below=of emission]    (spreading)     {Spreading\\Gain};
+    \node [block, below=of spreading]   (delay)         {Spreading\\Delay};
+    \node [block, below=of delay]       (attenuation)   {Attenuation\\Filter};
+    \node [block, below=of attenuation] (turbulence)    {Turbulence\\Filter};
+    \node [block, below=of turbulence]  (reflection)    {Reflection\\Filter};
+
+    % Main edges
+    \draw [->]  (emission)      --  (spreading);
+    \draw [->]  (spreading)     --  (delay);
+    \draw [->]  (delay)         --  (attenuation);
+    \draw [->]  (attenuation)   --  (turbulence);
+    \draw [->]  (turbulence)    --  (reflection);
+
+\end{tikzpicture}
+  \caption{Block diagram of the propagation model. These steps are performed for each propagation path and the resulting signals are summed.}
+  \label{fig:propagation_block_diagram}
+\end{wrapfigure}
+
+
+% TODO convective amplification is a source motion effect, not propagation.
+% Discuss in other section?
+% Convective amplification is supported in the
+% propagation model but was ignored here.
+
 The propagation model covers sound propagation in the far field through a
-homogeneous and isotropic atmosphere. Sound is modelled as rays. The propagation
+homogeneous and isotropic atmosphere. Sound is modelled as rays. The
 model takes into account geometrical spreading, Doppler shift, atmospheric
-attenuation and the ground reflection. These propagation effects are taken into
-account as signal processing operations.
-A model was developed to include scintillations, that is, fluctuations in the
-sound due to atmospheric turbulence \cite{Rietdijk2017}. That part is discussed
-in detail in chapter \ref{chapter:turbulence}.
+attenuation and the ground reflection. These propagation effects are implemented
+as signal processing operations.
+Paper \ref{paper:turbulence} describes a model that was developed to include
+scintillations, that is, fluctuations in the sound due to atmospheric turbulence.
+That part is discussed in detail in chapter \ref{chapter:turbulence}.
 
 Figure \ref{fig:propagation_block_diagram} shows a block diagram of the steps
 that are taken. Because of source motion all propagation effects are
@@ -21,52 +54,29 @@ this filter may be considered part of the mirror source, however, as movement is
 considered it needs to be placed after the Doppler-shift has been applied. The
 following sections will describe each of these steps in detail.
 
-% TODO remove turbulence from block diagram?
-\begin{figure}[H]
-  \centering
-\begin{tikzpicture}[auto, node distance=1cm,>=latex']
-\tikzset{
-block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimum width=5em, text width=5em, align=center},
-}
-    % Main nodes
-    \node [block]                       (emission)      {Emission\\Generator};
-    \node [block, right=of emission]    (spreading)     {Spreading\\Gain};
-    \node [block, right=of spreading]   (delay)         {Spreading\\Delay};
-    \node [block, right=of delay]       (attenuation)   {Attenuation\\Filter};
-    \node [block, right=of attenuation] (turbulence)    {Turbulence\\Filter};
-    \node [block, right=of turbulence]  (reflection)    {Reflection\\Filter};
-
-    % Main edges
-    \draw [->]  (emission)      --  (spreading);
-    \draw [->]  (spreading)     --  (delay);
-    \draw [->]  (delay)         --  (attenuation);
-    \draw [->]  (attenuation)   --  (turbulence);
-    \draw [->]  (turbulence)    --  (reflection);
-
-\end{tikzpicture}
-  \caption{Block diagram of the propagation model. These steps are performed for each propagation path and the resulting signals are summed.}
-  \label{fig:propagation_block_diagram}
-\end{figure}
-
-% TODO convective amplification is a source motion effect, not propagation.
-% Discuss in other section?
-% Convective amplification is supported in the
-% propagation model but was ignored here.
-
 % TODO explain situation - check noise signal!!
+\subsection{Emission signal and scenario}
 To demonstrate the different propagation effects a fixed situation is considered
-and propagation effects are added sequentially. A simple
-emission signal is considered consisting of brown noise and a tone with a
-frequency of \SI{1000}{\hertz}, both modelled as a monopole point source. The
-\say{aircraft} moves at a height of \SI{200}{\meter} and with a speed of
-\SI{100}{\meter\per\second} straight over the receiver.
+and propagation effects are added sequentially. A simple emission signal is
+considered consisting of pink noise and several harmonic tones with a
+fundamental frequency of \SI{2000}{\hertz}, both modelled as a monopole point
+source at the same position. The broadband noise is the sum of 1/1-octave
+band-pass filtered noise. The band-pass filters are \nth{8} order Butterworth
+filters implemented as second-order sections. Directivity is not included, and
+there are no other signal strength variations either.
+
+The \say{aircraft} moves at a height of \SI{200}{\meter} and with a
+speed of \SI{100}{\meter\per\second} straight over the receiver.
+The receiver is at a height of 1.7 meters and 8 meters next to the flight path.
 Figure \ref{fig:implementation:propagation:emission} shows a spectrogram of the
 emission signal.
+
+\clearpage
 
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/propagation/emission}
-  \caption{Spectrogram of the immission. Because in this case we do not consider sound propagation this in facts corresponds to the emission of the aircraft as function of the orientation. An omni-directional source is considered and therefore the emission is stationary.}
+  \caption{Spectrogram of the immission. Because in this case we do not consider sound propagation this in facts corresponds to the emission of the aircraft as function of the orientation. The immission is stationary because an omni-directional source is considered and no other emission variations are modelled.}
   \label{fig:implementation:propagation:emission}
 \end{figure}
 
@@ -130,10 +140,9 @@ requirement $\floor{n_e} >= 0$.
 %  y[n_e] = \left( 1 - n_e +  \floor{n_e} \right) \cdot y \left[ \floor{n_e} \right] + \left( n_e - \floor{n_e} \right) * y \left[ \floor{n_e} + 1 \right]
 % \end{equation}
 % where $\floor{n_e}$ corresponds to the floor function of $n_e$.
-The sound travel time was computed with the following expression for the speed of sound $c =
+The sound travel time was computed with the speed of sound $c =
 343.2 \sqrt{ \frac{T}{T_0} }$ where $T$ is the temperature during the event and
 $T_0 = 293.15$ K the reference temperature.
-
 Figure \ref{fig:implementation:propagation:doppler} shows a spectrogram of the
 immission when the propagation delay is also considered.
 
@@ -157,15 +166,15 @@ equation \eqref{eq:theory:sound:atmospheric-attenuation}.
 
 % The air pressure, relative humidity, and temperature were recorded during the event.
 The impulse response of a magnitude-only or zero-phase filter is non-causal and therefore in
-order to create a causal filter a linear-phase filter corresponding to 90
-degrees is added. The spectrum is real and even, and therefore the impulse
+order to create a causal filter a linear-phase filter corresponding to a 90
+degrees rotation is added. The spectrum is real and even, and therefore the impulse
 response is real and even as well. After convolving the signal with the designed
-filter the first $N_{aa}/2$ samples were removed to account for the delay caused
+filter the first $N_{aa}/2$ samples were dropped to account for the delay caused
 by the linear-phase factor.
 
-Convolution was performed using an overlap-save algorithm. The filter length was
+Convolution was performed using an overlap-discard algorithm. The filter length was
 4096 samples and the hop size 256 samples. Transitioning to the next impulse
-response was done without smoothing because the impulse responses are relatively small.
+response was done without smoothing because the difference in the impulse responses is relatively small.
 
 Figure \ref{fig:implementation:propagation:attenuation} shows a spectrogram of
 the immission when atmospheric attenuation is included. A reference atmosphere
@@ -208,8 +217,8 @@ consists mostly of grass a flow resistivity of
 4096 samples and the hop size 256 samples.
 
 Figure \ref{fig:implementation:propagation:reflection} shows a spectrogram of
-the immission when a ground reflection was added. A hard ground was considered for this figure.
-The effect of a soft ground was already demonstrated in Figure \ref{fig:theory:sound:reflection:ground}.
+the immission when a reflection on a hard ground was added.
+The effect of a hard and soft ground was demonstrated in Figure \ref{fig:theory:sound:reflection:ground}.
 
 \begin{figure}[H]
   \centering
