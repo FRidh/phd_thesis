@@ -24,6 +24,74 @@ discussed in Papers \ref{paper:forum2014} and \ref{paper:asa2014}.
 % \newpage
 % \section{Wave propagation in random media}
 
+\section{Coherence loss factor}
+Before presenting the new method let us consider an existing method that was
+mentioned in the introduction. Arntzen developed a method to include coherence
+loss \cite{Arntzen2014a,Arntzen2014b}, and the method considers a coherence factor $T_c$, first described by
+Clifford and Lataitis \cite{Clifford1983}, as well as a reciprocal filter $R_c$.
+Consider a typicaly scenario of a direct path and ground-reflected path. The
+sound pressure at the receiver is given by
+\begin{equation}
+%   p = \frac{A_d}{r_d} e^{j(\left(k r_d \right) + \phi_d} + Q \frac{A_r}{r_r} e^{j(\left(k r_r \right) + \phi_r}
+  p = \frac{A_d}{r_d} e^{j\left(k r_d \right) } + Q \frac{A_r}{r_r} e^{j\left(k r_r \right) }
+\end{equation}
+where $A$ is an amplitude, $r$ a path length, $Q=|Q|\exp{(j\phi)}$ a reflection
+factor (in the referred work the spherical reflection factor), and the indices $d$ and $r$ are used to represent respectively the
+direct and reflected paths.
+% If $A_d=A_r=A$, then the pressure relative to free field $p/p_0$ is
+% \begin{equation}
+%   \frac{p}{p_0} = 1 + Q \frac{r_d}{r_r} e^{-jk\left( r_r - r_d \right)}
+% \end{equation}
+The effective pressure squared, as used for computing a sound pressure level, is
+\begin{equation}
+%   p_{e}^2 = \frac{1}{r_d^2} +  \frac{|Q|}{r_r^2} +  \frac{2 |Q|}{r_d r_r} \cos{\left(k \left( r_r - r_d \right) + \phi + \phi_r - \phi_d \right)}
+  p_{e}^2 = \frac{A_d^2}{2 r_d^2} + |Q|^2 \frac{A_r^2}{2 r_r^2} + 2 |Q| \frac{A_d A_r}{r_d r_r} \cos{\left(k \left( r_r - r_d \right) + \phi  \right)}
+\end{equation}
+The sum of the first and second term is an incoherent addition of the direct and
+ground-reflected contributions. The third term on the right-hand side considers
+the interference between the direct and reflected paths.
+
+Clifford and Lataitis considered atmospheric turbulence in a line-of-sight
+propagation situations and accounted for complex phase perturbations, i.e.
+log-amplitude and phase, for each propagation path. They introduced a coherence
+factor $T_c$ in the third term to account for additional coherence loss due to
+atmospheric turbulence in line-of-sight propagation
+\begin{equation}
+  p_{e}^2 = \frac{A_d^2}{2 r_d^2} + |Q|^2 \frac{A_r^2}{2 r_r^2} + 2 |Q| T_c \frac{A_d A_r}{r_d r_r} \cos{\left(k \left( r_r - r_d \right) + \phi  \right)}
+\end{equation}
+The factor ranges from zero to one and can nullify interference.
+Assuming a spherical wave front and a Gaussian turbulence spectrum, the coherence factor is given by
+\begin{equation}
+  T_c = e^{-\sigma_S^2 \left(1 - C_{sp}\right)}
+\end{equation}
+where $\sigma_S^2$ is the variance of phase fluctuations (equation
+\eqref{eq:model_daigle}), and $C_{sp}$ the phase correlation (equation
+\eqref{eq:theory:propagation:turbulence:correlation}. The phase correlation is a function of the spatial separation $\rho$
+perpendicular to the wave propagation direction which in this case was derived as
+\begin{equation}
+  \frac{1}{\rho} = \frac{1}{2} \left( \frac{1}{h_s} + \frac{1}{h_r}  \right)
+\end{equation}
+where $h_d$ and $h_r$ are respectively the source and receiver height.
+The variance $\sigma_S^2$ is the sum of the direct and reflected path phase variances \cite{Clifford1983}.
+
+The interference term is implicitly included in auralisations and therefore,
+Arntzen included $T_c$ as a filter for the ground-reflected path and introduced
+another reciprocal filter $R_c$.
+\begin{equation}
+  p = R_c \frac{A_d}{r_d} e^{j\left(k r_d \right) } + Q T_c \frac{A_r}{r_r} e^{j\left(k r_r \right) }
+\end{equation}
+The magnitude-response of the reciprocal filter is given by
+\begin{equation}
+  R_c = - |Q| T_c + \sqrt{|Q|^2 + 2 |Q| T_c + 1}
+\end{equation}
+and is needed because the ground-reflected wave would be lost in case $T_c$ approached
+zero, which will happen with strong turbulence, i.e., high values of
+$\sigma^2_S$.
+
+
+%TODO so...what are the conclusions?
+
+
 \section{Generating sequences of scintillations}
 
 \subsection{Space-to-time conversion}
