@@ -14,7 +14,7 @@ def get_settings(length, variance):
     # Default propagation settings
     settings['spreading']['include'] = True
     settings['doppler']['include'] = True
-    settings['doppler']['purge_zeros'] = True
+    settings['doppler']['purge_zeros'] = False
     settings['atmospheric_absorption']['include'] = True
     settings['reflections']['include'] = True
     settings['reflections']['force_hard'] = True
@@ -45,9 +45,9 @@ def main():
         os.path.join(args.target, "turbulence-{}-{}.hdf5".format(length, variance))
         )
 
-    lengths = [ 1.0, 10.0, 100.0 ]
-    variances = [ 1e-7, 1e-6, 1e-5]
-    jobs = list(set(list(itertools.product(lengths, [1e-5])) + list(itertools.product([10.0], variances))))
+    lengths = [ 1.0, 4.0, 16.0 ]
+    variances = [ 1e-5, 1e-6, 1e-7 ]
+    jobs = list(set(list(itertools.product(lengths, [1e-5])) + list(itertools.product([1.0], variances))))
 
     #jobs = [
         #(1.0, 100000),

@@ -33,11 +33,11 @@ Consider a typicaly scenario of a direct path and ground-reflected path. The
 sound pressure at the receiver is given by
 \begin{equation}
 %   p = \frac{A_d}{r_d} e^{j(\left(k r_d \right) + \phi_d} + Q \frac{A_r}{r_r} e^{j(\left(k r_r \right) + \phi_r}
-  p = \frac{A_d}{r_d} e^{j\left(k r_d \right) } + Q \frac{A_r}{r_r} e^{j\left(k r_r \right) }
+  p = \frac{A_d}{r_d} e^{j k r_d } + Q \frac{A_r}{r_r} e^{j k r_r }
 \end{equation}
 where $A$ is an amplitude, $r$ a path length, $Q=|Q|\exp{(j\phi)}$ a reflection
 factor (in the referred work the spherical reflection factor), and the indices $d$ and $r$ are used to represent respectively the
-direct and reflected paths.
+direct and reflected paths. Note the amplitude can be different for each path to account for source directivity.
 % If $A_d=A_r=A$, then the pressure relative to free field $p/p_0$ is
 % \begin{equation}
 %   \frac{p}{p_0} = 1 + Q \frac{r_d}{r_r} e^{-jk\left( r_r - r_d \right)}
@@ -52,9 +52,9 @@ ground-reflected contributions. The third term on the right-hand side considers
 the interference between the direct and reflected paths.
 
 Clifford and Lataitis considered atmospheric turbulence in a line-of-sight
-propagation situations and accounted for complex phase perturbations, i.e.
+propagation situation and accounted for complex phase perturbations, i.e.
 log-amplitude and phase, for each propagation path. They introduced a coherence
-factor $T_c$ in the third term to account for additional coherence loss due to
+factor $T_c$ in the third term to include additional coherence loss due to
 atmospheric turbulence in line-of-sight propagation
 \begin{equation}
   p_{e}^2 = \frac{A_d^2}{2 r_d^2} + |Q|^2 \frac{A_r^2}{2 r_r^2} + 2 |Q| T_c \frac{A_d A_r}{r_d r_r} \cos{\left(k \left( r_r - r_d \right) + \phi  \right)}
@@ -74,7 +74,7 @@ perpendicular to the wave propagation direction which in this case was derived a
 where $h_d$ and $h_r$ are respectively the source and receiver height.
 The variance $\sigma_S^2$ is the sum of the direct and reflected path phase variances \cite{Clifford1983}.
 
-The interference term is implicitly included in auralisations and therefore,
+The interference term is implicitly included in auralisations. Therefore,
 Arntzen included $T_c$ as a filter for the ground-reflected path and introduced
 another reciprocal filter $R_c$.
 \begin{equation}
@@ -88,16 +88,22 @@ and is needed because the ground-reflected wave would be lost in case $T_c$ appr
 zero, which will happen with strong turbulence, i.e., high values of
 $\sigma^2_S$.
 
-
-%TODO so...what are the conclusions?
-
+A qualititive validation showed that the model indeed results in audible and
+predictable coherence loss, reducing the rasping sound due to interference that
+was otherwise clearly audible, and thereby increasing the perceptual validity.
 
 \section{Generating sequences of scintillations}
 
+Atmospheric turbulence is known to result in not only coherence loss but also in
+audible amplitude modulations. We shall therefore now explore a new method that
+also includes audible amplitude modulations. Whereas the method from the
+previous section modified the magnitude of the coherent part to increase
+coherence loss, the method proposed in this section generates sequences of
+log-amplitude and phase fluctuations and applies these to each propagation path.
+
 \subsection{Space-to-time conversion}
 
-In section \ref{theory:sound-propagation:atmospheric-turbulence} an introduction
-to atmospheric turbulence was given. Consider the line-of-sight situation where
+Consider again a line-of-sight situation where
 $d$ is the distance between a source and a receiver pair along the wave
 propagation direction, and $\rho$ the spatial separation of the receivers
 transverse to the wave propagation direction.
@@ -117,10 +123,10 @@ at which the field is carried by the wind transverse to the wave propagation
 direction.
 
 In this chapter the covariance for spherical waves and a Gaussian spectrum is
-considered, because the Gaussian spectrum is the simplest model to work with and
-computationally least demanding. The method can also be used with covariance
-functions that describe other turbulence spectra, like e.g. the Von Karman
-spectrum \cite{Ostashev2015}.
+considered for the same reason it was used in the other method: the Gaussian
+spectrum is the simplest model to work with and computationally least demanding.
+The method can also be used with covariance functions that describe other
+turbulence spectra, like e.g. the Von Karman spectrum \cite{Ostashev2015}.
 
 \subsection{Propagation in the turbulent atmosphere as a multichannel}
 The fluctuations in the atmosphere are temporal and/or spatial. Therefore, to
@@ -191,7 +197,7 @@ where $M_1$ is the length of the desired impulse response. The frequency respons
  H_B[k] =  \sqrt{ F \left\{  B[n] \right\}  } \exp \left\{ -j 2\pi k \frac{M_1}{2} \frac{f_s}{N} \right\},  \quad 0 \leq k \leq N/2
 \end{equation}
 where $F\{\}$ is the Discrete Fourier Transform (DFT).
-The desired impulse response is real-valued. Therefore we have because of Hermitian symmetry
+The desired impulse response is real-valued. Therefore, we have because of Hermitian symmetry
 \begin{equation}
 \begin{aligned}
  &H_B[k] = H_B(e^{j\omega}), &\quad 0 &\leq k \leq N/2, \quad  \omega = \frac{2 \pi k}{N} \\
@@ -261,7 +267,7 @@ fluctuations to a broadband signal.
 One possible method would be to decompose the input signal in complex
 exponentials with the Inverse Discrete Fourier Transform, and apply per complex
 exponential the log-amplitude and phase fluctuations which, when combined, can be
-written as a complex exponential as shown in equations
+written as a complex exponential $\psi$ as shown in equations
 \eqref{eq:complex_exponential} and \eqref{eq:chi_and_S}.
 
 A computationally less demanding method is to instead filter the carrier signal
@@ -301,7 +307,9 @@ the required sample frequency would be 1 hertz.
 
 In practice one might want to interpolate the impulse response as it changes
 over time, but because the phase also changes with time this can be problematic.
-Aside from converting to a minimum-phase representation we can also create a
+Aside from converting to a minimum-phase representation\footnote{
+A system is minimum-phase when it and its inverse are both causal and stable, which would require both the poles and zeros to be inside the unit circle.
+The group delay is minimal and thus its energy is concentrated at the start of an impulse response.} we can also create a
 linear-phase filter for which the magnitude changes with time but the phase does
 not. If the phase fluctuations are linear-phase, then they can be applied to the
 carrier signal $x[n]$ with a Variable Delay Line. In the Gaussian model the
@@ -553,20 +561,20 @@ same $z[n]$ were used for each case. A compression in time of the modulations wi
 \end{figure}
 
 
-\subsection{Application in auralization of aircraft}
-The method was developed in order to create more realistic sounding
+\subsection{Application in auralisation of aircraft}
+The method was developed in order to create more plausible sounding
 auralizations of aircraft. An aircraft moves at high speed through the
 atmosphere. A transverse speed is computed for each propagation path separately.
 Because the correlation time, distance and propagation varies between the two
 paths, decorrelation occurs. Figures \ref{fig:results_auralization_without} and
-\ref{fig:results_auralization_with} show spectrograms respectively with and
+\ref{fig:results_auralization_with} show spectrograms, respectively with and
 without turbulence. The vertical lines that can be seen are the amplitude
 modulations.
 
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/manual/turbulence-model/auralisation_flight_without}
-  \caption{Spectrogram of an auralization of an aircraft taking off.
+  \caption{Spectrogram of an auralisation of an aircraft taking off.
 Scintillations were not included. Visible are the ground effect and the Doppler
 shift. In the initial seconds a high amount of tonal components are visible.
   }
@@ -581,13 +589,19 @@ shift. In the initial seconds a high amount of tonal components are visible.
   \label{fig:results_auralization_with}
 \end{figure}
 
-Earlier it was assumed that the correlation length was much smaller than the Fresnel zone size.
-In this auralization the aircraft is moving close to the receiver. When the aircraft is closest, the distance is almost entirely given by the height which was approximately 100 meters.
-The correlation length was set at 20 meters. In that case the Fresnel zone is larger than the correlation length for the lower frequencies, and equation \eqref{eq:model_daigle} is not valid.
-Instead, the log-amplitude and phase variances should scale with respectively $d^3$ and $2k^2 d$ instead of $k^2 d$ \cite{Ishimaru1997}.
-
+Earlier it was assumed that the correlation length was much smaller than the
+Fresnel zone size. In this auralisation the aircraft is moving close to the
+receiver. When the aircraft is closest, the distance is almost entirely given by
+the height which was approximately 100 meters. The correlation length was set at
+20 meters. In that case the Fresnel zone is larger than the correlation length
+for the lower frequencies, and equation \eqref{eq:model_daigle} is not valid.
+Instead, the log-amplitude and phase variances should scale with respectively
+$d^3$ and $2k^2 d$ instead of $k^2 d$.
 
 \subsection{Influence of parameters}
+The two main parameters of the Gaussian model are the variance of
+refractive-index fluctuations $\sigma^2_{\mu}$ and the correlation length $L$.
+Figures \ref{fig:turbulence:aircraft:parameters:correlation} and \ref{fig:turbulence:aircraft:parameters:variance} show the effect of each of these parameters on an auralisation of an "aircraft".
 
 \begin{figure}[H]
 %     \centering
@@ -597,15 +611,15 @@ Instead, the log-amplitude and phase variances should scale with respectively $d
     \end{subfigure}
     ~
     \begin{subfigure}{\textwidth}
-        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-05}}}
+        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-4.0-1e-05}}}
         \caption{\SI{10}{\meter}}
     \end{subfigure}
     ~
     \begin{subfigure}{\textwidth}
-        \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-100.0-1e-05}}}
+        \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-16.0-1e-05}}}
         \caption{\SI{100}{\meter}}
     \end{subfigure}
-    \caption{The influence of the correlation length $L$. The variance of the dynamic refractive-index is $\SI{1e-5}{}$.}
+    \caption{The influence of the correlation length $L$. The variance of the dynamic refractive-index is fixed at $\SI{1e-5}{}$.}
     \label{fig:turbulence:aircraft:parameters:correlation}
 \end{figure}
 
@@ -613,20 +627,20 @@ Instead, the log-amplitude and phase variances should scale with respectively $d
 \begin{figure}[H]
 %     \centering
     \begin{subfigure}{\textwidth}
-        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-05}}}
+        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-1.0-1e-05}}}
         \caption{\SI{1e-5}{}}
     \end{subfigure}
     ~
     \begin{subfigure}{\textwidth}
-        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-06}}}
+        \includegraphics{{{../figures/generated/turbulence-parameters/turbulence-1.0-1e-06}}}
         \caption{\SI{1e-6}{}}
     \end{subfigure}
     ~
     \begin{subfigure}{\textwidth}
-        \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-10.0-1e-07}}}
+        \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-1.0-1e-07}}}
         \caption{\SI{1e-7}{}}
     \end{subfigure}
-    \caption{The influence of the variance of the dynamic refractive-index $\sigma_{\mu}^2$. The correlation length is \SI{1}{\meter}.}
+    \caption{The influence of the variance of the dynamic refractive-index $\sigma_{\mu}^2$. The correlation length is fixed at \SI{1}{\meter}.}
     \label{fig:turbulence:aircraft:parameters:variance}
 \end{figure}
 
@@ -652,7 +666,7 @@ the Von Karman spectrum is computationally much more demanding.
 % The Gaussian model also allows implementing the phase fluctuation with a Variable Delay Line (VDL).
 
 Examples are shown where the method is applied to a tone and to an aircraft
-auralization. The aircraft auralization spectrogram shows several spikes
+auralization. The aircraft auralisation spectrogram shows several spikes
 corresponding to amplitude modulations as well as an increase in the amount of
 decorrelation. Furthermore the transverse velocity dependence on the frequency
 content of the modulations is demonstrated.

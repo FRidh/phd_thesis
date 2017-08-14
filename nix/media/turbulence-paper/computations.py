@@ -41,7 +41,7 @@ def create_auralisation(modelfile, settings):
     #model.settings['turbulence']['fraction'] = 1
     model.settings['turbulence']['seed'] = 100
 
-    model.settings['doppler']['purge_zeros'] = True
+    model.settings['doppler']['purge_zeros'] = False
     model.settings['reflections']['include'] = True # Broken. Without everything works!
     model.settings['doppler']['include'] = True
     model.settings['spreading']['include'] = True

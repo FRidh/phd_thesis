@@ -149,26 +149,87 @@ and bandpass-filtered noise.
 % through a superposition of sines and noise.
 Therefore, a method is needed to extract from the backpropagated recordings the
 frequency, phase, and level of the tones, as well as the level of the noise as
-function of frequency.
+function of frequency. This section presents a method that was developed for
+extracting these features.
 
-A tone-seeking algorithm (in frequency domain) was developed (Paper \ref{paper:internoise2016})
-that utilises ISO 1996-2:2007 Annex C \cite{ISO1996-2_2007}. The tone-seeking
-algorithm as described in the standard did not prove capable of detecting all
-tones, and therefore an improved method was needed.
+The situations considered are landings, and therefore the tonal components in
+the spectra are not only the blade passing frequency of the fan and its
+harmonics, but also \say{Buzz-Saw} tones. The common denominator of the
+frequencies of these components is the frequency at which the engine shaft
+rotates.
 
-The situations considered are landings, and therefore the tonal components
-in the spectra are not only the blade passing frequency of the fan and its
-harmonics, but also \say{Buzz-Saw} tones. The common denominator of the frequencies of
-these components is the frequency at which the engine shaft rotates.
-The assumption was therefore made that all tones found by the
+\subsubsection*{Motivation for method}
+The events considered are short, typically less than 30 seconds, and their
+spectra vary considerably over time due to directivity of the source. Thus, in
+order to get a sufficiently good directivity resolution, a high temporal
+resolution is needed, and that limits the possibility to average over time. The
+frequency resolution, however, also matters. The emission may contain Buzz-Saw
+harmonics with a fundamental frequency below 100 Hz. While that gives some
+freedom for using a lower frequency resolution, first the actual tonal
+components need to be detected and thus distinguished from the broadband noise.
+
+While already corrected for in the backpropagation, the Doppler shift may make
+it difficult connecting obtained frequency-components at one step to those
+obtained the step later. Therefore, frequency-tracking algorithms were
+considered \cite{Lampert2010}, notably Hidden Markov Models. Due to their
+complexity such solutions were not pursued further.
+
+Tone-detection in the frequency-domain is in its simplest form a matter of peak
+detection for which a range of algorithms is known. However, a robust algorithm
+is needed that can distinguish between the tonal components and broadband noise
+peaks.
+
+Initially, the complex cepstrum\footnote{The complex cepstrum is defined as
+$c[n] = F^{-1}\left\{\log_{10}{\left( F \left\{x[n]\right\} \right)}\right\}$.}
+was used to determine the fundamental frequency of the Buzz-Saw harmonics
+(Paper \ref{paper:euronoise2015}). The method was reliable for determining the
+fundamental frequency. Because all the tonal components considered are multiples
+of this fundamental frequency, all their frequencies would then be known as
+well. Unfortunately, the frequency-resolution, or more precisely the
+quefrency-resolution, was not high enough to reliably predict the frequency of
+the high-frequent components.
+
+\subsubsection*{Tone-seeking algorithm}
+Annex C of ISO 1996-2:2007 \cite{ISO1996-2_2007} describes an objective method
+for assessing the audibility of tones in noise and a significant part of the
+method describes a tone-seeking algorithm. The tone-seeking algorithm works in
+frequency-domain on a narrowband power spectrum. An estimate of the narrowband
+spectrum is obtained using Welch's method. The time signal is split in chunks, a
+Hanning window is applied to each chunk, and a periodogram is determined for
+each chunk. Finally, linear averaging over the chunks results in Welch's
+estimate of the power spectral density.
+
+According to the standard an A-weighted signal should be used. Because the
+frequencies of the tonal components are of interest, and not their audibilities,
+an unweighted signal is considered instead. Furthermore, in order to obtain an
+accurate estimation an averaging-time of one minute is required, however, this
+could not be done as explained.
+
+The tone-seeking algorithm first determines noise pauses, which are local maxima
+with a probability of a tone. The next step is to assess whether tones exist in
+these noise pauses. Each frequency bin or line is assigned a label indicating whether
+it is part of a tone or whether it is masking noise.
+% The tone-seeking algorithm was implemented according to the standard.
+
+The power of the lines that are part of a tone are integrated. A correction is
+made for the masking noise contributions to those lines by estimating their
+contribution from a regression through the lines marked as noise within a
+portion of the critical band\footnote{A critical band is the bandwidth of a
+filter created by the cochlea, the auditory part of the inner ear.} around the
+centerfrequency of the tone.
+
+\subsubsection*{Extension}
+The tone-seeking algorithm is capable of detecting many of the tonal components
+but not all of them. Because the tones of interest are all multiples of a
+fundamental frequency the goal is to determine this fundamental frequency
+sufficiently accurate. The assumption was therefore made that all tones found by the
 tone-seeking algorithm from the standard were harmonics and that the fundamental
 frequency was within a specified range.
-
-The fundamental frequency is given by
+The fundamental frequency is then given
 \begin{equation}
  f_{0} = \mathrm{gcd}\left(f_1, f_2, \dots, f_n \right)
 \end{equation}
-where $\mathrm{gcd}$ is the \emph{greatest common divisor}.
+where $\mathrm{gcd}$ is the \emph{greatest common divisor} (Paper \ref{paper:internoise2016}).
 Implementations of the $\mathrm{gcd}$ operator attempt to find an exact solution.
 Due to errors in the estimation of the frequency of the tones and because some tones are
 not harmonics, an exact solution does not exist. Given an initial estimate of
@@ -180,18 +241,27 @@ order
 \end{equation}
 An estimate of the fundamental frequency is obtained by minimising this error.
 
-An earlier version of the algorithm did not use the $\mathrm{gcd}$ in
-combination with the optimisation algorithm but instead determined the
-fundamental frequency using the complex cepstrum (Paper \ref{paper:euronoise2015}).
-While it was possible to reliably determine the fundamental frequency with the
-complex cepstrum, the value which was obtained was not sufficiently accurate
-for determining higher harmonics.
+The tone-seeking algorithm is first ran to detect tonal components and obtain their centerfrequencies.
+% TODO bandwidth!
+Then, a fundamental frequency estimation is done. Next, the frequency lines
+within ??? hertz are added as noise pauses.
+The tone-seeking algorithm determines for these lines again whether they could
+be tones and outputs levels for all tonal components.
+Finally, the masking noise lines were integrated in \nicefrac{1}{6}-octaves.
 
-In the method as described in Annex C of ISO 1996-2:2007 each spectral line is
-assigned a label, e.g. whether the line is part of a tone or noise. Tones
-typically have a bandwidth and can therefore, depending on the frequency
-resolution, be spread over multiple lines. In order to compute the level of a
-tone, the spectral lines corresponding to that tone need to be integrated.
+
+% An earlier version of the algorithm did not use the $\mathrm{gcd}$ in
+% combination with the optimisation algorithm but instead determined the
+% fundamental frequency using the complex cepstrum (Paper ).
+% While it was possible to reliably determine the fundamental frequency with the
+% complex cepstrum, the value which was obtained was not sufficiently accurate
+% for determining higher harmonics.
+
+% In the method as described in Annex C of ISO 1996-2:2007 each spectral line is
+% assigned a label, e.g. whether the line is part of a tone or noise. Tones
+% typically have a bandwidth and can therefore, depending on the frequency
+% resolution, be spread over multiple lines. In order to compute the level of a
+% tone, the spectral lines corresponding to that tone need to be integrated.
 
 The bandwidth of the tonal components depends on various aspects, like frequency
 or phase modulations at the source or during propagation, e.g. due to
@@ -199,18 +269,20 @@ atmospheric turbulence. The direct and reflected contribution are
 Doppler-shifted slightly differently and that causes either double peaks or a
 single broader peak. But also averaging time and window shape play a role.
 
-The center frequencies of the tonal components obtained with the enhanced method
-were fed back in the method of the standard to obtain labels for each spectral
-line and to compute the levels of the tones and the noise.
-A value for the phase could not be obtained because the signal was too noisy.
-The lines that were assigned noise were integrated into \nicefrac{1}{6} octaves and for each
-fractional octave its level was kept.
+% The center frequencies of the tonal components obtained with the enhanced method
+% were fed back in the method of the standard to obtain labels for each spectral
+% line and to compute the levels of the tones and the noise.
 
-For the feature extraction 2 seconds windows were used, without overlap.
-While a short window decreases frequency resolution and precision of the features, a short
+% The lines that were assigned noise were integrated into \nicefrac{1}{6} octaves and for each
+% fractional octave its level was kept.
+
+For the feature extraction two seconds windows were used, without overlap.
+While a short window decreases frequency resolution and precision of the
+features, a short
 window was required in order to provide temporal resolution of the features.
 A 2 seconds window proved to be a good balance between temporal resolution
-and frequency resolution.
+and frequency resolution. A value for the phase could not be obtained because
+the signal was too noisy.
 
 % For the development of an emission model it is expected that
 % the uncertainties could be reduced through ensemble averaging. % TODO include this?
