@@ -302,14 +302,14 @@ different impulse response.
 % \missingfigure{Show how the matrix-vector product for an LTV is done.}
 
 The matrix-vector multiplication is a straightforward method to apply a
-time-variant filter. However, performance is generally bad because of the huge
+time-variant filter. However, performance is generally bad because of the large
 amounts of multiplications and additions that have to be performed. That has as
 effect that it typically cannot be used in real-time simulations.
 
 If we assume time-invariance during a short amount of time, then we can reuse
 the overlap-add method and perform each of the small convolutions with a
 possibly different impulse response. A requirement is that the filter changes
-sufficiently slow compared to update rate of the impulse response.
+sufficiently slow compared to the update rate of the impulse response.
 
 Switching from one impulse response to the next can still cause discontinuities
 which may appear as audible clicks. A solution to this problem is to convolve a block
@@ -378,7 +378,7 @@ Upsampling a signal with an integer factor can be done by inserting zeros
 between the actual samples and low-pass filtering the result to smooth out
 discontinuities, thereby replacing the zeros. Downsampling, also known as
 decimation, is done by first low-pass filtering the signal and then keeping
-every $F$th sample where $F$ is the integer downsampling factor.
+every $F$ sample where $F$ is the integer downsampling factor.
 
 If the resampling factor is not an integer, it is necessary to combine
 upsampling and downsampling. When upsampling with a rational fraction it is

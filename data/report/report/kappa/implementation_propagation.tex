@@ -62,7 +62,10 @@ considered consisting of pink noise and several harmonic tones with a
 fundamental frequency of \SI{2000}{\hertz}, both modelled as a monopole point
 source at the same position. The broadband noise is the sum of 1/1-octave
 band-pass filtered noise. The band-pass filters are \nth{8} order Butterworth
-filters implemented as second-order sections. Directivity is not included, and
+filters implemented as second-order sections\footnote{
+Higher-order IIR filters can easily become unstable. A solution is to implement
+the filter as a serial cascade of biquad or second-order sections, i.e., filters
+with two poles and two zeros.}. Directivity is not included, and
 there are no other signal strength variations either.
 
 The \say{aircraft} moves at a height of \SI{200}{\meter} and with a

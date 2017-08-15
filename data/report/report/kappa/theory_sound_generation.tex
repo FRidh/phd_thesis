@@ -1,7 +1,7 @@
 \section{Generation of sound}
 
 \subsection{Aerodynamic sound sources}\label{sec:theory:sound:aerodynamic}
-Classical acoustics provides a method for modeling sound generation due to
+Classical acoustics provides a method for modelling sound generation due to
 vibrating solid boundaries. Aerodynamic sources such as combustion or other
 unsteady fluid processes cannot be handled, however. With the development of
 jet-powered aircraft a description was needed to model such sources. Lighthill
@@ -37,8 +37,7 @@ The Lighthill stress tensor can be considered as a source term of a jet in an
 acoustic medium at rest and consists of three aero-acoustic processes that are
 sources of sound \cite{Rienstra2017}. The first are non-linear convective forces
 as described by the Reynold stress tensor $\rho \vect{u}\vect{u}$, the second
-viscous forces $\tau$ and the third deviations from a uniform soundspeed $c$
-and/or isentropic behaviour $p - c^2 \rho$.
+viscous forces $\tau$ and the third deviations from isentropic behaviour $p - c^2 \rho$.
 
 
 % A limitation of Lighthill's analogy is that it cannot handle situations where
@@ -56,8 +55,9 @@ and/or isentropic behaviour $p - c^2 \rho$.
 
 \subsection{Elementary sources}
 The Lighthill equation is an exact reformulation of the fundamental equations.
-Equation \eqref{eq:theory:sound:generation:lighthill} is the density-based variant of the Lighthill equation.
-Linearisation of the pressure-based variant results in
+Equation \eqref{eq:theory:sound:generation:lighthill} is the density-based
+variant of the Lighthill equation. Linearisation of the pressure-based variant
+results in
 \begin{equation}
  \frac{1}{c_0^2}\frac{\partial^2 p'}{\partial t^2} - \frac{\partial^2 p'}{\partial x_i^2} = \frac{\partial}{\partial t} \left( m + \frac{1}{c_0^2}\frac{\partial}{\partial t}\left(p' - c_0^2 \rho' \right) \right) - \frac{\partial f_i}{\partial x_i} + \frac{\partial^2 }{\partial x_i x_j} \left( \rho u_i u_j - \tau_{ij} \right)
 \end{equation}
@@ -70,45 +70,23 @@ The source term can be split into the following three parts
 \end{align}
 which are respectively the monopole, dipole and quadrupole source terms.
 
+% In case a source is compact, i.e., it is small compared to the wavelength, then the source
+% distribution can be written as a multipole.
 
-%
-% The term $s_1$ is the monopole source term, the term $s_2$ the dipole source term
-%
-% and corresponds to a superposition of monopole fields.
-%
-%
-% Volume source
-% %
-% % \begin{equation}
-% %  \frac{d^2 \rho'}{dt^2}
-% % \end{equation}
-%
-% \begin{equation}
-%  p' \left(\vect{x},t\right) = \frac{\dot{m} \left(\vect{y}, t-r/c\right)}{ 4 \pi r}
-% \end{equation}
-% where $\dot{m} = \partial m / \partial t$ is the time derivative of the unsteady mass flow $\dot{m}$.
-%
-% \subsubsection*{Dipole}
-%
-% \begin{equation}
-%  p' \left(\vect{x}, t\right) =
-% \end{equation}
-%
-%
-% \subsubsection*{Quadrupole}
-%
-% Moment
-%
-% % \subsubsection*{Multipoles and spherical harmonics} % TODO Unless I would write a piece about Ambisonics I have no need for this so could skip it
-% %
-% %
-% % \missingfigure{Multipoles and spherical harmonics}
-% %
-% % Ambisonics
+The source mechanisms of the monopole source are mass injection and deviations
+from adiabatic behaviour. The dipole source term represents an unsteady force
+acting on the fluid. The quadrupole source term describes noise due to unsteady
+momentum transport $\rho u_i u_j$. The viscous forces $\tau_{ij}$ can be
+neglected because they are typically much smaller than the momentum
+transportation term and therefore hardly contribute in case of high Reynolds
+numbers. The quadrupole source term is the main noise source of a high-speed jet.
 
 
 \subsection{Moving source}
-The sound field produced by a moving source is different from that of a fixed source.
+Motion of the medium and/or motion of the source affects the produced sound field.
+% A well known effect related to motion is the Doppler shift, which will be
+% The sound field produced by a moving source is different from that of a fixed source.
+% Motion of a source can result in a Doppler shift as well as strong directivity.
 
 \subsubsection*{Convective wave equation}\todo{keep this for other section?}
 A mean flow has an effect on sound generation and propagation.
@@ -125,15 +103,23 @@ results in the convective wave equation.
 % \begin{equation}
 %   \frac{\partial^2 \rho'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) \rho' \right) + \left( \vect{u}_0 \cdot \nabla \right) \left( \vect{u}_0 \nabla \rho' \right) - \nabla^2 p' = 0
 % \end{equation}
-Assuming an adiabatic process, the convective wave equation then becomes
+Assuming an adiabatic process gives
 \begin{equation}
   \frac{\partial^2 p'}{\partial t^2} + \frac{\partial}{\partial t} \left( 2 \left( \vect{u}_0 \cdot \nabla \right) p' \right) + \left( \vect{u}_0 \cdot \nabla \right)^2 p' - c^2 \nabla^2 p' = 0
 \end{equation}
 
 
-\subsubsection{Convective amplification}
+\subsubsection*{Convective amplification}
 Another effect that occurs and is especially relevant for fast-moving sources is
 convective amplification.
+
+\begin{align}
+ p_{m} \propto \left( 1 - M_e \right)^{-2} \\
+ p_{d} \propto \left( 1 - M_e \right)^{-2} \\
+ p_{q} \propto \left( 1 - M_e \right)^{-3} \\
+\end{align}
+Strong directivity can therefore occur for fast-moving sources.
+
 
 \cite{Dowling1976}
 

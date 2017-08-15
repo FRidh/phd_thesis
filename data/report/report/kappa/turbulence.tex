@@ -533,7 +533,7 @@ As expected the phase fluctuations cause spectral broadening of the tone as can 
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/turbulence-tone/tone_broadening}
-  \caption{The power spectrum of the tone shows the broadening due to the phase fluctuations.}
+  \caption{The power spectrum of the tone shows the broadening due to the phase fluctuations although the bandwidth at -3 dB from the maximum is still small.}
   \label{fig:results_tone_broadening}
 \end{figure}
 
@@ -601,7 +601,9 @@ $d^3$ and $2k^2 d$ instead of $k^2 d$.
 \subsection{Influence of parameters}
 The two main parameters of the Gaussian model are the variance of
 refractive-index fluctuations $\sigma^2_{\mu}$ and the correlation length $L$.
-Figures \ref{fig:turbulence:aircraft:parameters:correlation} and \ref{fig:turbulence:aircraft:parameters:variance} show the effect of each of these parameters on an auralisation of an "aircraft".
+Figures \ref{fig:turbulence:aircraft:parameters:correlation} and
+\ref{fig:turbulence:aircraft:parameters:variance} show examples of the effect of each of
+these parameters on an auralisation of an "aircraft".
 
 \begin{figure}[H]
 %     \centering
@@ -619,7 +621,7 @@ Figures \ref{fig:turbulence:aircraft:parameters:correlation} and \ref{fig:turbul
         \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-16.0-1e-05}}}
         \caption{\SI{100}{\meter}}
     \end{subfigure}
-    \caption{The influence of the correlation length $L$. The variance of the dynamic refractive-index is fixed at $\SI{1e-5}{}$.}
+    \caption{The influence of the correlation length $L$. The variance of the dynamic refractive-index is fixed at $\SI{1e-5}{}$. A higher correlation length results in slower fluctuations.}
     \label{fig:turbulence:aircraft:parameters:correlation}
 \end{figure}
 
@@ -640,7 +642,7 @@ Figures \ref{fig:turbulence:aircraft:parameters:correlation} and \ref{fig:turbul
         \includegraphics[]{{{../figures/generated/turbulence-parameters/turbulence-1.0-1e-07}}}
         \caption{\SI{1e-7}{}}
     \end{subfigure}
-    \caption{The influence of the variance of the dynamic refractive-index $\sigma_{\mu}^2$. The correlation length is fixed at \SI{1}{\meter}.}
+    \caption{The influence of the variance of the dynamic refractive-index $\sigma_{\mu}^2$. The correlation length is fixed at \SI{1}{\meter}. A higher variance results in stronger fluctuations.}
     \label{fig:turbulence:aircraft:parameters:variance}
 \end{figure}
 
@@ -671,5 +673,5 @@ corresponding to amplitude modulations as well as an increase in the amount of
 decorrelation. Furthermore the transverse velocity dependence on the frequency
 content of the modulations is demonstrated.
 
-According to the author the method results in more realistic sounding
+According to the author the method results in more plausible sounding
 auralizations, but this has not been validated yet with listening tests.

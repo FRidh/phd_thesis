@@ -122,7 +122,7 @@ frequency and its harmonics.
 
 \subsubsection*{Develop generic aircraft emission model}
 The emission synthesiser uses features determined from one specific event. The
-chosen emission synthesis strategy (spectral modeling synthesis with extracted features)
+chosen emission synthesis strategy (spectral modelling synthesis with extracted features)
 produced auralisations that sound plausible. Therefore, a future step
 is to construct a emission model that produces these features as function of
 input parameters (e.g. thrust settings).
@@ -139,11 +139,18 @@ question is how to conduct such a test, because due the statistical nature of
 the turbulence the auralisations and recordings there is a limitation to how
 similar they may sound.
 
+\subsubsection*{Correlation length not much smaller than Fresnel zone}
+As explained in \ref{theory:sound-propagation:atmospheric-turbulence} the
+variance of the fluctuations is a function of the correlation length and Fresnel
+zone size. The assumption was made that $L \ll \sqrt{\lambda d}$. A future step
+would be to account for situations where the correlation length is about the
+same size as the Fresnel zone or even larger.
+
 \subsubsection*{Different model for describing turbulence spectrum}
 As mentioned in the text the basic method for generating scintillations should
 also work with other models, like the Von Karman spectrum. The Gaussian model
 was chosen for performance reasons, as its simplest, but also because it allowed
-further optimisations. Future work could be to develop an optimised algorithm
+certain optimisations. Future work could be to develop an algorithm
 that utilises other spectra like e.g. the Von Karman spectrum with the use of
 expressions given in \cite{Ostashev2015}.
 

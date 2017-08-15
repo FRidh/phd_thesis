@@ -47,6 +47,7 @@ that were made for the sonAIR project as described in section
 overview of the airport, the trajectory and the receiver of the events
 considered. Aircraft took off and their height steadily increased from 30 to 260
 meters.
+
 % For the data presented measurements from only a single microphone
 % were used, situated at a height of 4 meters.
 
@@ -103,11 +104,15 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
   \label{fig:backpropagation_block_diagram}
 \end{figure}
 
-After application of the backpropagation algorithm, a time-domain signal is
-obtained that corresponds to the emission of the aircraft. The influence of the
-ground reflection is non-negligible. A soft ground is still relatively
-hard and therefore a -3 dB correction was applied. Ideally, a microphone on the ground was used,
-but the dataset that was available consisted of recordings at a height of 4 meters.
+Application of the backpropagation algorithm results in a time-domain signal
+that corresponds to the emission of the aircraft. The emission includes the
+effect of convective amplification, i.e., the directivity effects due to source
+motion.
+
+The influence of the ground reflection is non-negligible. A soft ground is still
+relatively hard and therefore a -3 dB correction was applied. Ideally, a
+microphone on the ground was used, but the dataset that was available consisted
+of recordings at a height of 4 meters.
 
 Figures \ref{fig:recording} and \ref{fig:backpropagated} show spectrograms of
 respectively the recording and of the signal that was backpropagated. The signal
