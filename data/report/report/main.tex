@@ -255,11 +255,21 @@
 
 % Add abstract to the ToC
 \cleardoublepage              % advance the pages
+{\parindent 0 pt}
+{\parindent 0 pt\thesistitle\par}
+{\thesissubtitle\par}
+{\textsc\thesisauthor\par}
+{\thesisdepartment\par}
+{Chalmers University of Technology\par}
+% \vskip 3 pc
 \phantomsection               % put pdf anchor
 \addcontentsline{toc}{chapter}{Abstract}  % add toc line with target at the last anchor
-\chapter*{Abstract}
-\vspace*{-1cm}                % More space for abstract text
+% \section*{Abstract}
+\begin{abstract}
+% \vspace*{-1cm}                % More space for abstract text
 \input{frontmatter/abstract}
+\end{abstract}
+% \makeabstract
 
 \cleardoublepage              % advance the pages
 \phantomsection               % put pdf anchor
@@ -384,19 +394,19 @@
 %       {Reproduced with kind permission from Springer Science+Business Media. \reformatted}
 %       {paper-supervisory/body}
 
-\chapter*{Paper \ref{paper:turbulence}}
-\fullcite{Rietdijk2017}
-\includepdf[pages=-]{../papers/2017_turbulence}
-\chapter*{Paper \ref{paper:overview}}
-\fullcite{Rietdijk2017c}
-\includepdf[pages=-]{../papers/2017_overview}
-\chapter*{Paper \ref{paper:internoise2016}}
-\fullcite{Rietdijk2016a}
-\includepdf[pages=-]{../papers/2016_internoise}
-\chapter*{Paper \ref{paper:euronoise2015}}
-\fullcite{Rietdijk2015}
-\includepdf[pages=-]{../papers/2015_euronoise}
-\chapter*{Paper \ref{paper:forum2014}}
-\fullcite{Rietdijk2014}
-\includepdf[pages=-]{../papers/2014_forum}
+% \chapter*{Paper \ref{paper:turbulence}}
+% \fullcite{Rietdijk2017}
+% \includepdf[pages=-]{../papers/2017_turbulence}
+% \chapter*{Paper \ref{paper:overview}}
+% \fullcite{Rietdijk2017c}
+% \includepdf[pages=-]{../papers/2017_overview}
+% \chapter*{Paper \ref{paper:internoise2016}}
+% \fullcite{Rietdijk2016a}
+% \includepdf[pages=-]{../papers/2016_internoise}
+% \chapter*{Paper \ref{paper:euronoise2015}}
+% \fullcite{Rietdijk2015}
+% \includepdf[pages=-]{../papers/2015_euronoise}
+% \chapter*{Paper \ref{paper:forum2014}}
+% \fullcite{Rietdijk2014}
+% \includepdf[pages=-]{../papers/2014_forum}
 \end{document}

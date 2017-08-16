@@ -231,22 +231,22 @@ development of improved descriptors.
 The method, essentially a form of virtual reality, can also be used as a
 communication tool, for example, when discussing urban development. Noise
 contours are typically computed and plotted to show the spatial distribution of
-% noise. These figures are often hard to interpret for non-specialists, and
+noise. These figures are often hard to interpret for non-specialists, and
 they also give no insight in what the noise may sound like.
 
 In 2015 Lelystad airport in The Netherlands was expanding. Residents living
-nearby were initially presented with noise contours but struggled with with
+nearby were initially presented with noise contours but struggled with
 interpreting them. The Netherlands Aerospace Centre (NLR) was asked to help
-residents understanding the implications of the airport changes and
-for this they were using auralisations at townhall meetings \cite{Arntzen2015}.
+residents understand the implications of the airport changes, and so they used
+auralisations at townhall meetings \cite{Arntzen2015}.
 
 Generating audible sounds can be done in several ways. Often the entire sound is
 synthesised, but this isn't necessarily the case. One could work with existing
 sounds and modify these instead. An example would be to take a recording made
-outside in front of a building and then simulate the sound indoors by applying a
+outside and in front of a building, and then simulate the sound indoors by applying a
 filter to account for the attenuation of walls and windows.
 As with noise prediction, emission synthesis and sound propagation are often
-separated. This isn't always possible, for example, when using a wave-based
+separated. This is, not always possible however, e.g. when using a wave-based
 method \cite{Hornikx2016,Georgiou2016,Georgiou2016a}.
 
 % Paragraph may still be quite similar to overview paper
@@ -268,7 +268,7 @@ operational state of the source.
 \subsection{Aircraft noise auralisation}
 Auralisation is an interesting method and has been used to study future aircraft
 types \cite{Rizzi2013,Rizzi2016,Rizzi2016a} and flight procedures
-\cite{Sahai2016}. Furthermore, the method was used to investigate the perceived
+\cite{Sahai2016} through perception-influenced design. Furthermore, the method was used to investigate the perceived
 unpleasantness of aircraft flyover noise as a function of certain temporal
 parameters \cite{Pate2017}.
 
@@ -285,14 +285,14 @@ the receiver due to directivity of the sources \cite{Bertsch2015}.
 % emission corresponds to tonal components or noise.
 
 The aircraft emission prediction tools found in the ANOPP-Source Functional
-Module of ANOPP2 \cite{Lopes2016, Tuttle2017} and INSTANT \cite{Sahai2016b}, which is based
+Module of NASA's ANOPP2 \cite{Lopes2016, Tuttle2017} and INSTANT \cite{Sahai2016b}, which is based
 on ANOPP, use established models for the noise prediction of the individual
 noise sources. The Heidmann model is for example used for fan noise and the
 Stone model for jet noise. The Heidmann model in ANOPP models
 five sources explicitly, of which three correspond to emission of tones and two
 to emission of broadband noise \cite{Arntzen2014a}. The model outputs for each
 of these five sources a spectrum in fractional-octaves.
-For broadband synthesis in the NAF\cite{Aumann2015}, power of the tonal
+For broadband synthesis in the NASA Auralization Framework (NAF)\cite{Aumann2015}, power of the tonal
 components in each band is divided by the amount of tones in that band.
 Nowadays the Heidmann model in ANOPP can output the frequencies and amplitudes
 of forward and aft radiated fan tones. Only Buzz-Saw noise is still output in
@@ -394,7 +394,7 @@ based on data obtained from flights that occured at Z\"{u}rich airport in 2013 a
 2014.
 
 The main dataset consists of sound recordings at various positions nearby the
-airport as well as at larger distances. Sound recordings were made with
+airport as well as at larger distances. Sound recordings were made at 44.1 kHz with
 microphones at a height of 4 meters above ground level and at several locations
 simultaneously. The position of the aircraft were recorded in several ways. Two
 special cameras were used to determine the aircraft their position when they
@@ -482,13 +482,13 @@ Finally, the work is summarised in Chapter \ref{chapter:conclusions} and future
 work is suggested.
 
 
-\subsection{Limitations}
+\subsection{Scope}
 The goal is to develop a tool that can deliver auralisations of airplanes that
 sound plausible. Unless mentioned otherwise, the type of aircraft considered are
 commercial airliners that have jet engines.
 
 Events that are considered are take-offs relatively close to the airport. In
-this case, the airport is Z\"{u}rich airport as that is where data was gathered.
+this case, the airport is Z\"{u}rich Airport as that is where data was gathered.
 Take-offs are considered instead of landings because landings can contain
 relatively fast-varying frequency components due to thrust corrections made by the pilot.
 

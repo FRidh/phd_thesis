@@ -7,6 +7,67 @@ emission model. An algorithm was presented for extracting select features from
 recordings with the underlying idea of using those features for the development
 of an empirical emission model.
 
+The next step is to determine whether auralisations based on features obtained
+from the described algorithm sound plausible. The purpose is to check not just
+whether the auralisations sound like an aircraft, but also whether they sound
+like the aircraft model and event that is being simulated. The assumption is
+made that the propagation model represents the actual sound propagation
+sufficiently good that inaccuracies in sound propagation are negligible and the
+resulting differences are entirely due to the emission synthesis.
+
+\subsubsection*{Perceptual validation}
+The question is then how to validate the plausibility of the auralisations.
+Comparing the overall and spectral sound pressure level as function of time
+could be a first simple test to determine whether the signal power is approximately
+correct. Signals with the same power may however still sound very different,
+and how they sound may depend on a multitude of factors. Factors can be properties
+of the sound, but also of the listener, or the environment.
+
+Psychoacoustic measures describe how a sound is perceived by most listeners and
+can therefore be used to characterise a sound. Many measures exist, but not all
+measures are appliceable to all sounds and care should therefore be taken when
+choosing measures. Examples of common measures are loudness, roughness and
+sharpness. Instead of using measures, participants could be asked to rate
+whether an auralisation sounds plausible. That would likely require a reference
+sound, e.g. a recording.
+
+Regardless of the method a variability exists in events that are considered
+alike. For example, consider events that are all landingsm of a certain aircraft
+type and with certain engines, and under meteorological conditions within a narrowly
+defined range. In one event the pilot may vary the thrust differently than in
+another event and that could already lead to audible differences.
+Clearly, the variance across events should be accounted for.
+
+\subsubsection*{Past work}
+Several validations of auralisations have been done in the past. Maillard
+conducted a quantitive and perceptual validation of road traffic auralisations
+that were created using granular synthesis \cite{Maillard2014}. Pieren and
+Heutschi conducted a small listening test to validate auralisations of
+windturbines. Participants were presented with recordings and auralisations and
+had to choose for each stimuli whether they thought it was a recording, an
+auralisation, or whether they could not tell. Hoffmann combined a tyre-noise
+prediction model with a car auralisation tool, and tested the perceptual
+validity of the produced auralisations \cite{Hoffmann2016a,Hoffmann2016}. Tests
+were done with semantic differentials using a categorical scale, and another
+test done was a paired comparison test.
+
+% \subsubsection*{Test methodologies}
+A semantic differential is a set of semantic scales. Each scale is typically
+defined by a bipolar combination of adjectives, e.g. \say{loud-silent}, and
+divided into steps. A categorical scale is similar, however, instead of a
+bipolar combination of adjectives with steps a single adjective is used with
+steps. An example is \say{agree-disagree}, where each word is placed at opposite
+ends of the scale. A paired comparison test is a type of test that can be used
+to rank the items that are tested with respect to the attribute that is
+investigated.
+
+Another interesting type of test is MUSHRA, short for MUltiple Stimuli with
+Hidden Reference and Anchor. The method is typically used to evaluate the
+perceived quality of the output from lossy audio compression algorithms, but was
+used by Southern to rate plausibility of auralisations of car pass-bys
+\cite{Southern2016}.
+
+\subsubsection*{Test overview}
 This chapter describes a listening test that was conducted. The purpose of the
 listening test was to check the plausiblity or perceptual validity of the
 auralisations and a comparison was therefore made between recordings and
@@ -17,13 +78,6 @@ type and under similar conditions are samples of the same group}.
 Audible differences are likely to occur and are also acceptable, because even
 among recordings of the same aircraft type there are audible differences.
 
-How sounds are perceived can depend on different factors. Factors can be properties
-of the sound, but also of the listener or the environment. Psychoacoustic
-measures describe how a sound is perceived by most listeners and can therefore
-be used to characterise a sound. Many measures exist, but not all measures are
-appliceable to all sounds and care should therefore be taken when choosing
-measures. Examples of common measures are loudness, roughness and sharpness.
-
 Due to time-constraints psychoacoustic measures were not measured. Instead, an
 overall similarity between stimuli was determined. Recordings were compared not
 only with auralisations, but also with other recordings, and similarly,
@@ -32,29 +86,12 @@ considered a group. If the hypothesis is valid, then the distribution of the
 group with comparisons between recordings and auralisations, should be the same
 as the other two distributions.
 
-% The purpose of the
-% test was to determine whether the auralisation tool produces auralisations that
-% sound similar to recordings, where the auralisations use for the emission
-% synthesis features that were extracted from the recordings. Because the
-% available data sets permits simulating and comparing different aircraft types,
-% the purpose was also to test whether participants can distinguish between
-% aircraft types.
-%
-% The purpose was not to determine similarity with respect to a certain aspect,
-% like for example annoyance, but instead the overall similarity as the goal was to create a tool capable of
 
-% TODO several methods
-
-\section{Method} % This section has been rewritten...slightly.
+\section{Method}
 
 The goal of the listening test was to determine whether the auralisations sound
 similar to the recordings they were based on. Participants were presented with
 pairs of stimuli and asked to rate how similar they sounded.
-
-% TODO {explain why this method is chosen? Explain other available methods?}
-% One can think of multiple methods to
-% determine the similarity. The MUSHRA (MUltiple Stimuli with Hidden Reference and
-% Anchor) test is methodology used for evaluating audio quality \cite{}, and has also been used for determining the plausibility of synthesised vehicle pass-by sounds when compared to recordings \cite{Southern2016}.
 
 Eight different sounds were considered and they were each 12 seconds long. The
 sounds include the approach of an aircraft, its flyover and its distancing.

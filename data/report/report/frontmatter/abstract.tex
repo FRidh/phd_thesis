@@ -1,22 +1,17 @@
 Aircraft noise is a major issue in urban areas. Due to a rising level of
 urbanisation and the continuing growth of air traffic more people are exposed to
-aircraft noise than ever. Methods that are currently used for determining the
-impact of aircraft noise on humans consider energetic quantities, and not the
+aircraft noise than ever. Methods currently used for assessing the
+impact of aircraft noise on humans consider mostly energetic quantities, and not the
 dynamic character of the sound. Therefore, in order to obtain a more accurate
 picture of the impact of aircraft sound it may be helpful to assess the audible
 sound.
 
 Auralisation is a method for rendering audible sound fields and may be used to
 create audible aircraft sound. A tool was developed to auralise the sound of jet
-airplanes and consists of a propagation model and an emission synthesiser based
-on spectral modelling synthesis. Geometrical acoustics is considered and the
-propagation model accounts for the typical propagation effects like spreading,
-Doppler shift and atmospheric attenuation. Reflections are taken into account
-using the Image Source Method.
+airplanes and consists of an outdoor sound propagation model and an emission synthesiser.
 The emission synthesiser computes an emission signal consisting of tonal
 components and broadband noise. The spectral components vary over time and take
-into account directivity. As input the centerfrequencies, bandwidths, and
-levels are needed.
+into account directivity.
 
 % TODO rewrite
 An inverse propagation model was developed to compute back from a receiver to
@@ -29,8 +24,8 @@ it is based on.
 % TODO rewrite
 To determine whether the auralisations indeed resembled the recordings, and thus
 to validate the auralisation tool, a listening test was conducted. Participants
-were asked to rate the similarity of two sounds in a paired comparisons. Two
-aircraft types were considered, and two events for per type.
+were presented with two sounds at a time and were asked to rate their similarity.
+Two aircraft types were considered, and two events for per type.
 The conclusion is that the auralisations are not very similar to the recordings
 and that they may appear to sound like a different aircraft type.
 
@@ -39,14 +34,10 @@ distant aircraft. One cause of these fluctuations is atmospheric turbulence. In
 order to improve the plausibility of the auralisations, a
 computationally fast algorithm was developed to take into account the amplitude
 and phase modulations that arise as the sound propagates through the turbulent
-atmosphere. Sequences of modulations are computed and applied to each
-propagation path. The modulations are a function of source-receiver distance,
-transverse speed of the source, as well as parameters used to describe turbulent
-field. Demonstrated are the effects of the method on a
-pure-tone signal as well as aircraft sound.
+atmosphere.
 
 
 
 \vspace{0.1cm}
 
-\textbf{Keywords}: Aircraft noise, Auralization, Outdoor sound propagation, Atmospheric turbulence
+\textbf{Keywords}: Aircraft noise, Auralisation, Outdoor sound propagation, Atmospheric turbulence
