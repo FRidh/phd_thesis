@@ -2,6 +2,7 @@
 , runCommand
 , references
 , media
+, audio
 }:
 
 with stdenv.lib;
@@ -16,6 +17,9 @@ let
 #   args = mapAttrsToList (k: v: "${k} ${v}" ) figures;
 
   src = ./../../data/report;
+
+  # Tex file with table of audio files and figures.
+  appendixAudio = audio.appendix;
 
 in stdenv.mkDerivation {
   name = "thesis-source";
@@ -40,6 +44,7 @@ in stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out
     mv * $out
+    cp "${appendixAudio}" "$out/report/kappa/appendix-audio.tex"
   '';
 
   preferLocalBuild = true;

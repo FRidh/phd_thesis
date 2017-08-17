@@ -32,11 +32,12 @@ in rec {
 
   # Standalone source tree containing everything needed to build the thesis.
   thesis-source = callPackage ./nix/thesis-source {
-    inherit references media;
+    inherit references media audio;
   };
 
   audio = callPackage ./nix/audio {
-    inherit media;
+    inherit media python;
+    inherit (pkgs) zip;
   };
 
   # Bibtex library with references/citations

@@ -222,7 +222,7 @@ correction for the Hanning window.
 
 \subsubsection*{Extension and modifications}
 The tone-seeking algorithm is capable of detecting many of the tonal components
-but not all of them. Therefore, the algorithm is modified and extended.
+but not all of them. Therefore, the algorithm is modified and extended (Paper \ref{paper:internoise2016}).
 Because the tones of interest are all multiples of a
 fundamental frequency, the goal is to determine this fundamental frequency
 sufficiently accurate. The assumption was therefore made that all tones found by the
@@ -232,7 +232,7 @@ The fundamental frequency is then given
 \begin{equation}
  f_{0} = \mathrm{gcd}\left(f_1, f_2, \dots, f_n \right)
 \end{equation}
-where $\mathrm{gcd}$ is the \emph{greatest common divisor} (Paper \ref{paper:internoise2016}).
+where $\mathrm{gcd}$ is the \emph{greatest common divisor}.
 Implementations of the $\mathrm{gcd}$ operator attempt to find an exact solution.
 Due to errors in the estimation of the frequency of the tones and because some tones are
 not harmonics, an exact solution does not exist. Given an initial estimate of
@@ -351,7 +351,7 @@ Figures \ref{fig:synthesis} and \ref{fig:auralisation} show spectrograms of
 respectively the emission synthesis and the auralisation at the receiver.
 
 \newpage
-\afterpage{
+% \afterpage{
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/synthesis}
@@ -367,4 +367,4 @@ respectively the emission synthesis and the auralisation at the receiver.
   The Doppler-shifted tones and the mirror-effect are clearly visible. The Doppler-shifted tones are not very smooth. This is due to fluctuations in the aircraft position due to uncertainties.}
   \label{fig:auralisation}
 \end{figure}
-}
+% }

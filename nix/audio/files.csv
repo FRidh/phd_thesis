@@ -1,0 +1,32 @@
+Figure,Extra,Description,Source
+2.2a,,Reflection on hard surface,sound-mirror-effect/hard.wav
+2.2b,,Reflection on soft surface,sound-mirror-effect/soft.wav
+2.4a,,Linear interpolation,signal-processing-resampling/linear.wav
+2.4b,,"Lanczos interpolation, $\alpha=2$",signal-processing-resampling/lanczos-2.wav
+2.4c,,"Lanczos interpolation, $\alpha=10$",signal-processing-resampling/lanczos-10.wav
+3.3,,Emission,propagation/emission.wav
+3.4,,Spreading,propagation/spreading.wav
+3.5,,Doppler,propagation/doppler.wav
+3.6,,Attenuation,propagation/attenuation.wav
+3.7,,Reflection,propagation/reflection.wav
+3.11,,Recording,recording-to-auralisation/recording.wav
+3.12,,Backpropagation,recording-to-auralisation/reverted.wav
+3.13,,Emission synthesis,recording-to-auralisation/synthesis.wav
+3.14,,Auralisation,recording-to-auralisation/auralisation.wav
+4.1,a,"Recording, approach",listening/5330e8aee49d6dfa3dd8bdae8d647b51-11_103_A320-A-recording-start.wav
+4.1,b,"Recording, flyover",listening/6662e389f66b58fe10d01cbce1465ada-11_103_A320-A-recording-center.wav
+4.1,c,"Recording, distancing",listening/cac93cca655b67ee0586cd829666038f-11_103_A320-A-recording-end.wav
+4.2,a,"Auralisation, approach",listening/9b4650d82a680343adadac514fb40137-11_103_A320-A-turbulence-start.wav
+4.2,b,"Auralisation, flyover",listening/0be469ea22127f0a1352e49c44455868-11_103_A320-A-turbulence-center.wav
+4.2,c,"Auralisation, distancing",listening/03af5cce5e63b401714e1b3080160f32-11_103_A320-A-turbulence-end.wav
+5.6,a,"Modulated tone, $v_{\bot}=1$",turbulence-tone/scintillations_speed_1.wav
+5.6,b,"Modulated tone, $v_{\bot}=10$",turbulence-tone/scintillations_speed_10.wav
+5.6,c,"Modulated tone, $v_{\bot}=20$",turbulence-tone/scintillations_speed_20.wav
+5.6,d,"Modulated tone, $v_{\bot}=100$",turbulence-tone/scintillations_speed_100.wav
+5.6,e,"Modulated tone, $v_{\bot}=110$",turbulence-tone/scintillations_speed_110.wav
+5.1,a,"Parameters, $L=1$, $\sigma^2_{\mu}=1e-5$",turbulence-parameters/turbulence-1.0-1e-05.wav
+5.1,b,"Parameters, $L=4$, $\sigma^2_{\mu}=1e-5$",turbulence-parameters/turbulence-4.0-1e-05.wav
+5.1,c,"Parameters, $L=16$, $\sigma^2_{\mu}=1e-5$",turbulence-parameters/turbulence-16.0-1e-05.wav
+5.11,a,"Parameters, $L=1$, $\sigma^2_{\mu}=1e-5$",turbulence-parameters/turbulence-1.0-1e-05.wav
+5.11,b,"Parameters, $L=4$, $\sigma^2_{\mu}=1e-6$",turbulence-parameters/turbulence-1.0-1e-06.wav
+5.11,c,"Parameters, $L=16$, $\sigma^2_{\mu}=1e-7$",turbulence-parameters/turbulence-1.0-1e-07.wav
