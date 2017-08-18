@@ -2,18 +2,18 @@
 
 \section{Introduction}
 In the previous chapter an overview was given of the auralisation tool. A
-propagation model for aircraft sound was developed but still missing is an
-emission model. An algorithm was presented for extracting select features from
-recordings with the underlying idea of using those features for the development
-of an empirical emission model.
+propagation model for aircraft sound was developed, as well as a method for
+obtaining features from recordings and creating auralisations using them. The
+purpose of determining the features is to use those features for the development
+of an emission model.  The next step is to determine whether auralisations based
+on features obtained from the described approach actually sound plausible.
 
-The next step is to determine whether auralisations based on features obtained
-from the described algorithm sound plausible. The purpose is to check not just
-whether the auralisations sound like an aircraft, but also whether they sound
-like the aircraft model and event that is being simulated. The assumption is
-made that the propagation model represents the actual sound propagation
-sufficiently good that inaccuracies in sound propagation are negligible and the
-resulting differences are entirely due to the emission synthesis.
+The purpose is to check whether the auralisations sound like an aircraft, and
+whether they sound like the aircraft model and event that is being simulated.
+The assumption is made that the propagation model represents the actual sound
+propagation sufficiently good that inaccuracies in sound propagation are
+negligible and the resulting differences are entirely due to the emission
+synthesis.
 
 \subsubsection*{Perceptual validation}
 The question is then how to validate the plausibility of the auralisations.
@@ -42,7 +42,7 @@ Clearly, the variance across events should be accounted for.
 Several validations of auralisations have been done in the past. Maillard
 conducted a quantitive and perceptual validation of road traffic auralisations
 that were created using granular synthesis \cite{Maillard2014}. Pieren and
-Heutschi conducted a small listening test to validate auralisations of
+Heutschi conducted a listening test to validate auralisations of
 windturbines. Participants were presented with recordings and auralisations and
 had to choose for each stimuli whether they thought it was a recording, an
 auralisation, or whether they could not tell. Hoffmann combined a tyre-noise
@@ -78,20 +78,22 @@ type and under similar conditions are samples of the same group}.
 Audible differences are likely to occur and are also acceptable, because even
 among recordings of the same aircraft type there are audible differences.
 
-Due to time-constraints psychoacoustic measures were not measured. Instead, an
-overall similarity between stimuli was determined. Recordings were compared not
-only with auralisations, but also with other recordings, and similarly,
-auralisations with other auralisations. Each of these comparisons can be
-considered a group. If the hypothesis is valid, then the distribution of the
-group with comparisons between recordings and auralisations, should be the same
-as the other two distributions.
+Psychoacoustic measures were not measured. Instead, an overall similarity
+between stimuli was determined by letting participants rate how similar they
+found two sounds to be, where similar is defined as entities that are alike or
+have characteristics in common.
 
+Recordings were compared not only with auralisations,
+but also with other recordings, and similarly, auralisations with other
+auralisations. Each of these comparisons can be considered a group. If the
+hypothesis is valid, then the distribution of the group with comparisons between
+recordings and auralisations, should be the same as the other two distributions.
 
 \section{Method}
 
 The goal of the listening test was to determine whether the auralisations sound
 similar to the recordings they were based on. Participants were presented with
-pairs of stimuli and asked to rate how similar they sounded.
+pairs of stimuli and asked to rate how similar they sounded, overall.
 
 Eight different sounds were considered and they were each 12 seconds long. The
 sounds include the approach of an aircraft, its flyover and its distancing.
@@ -302,14 +304,15 @@ Consider Tables \ref{table:listening:results:analysis} and
 groups is mostly around 0.25, although a notable exception is the group in which
 two recordings of A320's were compared. The standard deviation is only 0.09 and
 the mean 0.89. Comparing that with the other groups, implies the two recordings
-this group consists of are relatively closer to eachother than those in other
+this group consists of are relatively closer to each other than those in other
 groups.
 The highest mean values are achieved when comparing similar aircraft types,
 regardless of whether the stimuli were recordings or auralisations. However,
 when comparing a recording with an auralisation the mean value is lower. The
 mean values of the groups comparing recordings and auralisations are
 systematically below those of the groups comparing recordings or auralisations.
-That would imply the hypothesis is not true.
+That would imply the hypothesis that \say{recordings and auralisations of aircraft of the same
+type and under similar conditions are samples of the same group} is not true.
 
 Figure \ref{fig:listening:ratings-kde-overall} shows kernel density estimates of
 the distributions of the nine groups. Some groups appear to follow a Gaussian
@@ -356,12 +359,13 @@ true and that the auralisations may appear to be different types of aircraft.
 % recordings they are based on.
 
 Figures \ref{fig:listening:results:ratings-A320-parts} and
-\ref{fig:listening:results:ratings-RJ1H-parts} show the same data as \ref{fig:listening:ratings-stimuli-type-combinations}
-but grouped further by stimuli part. Judging from Figure
-\ref{fig:listening:results:ratings-A320-parts} there appears to be a
-relative large dissimilarity between the approach and fly-over parts of the A320 recordings.
-The distancing parts, however, are rated as very similar. The groups ``(rec,
-rec)'' and ``(sim, sim)'' consist however of only 17 data points.
+\ref{fig:listening:results:ratings-RJ1H-parts} show the same data as
+\ref{fig:listening:ratings-stimuli-type-combinations} but grouped further by
+stimuli part. Judging from Figure \ref{fig:listening:results:ratings-A320-parts}
+there appears to be a relative large dissimilarity between the approach and
+fly-over parts of the A320 recordings. The distancing parts, however, are rated
+as very similar. The groups ``(rec, rec)'' and ``(sim, sim)'' consist however of
+only 17 data points.
 
 % When comparing auralisations
 % and recordings there does not seem to be any especially good or bad part: the spread is relatively large and the mean is mediocre at
@@ -376,10 +380,17 @@ underestimate the power and bandwidth of the blade passing frequency and its
 harmonics because the algorithm was tuned for the Buzz-Saw tones. Therefore, a
 likely explanation is that this underestimation of power and bandwidth is
 causing audible differences between recordings and auralisations.
-Furthermore, as described in section \ref{sec:tool:synthesis:synthesis}, an
-incorrect distribution was used for the phase relation between the harmonics.
 
-Finally, it should be noted that only two events per aircraft type were
-considered. In a future test more events should be considered in order to
-correctly represent the spread that exists in recordings of a certain aircraft
-type.
+The author noticed after the listening test that the initial phase of the tones
+was Gaussian distributed instead of uniform (see section
+\ref{sec:tool:synthesis:synthesis}) resulting in a most probable zero degrees
+initial phase for all tonal components, and that may affect how the sound is
+perceived.
+
+The listening test considered only two events per aircraft type. In order to
+correctly represent the spread that exists in recordings of a certain group, in
+this case, an aircraft type. Future tests should therefore consider more events
+and investigate the spread that already exists in the similarity between
+recordings. Increasing the test size would, however, significantly increase the
+test size, which is the reason only two events per aircraft type were
+considered.

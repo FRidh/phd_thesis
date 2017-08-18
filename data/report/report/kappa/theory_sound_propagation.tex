@@ -67,6 +67,10 @@ where
  C = -6.8346 \cdot \left( \frac{T_{01}}{T} \right)^{1.261}  + 4.6151
 \end{equation}
 and where $T_{01}$ is the triple-point isotherm temperature of 273.16 K.
+Figure \ref{fig:theory:sound:attenuation} shows the atmospheric attenuation
+coefficient $\alpha$ as function of frequency, in case of a reference
+atmosphere. A reference atmosphere is an atmosphere where $p_a=p_r$ and
+$T=293.15$ K.
 
 % % TODO what to do with this
 % The standard furthermore mentions the following expression for the speed of sound
@@ -77,7 +81,7 @@ and where $T_{01}$ is the triple-point isotherm temperature of 273.16 K.
 \begin{figure}[H]
         \centering
         \includegraphics[]{../figures/generated/sound/attenuation}
-        \caption{Atmospheric attenuation as function of frequency for a standard atmosphere.}
+        \caption{Atmospheric attenuation as function of frequency for a reference atmosphere.}
         \label{fig:theory:sound:attenuation}
 \end{figure}
 
@@ -218,9 +222,20 @@ In outdoor situations the ground is typically providing the second-largest
 contribution and is important when considering an elevated source. As mentioned
 before, impedances of surfaces can vary significantly, and this is especially
 the case for the ground surface. Spectrograms of recordings of aircraft often
-show a distinct interference pattern called the Lloyd's mirror effect. Figure
-\ref{fig:theory:sound:reflection:ground} shows a synthesised example of the
-Lloyd's mirror effect as caused by an elevated moving source.
+show a distinct interference pattern called the Lloyd's mirror effect.
+Figure \ref{fig:theory:sound:reflection:ground} shows a spectrogram of a
+synthesised example of the Lloyd's mirror effect as caused by an elevated moving
+source. The upper spectrogram considers a hard reflecting surface whether the lower
+spectrogram considers a soft reflecting surface, which results in decorrelation
+between the two propagation paths.
+
+A spectrogram shows an estimate of the power spectral density as function of
+time and these type of figures are used throughout the thesis. In this case, the
+spectrogram shows two tonal components that are Doppler-shifted. Superposition
+of the direct and reflected path contributions result interference showing as
+bands in the spectrogram. Sound has a finite speed of sound, and the black
+section in the first couple of seconds represents the initial sound travel time
+from source to receiver.
 
 \begin{figure}
 %     \centering

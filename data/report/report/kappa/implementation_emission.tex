@@ -2,9 +2,8 @@
 
 \subsection{Introduction}
 The previous section treated the propagation model of the tool. In order to
-simulate the audible sound of aircraft an emission signal is needed. Thus far a
-simple signal consisting of noise and a tone was considered. This section
-describes a method to create an emission signal from features derived from
+simulate the audible sound of aircraft an emission signal is needed.
+This section describes a method to create an emission signal from features derived from
 recordings. An auralisation or pseudo-recording at a receiver position can then
 be created by propagating the signal using the propagation model. Figure
 \ref{fig:tool:backpropagation:introduction:block-diagram} shows a block diagram
@@ -62,8 +61,8 @@ meters.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.3\textwidth]{../figures/manual/auralisation-paper/figure_trajectory}
-  \caption{Overview of the airport, trajectory and the receiver. The receiver
+  \includegraphics[width=0.5\textwidth]{../figures/manual/auralisation-paper/figure_trajectory}
+  \caption{Overview of the airport, trajectory and the receiver. The receiver considered
 (green dot) is situated slightly north of the trajectory, almost straight underneath the
 trajectory.}
   \label{fig:figure_trajectory}
@@ -110,37 +109,37 @@ effect of convective amplification, i.e., the directivity effects due to source
 motion.
 
 The influence of the ground reflection is non-negligible. A soft ground is still
-relatively hard and therefore a -3 dB correction was applied. Ideally, a
-microphone on the ground was used, but the dataset that was available consisted
-of recordings at a height of 4 meters.
+relatively hard and therefore a -3 dB correction was applied to the power of the
+features obtained in the next section. Ideally, a microphone on the ground was
+used, but the dataset that was available consisted of recordings at a height of
+4 meters.
 
-Figures \ref{fig:recording} and \ref{fig:backpropagated} show spectrograms of
-respectively the recording and of the signal that was backpropagated. The signal
-after backpropagation is shorter than the recording due to lack of aircraft
-position information during the initial propagation delay.
-Aside from small variations the tonal components remain constant in frequency
-over time in Figure \ref{fig:backpropagated}. The variations are caused
-by uncertainties in the measured position of the aircraft and thus the estimated
-propagation delay.
+Figure \ref{fig:recording} shows a spectrogram of a recording. Clearly visible
+are the Doppler-shifted tones and the peaks due to atmospheric turbulence. The
+most powerful tone corresponds to the blade passing frequency of the fan. The
+other tones are Buzz-Saw tones.
 
+Figure \ref{fig:backpropagated} shows a spectrogram of the recording after
+backpropagation. The signal after backpropagation is shorter than the recording
+due to lack of aircraft position information during the initial propagation
+delay. The Doppler-shift has mostly been removed. Aside from small variations,
+the tonal components remain constant in frequency over time. The variations are
+caused by uncertainties in the measured position of the aircraft and thus the
+estimated propagation delay. Artifacts like the mirror-effect and amplitude
+modulations due to atmospheric turbulence remain.
 
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/recording}
   \caption{
-    Spectrogram of a recording of an A320. Clearly visible are the
-    Doppler-shifted tones and the peaks due to atmospheric turbulence.
-    Interference between direct and reflected path acts as a Comb filter resulting
-    in an acoustical Lloyd's mirror-effect, which can be seen here at lower
-    frequencies. The most powerful tone corresponds to the blade passing frequency
-    of the fan. The other tones are Buzz-Saw tones.}
+    Spectrogram of a recording of an A320. }
   \label{fig:recording}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/reverted}
-  \caption{Spectrogram of the recording shown in Figure \ref{fig:recording} after backpropagation to the source. The Doppler-shift has mostly been removed. Artifacts like the mirror-effect and amplitude modulations due to atmospheric turbulence remain.}
+  \caption{Spectrogram of the recording shown in Figure \ref{fig:recording} after backpropagation to the source.}
   \label{fig:backpropagated}
 \end{figure}
 
@@ -342,20 +341,27 @@ As mentioned in the previous section, values for the phase of the tones could
 not be obtained, and therefore values had to be chosen. Because the harmonics
 are \say{Buzz-Saw} noise, a phase corresponding to a sawtooth signal was
 initially assumed. Participants in a preliminary test found the simulations
-sound metallic compared to the recordings (Paper \ref{paper:internoise2016}). Therefore, the
-assumption was made that the initial phase relation between the Buzz-Saw tones
-was entirely lost and could therefore be chosen randomly. In that case the
-probability distribution would be uniform.
+sound metallic compared to the recordings (Paper \ref{paper:internoise2016}).
+Therefore, the assumption was made that the initial phase relation between the
+Buzz-Saw tones was entirely lost and could therefore be chosen randomly, in
+which case the probability distribution would likely be uniform as otherwise a
+certain initial phase would still be preferred.
 
-Figures \ref{fig:synthesis} and \ref{fig:auralisation} show spectrograms of
-respectively the emission synthesis and the auralisation at the receiver.
+Figure \ref{fig:synthesis} shows a spectrogram of the emission synthesis. The
+level of the tonal components and the broadband noise varies over time. The
+blade passing frequency is not clearly visible because the determined level of
+the tone was underestimated. Figure \ref{fig:auralisation} shows a spectrogram
+of the auralisation at the receiver. The Doppler-shifted tones and the
+mirror-effect are clearly visible. The Doppler-shifted tones are not very
+smooth. This is due to fluctuations in the measured aircraft position and a smoothing filter
+could reduce impact of these uncertainties.
 
 \newpage
 % \afterpage{
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/synthesis}
-  \caption{Emission synthesis of the aircraft. Inputs to the emission synthesiser were obtained by applying the feature-extraction algorithm to the signal shown in Figure \ref{fig:backpropagated}. The level of the tonal components vary over time. The blade passing frequency is not clearly visible because the determined level of the tone was underestimated.}
+  \caption{Emission synthesis of the aircraft. Inputs to the emission synthesiser were obtained by applying the feature-extraction algorithm to the signal shown in Figure \ref{fig:backpropagated}.}
   \label{fig:synthesis}
 \end{figure}
 
@@ -364,7 +370,7 @@ respectively the emission synthesis and the auralisation at the receiver.
   \centering
   \includegraphics[]{../figures/generated/recording-to-auralisation/auralisation}
   \caption{Auralisation of the event shown in Figure \ref{fig:recording} .
-  The Doppler-shifted tones and the mirror-effect are clearly visible. The Doppler-shifted tones are not very smooth. This is due to fluctuations in the aircraft position due to uncertainties.}
+  }
   \label{fig:auralisation}
 \end{figure}
 % }

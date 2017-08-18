@@ -1,11 +1,28 @@
-\section{Overview}
+\section{Introduction}
 
-The aim was to develop a tool for the auralisation of airplanes.
-This chapter describes the tool that was developed. The contents of this chapter
-is based on Papers \ref{paper:euronoise2015}, \ref{paper:internoise2016} and \ref{paper:overview}.
+The aim was to develop a tool for the auralisation of airplanes that can cover a
+wide range of aircraft that are currently in use. Aircraft are complex noise
+sources, with multiple components causing sound emission. The long-term goal is
+to develop a generic emission model and the idea is to use measured data
+from the sonAIR project for its development. Sound
+recordings include propagation effects, and these effects are undesirable when
+developing an emission model. This Chapter, which is based on Papers
+\ref{paper:overview}, \ref{paper:internoise2016} and \ref{paper:euronoise2015},
+describes the tool that was developed.
+
+Removing the propagation effects requires a propagation model, and therefore the
+next section discusses first the basic propagation model. The section after
+describes the emission synthesis along with a method for determining the
+spectral information from airplane recordings. The plausibility of these
+auralisations is then compared to that of the recordings in the next chapter by
+means of a listening test. Note that parameters that are given in this section
+correspond to those that were used for that test.
+
+
 % As explained in the introduction, the goal is to develop a tool that can
 % produce auralisations that are physically as correct as possible, yet at low
 % computational cost.
+\subsubsection*{Tool overview}
 The auralisation tool consists roughly of three parts as shown also in Figure
 \ref{fig:implementation:overview}:
 
@@ -47,16 +64,8 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
   \label{fig:implementation:overview}
 \end{figure}
 
-The next section discusses the propagation model in detail. The chosen synthesis
-strategy requires as input spectral information of the source. The section after
-describes the emission synthesis along with a method
-for determining input values from recordings of airplanes. The plausibility
-of these auralisations is then compared to that of the recordings in the next
-chapter by means of a listening test. Parameters that are given in this section
-correspond to those that were used for that test.
-
 % TODO Skip?
-The tools mentioned in \ref{sec:theory:auralisation:software}, as well as other
+The tools mentioned in section \ref{sec:theory:auralisation:software}, as well as other
 general-purpose languages, were considered for the implemention.
 Eventually the Python general-purpose language was chosen because of its flexibility,
 well-tested libraries for computing and signal processing as well as sufficiently good

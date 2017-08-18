@@ -19,7 +19,7 @@ EXTENSION = "eps"
 #EXTENSION = "png"
 
 #XLIM = (10.0, 38.0)
-YLIM = (0.0, 4000.0)
+YLIM = (0.0, 6000.0)
 
 
 def create_figure(source, target, clim):
@@ -41,11 +41,11 @@ def main():
 
     clims = {
         'emission' :        (+20.0, +70.0),
-        'spreading':        (-10.0, +40.0),
-        'doppler' :         (-10.0, +40.0),
-        'attenuation':      (-10.0, +40.0),
-        'reflection':       (-10.0, +40.0),
-        'turbulence':       (-10.0, +40.0)
+        'spreading':        (-20.0, +30.0),
+        'doppler' :         (-20.0, +30.0),
+        'attenuation':      (-20.0, +30.0),
+        'reflection':       (-20.0, +30.0),
+        'turbulence':       (-20.0, +30.0)
     }
 
     for filename in os.listdir(args.source):

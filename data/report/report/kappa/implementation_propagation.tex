@@ -1,4 +1,4 @@
-\section{Propagation model}
+\section{Propagation model}\label{sec:tool:propagation}
 
 \subsection{Introduction}
 % TODO remove turbulence from block diagram?
@@ -35,30 +35,36 @@ block/.style    = {draw, shape=rectangle, fill=white, minimum height=4em, minimu
 % propagation model but was ignored here.
 
 The propagation model covers sound propagation in the far field through a
-homogeneous and isotropic atmosphere. Sound is modelled as rays. The
-model takes into account geometrical spreading, Doppler shift, atmospheric
-attenuation and the ground reflection. These propagation effects are implemented
-as signal processing operations.
-Paper \ref{paper:turbulence} describes a model that was developed to include
-scintillations, that is, fluctuations in the sound due to atmospheric turbulence.
-That part is discussed in detail in chapter \ref{chapter:turbulence}.
+homogeneous and isotropic atmosphere and takes into account geometrical
+spreading, Doppler shift, atmospheric attenuation and the ground reflection.
+Sound is modelled as rays and the propagation effects are implemented as signal
+processing operations.
+
+The following sections will describe each of the implemented propagation effects
+in detail. To also demonstrate the different propagation effects, a fixed
+situation is considered and propagation effects are added sequentially.
 
 Figure \ref{fig:propagation_block_diagram} shows a block diagram of the steps
 that are taken. Because of source motion all propagation effects are
 time-variant. The order of the operation matters although some could be
-exchanged. The Doppler-shift occurs between the source and the medium and
-therefore divergence is computed first. The shifted frequencies are then
-attenuated in the atmosphere. A reflection is modeled as a parallel path with a
-filter representing the reflection coefficient. In case there is no movement
-this filter may be considered part of the mirror source, however, as movement is
-considered it needs to be placed after the Doppler-shift has been applied. The
-following sections will describe each of these steps in detail.
+exchanged. For operations that are distance-dependent, care should be taken to
+consider the distance at the emission or retarded time. Divergence is computed
+first. The Doppler-shift, a result of a change in propagation delay as function
+of time, occurs between the source and the medium. The shifted frequencies are
+then attenuated in the atmosphere. A reflection is modeled as a parallel path
+with a filter representing the reflection coefficient. In case there is no
+movement this filter may be considered part of the mirror source, however, as
+movement is considered it needs to be placed after the Doppler-shift has been
+applied.
+
+Paper \ref{paper:turbulence} describes a model that was developed to include
+scintillations, that is, fluctuations in the sound due to atmospheric
+turbulence. That part is discussed in detail in Chapter \ref{chapter:turbulence}
+and therefore not included in this Chapter.
 
 % TODO explain situation - check noise signal!!
 \subsection{Emission signal and scenario}
-To demonstrate the different propagation effects a fixed situation is considered
-and propagation effects are added sequentially. A simple emission signal is
-considered consisting of pink noise and several harmonic tones with a
+A simple emission signal is considered consisting of pink noise and several harmonic tones with a
 fundamental frequency of \SI{2000}{\hertz}, both modelled as a monopole point
 source at the same position. The broadband noise is the sum of 1/1-octave
 band-pass filtered noise. The band-pass filters are \nth{8} order Butterworth
@@ -72,7 +78,8 @@ The \say{aircraft} moves at a height of \SI{200}{\meter} and with a
 speed of \SI{100}{\meter\per\second} straight over the receiver.
 The receiver is at a height of 1.7 meters and 8 meters next to the flight path.
 Figure \ref{fig:implementation:propagation:emission} shows a spectrogram of the
-emission signal.
+emission signal. In the next sections propagation effects will be added sequentially
+resulting in clear changes to the immission.
 
 % \clearpage
 
@@ -100,7 +107,10 @@ ratio of the distances
 \end{equation}
 This operation is implemented as a simple gain. Figure
 \ref{fig:implementation:propagation:spreading} shows a spectrogram of the
-immission when geometrical spreading is taken into account.
+immission when geometrical spreading is taken into account and applied to the
+signal showed in Figure \ref{fig:implementation:propagation:emission}. Due to
+the applied gain the sound pressure level is lower when the aircraft is farther
+away, which is here at the start and the end of the sample.
 
 \begin{figure}[H]
   \centering
@@ -109,7 +119,7 @@ immission when geometrical spreading is taken into account.
   \label{fig:implementation:propagation:spreading}
 \end{figure}
 
-% \subsubsection{Geometrical spreading - phase}
+\subsubsection{Doppler shift}
 The time-dependent propagation delay, which is relevant for the Doppler shift,
 is taken into account by resampling the discretized sound pressure signal with a
 Variable Delay Line. Since the signal is discrete and the delay is generally not
@@ -147,12 +157,14 @@ The sound travel time was computed with the speed of sound $c =
 343.2 \sqrt{ \frac{T}{T_0} }$ where $T$ is the temperature during the event and
 $T_0 = 293.15$ K the reference temperature.
 Figure \ref{fig:implementation:propagation:doppler} shows a spectrogram of the
-immission when the propagation delay is also considered.
+immission when the propagation delay is also considered. The Doppler shift is
+clearly visible, especially when considering the tonal components.
+The black part in the first couple of seconds represents zero signal and is due to the initial propagation delay.
 
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/propagation/doppler}
-  \caption{Spectrogram of the immission when the propagation delay, and thus the Doppler shift, is included as well. The black part in the first couple of seconds is due to the initial propagation delay.}
+  \caption{Spectrogram of the immission when the propagation delay, and thus the Doppler shift, is included as well. }
   \label{fig:implementation:propagation:doppler}
 \end{figure}
 
@@ -175,9 +187,11 @@ response is real and even as well. After convolving the signal with the designed
 filter the first $N_{aa}/2$ samples were dropped to account for the delay caused
 by the linear-phase factor.
 
-Convolution was performed using an overlap-discard algorithm. The filter length was
-4096 samples and the hop size 256 samples. Transitioning to the next impulse
-response was done without smoothing because the difference in the impulse responses is relatively small.
+Convolution was performed using a segmented convolution as explained in section
+\ref{sec:theory:signal:convolution}. The filter length was 4096 samples and the
+hop size 256 samples. Transitioning to the next impulse response was done
+without smoothing because the difference in the impulse responses is relatively
+small.
 
 Figure \ref{fig:implementation:propagation:attenuation} shows a spectrogram of
 the immission when atmospheric attenuation is included. A reference atmosphere
@@ -220,8 +234,9 @@ consists mostly of grass a flow resistivity of
 4096 samples and the hop size 256 samples.
 
 Figure \ref{fig:implementation:propagation:reflection} shows a spectrogram of
-the immission when a reflection on a hard ground was added.
-The effect of a hard and soft ground was demonstrated in Figure \ref{fig:theory:sound:reflection:ground}.
+the immission when a reflection on a hard ground was added. The additional path
+clearly causes interference as can be seen from the bands in the Figure.
+The effect of a hard and soft ground was demonstrated before in Figure \ref{fig:theory:sound:reflection:ground}.
 
 \begin{figure}[H]
   \centering
@@ -230,6 +245,18 @@ The effect of a hard and soft ground was demonstrated in Figure \ref{fig:theory:
   \label{fig:implementation:propagation:reflection}
 \end{figure} % TODO text
 
+\newpage
+\subsection{Concluding remarks}
+This section gave an overview of the propagation model that was implemented in
+the auralisation tool. The propagation effects that were considered were
+implemented as signal processing operations. The model that was implemented
+could now be used to investigate how properties of the atmosphere, boundaries
+and the geometry, affect sound propagation.
+
+After taking into account sound propagation an immission signal is obtained that
+already starts to sound like an aircraft. However, thus far a simple emission
+signal consisting of some noise and several tones was considered. The next
+section presents a method to obtain a more accurate airplane emission signal.
 
 %
 %

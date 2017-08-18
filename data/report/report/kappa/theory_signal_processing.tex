@@ -2,16 +2,18 @@
 The previous sections discussed sound generation and propagation. Synthesising
 the sound of aircraft requires generating and modifying signals. This section
 discusses several signal processing techniques that are useful or required to
-create auralisations.
-In this chapter all operations are considered to be in time or frequency
-domain. Generally, these operations can also be used with other domain pairs, like for
-example the space-wavenumber pair.
+create auralisations. An introduction to signal processing for auralisation is
+provided by Vörlander \cite{Vorlander2008} In this chapter all operations are
+considered to be in time or frequency domain. Generally, these operations can
+also be used with other domain pairs, like for example the space-wavenumber
+pair.
 
 % \newpage
 \subsection{Fourier transform}
 The Fourier transform decomposes a signal into complex exponentials with
-different frequencies that the signal is made up of.
-
+different frequencies that the signal. Essential for creating certain filters
+for auralisations, the transform is also used to implement fast convolutions as
+will be discussed in section \ref{sec:theory:signal:convolution}.
 The forward Fourier transform can be defined as
 \begin{equation}
  X(f) = \int_{-\infty}^{\infty} x(t) e^{-j 2 \pi f t} \mathrm{d} t
@@ -19,40 +21,38 @@ The forward Fourier transform can be defined as
 where $x(t)$ is a signal in the time-domain, $f$ the frequency of the complex exponential and $j^2=-1$.
 Often the complex exponent $e^{-j 2 \pi f t}$ is written as $e^{-j \omega t}$ where $\omega$ is the angular frequency.
 Typically, $\mathcal{F} \left\{ x(t) \right\}$ is used to denote the Fourier transform of the function $x(t)$.
-
-To go from frequency to time-domain we can use the inverse Fourier transform which is defined as
-\begin{equation}
- x(t) = \int_{-\infty}^{\infty} X(f) e^{+j 2 \pi f t} \mathrm{d} f
-\end{equation}
-Note that multiple conventions exist for defining the Fourier transform.
-% Note the change of sign in the exponent.
+%
+% To go from frequency to time-domain we can use the inverse Fourier transform which is defined as
+% \begin{equation}
+%  x(t) = \int_{-\infty}^{\infty} X(f) e^{+j 2 \pi f t} \mathrm{d} f
+% \end{equation}
+% Note that multiple conventions exist for defining the Fourier transform.
+% % Note the change of sign in the exponent.
 For operation on digital signals a discretized version of the
 Fourier transform is needed. The Discrete Fourier Transform (DFT) both operates on, and
-returns, finite discrete signals.
-
-The forward DFT can be defined as
+returns, finite discrete signals and is defined as
+% The forward DFT can be defined as
 \begin{equation}
  X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-j 2\pi k n / N}
 \end{equation}
 where $x_n$ is a discrete signal in time-domain, $X_k$ the resulting signal in
 frequency domain, $N$ the amount of complex numbers the input and output signal
-consists of, and $k$ integer frequencies. The corresponding definition of the inverse DFT is
-\begin{equation}
- x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] e^{+j 2 \pi k n/N}
-\end{equation}
-The factor $\frac{1}{N}$ is a normalisation factor. As with the
-continuous Fourier transform there are multiple conventions for the DFT, with
-the most notable difference between the chosen normalization factors.
-
+consists of, and $k$ integer frequencies.
+% The corresponding definition of the inverse DFT is
+% \begin{equation}
+%  x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] e^{+j 2 \pi k n/N}
+% \end{equation}
+% The factor $\frac{1}{N}$ is a normalisation factor. As with the
+% continuous Fourier transform there are multiple conventions for the DFT, with
+% the most notable difference between the chosen normalization factors.
 The DFT can be expressed as a matrix and applied through matrix multiplication
 with the signal. The Fast Fourier Transform (FFT) is an algorithm that
 calculates the DFT by decomposing the DFT matrix into a product of sparse
 factors, thereby reducing the amount of computations necessary and obtaining a
 higher performance.
 
-
 \subsubsection{Hermitian symmetry}
-The Fourier transform and DFT operate both on a complex function and return a
+The Fourier transform and DFT both operate on a complex function and return a
 complex function as well where the negative frequencies can be different from
 the positive frequencies. If however the input function is real-valued, then the
 negative frequencies are identical to the positive frequencies, and we say the
@@ -66,8 +66,6 @@ Similarly, when the input function is Hermitian, then its Fourier transform is
 real-valued. This property turns out to be useful, since when computing the DFT
 of a real-valued signal this property will half the amount of computations and
 storage required.
-% that is required to respectively compute and store the result of the
-% DFT.
 
 \subsubsection{Sine and cosine transform}
 The Fourier transform takes a complex-valued function and returns complex
@@ -90,12 +88,17 @@ Fourier transforms of the signals, $X(e^{j\omega})$ and $Y(e^{j\omega})$.
 The system is linear when it satisfies the properties of superposition,
 additivity and homogeneity. When the output does not depend on the particular
 time the input is applied the system is called time-invariant.
-
 The transfer function of a continuous-time linear time-invariant system is then given by
 \begin{equation}
   H(e^{j\omega}) = \frac{Y(e^{j\omega})}{X(e^{j\omega})}
 \end{equation}
 and describes in frequency-domain the relation between the input and output.
+
+A sound propagation model describes the ratio or transfer function between the
+immission and the emission. Depending on the situation that is modelled, the
+whole model or certain parts of it can be considered as linear time-invariant
+systems.
+
 % Multiplication in frequency-domain of the input with the transfer function gives the output.
 
 %
@@ -104,7 +107,6 @@ and describes in frequency-domain the relation between the input and output.
 %  y(t) = (h \star x)(t) = \int_{-\infty}^{\infty} h(\tau)x(t-\tau) \mathrm{d}\tau
 % \end{equation}
 %
-
 
 \subsubsection{Gain and delay}
 A gain $G$ is an amplification factor that amplifies or attenuates a signal, independently of frequency
@@ -121,17 +123,22 @@ Similarly, a delay is an element that delays samples by one sample or multiple s
 
 
 \subsubsection{Finite and Infinite Impulse Response filters}
-We will now consider two types of filters. In the following expressions $x[n]$ is an input signal to a filter, and $y[n]$ the signal after filtering.
+We will now consider two types of filters. In the following expressions $x[n]$
+is an input signal to a filter, and $y[n]$ the signal after filtering.
 
 % \subsubsubsection{Infinite Impulse Response filter}
-An Infinite Impulse Response (IIR) filter is a type of filter whose impulse response never exactly reaches zero. Analog electronic filters like fractional-octave bandpass filters in sound level meters are generally IIR filters.
-The output of a digital IIR filter can be obtained through the difference equation
+An Infinite Impulse Response (IIR) filter is a type of filter whose impulse
+response never exactly reaches zero. Analog electronic filters like
+fractional-octave bandpass filters in sound level meters are generally IIR
+filters. The output of a digital IIR filter can be obtained through the
+difference equation
 \begin{multline}
  y[n] = \frac{1}{a_0} ( b_0 x[n] + b_1 x[n-1] + \dots b_P x[n-P] \\
       - a_1 y[n-1] - a_2 y[n-2] - \dots - a_Q y[n-Q] )
 \end{multline}
-where $P$ and $Q$ are respectively the feedforward and feedback filter orders, and $b_i$ and $a_i$ respectively the feedforward and feedback filter coefficients.
-The expression can be written as
+where $P$ and $Q$ are respectively the feedforward and feedback filter orders,
+and $b_i$ and $a_i$ respectively the feedforward and feedback filter
+coefficients. The expression can be written as
 \begin{equation}
  y[n] = \frac{1}{a_0} \left( \sum_{i=0}^{P} b_i x[n-i] - \sum_{j=1}^Q a_j y[n-j] \right)
 \end{equation}
@@ -139,11 +146,13 @@ and its transfer function in $z$-domain is
 \begin{equation}
  H(z) = \frac{\sum_{i=0}^P b_i z^{-i}}{\sum_{j=0}^Q a_j z^{-j}}
 \end{equation}
-Because an IIR filter has feedback terms, it will have poles which can have a negative effect on the stability of the filter.
+Because an IIR filter has feedback terms, it will have poles which can have a
+negative effect on the stability of the filter.
 
 % \subsubsubsection{Finite Impulse Response filter}
-A Finite Impulse Response (FIR) filter is a filter whose impulse response is of finite duration before it settles to zero in finite time.
-In the case of a causal digital FIR filter the output $y[n]$ is given by
+A Finite Impulse Response (FIR) filter is a filter whose impulse response is of
+finite duration before it settles to zero in finite time. In the case of a
+causal digital FIR filter the output $y[n]$ is given by
 \begin{equation}
  y[n] = b_0 x[n] + b_1 x[n-1] + \dots + b_N x[n-N]
 \end{equation}
@@ -156,8 +165,10 @@ The transfer function in $z$-domain is
 \begin{equation}
 H(z) = \sum_{n=-\infty}^{\infty} h[n] z^{-n}
 \end{equation}
-This type of filter does not have any feedback terms, therefore there cannot be any poles and thus this type of filter is inherently stable.
-Furthermore, they can be easily designed to have linear phase, which is an important requirement for auralisations.
+This type of filter does not have any feedback terms, therefore there cannot be
+any poles and thus this type of filter is inherently stable. Furthermore, they
+can be easily designed to have linear phase, which is an important requirement
+for auralisations.
 
 \subsubsection{Linear phase and zero phase}\label{sec:theory:signal-processing:linear-phase}
 A filter is said to have linear phase when the phase response of the filter is a 
@@ -190,7 +201,9 @@ operation is non-causal.
 
 
 % \newpage
-\subsection{Convolution}
+\subsection{Convolution}\label{sec:theory:signal:convolution}
+Auralisations are signals that represent the sound pressure at a receiver location as function of time.
+In order to apply a Finite Impulse Response filter a convolution is essentially performed.
 
 \subsubsection{Convolution definition}
 The convolution of the functions $h$ and $x$ is written $h \star x$ and is defined as the integral of the product of the two functions after one of the functions is reversed and shifted.
@@ -198,11 +211,11 @@ The convolution of the functions $h$ and $x$ is written $h \star x$ and is defin
  y(t) = (h \star x)(t) = \int_{-\infty}^{\infty} h(\tau)x(t-\tau) \mathrm{d}\tau
 \end{equation}
 % Often $f$ would be an input signal and $g$ an impulse response of a system.
-In practice discrete signals are used. The discrete convolution of $h$ and $x$ is defined as
-\begin{equation}
- y [n] = (h \star x )[n] = \sum_{m=-\infty}^{\infty} h[m] x[n-m]
-\end{equation}
-Furthermore, the sequences are finite and therefore write
+In practice discrete and finite signals are used. The discrete convolution of finite signals $h$ and $x$ is defined as
+% \begin{equation}
+%  y [n] = (h \star x )[n] = \sum_{m=-\infty}^{\infty} h[m] x[n-m]
+% \end{equation}
+% Furthermore, the sequences are finite and therefore write
 \begin{equation}\label{eq:theory_signal_processing_convolution_fir}
  y [n] = (h \star x )[n] = \sum_{m=0}^{M-1} h[m] x[n-m]
 \end{equation}
@@ -254,7 +267,7 @@ Fourier transforms of the inputs
 \end{equation}
 This algorithm generally performs better for larger lengths of $h$ and $x$.
 
-\subsubsection{Overlap-add method}
+\subsubsection{Segmented convolution}
 If one of the sequences is much longer than the other, then it might be worth
 splitting up the long sequence into blocks and apply the convolution on each
 block. The overlap-add method is an example of such algorithm. In the
@@ -297,7 +310,7 @@ So far we considered linear time-invariant systems. In a linear time-variant
 system the impulse response can change over time. Consider again the Toeplitz
 matrix as shown in \eqref{eq:theory_signal_processing_convolution_toeplitz}. In
 the time-invariant case each column is a time-shifted copy of the same impulse
-response. In the time-variant case, however, each column can be a entirely
+response. In the time-variant case, however, each column can be an entirely
 different impulse response.
 % \missingfigure{Show how the matrix-vector product for an LTV is done.}
 
@@ -307,7 +320,7 @@ amounts of multiplications and additions that have to be performed. That has as
 effect that it typically cannot be used in real-time simulations.
 
 If we assume time-invariance during a short amount of time, then we can reuse
-the overlap-add method and perform each of the small convolutions with a
+the overlap-add overlap-discard method and perform each of the small convolutions with a
 possibly different impulse response. A requirement is that the filter changes
 sufficiently slow compared to the update rate of the impulse response.
 
@@ -336,7 +349,7 @@ with both impulse responses and crossfade the resulting sequences.
 
 
 % \newpage
-\subsection{Amplitude envelope and instantaneous frequency}
+\subsection{Amplitude envelope and instantaneous frequency}\label{sec:theory:signal:hilbert}
 % An analytic signal $s_a$ is a complex-valued function that has no negative frequency components. The real and imaginary parts of an analytic signal are real-valued functions related to each other by the Hilbert transform.
 In some cases it is possible to directly extract the amplitude envelope $A(t)$
 and instantaneous frequency $\phi(t)$ of a signal. An example of such a case
