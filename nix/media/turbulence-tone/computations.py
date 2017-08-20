@@ -106,6 +106,9 @@ modulated = modulate_tone(tone, fs, frequency, fs_min, correlation_length, speed
 both = Signal([tone, modulated], fs)
 print(both.levels()[1].std(axis=-1))
 
+saveaudio(tone, "tone.wav")
+saveaudio(modulated, "modulated.wav")
+
 
 # In[9]:
 labels=["Tone", "Modulated"]
@@ -179,7 +182,7 @@ print("Actual sample frequency: {}".format(fs/nhop))
 #fmin = fs / nhop # ideal
 
 speeds = np.array([1,10,20,100,110])
-fmin = (5. * speeds / correlation_length).max()
+fmin = (5. * speeds / correlation_length).max() * 10.0
 
 
 _linestyles = itertools.cycle(iter(linestyles))

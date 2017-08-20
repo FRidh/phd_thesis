@@ -19,6 +19,8 @@
 "4.2","a","Auralisation, approach","listening/9b4650d82a680343adadac514fb40137-11_103_A320-A-turbulence-start.wav"
 "4.2","b","Auralisation, flyover","listening/0be469ea22127f0a1352e49c44455868-11_103_A320-A-turbulence-center.wav"
 "4.2","c","Auralisation, distancing","listening/03af5cce5e63b401714e1b3080160f32-11_103_A320-A-turbulence-end.wav"
+"5.4","a","Tone","turbulence-tone/tone.wav"
+"5.4","b","Modulated tone","turbulence-tone/modulated.wav"
 "5.6","a","Modulated tone, $v_{\bot}=1$","turbulence-tone/scintillations_speed_1.wav"
 "5.6","b","Modulated tone, $v_{\bot}=10$","turbulence-tone/scintillations_speed_10.wav"
 "5.6","c","Modulated tone, $v_{\bot}=20$","turbulence-tone/scintillations_speed_20.wav"
