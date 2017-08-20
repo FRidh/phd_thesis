@@ -3,6 +3,7 @@
 , references
 , media
 , audio
+, overview-paper
 }:
 
 with stdenv.lib;
@@ -34,6 +35,9 @@ in stdenv.mkDerivation {
       done
     done
     popd
+
+#     rm papers/2017_overview.pdf
+    cp ${overview-paper} papers/2017_overview.pdf
 
     # We need the references
     pushd report

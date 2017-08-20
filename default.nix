@@ -32,7 +32,11 @@ in rec {
 
   # Standalone source tree containing everything needed to build the thesis.
   thesis-source = callPackage ./nix/thesis-source {
-    inherit references media audio;
+    inherit references media audio overview-paper;
+  };
+
+  overview-paper = callPackage ./nix/overview-paper {
+    inherit media audio figures references latex python;
   };
 
   audio = callPackage ./nix/audio {
@@ -40,9 +44,13 @@ in rec {
     inherit (pkgs) zip;
   };
 
+  figures = callPackage ./nix/figures {
+    inherit media;
+  };
+
   # Bibtex library with references/citations
-  references = ./data/library.bib; #/home/freddy/Data/Media/References/library.bib;
-#   references = /home/freddy/Data/Media/References/library.bib;
+#   references = ./data/library.bib; #/home/freddy/Data/Media/References/library.bib;
+  references = /home/freddy/Data/Media/References/library.bib;
 
   data = rec {
     # Tarball with listening test data.
