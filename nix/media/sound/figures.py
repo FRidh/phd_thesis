@@ -10,6 +10,9 @@ mpl.rc("figure", figsize=(6.0, 2.5))
 mpl.rc("font", size=10)
 mpl.rc('text', usetex=True)
 mpl.rc('axes', grid=True)
+mpl.rc('font', **{'family':'serif', 'serif':['Computer Modern Roman'],
+                                'monospace': ['Computer Modern Typewriter']})
+
 import matplotlib.pyplot as plt
 
 from acoustics.atmosphere import Atmosphere

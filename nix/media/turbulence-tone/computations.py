@@ -11,6 +11,9 @@ mpl.rc("font", size=10)
 mpl.rc("text", usetex=True)
 mpl.rc("lines", markersize=4)
 mpl.rc("lines", linewidth=0.8)
+mpl.rc('font', **{'family':'serif', 'serif':['Computer Modern Roman'],
+                                'monospace': ['Computer Modern Typewriter']})
+
 #get_ipython().magic('matplotlib inline')
 from scintillations.stream import *
 from scintillations.sequence import *

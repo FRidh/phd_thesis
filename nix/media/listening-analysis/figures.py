@@ -15,6 +15,8 @@ mpl.rc("figure", figsize=(3.0, 2.5))
 mpl.rc("font", size=10)
 #mpl.rc("legend", fontsize=7)
 mpl.rc("text", usetex=True)
+mpl.rc('font', **{'family':'serif', 'serif':['Computer Modern Roman'],
+                                'monospace': ['Computer Modern Typewriter']})
 
 DPI = 600
 
