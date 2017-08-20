@@ -47,15 +47,15 @@ situation is considered and propagation effects are added sequentially.
 Figure \ref{fig:propagation_block_diagram} shows a block diagram of the steps
 that are taken. Because of source motion all propagation effects are
 time-variant. The order of the operation matters although some could be
-exchanged. For operations that are distance-dependent, care should be taken to
-consider the distance at the emission or retarded time. Divergence is computed
+exchanged. For operations that are distance-dependent and thus propagation-delay dependent care should be taken to
+consider the distances at the emission or retarded times. Divergence is computed
 first. The Doppler-shift, a result of a change in propagation delay as function
 of time, occurs between the source and the medium. The shifted frequencies are
 then attenuated in the atmosphere. A reflection is modeled as a parallel path
 with a filter representing the reflection coefficient. In case there is no
 movement this filter may be considered part of the mirror source, however, as
 movement is considered it needs to be placed after the Doppler-shift has been
-applied.
+applied. The same applies for the turbulence filter.
 
 Paper \ref{paper:turbulence} describes a model that was developed to include
 scintillations, that is, fluctuations in the sound due to atmospheric
@@ -75,10 +75,10 @@ with two poles and two zeros.}. Directivity is not included, and
 there are no other signal strength variations either.
 
 The \say{aircraft} moves at a height of \SI{200}{\meter} and with a
-speed of \SI{100}{\meter\per\second} straight over the receiver.
-The receiver is at a height of 1.7 meters and 8 meters next to the flight path.
+speed of \SI{100}{\meter\per\second} at a transverse distance of about \SI{500}{\meter}.
+The receiver is at a height of 1.7 meters.
 Figure \ref{fig:implementation:propagation:emission} shows a spectrogram of the
-emission signal. In the next sections propagation effects will be added sequentially
+signal. In the next sections propagation effects will be added sequentially
 resulting in clear changes to the immission.
 
 % \clearpage
@@ -86,7 +86,7 @@ resulting in clear changes to the immission.
 \begin{figure}[H]
   \centering
   \includegraphics[]{../figures/generated/propagation/emission}
-  \caption{Spectrogram of the immission. Because in this case we do not consider sound propagation this in facts corresponds to the emission of the aircraft as function of the orientation. The immission is stationary because an omni-directional source is considered and no other emission variations are modelled.}
+  \caption{Spectrogram of the emission. The immission is stationary because an omni-directional source is considered and no other emission variations are modelled.}
   \label{fig:implementation:propagation:emission}
 \end{figure}
 
@@ -173,7 +173,7 @@ The black part in the first couple of seconds represents zero signal and is due 
 Atmospheric attenuation is accounted for by creating a time-variant filter of length $N_{aa}$.
 A single-sided magnitude spectrum is calculated as
 \begin{equation}
- \left| H_{aa} \right| = 10^{- d \alpha(f) / 20}
+ \left| H_{aa} \right| = 10^{- d(t) \alpha(f) / 20}
 \end{equation}
 where $d$ is the source-receiver distance in \SI{}{meter} and $\alpha(f)$ the
 frequency-dependent attenuation coefficient in \SI{}{\decibel\per\meter} computed using
@@ -195,7 +195,11 @@ small.
 
 Figure \ref{fig:implementation:propagation:attenuation} shows a spectrogram of
 the immission when atmospheric attenuation is included. A reference atmosphere
-was considered.
+was considered. The difference with the previous figure is small. That is
+because the distances considered are relatively small. Attenuation is especially
+strong at higher frequencies, however, the source spectrum that is considered is
+relatively weak at higher frequencies. Furthermore, the spectrograms only show up to
+6 kHz.
 
 \begin{figure}[H]
   \centering
@@ -228,8 +232,7 @@ assumption is no longer valid and must be replaced by a model that takes into
 account the reflection of spherical waves from a ground surface of finite
 impedance \cite{Tuttle2014}. % TODO rewrite. Maybe move to theory
 
-The scenarios considered were landings. Because the area around the airport
-consists mostly of grass a flow resistivity of
+The area around the airport consists mostly of grass and therefore a flow resistivity of
 \SI{2e5}{\pascal\second\per\meter\squared} was chosen. The filter length was
 4096 samples and the hop size 256 samples.
 
@@ -255,7 +258,7 @@ and the geometry, affect sound propagation.
 
 After taking into account sound propagation an immission signal is obtained that
 already starts to sound like an aircraft. However, thus far a simple emission
-signal consisting of some noise and several tones was considered. The next
+signal consisting of some noise and several harmonics was considered. The next
 section presents a method to obtain a more accurate airplane emission signal.
 
 %

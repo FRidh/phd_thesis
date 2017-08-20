@@ -6,7 +6,7 @@
 
 % Overview paper
 Aircraft noise has a negative impact on humans. To further study its impact on
-humans a tool was developed to simulate the audible sound field caused by
+humans a tool was developed to simulate the audible sound caused by
 fly-overs of airplanes. The goal was to develop a tool that can create
 auralisations of the current fleet of aircraft that sound plausible.
 
@@ -18,7 +18,7 @@ that was obtained after applying an inverse propagation model to a recording.
 To verify whether the auralisations sound similar to recordings of the
 respective airplane types, a listening test was conducted.
 
-A listening test was conducted where participants were presented with two stimuli
+In a listening test participants were presented with two stimuli
 at a time and were asked to rate on a categorical scale the similarity of the two stimuli,
 where the two stimuli could be recordings, auralisations, or one of each. The
 hypothesis was that \emph{recordings and auralisations of aircraft of the same
@@ -40,15 +40,21 @@ the Buzz-Saw tones and is therefore underestimating the power and bandwidth of
 the blade-passing frequency and harmonics.
 
 Section \ref{sec:introduction:background:auralisation} listed several
-auralisation use cases. Whether it is relevant that the auralisations do not
-sound exactly similar to the recordings would depend on how the auralisations
-would be utilised.
+auralisation use cases. The relevance of audible differences between
+auralisations and recordings may depend on the application of the auralisations
+and the precision it requires. Consider e.g. the Lelystad Airport example that
+was given in section \ref{sec:introduction:background:auralisation}. For that
+purpose, what is needed is auralisations of aircraft of a certain class, but not
+necessarily a specific aircraft type. Perception-influenced design of aircraft
+may require a higher precision. However, while a minimum error between
+auralisations and recordings is desirable, what is perhaps more important is
+that the auralisation tool behaves correctly when adjusting certain parameters.
 
 % Turbulence paper
 To improve the plausibility of the auralisations
 % in situations where the source-receiver distance is typically larger
 a method was developed to simulate modulations due to weak atmospheric
-turbulence. Spatial and temporal variations in temperature and cause variations
+turbulence. Spatial and temporal variations in temperature cause variations
 in the soundspeed field. As sound propagates through a turbulent atmosphere, the
 variations will cause multiple scattering and result in audible modulations,
 known as scintillations. A method was presented for generating sequences of
@@ -66,14 +72,14 @@ log-amplitude fluctuations, and another for the phase fluctuations.
 The random fluctuations have a Gaussian statistical distribution and a spectrum.
 The spectrum is the Fourier transformation of the covariance of the random
 temporal fluctuations. To approximate the spectrum of the turbulence a Gaussian
-model was used. While other turbulence model are available and could be used,
+model was used. While other turbulence models are available and could be used,
 the Gaussian model was chosen for its simplicity and because its computationally
 least demanding. In the Gaussian model the correlation depends on the
 correlation length $L$ of the turbulence and the transverse speed $v_{\bot}$, and
 the variance on distance $d$, correlation length $L$, wavenumber $k$ and
 variance of the dynamic refractive-index field. Because of the
 frequency-dependency, the fluctuations or modulations were implemented as a
-time-variant filter.
+time-variant filter. Furthermore, saturation of the log-amplitude was accounted for.
 
 Examples were shown where the method is applied to a pure tone and to airplane
 auralisations. The log-amplitude fluctuations cause clearly audible modulations,
@@ -112,7 +118,7 @@ recordings. A probable cause of these differences is the estimation of the
 power and bandwidth of the blade passing frequency and harmonics. Therefore, a
 possible improvement would be to enhance the feature-extraction algorithm to
 better estimate these properties. If the amount of fan blades is known, then that
-could be used as input to change the behaviour of the algoritm at the blade passing
+could be used as input to change the behaviour of the algorithm at the blade passing
 frequency and its harmonics.
 
 % The most important point to improve is likely the simulation of the
@@ -124,7 +130,7 @@ frequency and its harmonics.
 The emission synthesiser uses features determined from one specific event. The
 chosen emission synthesis strategy (spectral modelling synthesis with extracted features)
 produced auralisations that sound plausible. Therefore, a future step
-is to construct a emission model that produces these features as function of
+is to construct an emission model that produces these features as function of
 input parameters (e.g. thrust settings).
 
 \subsubsection*{Subjective validation of scintillations model}

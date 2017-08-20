@@ -174,19 +174,19 @@
 
 % \newenvironment{env-name}[optional-number-of-args][default-args]{insert-before}{insert-after}
 
-\newenvironment{abstract}{
-  \begin{center}
-    {\bfseries Abstract\par}  % \bfseries - some bold font, \par - end of paragraph (as empty line)
-  \end{center}
-  \quotation                  % extra indent from left and right
-  \noindent
-}
-{\par\endquotation}
-
-\newenvironment{keywords}%
-{{\bfseries Keywords:}}%
-{\par}%
-% % % End new environments
+% \newenvironment{abstract}{
+%   \begin{center}
+%     {\bfseries Abstract\par}  % \bfseries - some bold font, \par - end of paragraph (as empty line)
+%   \end{center}
+%   \quotation                  % extra indent from left and right
+%   \noindent
+% }
+% {\par\endquotation}
+%
+% \newenvironment{keywords}%
+% {{\bfseries Keywords:}}%
+% {\par}%
+% % % % End new environments
 
 
 % % Begin page content adjustments for putting more text on pages.
@@ -265,20 +265,20 @@
 
 % Add abstract to the ToC
 \cleardoublepage              % advance the pages
-{\parindent 0 pt}
-{\parindent 0 pt\thesistitle\par}
-{\thesissubtitle\par}
-{\textsc\thesisauthor\par}
-{\thesisdepartment\par}
-{Chalmers University of Technology\par}
+% {\parindent 0 pt}
+{\noindent \thesistitle\\}
+{\noindent \thesissubtitle\\}
+{\noindent \textsc\thesisauthor\\}
+{\noindent \thesisdepartment\\}
+{\noindent Chalmers University of Technology\\}
 % \vskip 3 pc
 \phantomsection               % put pdf anchor
 \addcontentsline{toc}{chapter}{Abstract}  % add toc line with target at the last anchor
-% \section*{Abstract}
-\begin{abstract}
+\section*{Abstract}
+% \begin{abstract}
 % \vspace*{-1cm}                % More space for abstract text
 \input{frontmatter/abstract}
-\end{abstract}
+% \end{abstract}
 % \makeabstract
 
 \cleardoublepage              % advance the pages

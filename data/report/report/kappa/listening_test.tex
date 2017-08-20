@@ -32,7 +32,7 @@ whether an auralisation sounds plausible. That would likely require a reference
 sound, e.g. a recording.
 
 Regardless of the method a variability exists in events that are considered
-alike. For example, consider events that are all landingsm of a certain aircraft
+alike. For example, consider events that are all landings of a certain aircraft
 type and with certain engines, and under meteorological conditions within a narrowly
 defined range. In one event the pilot may vary the thrust differently than in
 another event and that could already lead to audible differences.
@@ -96,7 +96,7 @@ similar to the recordings they were based on. Participants were presented with
 pairs of stimuli and asked to rate how similar they sounded, overall.
 
 Eight different sounds were considered and they were each 12 seconds long. The
-sounds include the approach of an aircraft, its flyover and its distancing.
+sounds include the approach of an aircraft, its fly-over and its distancing.
 Because the character of the sounds varies considerably over time, they were
 each split into parts of four seconds, corresponding to the approach, fly-over
 and distancing. The listening test was also divided in these three parts. First,
@@ -121,9 +121,17 @@ Likert scale. The left side of the scale said ``not so much'' and the right side
 randomised for each test and each part.
 
 Figures \ref{fig:listening:results:recording-A320} and
-\ref{fig:listening:results:simulation-A320} show spectrograms of some of the stimuli
-that were used. The blade passing frequency and harmonics are not as prominent
-in the auralisation as they are in the recording.
+\ref{fig:listening:results:simulation-A320} show spectrograms of some of the
+stimuli that were used. The blade passing frequency and harmonics are not as
+prominent in the auralisation as they are in the recording. The approach-part of
+the auralisation spectrogram shows a part where the signal was zero and this is
+due to the initial propagation delay. This was supposedly accounted for by
+creating longer auralisations and then selecting the part where there was
+signal, but judging from the spectrogram and inspection of the audio files, an
+error was made. This was noticed only after the listening tests. The errors are
+0.15 and 0.35 seconds in the case of the RJ1H samples, and 0.65 and 0.75 seconds
+in case of the A320 samples.
+
 
 % \newpage
 % \afterpage{
@@ -137,7 +145,7 @@ in the auralisation as they are in the recording.
 % \begin{figure}
   \centering
   \includegraphics[]{../figures/generated/listening/turbulence-A320}
-  \caption{Spectrograms of the approach, ``center`` and distancing parts of an auralisation of an A320.}
+  \caption{Spectrograms of the approach, fly-over and distancing parts of an auralisation of an A320.}
   \label{fig:listening:results:simulation-A320}
 \end{figure}
 % }
@@ -156,43 +164,30 @@ data of all participants. % and all three test parts.
 The listening test data can be found at \cite{Rietdijk2017a} and the
 raw results along with a brief analysis at \cite{Rietdijk2017b}.
 
-Table \ref{table:listening:results:analysis-parts} shows the mean $\mu$,
-standard deviation $\sigma$ and amount of samples $n$ per group.
-Averaging was done over participants. Table \ref{table:listening:results:analysis} is similar,
-but now averaging was done not over only participants but also over the three test parts.
+Table \ref{table:listening:results:analysis-parts} shows the sample mean $\mu$,
+sample standard deviation $\sigma$ and amount of samples $n$ per group. Averaging was
+done over participants. Table
+\ref{table:listening:results:analysis-with-approach} is similar, with averaging
+done over the three test parts as well. Table
+\ref{table:listening:results:analysis} is like Table
+\ref{table:listening:results:analysis-with-approach}, however, with all approach
+parts excluded. Because participants are a sample of the actual
+population, $n-1$ degrees of freedom were considerd for the computation of the
+standard deviation and the standard error of the mean $\sigma/\sqrt{n}$.
 
-\begin{table}[H]
-  \centering
-  \caption{The mean value $\mu$, standard deviation $\sigma$ and amount of samples $n$ per aircraft type combination, and stimuli type combination. Averaging was done over participants and parts.}
-  \label{table:listening:results:analysis}
-  \input{../figures/generated/listening-analysis/table_analysis.tex}
-\end{table}
-
-Figure \ref{fig:listening:ratings-kde-overall} shows the distribution of the
-similarity ratings grouped by aircraft and stimuli type combinations. The
-vertical axes show kernel density estimations of how common the given ratings
-were\footnote{ A kernel density estimation can be seen as a continuous version
+The following figures show per group a normalised histogram and a kernel density estimation\footnote{ A kernel density estimation can be seen as a continuous version
 of a histogram. Each sample is replaced by a kernel function centered at the
 value of the sample. The curves are then summed to obtain a density and finally
 normalised so that the area under the resulting curve is 1. }. A Gaussian kernel
-was used. Averaging is done over participants and test parts.
-
-Figures \ref{fig:listening:ratings-aircraft-type-combinations} and \ref{fig:listening:ratings-stimuli-type-combinations} show mostly the same curves as Figure \ref{fig:listening:ratings-kde-overall} but the curves are grouped.
-Figure \ref{fig:listening:ratings-aircraft-type-combinations} shows the distribution of the similarity ratings grouped by
-aircraft combination for both the recordings and the auralisations.
-Figure \ref{fig:listening:ratings-stimuli-type-combinations} shows the distribution of the similarity ratings grouped by stimuli type combination
-for both the A320 and the RJ1H. In both cases the results encompass all parts.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{{{../figures/generated/listening-analysis/figure_kde}}}
-  \caption{Similarity ratings grouped by both aircraft combinations and stimuli type combinations.}% Groups considering only recordings and compare only one aircraft type have relatively high similarity ratings. Groups that consider two aircraft types have relatively the lowest ratings. }
-  \label{fig:listening:ratings-kde-overall}
-\end{figure}
-
-In Figures \ref{fig:listening:results:ratings-A320-parts} and
-\ref{fig:listening:results:ratings-RJ1H-parts} the results were split by part.
-To improve clarity, the amount of information is reduced by using Tukey boxplots.
+was used.
+% Figure \ref{fig:listening:ratings-kde-overall} shows the distribution of the
+% similarity ratings grouped by aircraft and stimuli type combinations. The
+% vertical axes show kernel density estimations of how common the given ratings
+% were
+In Figure \ref{fig:listening:ratings-histograms-all} averaging is done over all participants and all parts.
+In Figure \ref{fig:listening:ratings-histograms-no-approach} averaging is done over all participants, as well as the the fly-over and distancing parts.
+Figures \ref{fig:listening:ratings-histograms-approach}, \ref{fig:listening:ratings-histograms-flyover} and \ref{fig:listening:ratings-histograms-distancing}
+consider the approach, fly-over and distancing separately. In these figures averaging is done only over participants.
 
 Participants mentioned they noted larger differences at especially the approach of the events and the distancing.
 A common answer to the question how many different aircraft they heard was ``two or three``.
@@ -202,6 +197,22 @@ participants were surprised when told that simulations were included,
 others said they had thought so, and a few of the participants were already
 aware the test was possibly going to contain simulations.
 
+\newpage
+\begin{table}[H]
+  \centering
+  \caption{The mean value $\mu$, standard deviation $\sigma$ and amount of samples $n$ per aircraft type combination, and stimuli type combination. Averaging was done over participants and parts.}
+  \label{table:listening:results:analysis-with-approach}
+  \input{../figures/generated/listening-analysis/table_analysis.tex}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{The mean value $\mu$, standard deviation $\sigma$ and amount of samples $n$ per aircraft type combination, and stimuli type combination. Averaging was done over participants and parts, \emph{excluding the approach parts}.}
+  \label{table:listening:results:analysis}
+  \input{../figures/generated/listening-analysis/table_analysis_no_approach.tex}
+\end{table}
+
+\newpage
 \begin{table}[H]
   \centering
   \caption{The mean value $\mu$, standard deviation $\sigma$ and amount of samples $n$ per test part, aircraft type combination, and stimuli type combination. Averaging was done over participants.}
@@ -210,39 +221,96 @@ aware the test was possibly going to contain simulations.
 \end{table}
 
 
-% \newpage
-% \afterpage{
-\begin{figure}
-%     \centering
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics{{{../figures/generated/listening-analysis/figure1_ratings_recordings}}}
-        \caption{Recordings}
-        \label{fig:listening:ratings-aircraft-type-combinations:recordings}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics{{{../figures/generated/listening-analysis/figure2_ratings_simulations}}}
-        \caption{Auralisations}
-        \label{fig:listening:ratings-aircraft-type-combinations:auralisations}
-    \end{subfigure}
-    \caption{Similarity ratings grouped by aircraft type combinations. The left figure shows the ratings for the recordings and the right figure for the auralisations.}
-    \label{fig:listening:ratings-aircraft-type-combinations}
-% \end{figure}
-% \clearpage
+%
+% Averaging is done over participants and test parts.
+% all parts
+% Figures \ref{fig:listening:ratings-aircraft-type-combinations} and \ref{fig:listening:ratings-stimuli-type-combinations} show mostly the same curves as Figure \ref{fig:listening:ratings-kde-overall} but the curves are grouped.
+% Figure \ref{fig:listening:ratings-aircraft-type-combinations} shows the distribution of the similarity ratings grouped by
+% aircraft combination for both the recordings and the auralisations.
+% Figure \ref{fig:listening:ratings-stimuli-type-combinations} shows the distribution of the similarity ratings grouped by stimuli type combination
+% for both the A320 and the RJ1H. In both cases the results encompass all parts.
+%
+% % \begin{figure}[H]
+% %   \centering
+% %   \includegraphics{{{../figures/generated/listening-analysis/figure_kde}}}
+% %   \caption{Similarity ratings grouped by both aircraft combinations and stimuli type combinations.}% Groups considering only recordings and compare only one aircraft type have relatively high similarity ratings. Groups that consider two aircraft types have relatively the lowest ratings. }
+% %   \label{fig:listening:ratings-kde-overall}
+% % \end{figure}
 
-% \begin{figure}
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[]{{{../figures/generated/listening-analysis/figure3_ratings_A320}}}
-        \caption{A320}
-        \label{fig:listening:ratings-stimuli-type-combinations:A320}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[]{{{../figures/generated/listening-analysis/figure4_ratings_RJ1H}}}
-        \caption{RJ1H}
-        \label{fig:listening:ratings-stimuli-type-combinations:RJ1H}
-    \end{subfigure}
-    \caption{Similarity ratings grouped by stimuli type combinations. The left figure shows the ratings for the A320 and the right figure for the RJ1H.}
-    \label{fig:listening:ratings-stimuli-type-combinations}
+\begin{figure}[H]
+  \centering
+  \includegraphics{{{../figures/generated/listening-analysis/histograms}}}
+  \caption{Normalised histogram and kernel density estimate per group. Averaging was done over all participants, and all parts.}
+  \label{fig:listening:ratings-histograms-all}
 \end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{{{../figures/generated/listening-analysis/histograms_no_approach}}}
+  \caption{Normalised histogram and kernel density estimate per group. Averaging was done over all participants, and the fly-over and distancing parts.}
+  \label{fig:listening:ratings-histograms-no-approach}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{{{../figures/generated/listening-analysis/histograms_approach}}}
+  \caption{Normalised histogram and kernel density estimate per group for the approach part. Averaging was done over all participants.}
+  \label{fig:listening:ratings-histograms-approach}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{{{../figures/generated/listening-analysis/histograms_flyover}}}
+  \caption{Normalised histogram and kernel density estimate per group for the fly-over part. Averaging was done over all participants.}
+  \label{fig:listening:ratings-histograms-flyover}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{{{../figures/generated/listening-analysis/histograms_distancing}}}
+  \caption{Normalised histogram and kernel density estimate per group for the distancing part. Averaging was done over all participants.}
+  \label{fig:listening:ratings-histograms-distancing}
+\end{figure}
+
+% In Figures \ref{fig:listening:results:ratings-A320-parts} and
+% \ref{fig:listening:results:ratings-RJ1H-parts} the results were split by part.
+% To improve clarity, the amount of information is reduced by using Tukey boxplots.
+
+
+
+% % \newpage
+% % \afterpage{
+% \begin{figure}
+% %     \centering
+%     \begin{subfigure}{0.5\textwidth}
+%         \includegraphics{{{../figures/generated/listening-analysis/figure1_ratings_recordings}}}
+%         \caption{Recordings}
+%         \label{fig:listening:ratings-aircraft-type-combinations:recordings}
+%     \end{subfigure}
+%     \begin{subfigure}{0.5\textwidth}
+%         \includegraphics{{{../figures/generated/listening-analysis/figure2_ratings_simulations}}}
+%         \caption{Auralisations}
+%         \label{fig:listening:ratings-aircraft-type-combinations:auralisations}
+%     \end{subfigure}
+%     \caption{Similarity ratings grouped by aircraft type combinations. The left figure shows the ratings for the recordings and the right figure for the auralisations.}
+%     \label{fig:listening:ratings-aircraft-type-combinations}
+% % \end{figure}
+% % \clearpage
+%
+% % \begin{figure}
+%     \begin{subfigure}{0.5\textwidth}
+%         \includegraphics[]{{{../figures/generated/listening-analysis/figure3_ratings_A320}}}
+%         \caption{A320}
+%         \label{fig:listening:ratings-stimuli-type-combinations:A320}
+%     \end{subfigure}
+%     \begin{subfigure}{0.5\textwidth}
+%         \includegraphics[]{{{../figures/generated/listening-analysis/figure4_ratings_RJ1H}}}
+%         \caption{RJ1H}
+%         \label{fig:listening:ratings-stimuli-type-combinations:RJ1H}
+%     \end{subfigure}
+%     \caption{Similarity ratings grouped by stimuli type combinations. The left figure shows the ratings for the A320 and the right figure for the RJ1H.}
+%     \label{fig:listening:ratings-stimuli-type-combinations}
+% \end{figure}
 % }
 % \clearpage
 
@@ -276,36 +344,45 @@ aware the test was possibly going to contain simulations.
 
 
 %
-% \newpage
-% \afterpage{
-% \begin{float}
-\begin{figure}[H]
-  \centering
-  \includegraphics[]{../figures/generated/listening-analysis/figure5_ratings_part_A320}
-  \caption{Similarity ratings for the A320 grouped by stimuli type combinations and stimuli part.}
-  \label{fig:listening:results:ratings-A320-parts}
-% \end{figure}
-% TODO discuss
-
+% % \newpage
+% % \afterpage{
+% % \begin{float}
 % \begin{figure}[H]
-  \centering
-  \includegraphics[]{../figures/generated/listening-analysis/figure6_ratings_part_RJ1H}
-  \caption{Similarity ratings for the RJ1H grouped by stimuli type combinations and stimuli part.}
-  \label{fig:listening:results:ratings-RJ1H-parts}
-\end{figure}
-% \end{float}
-% TODO discuss
-% }
+%   \centering
+%   \includegraphics[]{../figures/generated/listening-analysis/figure5_ratings_part_A320}
+%   \caption{Similarity ratings for the A320 grouped by stimuli type combinations and stimuli part.}
+%   \label{fig:listening:results:ratings-A320-parts}
+% % \end{figure}
+% % TODO discuss
+%
+% % \begin{figure}[H]
+%   \centering
+%   \includegraphics[]{../figures/generated/listening-analysis/figure6_ratings_part_RJ1H}
+%   \caption{Similarity ratings for the RJ1H grouped by stimuli type combinations and stimuli part.}
+%   \label{fig:listening:results:ratings-RJ1H-parts}
+% \end{figure}
+% % \end{float}
+% % TODO discuss
+% % }
 
 \newpage
 \section{Discussion}
-Consider Tables \ref{table:listening:results:analysis} and
-\ref{table:listening:results:analysis-parts}. The standard deviation of the
-groups is mostly around 0.25, although a notable exception is the group in which
-two recordings of A320's were compared. The standard deviation is only 0.09 and
-the mean 0.89. Comparing that with the other groups, implies the two recordings
-this group consists of are relatively closer to each other than those in other
-groups.
+Consider tables \ref{table:listening:results:analysis-with-approach} and
+\ref{table:listening:results:analysis}. In both tables the sample
+standard deviations are around 0.25. The spread in the mean within the tables is
+large, but the difference in mean values between the two tables is small. While
+the largest difference is 0.05, which is about two standard errors, for the
+majority of groups the difference is about one standard error.
+
+Table \ref{table:listening:results:analysis-parts} does not average over the
+three parts. Again, the standard deviation of the groups is mostly around 0.25,
+although a notable exception is the group in which two recordings of A320's were
+compared. The standard deviation is only 0.09 and the mean 0.89. Comparing that
+with the other groups, implies the two recordings this group consists of are
+relatively closer to each other than those in other groups. The standard
+deviation of the approach groups with the faulty auralisations is similar as
+that of the other groups.
+
 The highest mean values are achieved when comparing similar aircraft types,
 regardless of whether the stimuli were recordings or auralisations. However,
 when comparing a recording with an auralisation the mean value is lower. The
@@ -314,77 +391,95 @@ systematically below those of the groups comparing recordings or auralisations.
 That would imply the hypothesis that \say{recordings and auralisations of aircraft of the same
 type and under similar conditions are samples of the same group} is not true.
 
-Figure \ref{fig:listening:ratings-kde-overall} shows kernel density estimates of
-the distributions of the nine groups. Some groups appear to follow a Gaussian
-curve, however, not all. In certain cases there are also (close to) two maxima.
+Figures \ref{fig:listening:ratings-histograms-all} and
+\ref{fig:listening:ratings-histograms-no-approach} show normalised histograms
+and kernel density estimates. The difference beween the two figures is that the
+latter does not include approach samples. No notable differences can be observed
+in the figures, implying the approach samples are \say{average}.
+
+% Thus, considering the observation that the difference in mean
+% values is much smaller than the standard deviations, it would appear there is no
+% notable effect due to the initial delay errors in the approach auralisation
+% stimuli.
+
 The similarity rating is a value given by participants after performing a
 comparison of two items, and comparing them on whichever aspects they choose to
 consider. Therefore, it is likely that the distributions are Gaussian. However,
-because the ratings could only be given on a limited range this may skew the
-distributions.
+the ratings could only be given on a limited range and that may skew the
+distributions. In most cases the distributions do not appear to follow a Gaussian curve.
+
+% Figure \ref{fig:listening:ratings-kde-overall} shows kernel density estimates of
+% the distributions of the nine groups.
 
 % Z-score and p-value?
 
-As can be seen in Figure
-\ref{fig:listening:ratings-aircraft-type-combinations:recordings}, the recordings of the A320's
-are judged to be very similar to each other, and the recordings of the RJ1H's as quite similar to
-each other as well. The A320's are not rated as very similar to the RJ1H's and therefore
-it appears that the participants can discriminate between the two aircraft
-types.
-In the case of the auralisations, Figure
-\ref{fig:listening:ratings-aircraft-type-combinations:auralisations}, the
-results are similar in case of the A320's and the RJ1H's, although less convincing.
-Furthermore, in this case the dissimilarity between the A320's and the RJ1H's isn't as large.
-In fact, this distribution is relatively closer to the other two distributions than is the case with the recordings,
-implying the auralisations, regardless of aircraft type, all sound more alike.
+The recordings of the A320's (top-left) are judged to be very similar to each other, and
+the recordings of the RJ1H's (bottom-left) as quite similar to each other as well although
+slightly less. The A320's are not rated as very similar to the RJ1H's (center-left) and
+therefore it appears that the participants can discriminate between the two
+aircraft types.
+For the auralisations, the results are similar in case of the A320's (top-right)
+and the RJ1H's (bottom-right), although less convincing. Furthermore, in this case the
+dissimilarity between the A320's and the RJ1H's isn't as large (center-right). In fact, this
+distribution is relatively closer to the other two distributions than is the
+case with the recordings, implying the auralisations, regardless of aircraft
+type, all sound more alike. That is, they all sound more like another aircraft type.
 
-% participants can also discriminate between the aircraft types, but now the
-% RJ1H's are judged to be relatively more similar than the A320's. Compared to the
-% recordings the difference between the A320's and the RJ1H's is slightly smaller.
+% % participants can also discriminate between the aircraft types, but now the
+% % RJ1H's are judged to be relatively more similar than the A320's. Compared to the
+% % recordings the difference between the A320's and the RJ1H's is slightly smaller.
+%
+% % One might argue from these findings that the whole set of auralisations is more similar than the set of recordings.
 
-% One might argue from these findings that the whole set of auralisations is more similar than the set of recordings.
+Were the hypothesis valid, then the curves in the top would have to overlap, and
+the curves in the bottom as well. While the distributions of the groups that
+compare auralisations are quite similar to the distributions comparing
+recordings, they are not similar to the groups comparing auralisations with
+recordings. That would again imply the hypothesis is not true and that the
+auralisations may appear to be different types of aircraft.
 
-Another view on the data is presented in Figure
-\ref{fig:listening:ratings-stimuli-type-combinations}. Were the hypothesis
-valid, then the curves in each subfigure would have to overlap. While the
-distributions of the groups that compare auralisations are quite similar to the
-distributions comparing recordings, the groups comparing auralisations with
-recordings are not similar at all. That would again imply the hypothesis is not
-true and that the auralisations may appear to be different types of aircraft.
+% % The groups ``(rec, sim)'' contain pairs consisting of a recording and an auralisation, and the similarity ratings of these two groups are similar to the ``(A320, RJ1H)''
+% % groups in Figure \ref{fig:listening:ratings-aircraft-type-combinations}. Therefore,
+% % it would appear that listeners can discriminate between aircraft types, but that
+% % the auralisations are considered to be of different aircraft types than the
+% % recordings they are based on.
 
-% The groups ``(rec, sim)'' contain pairs consisting of a recording and an auralisation, and the similarity ratings of these two groups are similar to the ``(A320, RJ1H)''
-% groups in Figure \ref{fig:listening:ratings-aircraft-type-combinations}. Therefore,
-% it would appear that listeners can discriminate between aircraft types, but that
-% the auralisations are considered to be of different aircraft types than the
-% recordings they are based on.
+Figures \ref{fig:listening:ratings-histograms-approach},
+\ref{fig:listening:ratings-histograms-flyover} and
+\ref{fig:listening:ratings-histograms-distancing} show similar curves but per
+test part. Aside from the A320 distancing recordings that were mentioned before,
+there do not appear to be significant differences between the parts.
+In case of the RJ1H the distancing stimuli seem to be relatively close to each other.
 
-Figures \ref{fig:listening:results:ratings-A320-parts} and
-\ref{fig:listening:results:ratings-RJ1H-parts} show the same data as
-\ref{fig:listening:ratings-stimuli-type-combinations} but grouped further by
-stimuli part. Judging from Figure \ref{fig:listening:results:ratings-A320-parts}
-there appears to be a relative large dissimilarity between the approach and
-fly-over parts of the A320 recordings. The distancing parts, however, are rated
-as very similar. The groups ``(rec, rec)'' and ``(sim, sim)'' consist however of
-only 17 data points.
 
-% When comparing auralisations
-% and recordings there does not seem to be any especially good or bad part: the spread is relatively large and the mean is mediocre at
-% and also between the ``end'' parts of the A320 auralisations.  each whereas
-% the ``(rec, sim)'' group has 68 data points.
+% Figures \ref{fig:listening:results:ratings-A320-parts} and
+% \ref{fig:listening:results:ratings-RJ1H-parts} show the same data as
+% \ref{fig:listening:ratings-stimuli-type-combinations} but grouped further by
+% stimuli part. Judging from Figure \ref{fig:listening:results:ratings-A320-parts}
+% there appears to be a relative large dissimilarity between the approach and
+% fly-over parts of the A320 recordings. The distancing parts, however, are rated
+% as very similar. The groups ``(rec, rec)'' and ``(sim, sim)'' consist however of
+% only 17 data points.
+
+% % When comparing auralisations
+% % and recordings there does not seem to be any especially good or bad part: the spread is relatively large and the mean is mediocre at
+% % and also between the ``end'' parts of the A320 auralisations.  each whereas
+% % the ``(rec, sim)'' group has 68 data points.
 
 The participants mentioned relatively larger differences in the stimuli that
-correspond to the approach of the aircraft (``start`` stimuli). During the
+correspond to the approach of the aircraft (approach stimuli). During the
 approach the tonal components are clearly audible compared to other parts of the
 events due to the directivity. The feature-extraction algorithm was known to
 underestimate the power and bandwidth of the blade passing frequency and its
 harmonics because the algorithm was tuned for the Buzz-Saw tones. Therefore, a
 likely explanation is that this underestimation of power and bandwidth is
 causing audible differences between recordings and auralisations.
+Another cause could be the initial delay error.
 
 The author noticed after the listening test that the initial phase of the tones
 was Gaussian distributed instead of uniform (see section
 \ref{sec:tool:synthesis:synthesis}) resulting in a most probable zero degrees
-initial phase for all tonal components, and that may affect how the sound is
+initial phase for all tonal components. That may affect how the sound is
 perceived.
 
 The listening test considered only two events per aircraft type. In order to

@@ -29,7 +29,7 @@ def simulate(settings, name, with_tones=True, with_noise=True):
     frequency = 2000.0
     speed = 100.0
     x = np.ones_like(t) * speed * (t - duration/2.0)    # Source moves along the x-axis.
-    y = np.ones_like(t) * 3.0
+    y = np.ones_like(t) * 500.0
     z = np.ones_like(t) * 200.0   # Altitude of source
     src = model.add_source(name='source', position=np.vstack((x,y,z)).T)
     #src = model.add_source(name='source', position=Point(0.0,0.0,0.0))

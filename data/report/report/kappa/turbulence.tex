@@ -65,15 +65,17 @@ Assuming a spherical wave front and a Gaussian turbulence spectrum, the coherenc
 \begin{equation}
   T_c = e^{-\sigma_S^2 \left(1 - C_{sp}\right)}
 \end{equation}
-where $\sigma_S^2$ is the variance of phase fluctuations (equation
-\eqref{eq:model_daigle}), and $C_{sp}$ the phase correlation (equation
-\eqref{eq:theory:propagation:turbulence:correlation}. The phase correlation is a function of the spatial separation $\rho$
+where $C_{sp}$ is the correlation function of the fluctuations (equation
+\eqref{eq:theory:propagation:turbulence:correlation}, and $\sigma^2$ the variance of the fluctuations.
+According to Clifford the variance is the sum of the direct and reflected path wave variances and accounts for both log-amplitude and phase fluctuations \cite{Clifford1983}.
+This value is then twice the variance given by equation \ref{eq:model_daigle}.
+Arntzen considered only phase variances and took half this value.
+The correlation is a function of the spatial separation $\rho$
 perpendicular to the wave propagation direction which in this case was derived as
 \begin{equation}
   \frac{1}{\rho} = \frac{1}{2} \left( \frac{1}{h_s} + \frac{1}{h_r}  \right)
 \end{equation}
 where $h_d$ and $h_r$ are respectively the source and receiver height.
-The variance $\sigma_S^2$ is the sum of the direct and reflected path phase variances \cite{Clifford1983}.
 
 The interference term is implicitly included in auralisations. Therefore,
 Arntzen included $T_c$ as a filter for the ground-reflected path and introduced
@@ -403,7 +405,7 @@ and incoherent wave. The amplitude of the coherent wave decreases over distance
 while the incoherent wave obtains the energy from the coherent wave. The
 coherent wave $p$ is written as
 \begin{equation}
- \langle p \  p^* \rangle = \left( A_m^2 / 4 \pi r^2 \right) \exp{\left( -2 \langle \mu^2 \rangle k^2 r L \right)}
+ \langle p \  p^* \rangle = \left( A_m^2 / 4 \pi r^2 \right) \exp{\left( -2 \sigma_{\mu} k^2 r L \right)}
 \end{equation}
 Wenzel defines the distance to saturation $r_s$ as the distance at which the coherent wave is reduced to $e^{-1}$ of its original strength
 \begin{equation}\label{eq:saturation_distance}
@@ -515,7 +517,7 @@ modulations from this tone, or for example from one measured outdoors, one could
 in section \ref{sec:theory:signal:hilbert}.
 
 The log-amplitude and phase move in-phase. The value for the log-amplitude is slightly lower than that of the phase because of saturation.
-As expected the phase fluctuations cause spectral broadening of the tone as can be seen in Figure \cite{Ostashev2016}.
+As expected the phase fluctuations cause spectral broadening of the tone as can be seen in Figure \ref{fig:results_tone_broadening} \cite{Ostashev2016}.
 
 \begin{figure}[H]
   \centering
@@ -570,8 +572,8 @@ auralizations of aircraft. An aircraft moves at high speed through the
 atmosphere. A transverse speed is computed for each propagation path separately.
 Because the correlation time, distance and propagation varies between the two
 paths, decorrelation occurs. Figures \ref{fig:results_auralization_without} and
-\ref{fig:results_auralization_with} show spectrograms, respectively with and
-without turbulence. The vertical lines that can be seen are the amplitude
+\ref{fig:results_auralization_with} show spectrograms, respectively without and
+with turbulence. The vertical lines that can be seen are the amplitude
 modulations.
 
 \begin{figure}[H]
@@ -652,12 +654,12 @@ these parameters on an auralisation of an "aircraft".
 
 \section{Conclusion}
 Fluctuations in the refractive-index field due to variations in temperature and
-wind affects sound propagation and causes audible modulations. A method was
+wind affects sound propagation, and this causes audible modulations. A method was
 presented for generating sequences of modulations and applying these to
 monochromatic as well as broadband signals.
 
 A Rytov approximation to first-order refractive-index flucutuations results in a complex
-phase which we can write as a log-amplitude $\chi$ and phase $S$ fluctuation.
+phase $\psi$, which we can write as a log-amplitude $\chi$ fluctuation, and a phase $S$ fluctuation.
 The propagating sound is modelled as a time-varying channel where we consider
 two sequences, one for the log-amplitude fluctuations, and another for the phase
 fluctuations.

@@ -63,7 +63,7 @@ The world population is growing rapidly and it is expected that the given
 percentage increases to 66\% by 2050 \cite{UnitedNations2014}, resulting
 in higher urban densities.
 
-People not only live closer to eachother than ever before, but also transport
+People not only live closer to each other than ever before, but also transport
 more than before. Transport allows the spreading of people as well as trade and
 is therefore an important aspect for economic growth. People typically commute
 to where they work or study, and transport themselves as well for leisure.
@@ -94,7 +94,7 @@ constraint for aviation, and is likely to become even more important in the
 future considering the densification of cities worldwide.
 
 % how many exposed
-In Europe, several millions of people are effected by aircraft noise
+In Europe, several millions of people are affected by aircraft noise
 \cite{MPDGroupLimited2007}. In for example Switzerland, a country with just over
 8 million inhabitants, 3\% (225,000 persons) and 1.3\% (95,000 persons) of the
 population are exposed to A-weighted noise levels of above 55 dB by day and above
@@ -116,7 +116,7 @@ unpleasant mental state, and is a term that is used in general for all negative
 feelings, such as nuisance, disturbance, unpleasantness and irritation
 \cite{Guski1999}. Aircraft noise can have a major impact on noise annoyance,
 and there are findings suggesting that people's attitude towards aircraft noise
-has changed over the years, rating aircraft noise noiser than before \cite{Babisch2009}.
+has changed over the years, rating aircraft noiser than before \cite{Babisch2009}.
 
 Another consequence of aircraft noise that is being studied is sleep disturbance
 \cite{Michaud2007}. Adequate sleep is essential to one's well being, and
@@ -147,6 +147,16 @@ regulating international air travel. The ICAO adopts standards and guidelines on
 matters like navigation, infrastructure and inspection. They also provide
 guidelines related to aircraft noise. For example, Doc 9501 describes procedures
 for noise emission certification of aircraft \cite{ICAO_9501}.
+
+For the certification of aircraft several single-value noise metrics may be
+used \cite{}. These metrics are computed for a single fly-over. In case of light-weight
+propeller-driven aircraft the A-weighted maximum sound pressure level
+$L_{A,max}$ is used, and for lightweight helicopters the sound exposure level
+(SEL), $L_{A,E}$. The effective perceived noise level (EPNL) is used for the
+majority of aircraft types. EPNL is also a single-value metric and accounts for
+noisiness and tonality. Signal duration is taken into account as well as
+spectral content.
+
 % Airports may then restrict aircraft based on their emission certification.
 
 % The Effective Perceived Noise Level (EPNL) with unit EPNdB
@@ -228,11 +238,12 @@ noise. These figures are often hard to interpret for non-specialists, and
 they also give no insight in what the noise may sound like because they do not
 include the temporal structure of the sounds.
 
-In 2015 Lelystad airport in The Netherlands was expanding. Residents living
-nearby were initially presented with noise contours but struggled with
-interpreting them. The Netherlands Aerospace Centre (NLR) was asked to help
-residents understand the implications of the airport changes, and so they used
-auralisations at townhall meetings \cite{Arntzen2015}.
+In 2015 Lelystad Airport in The Netherlands was expanding, extending its runway
+to facilitate aircraft models like the A320. Residents living nearby were
+initially presented with noise contours but struggled with interpreting them.
+The Netherlands Aerospace Centre (NLR) was asked to help residents understand
+the implications of the airport changes, and so they used auralisations at
+townhall meetings \cite{Arntzen2015}.
 
 Sounds are typically created based on some underlying physical model. This
 allows the possibility of generating sounds that correspond to specific
@@ -270,9 +281,9 @@ Auralisation is an interesting method and has been used to study future aircraft
 types \cite{Rizzi2013,Rizzi2016,Rizzi2016a} and flight procedures
 \cite{Sahai2016} through perception-influenced design. The method was also used
 to investigate the perceived unpleasantness of aircraft flyover noise as a
-function of certain temporal parameters \cite{Pate2017}. Furthermore worth
-mentioning is Arntzens doctoral thesis, providing according an extensive
-introduction to and overview of aircraft auralisation \cite{Antzen2014a}.
+function of certain temporal parameters \cite{Pate2017}.
+An extensive introduction to aircraft auralisation is provided by Arntzen in his
+doctoral thesis \cite{Arntzen2014a}.
 
 Aspects to consider when simulating the sound of aircraft are the different
 noise sources on the aircraft, the state of the aircraft (e.g. thrust setting)
@@ -408,7 +419,9 @@ engine shaft rotational frequency and configuration of the gear and flaps. All
 data was time-synchronised using GPS receivers. Finally, meteorological data was
 available.
 
-
+This extensive dataset was used for the development for an aircraft noise
+prediction model, but could also be interesting for the development of an
+aircraft emission model for auralisations.
 
 \newpage
 \section{Thesis}

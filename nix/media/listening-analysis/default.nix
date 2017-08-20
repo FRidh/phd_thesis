@@ -13,7 +13,7 @@ in rec {
     kind = "figures";
   in runCommand "${name}-${kind}" {
     buildInputs = [
-      (python.withPackages (ps: with ps; [ pandas seaborn ] ) )
+      (python.withPackages (ps: with ps; [ pandas seaborn ]))
       matplotlibHook
     ];
   } ''

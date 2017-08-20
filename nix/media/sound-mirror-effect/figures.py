@@ -19,7 +19,7 @@ EXTENSION = "eps"
 #EXTENSION = "png"
 
 #XLIM = (10.0, 38.0)
-YLIM = (0.0, 4000.0)
+YLIM = (0.0, 6000.0)
 CLIM = (10.0, 80.0)
 
 

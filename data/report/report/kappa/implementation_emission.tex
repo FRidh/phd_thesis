@@ -108,11 +108,22 @@ that corresponds to the emission of the aircraft. The emission includes the
 effect of convective amplification, i.e., the directivity effects due to source
 motion.
 
-The influence of the ground reflection is non-negligible. A soft ground is still
-relatively hard and therefore a -3 dB correction was applied to the power of the
-features obtained in the next section. Ideally, a microphone on the ground was
-used, but the dataset that was available consisted of recordings at a height of
-4 meters.
+The influence of the ground reflection is non-negligible. The backpropagation
+model does not undo the ground reflection because it was not expected that this
+would result in improved results due to the approximations that would have to be
+made. For example, let us assume two clear propagation paths exist. The
+immission consists of the contributions from each path. The propagation delays
+of each contribution are different. The contributions are therefore
+Doppler-shifted differently, and the contributions are generated at different
+emission times. Minor differences in emission may exist also due to the
+directivity. Furthermore, the reflection coefficient plays a large role and is
+only roughly known.
+
+In order to account for the extra contribution, a correction is applied. A soft
+ground is still relatively hard and therefore a -3 dB correction was applied to
+the power of the features obtained in the next section. Ideally, a microphone on
+the ground was used, but the dataset that was available consisted of recordings
+at a height of 4 meters.
 
 Figure \ref{fig:recording} shows a spectrogram of a recording. Clearly visible
 are the Doppler-shifted tones and the peaks due to atmospheric turbulence. The
@@ -143,7 +154,7 @@ modulations due to atmospheric turbulence remain.
   \label{fig:backpropagated}
 \end{figure}
 
-\subsection{Feature extraction}
+\subsection{Feature extraction}\label{sec:tool:emission:features}
 Spectral modelling synthesis was chosen as emission synthesis strategy. With
 spectral modelling synthesis a signal is generated as a superposition of tones
 and bandpass-filtered noise.
@@ -156,7 +167,7 @@ frequency, phase, and level of the tones, as well as the level of the noise as
 function of frequency. This section presents a method that was developed for
 extracting these features.
 
-The situations considered are landings, and therefore the tonal components in
+The situations considered are take-offs, and therefore the tonal components in
 the spectra are not only the blade passing frequency of the fan and its
 harmonics, but also \say{Buzz-Saw} tones. The common denominator of the
 frequencies of these components is the frequency at which the engine shaft
@@ -315,8 +326,8 @@ window shape play a role.
 With the extracted features, which were obtained as function of time and at
 several receiver positions, it is possible to develop an emission model that
 takes into account directivity of the spectral components. Such emission model
-would then output input for the SMS synthesiser and the created emission signal
-would be propagated to a receiver a location.
+would then output input for the SMS synthesiser, and the created emission signal
+would be propagated to a receiver location.
 
 An important question to ask is whether the described methodology of extracting
 features, synthesising an emission signal and propagating it would result in
@@ -349,8 +360,16 @@ certain initial phase would still be preferred.
 
 Figure \ref{fig:synthesis} shows a spectrogram of the emission synthesis. The
 level of the tonal components and the broadband noise varies over time. The
-blade passing frequency is not clearly visible because the determined level of
-the tone was underestimated. Figure \ref{fig:auralisation} shows a spectrogram
+blade passing frequency is not clearly visible. The feature extraction algorithm
+underestimated the levels of the blade passing frequency and its harmonics. As
+explained in \ref{sec:tool:emission:features} tones were searched for in noise
+pauses. These noise pauses were \say{created} after the fundamental frequency
+was determined. The bandwidth of these noise pauses was relatively small because
+they were tuned for the \say{Buzz-Saw} tones. An improvement would be to look in
+a larger noise pause bandwidth or bandwidth for these tonal components, however,
+that requires explicit knowledges of the amount of blades.
+
+Figure \ref{fig:auralisation} shows a spectrogram
 of the auralisation at the receiver. The Doppler-shifted tones and the
 mirror-effect are clearly visible. The Doppler-shifted tones are not very
 smooth. This is due to fluctuations in the measured aircraft position and a smoothing filter

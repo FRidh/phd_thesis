@@ -244,7 +244,7 @@ The discrete convolution operation can be written as a matrix-vector multiplicat
  \end{bmatrix}
 \end{equation}
 The matrix $T$ is a Toeplitz matrix with each column a shifted copy of $h$.
-For relatively long signals the matrix will be sparse.
+For relative long signals the matrix will be sparse.
 
 \begin{figure}[H]
         \centering
@@ -270,7 +270,7 @@ This algorithm generally performs better for larger lengths of $h$ and $x$.
 \subsubsection{Segmented convolution}
 If one of the sequences is much longer than the other, then it might be worth
 splitting up the long sequence into blocks and apply the convolution on each
-block. The overlap-add method is an example of such algorithm. In the
+block. The overlap-add method is an example of such an algorithm. In the
 overlap-add method the signal $x[n]$ is divided into blocks of size $L$. We now
 define
 \begin{equation}
@@ -316,8 +316,8 @@ different impulse response.
 
 The matrix-vector multiplication is a straightforward method to apply a
 time-variant filter. However, performance is generally bad because of the large
-amounts of multiplications and additions that have to be performed. That has as
-effect that it typically cannot be used in real-time simulations.
+amounts of multiplications and additions that have to be performed. As a consequence,
+it typically cannot be used in real-time simulations.
 
 If we assume time-invariance during a short amount of time, then we can reuse
 the overlap-add overlap-discard method and perform each of the small convolutions with a
@@ -397,7 +397,7 @@ If the resampling factor is not an integer, it is necessary to combine
 upsampling and downsampling. When upsampling with a rational fraction it is
 necessary to upsample first, and then downsample. Both operations require
 low-pass filtering, but because of the order of operations it is sufficient to
-low-pass filter only once and with the lower of the two cut-off frequencies.
+low-pass filter only once and using the lower of the two cut-off frequencies.
 
 Similarly, when downsampling with a rational fraction, the downsampling with an
 integer factor is done first, followed by upsampling. Again, because of the
@@ -405,7 +405,7 @@ order of operations it is sufficient to low-pass filter only once with the lower
 of the two cut-off frequencies.
 
 \subsubsection{Interpolation} % TODO Rewrite section, more general, less specific to Doppler shift.
-The low-pass filters used when resampling are basically interpolation filters.
+The low-pass filters used in resampling are basically interpolation filters.
 Interpolation filters can be used when applying for example a delay to a system in case
 the delay is not exactly an integer of the sample time, or when the delay
 changes as function of time. The latter is called a Variable Delay Line (VDL).
@@ -430,7 +430,7 @@ An interpolation filter acts as a low-pass filter and therefore introduces
 amplitude errors at higher frequencies. Furthermore, sampling the interpolated
 values results in aliasing. There are methods to reduce these artefacts. For
 example, upsampling the signal before resampling decreases the prominence of the
-artifacts. Another possibility is a different interpolation scheme.
+artifacts. Another possibility is the application of a different interpolation scheme.
 
 Theoretically, the optimal reconstruction filter is a sinc filter. In practice,
 only approximations of this filter can be used, and these approximations are
