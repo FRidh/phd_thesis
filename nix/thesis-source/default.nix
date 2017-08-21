@@ -28,6 +28,7 @@ in stdenv.mkDerivation {
 
   buildPhase = ''
     # Link all the figures we have in the figures folder
+    mkdir -p figures/generated
     pushd figures/generated
     for path in ${concatStringsSep " " figures}; do
       for f in "$path/figures/generated/*"; do
