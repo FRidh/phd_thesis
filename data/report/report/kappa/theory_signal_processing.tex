@@ -28,7 +28,7 @@ Typically, $\mathcal{F} \left\{ x(t) \right\}$ is used to denote the Fourier tra
 % \end{equation}
 % Note that multiple conventions exist for defining the Fourier transform.
 % % Note the change of sign in the exponent.
-For operation on digital signals a discretized version of the
+For operation on digital signals a discretised version of the
 Fourier transform is needed. The Discrete Fourier Transform (DFT) both operates on, and
 returns, finite discrete signals and is defined as
 % The forward DFT can be defined as
@@ -411,10 +411,10 @@ the delay is not exactly an integer of the sample time, or when the delay
 changes as function of time. The latter is called a Variable Delay Line (VDL).
 
 A simple interpolator is a linear interpolator. A linear interpolator works by
-basically drawing a straight line between two neighboring samples and returning
+basically drawing a straight line between two neighbouring samples and returning
 the requested value along that line. Consider a discrete signal $y[n]$, and let
 $\eta$ be a number between 0 and 1 that represents by how much we want to
-interpolate the signal $y$ between samples $n$ and $n+1$. The interpolator
+interpolate the signal $y$ between samples $n$ and $n+1$. The interpolate
 \begin{equation}
   y_{\mathrm{lin}} (n + \eta) = (1-\eta) \cdot y[n] + \eta \cdot y[n+1]
 \end{equation}
@@ -430,7 +430,7 @@ An interpolation filter acts as a low-pass filter and therefore introduces
 amplitude errors at higher frequencies. Furthermore, sampling the interpolated
 values results in aliasing. There are methods to reduce these artefacts. For
 example, upsampling the signal before resampling decreases the prominence of the
-artifacts. Another possibility is the application of a different interpolation scheme.
+artefacts. Another possibility is the application of a different interpolation scheme.
 
 Theoretically, the optimal reconstruction filter is a sinc filter. In practice,
 only approximations of this filter can be used, and these approximations are
@@ -454,8 +454,8 @@ The interpolator performs a convolution of the signal $x[n]$ with the kernel
 Figure \ref{fig:theory:signal-processing:resampling} compares the two
 interpolators. The figure shows spectrograms of a Doppler-shifted tone for the
 two explained interpolation algorithms and two values of the kernelsize $a$.
-Aside from the Doppler-shifted tones artifacts are clearly present and indeed
-also audible. The artifacts are clearly less pronounced when using a larger
+Aside from the Doppler-shifted tones artefacts are clearly present and indeed
+also audible. The artefacts are clearly less pronounced when using a larger
 kernelsize. However, a larger kernelsize does come at a cost of performance.
 
 
@@ -508,7 +508,7 @@ kernelsize. However, a larger kernelsize does come at a cost of performance.
         \includegraphics[]{../figures/generated/signal-processing-resampling/lanczos-10}
         \caption{Lanczos interpolation with $a=10$}
     \end{subfigure}
-    \caption{A comparison between linear interpolation (top) and Lanczos interpolation with different kernelsizes. The artifacts are weaker for Lanczos interpolation, especially with larger kernelsize $a$.}
+    \caption{A comparison between linear interpolation (top) and Lanczos interpolation with different kernelsizes. The artefacts are weaker for Lanczos interpolation, especially with larger kernelsize $a$.}
     \label{fig:theory:signal-processing:resampling}
 \end{figure}
 

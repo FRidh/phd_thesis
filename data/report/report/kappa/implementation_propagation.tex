@@ -50,7 +50,7 @@ exchanged. For operations that are distance-dependent and thus propagation-delay
 consider the distances at the emission or retarded times. Divergence is computed
 first. The Doppler-shift, a result of a change in propagation delay as function
 of time, occurs between the source and the medium. The shifted frequencies are
-then attenuated in the atmosphere. A reflection is modeled as a parallel path
+then attenuated in the atmosphere. A reflection is modelled as a parallel path
 with a filter representing the reflection coefficient. In case there is no
 movement this filter may be considered part of the mirror source, however, as
 movement is considered it needs to be placed after the Doppler-shift has been
@@ -120,7 +120,7 @@ away, which is here at the start and the end of the sample.
 
 \subsubsection{Doppler shift}
 The time-dependent propagation delay, which is relevant for the Doppler shift,
-is taken into account by resampling the discretized sound pressure signal with a
+is taken into account by resampling the discretised sound pressure signal with a
 Variable Delay Line. Since the signal is discrete and the delay is generally not
 an integer multiple of the sample time, an interpolation scheme is required.
 
@@ -130,7 +130,7 @@ interpolation schemes exist, including Lanczos interpolation that was used for
 auralisation as well \cite{Rietdijk2015, Pieren2015}. In this case a linear
 interpolation scheme was chosen due to its simplicity and computational
 performance \cite{Heutschi2014}. While linear interpolation can cause audible
-artifacts, these are in the case of a broadband signal less pronounced than if
+artefacts, these are in the case of a broadband signal less pronounced than if
 solely a tonal component is considered as was demonstrated in Figure
 \ref{fig:theory:signal-processing:resampling}.
 
@@ -182,7 +182,7 @@ equation \eqref{eq:theory:sound:atmospheric-attenuation}.
 The impulse response of a magnitude-only or zero-phase filter is non-causal and therefore in
 order to create a causal filter a linear-phase filter corresponding to a 90
 degrees rotation is added. The spectrum is real and even, and therefore the impulse
-response is real and even as well. After convolving the signal with the designed
+response is real and even as well. After convolution of the signal with the designed
 filter the first $N_{aa}/2$ samples were dropped to account for the delay caused
 by the linear-phase factor.
 
