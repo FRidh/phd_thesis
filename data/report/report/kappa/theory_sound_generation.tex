@@ -58,10 +58,10 @@ viscous forces $\tau$ and the third deviations from isentropic behaviour $p - c^
 
 \subsubsection*{Elementary sources}
 Deviations from the wave equation can be considered sources. Sources are
-typically classified as a multipole, e.g. a multipole or a dipole. The
+typically classified as a multipole, e.g. a monopole or a dipole. The
 aerodynamic sound sources can also be classified as different multipoles, in
-case the sources are compact. We will now consider the different aerodynamic
-sound sources.
+case the sources are compact, i.e., the source is small compared to the
+wavelength. We will now consider the different aerodynamic sound sources.
 
 The Lighthill equation is an exact reformulation of the fundamental equations.
 Equation \eqref{eq:theory:sound:generation:lighthill} is the density-based
@@ -78,14 +78,12 @@ The source term can be split into the following three parts
   s_3 &= \frac{\partial^2 }{\partial x_i x_j} \left( \rho u_i u_j - \tau_{ij} \right)
 \end{align}
 which are respectively the monopole, dipole and quadrupole source terms.
-
 % In case a source is compact, i.e., it is small compared to the wavelength, then the source
 % distribution can be written as a multipole.
-
-We will now look at these different terms assuming they are compact sources, and for which
-the general solution is
+We will now look at these different terms, assuming they are compact non-moving sources.
+Considering the Green's function given in the previous section, the general solution is
 \begin{equation}
-  p'(\vect{x}, t)' = \int_V \frac{s(\vect{y}, t-r/c_0)}{4\pi r} \mathrm{d} V
+  p'(\vect{x}, t) = \int_V \frac{s(\vect{y}, t-r/c_0)}{4\pi r} \mathrm{d} V
 \end{equation}
 
 \subsubsection*{Monopole}
