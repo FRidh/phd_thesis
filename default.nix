@@ -137,4 +137,8 @@ in rec {
     overview = ./data/papers/overview.pdf;
     turbulence = ./data/papers/turbulence.pdf;
   };
+
+  presentation = callPackage ./nix/presentation {
+    inherit audio figures python;
+  };
 }
