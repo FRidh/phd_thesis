@@ -23,8 +23,6 @@ let
 
     # Additional packages/overrides
     overrides = self: super: {
-        # Package for loading and saving tabular data with metadata.
-        h5store = super.callPackage /home/freddy/Code/libraries/h5store { };
 
         # Function for creating one-file package modules.
         pythonModule = { src, ... } @attrs:
@@ -51,6 +49,12 @@ let
         common_simulation = self.pythonModule {
           src = ./common_simulation.py;
           propagatedBuildInputs = [ super.auraliser self.h5store ];
+        };
+
+        # Package for loading and saving tabular data with metadata.
+        h5store = self.pythonModule {
+          src = ./h5store.py;
+          propagatedBuildInputs = [ super.pandas ];
         };
       };
 
